@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
 
-    formatVideoSelect.addEventListener('click', () => {
+    formatVideoSelect.addEventListener('change', () => {
         if (formatVideoSelect.value != pickedVideoFormat) {
             pickedVideoFormat = formatVideoSelect.value;
             console.log(formatVideoSelect.value);
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     cloneInpt = itemClone.querySelector(".optional-txt");
                 cloneCheck.checked = false;
                 cloneInpt.setAttribute('disabled', true);
-                if(item.nextSibling){
+                if (item.nextSibling) {
                     item.after(itemClone);
                     item = item.nextSibling;
                     createOptionalFiled(item);
@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 moreColorsInpt.setAttribute('disabled', true);
                 item = item.previousSibling;
-                if(item.nextSibling){
+                if (item.nextSibling) {
                     item.nextSibling.remove();
                 }
-                
+
             }
         })
         if (!moreColorsCheckbox.checked) {
@@ -99,42 +99,53 @@ document.addEventListener('DOMContentLoaded', function () {
         createOptionalFiled(item)
     })
 
-    // CAROUSEL
-    $(document).ready(function(){
-$('.sl').slick({
-    centerMode: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    responsive: [
-        {
-            breakpoint: 990,
-            settings: {
-              //arrows: false,
-              centerMode: true,
-              centerPadding: '40px',
-              slidesToShow: 2
-            }
-          },
-      {
-        breakpoint: 768,
-        settings: {
-          //arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 580,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 2
-        }
-      }
-    ]
-  });
+    // CAROUSEL - external plugin
+    $(document).ready(function () {
+        $('.sl').slick({
+            centerMode: true,
+            centerPadding: '60px',
+            slidesToShow: 3,
+            responsive: [{
+                    breakpoint: 990,
+                    settings: {
+                        //arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        //arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 580,
+                    settings: {
+                        //arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 2
+                    }
+                }
+            ]
+        });
     });
-})
+
+    const slickSlide = document.querySelector('.sl');
    
+    slickSlide.addEventListener('click', () => {
+
+        let txtSlide = document.querySelector('.slick-current p');
+    
+            console.log(txtSlide)
+
+    })
+
+
+
+})
