@@ -281,6 +281,11 @@ h5 {
   position: relative;
 }
 
+.sl1 img {
+  width: 100%;
+  position: relative;
+}
+
 .slick-slide {
   margin: 0 5px;
   outline: none;
