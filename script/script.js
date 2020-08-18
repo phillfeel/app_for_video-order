@@ -131,11 +131,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         centerPadding: '40px',
                         slidesToShow: 2
                     }
+                },
+                {
+                    breakpoint: 420,
+                    settings: {
+                        //arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 1
+                    }
                 }
             ]
         });
     });
 
+//получение выбранной анимации
     const slickSlide = document.querySelector('.sl');
    
     slickSlide.addEventListener('click', () => {

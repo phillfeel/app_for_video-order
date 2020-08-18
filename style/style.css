@@ -13,6 +13,9 @@ h5 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .duration-main__title {
@@ -33,6 +36,12 @@ h5 {
 
 .wrapper {
   padding: 10px 10px;
+}
+
+@media screen and (max-width: 450px) {
+  .duration-main__title {
+    width: 60%;
+  }
 }
 
 .qty {
@@ -214,6 +223,36 @@ h5 {
   display: inline-block;
 }
 
+@media screen and (max-width: 465px) {
+  .title-line {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .title-line .right-title {
+    margin: 7px 0 0 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .title-line .right-title .duration-title {
+    display: inline-block;
+    margin-bottom: 4px;
+    margin-right: 5px;
+  }
+  .title-line .right-title .counter {
+    display: inline-block;
+  }
+}
+
 /* User styles */
 @media screen and (min-width: 911px) {
   .ant-carousel {
@@ -231,6 +270,10 @@ h5 {
   .ant-carousel {
     max-width: 270px;
   }
+}
+
+.wrapper .chooseAnimation-zone {
+  margin-bottom: 0px;
 }
 
 .sl img {
@@ -277,5 +320,40 @@ h5 {
   top: 35%;
   left: 0px;
   z-index: 1000;
+}
+
+.btn-zone {
+  text-align: right;
+}
+
+.btn-zone .btn-outline-danger {
+  display: inline-block;
+  text-align: right;
+}
+
+.add_slide-wrapp {
+  text-align: center;
+}
+
+.add_slide-wrapp .add_slide {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.add_slide-wrapp .add_slide p:first-child {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.add_slide-wrapp .add_slide p:last-child {
+  padding-bottom: 10px;
+  vertical-align: middle;
+  padding-left: 3px;
+}
+
+.add_slide-wrapp .add_slide p {
+  display: inline-block;
+  margin: 0;
 }
 /*# sourceMappingURL=style.css.map */
