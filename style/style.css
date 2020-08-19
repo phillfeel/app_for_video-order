@@ -131,6 +131,8 @@ h5 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .format-video h5 {
@@ -149,10 +151,13 @@ h5 {
   position: relative;
 }
 
-.format-video__preview div {
+.format-video__preview .square,
+.format-video__preview .rectangle16x9,
+.format-video__preview .rectangle9x16,
+.format-video__preview .custom-size-preview {
   content: "";
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   border: 1px solid orange;
 }
@@ -170,6 +175,30 @@ h5 {
 .format-video__preview .rectangle9x16 {
   width: calc((100%/2) * (9 / 16));
   height: 100%;
+}
+
+.format-video__preview .custom-size-preview {
+  width: 0px;
+  height: 0px;
+  border: none;
+}
+
+.format-video__input-size {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.format-video__input-size * {
+  display: inline-block;
+}
+
+.format-video__input-size p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.format-video__input-size input {
+  width: 70px;
 }
 
 .more-colors input[type=checkbox] {

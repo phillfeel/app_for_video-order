@@ -129,6 +129,7 @@ h5 {
 // Format video
 .format-video {
     display: flex;
+    flex-wrap: wrap;
 
     h5 {
 
@@ -148,10 +149,14 @@ h5 {
 
         position: relative;
 
-        div {
+        .square,
+        .rectangle16x9,
+        .rectangle9x16,
+        .custom-size-preview    
+         {
             content: "";
             position: absolute;
-            top: 0;
+            top: 1px;
             left: 0;
             //transform: translate(20%, 10%);
             border: 1px solid orange;
@@ -171,6 +176,28 @@ h5 {
             width: calc((100%/2) * (9 / 16));
             height: 100%;
         }
+        .custom-size-preview {
+            width: 0px;
+            height: 0px;
+            border:none;
+        }
+
+    }
+
+    &__input-size{
+        margin-left: 20px;
+        display: inline-block;
+        *{
+            display: inline-block;
+        }
+        p {
+            margin: 0;
+            font-weight: 600;
+        }
+        input{
+            width: 70px;
+        }
+
     }
 }
 
