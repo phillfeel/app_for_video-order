@@ -21,15 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  document.querySelectorAll(".counter").forEach(function (item) {
-    if (item.classList.contains('main-counter')) {
-      changeValCount(item, 40, 5, 5);
-    } else {
-      changeValCount(item, 8, 2, 1);
-    }
-
-  })
-
   //FORMAT VIDEO PREVIEW
   const formatVideoSelect = document.querySelector(".format-video__change_input"),
     formatPreview = document.createElement("div");
@@ -60,22 +51,29 @@ document.addEventListener('DOMContentLoaded', function () {
     inputCustomSize.after(customSizeElem);
 
     const customSizePreview = document.querySelector(".custom-size-preview");
-    let horizontPx, verticalPx;
-    inputHorizont.addEventListener("change", () => {
-      console.log(inputHorizont.value);
+    let horizontPx, verticalPx, proportionPx, resizeVerticalPx, resizeHorizontPx;
+    inputHorizont.addEventListener("input", () => {
       horizontPx = inputHorizont.value;
-    });
-    inputVertical.addEventListener("change", () => {
-      console.log(inputVertical.value);
-      verticalPx = inputVertical.value;
-
-      let proportionPx = 30 / verticalPx,
+      if(!inputVertical.value == ""){
+        proportionPx = 30 / verticalPx,
         resizeVerticalPx = proportionPx * verticalPx,
         resizeHorizontPx = proportionPx * horizontPx;
+        customSizePreview.style.width = `${resizeHorizontPx}px`;
+        customSizePreview.style.height = `${resizeVerticalPx}px`;
+        customSizePreview.style.border = '1px solid #ffa500'
+      }
 
-      customSizePreview.style.width = `${resizeHorizontPx}px`;
-      customSizePreview.style.height = `${resizeVerticalPx}px`;
-      customSizePreview.style.border = '1px solid #ffa500'
+    });
+    inputVertical.addEventListener("input", () => {
+      verticalPx = inputVertical.value;
+      if(!inputHorizont.value == ""){
+        proportionPx = 30 / verticalPx;
+        resizeVerticalPx = proportionPx * verticalPx;
+        resizeHorizontPx = proportionPx * horizontPx;
+        customSizePreview.style.width = `${resizeHorizontPx}px`;
+        customSizePreview.style.height = `${resizeVerticalPx}px`;
+        customSizePreview.style.border = '1px solid #ffa500'
+      }
     });
   }
 
@@ -89,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   formatVideoSelect.addEventListener('change', () => {
-
     if (formatVideoSelect.value === "Ввести") {
       formatVideoZone.remove();
       const inputSize = document.createElement('div');
@@ -102,20 +99,15 @@ document.addEventListener('DOMContentLoaded', function () {
       createPreviewCustom();
     } else {
       if (document.querySelector('.format-video__input-size')) {
-
         document.querySelector('.format-video__input-size').remove();
         deletePreviewCustom();
-
         formatVideoZone = document.createElement("div");
         formatVideoZone.classList.add("format-video__preview");
         formatVideoSelect.parentNode.after(formatVideoZone);
       }
       pickedVideoFormat = formatVideoSelect.value;
-      console.log(formatVideoSelect.value);
       createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
     }
-
-
   })
 
   //MORE-COLOR
@@ -208,15 +200,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // динамическое создание слайдов
-  const slide = document.querySelector(".test1");
   const constructSlide = document.createElement("div");
-  constructSlide.classList = "video-slide block test1"
-  constructSlide.innerHTML = '<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">1</h5><select class="video-slide__change form-control form-control-sm "><option>Побуждающая фраза</option><option>Логотип</option><option>Товар-Цена</option><option>Услуга-Описание</option><option>Акция</option><option>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>'
+  constructSlide.classList = "video-slide block"
+  constructSlide.innerHTML = '<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">1</h5><select class="video-slide__change form-control form-control-sm "><option>Побуждающая фраза</option><option>Логотип</option><option>Товар-Цена</option><option>Услуга-Описание</option><option>Акция</option><option>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>'
   const main = document.querySelector('.main .col-md-8');
   main.append(constructSlide);
 
-  const nameForCarouselPromo = "sl1";
-  const insideHtmlStimulPrase = `<div class="text-zone">
+  const getInsideHtmlStimulPhrs = function (name) {
+  let insideHtmlStimulPrase = `<div class="text-zone">
   <input class="text-field form-control" type="text" placeholder="Введите текст">
   <div class="more-colors optional-field form-check">
     <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
@@ -227,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 <h6 class="duration-title">Настроить анимацию</h6>
 <div class="chooseAnimation-zone">
-  <div class="${nameForCarouselPromo}">
+  <div class="${name}">
     <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
     <p class="sl_text">Текст на подложке</p>
     </div>
@@ -244,15 +235,18 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </div>
 <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm">Удалить слайд</button></div>`
+ return insideHtmlStimulPrase;
+  };
+ 
   //динамическое добавление Побуждающей фразы
   document.querySelectorAll('.video-slide__change').forEach((item) => {
     switch (item.value) {
       case 'Побуждающая фраза':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         const insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        const stimulPraseInside = document.createElement('div');
-        stimulPraseInside.innerHTML = insideHtmlStimulPrase;
-        insideSlideWrapp.append(stimulPraseInside);
+        const stimulPhraseInside = document.createElement('div');
+        stimulPhraseInside.innerHTML = getInsideHtmlStimulPhrs("sl1");
+        insideSlideWrapp.append(stimulPhraseInside);
         //добавляем работу доп. форм
         const optionalField = document.querySelectorAll(".optional-field");
         optionalField.forEach(function (item) {
@@ -274,27 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
             centerMode: true,
             centerPadding: '40px',
             slidesToShow: 2
-          }
-        },
-        {
+          }},{
           breakpoint: 768,
           settings: {
             //arrows: false,
             centerMode: true,
             centerPadding: '40px',
             slidesToShow: 3
-          }
-        },
-        {
+          }},{
           breakpoint: 580,
           settings: {
             //arrows: false,
             centerMode: true,
             centerPadding: '40px',
             slidesToShow: 2
-          }
-        },
-        {
+          }},{
           breakpoint: 420,
           settings: {
             //arrows: false,
@@ -311,15 +299,84 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(".btn-remove-slide").forEach((elem) => {
       elem.addEventListener('click', () => {
         console.log("Удаляем Слайд")
-        const targetVideoSlide = elem.parentNode.parentNode.parentNode.parentNode;
-        targetVideoSlide.remove();
+        if(confirm("После удаления слайда данные не сохраняться. Удалить?")){
+          const targetVideoSlide = elem.parentNode.parentNode.parentNode.parentNode;
+          targetVideoSlide.remove();
+        }
       })
     })
   };
 
   deleteSlide(); //точно должна идти после формирования слайда
 
+  document.querySelectorAll(".counter").forEach(function (item) {
+    if (item.classList.contains('main-counter')) {
+      changeValCount(item, 40, 5, 5);
+    }
+    if (item.classList.contains('stimul-phrase')) {
+      changeValCount(item, 8, 2, 1);
+    }
 
+  })
+ 
+  //создать новый слайд по клику
+  document.querySelector(".add_slide").addEventListener("click", ()=>{
+    const constructSlide = document.createElement("div");
+    constructSlide.classList = "video-slide block added"
+    constructSlide.innerHTML = '<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">1</h5><select class="video-slide__change form-control form-control-sm "><option>Побуждающая фраза</option><option>Логотип</option><option>Товар-Цена</option><option>Услуга-Описание</option><option>Акция</option><option>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>'
+    const main = document.querySelector('.main .col-md-8');
+    main.append(constructSlide);
+    const insideSlideWrapp = document.querySelector('.added .wrapper');
+    const stimulPhraseInside = document.createElement('div');
+    stimulPhraseInside.innerHTML = getInsideHtmlStimulPhrs("stimul-phrase__slide");
+    insideSlideWrapp.append(stimulPhraseInside);
+        //добавляем работу доп. форм
+    const optionalField = document.querySelectorAll(".optional-field");
+    optionalField.forEach(function (item) {
+      createOptionalFiled(item);
+    });
+    
+    $(document).ready(function () {
+      $('.stimul-phrase__slide').slick({
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 3,
+        responsive: [{
+            breakpoint: 990,
+            settings: {
+              //arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 2
+            }},{
+            breakpoint: 768,
+            settings: {
+              //arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 3
+            }},{
+            breakpoint: 580,
+            settings: {
+              //arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 2
+            }},{
+            breakpoint: 420,
+            settings: {
+              //arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
+    deleteSlide();
+    
+  })
 
 
 

@@ -128,6 +128,7 @@ h5 {
 }
 
 .format-video {
+  margin-bottom: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -141,10 +142,12 @@ h5 {
 
 .format-video__change {
   display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
 
 .format-video__preview {
-  margin-left: 20px;
+  margin-bottom: 10px;
   display: inline-block;
   width: 60px;
   height: 30px;
@@ -163,29 +166,30 @@ h5 {
 }
 
 .format-video__preview .square {
-  height: 100%;
-  width: calc(100% / 2);
+  height: 30px;
+  width: 30px;
 }
 
 .format-video__preview .rectangle16x9 {
-  width: calc((100% / 2) * (16/9));
-  height: 100%;
+  width: calc(30px * (16/9));
+  height: 30px;
 }
 
 .format-video__preview .rectangle9x16 {
-  width: calc((100%/2) * (9 / 16));
-  height: 100%;
+  width: calc(30px * (9 / 16));
+  height: 30px;
 }
 
 .format-video__preview .custom-size-preview {
-  width: 0px;
+  max-width: 100%;
   height: 0px;
   border: none;
 }
 
 .format-video__input-size {
-  margin-left: 20px;
   display: inline-block;
+  margin-right: 20px;
+  padding-bottom: 10px;
 }
 
 .format-video__input-size * {
@@ -305,12 +309,12 @@ h5 {
   margin-bottom: 0px;
 }
 
-.sl img {
+.slick-initialized img {
   width: 100%;
   position: relative;
 }
 
-.sl1 img {
+.slick-initialized img {
   width: 100%;
   position: relative;
 }
@@ -371,6 +375,10 @@ h5 {
 
 .add_slide-wrapp .add_slide {
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   display: inline-block;
 }
 
