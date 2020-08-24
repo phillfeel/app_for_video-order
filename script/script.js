@@ -110,9 +110,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  //MORE-COLOR
-  const createOptionalFiled = function (item) {
+  //MORE - INPUT (more color)
+  function turnForm(elem) {
+    console.log("вызвали turnForm")
+    const moreColorsCheckbox = elem.querySelector(".optional-checkbox"),
+      moreColorsInpt = elem.querySelector(".optional-txt");
+
+    moreColorsCheckbox.addEventListener('click', function () {
+      if (moreColorsCheckbox.checked) {
+        moreColorsInpt.removeAttribute('disabled', false);
+      } else {
+        moreColorsInpt.setAttribute('disabled', true);
+      }
+    });
+  }
+
+
+  function createOptionalFiled(item) {
     console.log('вызвали createOptionalFiled');
+    //console.log(item);
     const moreColorsCheckbox = item.querySelector(".optional-checkbox"),
       moreColorsInpt = item.querySelector(".optional-txt");
     moreColorsCheckbox.addEventListener('click', function () {
@@ -130,9 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       } else {
         moreColorsInpt.setAttribute('disabled', true);
-        item = item.previousSibling;
-        if (item.nextSibling) {
-          item.nextSibling.remove();
+        console.log(item);
+        if (item.previousElementSibling !== null) {
+          item = item.previousElementSibling;
+          if (item.nextElementSibling !== null || item.nextElementSibling.classList.contains("optional-field")) {
+            item.nextSibling.remove();
+          }
         }
       }
     })
@@ -141,66 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // CAROUSEL - external plugin
-  /* $(document).ready(function () {
-    $('.sl').slick({
-      centerMode: true,
-      centerPadding: '60px',
-      slidesToShow: 3,
-      responsive: [{
-          breakpoint: 990,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        },
-        {
-          breakpoint: 580,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 420,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-  });
- */
-  //получение выбранной анимации DISABLE
-  /*  const slickSlide = document.querySelector('.sl');
-
-   slickSlide.addEventListener('click', () => {
-
-     let txtSlide = document.querySelector('.slick-current p');
-
-     console.log(txtSlide)
-
-   }) */
-
-
   // динамическое создание слайдов
-  const setSlideHtmlWithSelector = function (number,selector) {
+  const setSlideHtmlWithSelector = function (number, selector) {
     let logo = "",
       stimulPhrs = "",
       productPrice = "",
@@ -265,7 +226,19 @@ document.addEventListener('DOMContentLoaded', function () {
       <p class="sl_text">Текст с фигурами</p></div>
   </div>
 </div>
-<div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm">Удалить слайд</button></div>`
+<div class="solo-check form-check">
+  <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
+  </label>
+</div>
+<div class="solo-check form-check">
+  <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
+  </label>
+</div>
+<div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
     return insideHtmlStimulPrase;
   };
 
@@ -274,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
 <input type="file" class="form-control-file" id="exampleFormControlFile1">
     <div class="text-zone">
-    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Введите контактную информацию которая должна быть отражена в видеоролике" rows="3"></textarea>
+    
     <div class="more-colors optional-field form-check">
       <input class="form-check-input optional-checkbox" type="checkbox" checked value="" id="defaultCheck1">
       <label class="form-check-label" for="defaultCheck1">
@@ -300,11 +273,11 @@ document.addEventListener('DOMContentLoaded', function () {
         <p class="sl_text">Текст с фигурами</p></div>
     </div>
   </div>
-  <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm">Удалить слайд</button></div>`
+  <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
     return insideHtmlLogo;
   };
 
-  const createSecondPart = function(wrapp, part2, classPart, funcHtmlSlider ){
+  function createSecondPart(wrapp, part2, classPart, funcHtmlSlider) {
 
     part2 = document.createElement('div');
     part2.classList.add(classPart);
@@ -320,14 +293,16 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'Побуждающая фраза':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
-
-        createSecondPart(insideSlideWrapp,secondPart,'stimul-part', setStimulHtmlWithSlider("sl1"));
-
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1"));
         //добавляем работу доп. форм
-        optionalField = document.querySelectorAll(".optional-field");
+        optionalField = insideSlideWrapp.querySelectorAll(".optional-field");
         optionalField.forEach(function (item) {
           createOptionalFiled(item);
         })
+        insideSlideWrapp.querySelectorAll(".solo-check").forEach(function(item){
+          turnForm(item);
+        })
+
         break;
       case 'Логотип':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
@@ -386,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  const deleteSlide = function () {
+  function deleteSlide() {
     document.querySelectorAll(".btn-remove-slide").forEach((elem) => {
       elem.addEventListener('click', () => {
         console.log("Удаляем Слайд")
@@ -414,17 +389,17 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector(".add_slide").addEventListener("click", () => {
     const constructSlide = document.createElement("div");
     constructSlide.classList = "video-slide block added"
-    constructSlide.innerHTML = setSlideHtmlWithSelector(2,"Логотип");
+    constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Логотип");
     let main = document.querySelector('.main .col-md-8');
     main.append(constructSlide);
 
     let insideSlideWrapp, secondPart;
     insideSlideWrapp = document.querySelector('.added .wrapper');
 
-    createSecondPart(insideSlideWrapp,secondPart,'logo-part', setLogoHtmlWithSlider("logo_slide"));
+    createSecondPart(insideSlideWrapp, secondPart, 'logo-part', setLogoHtmlWithSlider("logo_slide"));
 
     //добавляем работу доп. форм
-    let optionalField = document.querySelectorAll(".optional-field");
+    let optionalField = document.querySelectorAll(".logo-part .optional-field");
     optionalField.forEach(function (item) {
       createOptionalFiled(item);
     });
@@ -470,10 +445,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
     deleteSlide();
-    
     document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
 
   })
+
+  
+
 
 
 

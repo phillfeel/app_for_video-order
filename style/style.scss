@@ -76,6 +76,8 @@ p{
 }
 
 .qty .plus {
+  
+    background-color: #646464 !important;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
@@ -89,6 +91,7 @@ p{
 }
 
 .qty .minus {
+    background-color: #646464 !important;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
@@ -192,7 +195,6 @@ p{
             height: 0px;
             border:none;
         }
-
     }
 
     &__input-size{
@@ -213,7 +215,7 @@ p{
     }
 }
 
-.more-colors {
+.form-check {
     input[type=checkbox] {
         height: 20px;
         width: 20px;
@@ -256,12 +258,10 @@ p{
                 display: inline-block;
             }
         }
-
     }
-
 }
 
-@media screen and (max-width: 465px) {
+@media screen and (max-width: 565px) {
     .title-line {
         display: flex;
         flex-wrap: wrap;
@@ -309,7 +309,7 @@ p{
 }
 
 .wrapper .chooseAnimation-zone {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 
@@ -367,12 +367,26 @@ p{
 // button delete
 .btn-zone {
     text-align: right;
+    .btn-remove-slide {
+        position: relative;
+        ion-icon{
+            position: absolute;
+            top:8px;
+            left:5px;
+            line-height: 20px;
+    }
+       p{
+            display: inline-block;
+            padding-left: 15px;
+       }
+    }
 
     .btn-outline-danger {
         display: inline-block;
         text-align: right;
     }
 }
+
 @media screen and (max-width: 465px) {
     .btn-zone {
         //text-align: left;
@@ -406,14 +420,14 @@ p{
 }
 }
 
-// SLIDER LOGO
 
+
+// SLIDER LOGO
 .logo-part{
     .slogan{
         //wait
     }
 }
-
 
 .form-control-file{
     display: none;
@@ -421,14 +435,24 @@ p{
 .my-file-input{
     cursor: pointer;
     display: flex;
+    margin-bottom: 20px;
     ion-icon{
-
+        position: absolute;
+        left: 18px;
     }
     P{  
         display: inline-block;
         border-bottom: 2px dotted #a19d94;
         line-height: 29px;
-
+       margin-left: 20px;
+        //position: absolute;
+        //left: 50px;
     }
- 
+
 }
+
+.solo-check{
+    margin-bottom: 10px;
+}
+
+
