@@ -1,0 +1,43 @@
+//css
+
+@media screen and (max-width: 565px) {
+    .title-line {}
+
+
+
+.btn-remove-slide {
+    ion-icon{
+    
+}
+   p{
+
+   }
+}
+
+// SLIDER LOGO
+
+.form-control-file{
+    display: none;
+}
+.my-file-input{
+    cursor: pointer;
+    display: flex;
+    ion-icon{
+
+    }
+    P{
+        border-bottom: 2px dotted #a19d94;
+
+    }
+ 
+}
+
+
+//html v LOGO
+
+<label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
+<input type="file" class="form-control-file" id="exampleFormControlFile1">
+
+
+v body
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>

@@ -45,6 +45,9 @@ h5 {
     }
 }
 
+p{
+    margin-bottom: 0;
+}
 
 
 // COUNTER 
@@ -409,4 +412,23 @@ h5 {
     .slogan{
         //wait
     }
+}
+
+
+.form-control-file{
+    display: none;
+}
+.my-file-input{
+    cursor: pointer;
+    display: flex;
+    ion-icon{
+
+    }
+    P{  
+        display: inline-block;
+        border-bottom: 2px dotted #a19d94;
+        line-height: 29px;
+
+    }
+ 
 }

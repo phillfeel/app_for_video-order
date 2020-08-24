@@ -270,7 +270,10 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const setLogoHtmlWithSlider = function (name) {
-    let insideHtmlLogo = `<div class="text-zone">
+    let insideHtmlLogo = `
+    <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
+<input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <div class="text-zone">
     <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Введите контактную информацию которая должна быть отражена в видеоролике" rows="3"></textarea>
     <div class="more-colors optional-field form-check">
       <input class="form-check-input optional-checkbox" type="checkbox" checked value="" id="defaultCheck1">
