@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
 </head>
 
 <body>
@@ -44,15 +44,46 @@
                 <input class="form-control form-control-sm" type="text" placeholder="пиксели">
               </div> -->
             </div>
+            <div class="logo-block">
+              <label class="my-file-input" for="exampleFormControlFile1">
+                <ion-icon size="large" name="attach-outline"></ion-icon>
+                <p>Прикрепить логотип</p>
+              </label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
             <input class="main-colors form-control" type="text" placeholder="Напишите основные цвета">
-            <div class="more-colors optional-field form-check">
+            <div class="more-colors optional-field form-check block">
               <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
               <label class="form-check-label" for="defaultCheck1">
                 <input class="optional-txt form-control form-control-sm" type="text" placeholder="Дополнительные цвета">
               </label>
             </div>
-            <textarea class="form-control" id="textarea1" placeholder="Введите контактную информацию которая должна быть отражена в видеоролике" rows="3"></textarea>
-            <textarea class="form-control" id="textarea2" placeholder="Дисклэймер" rows="3"></textarea>
+            <div class="contact-block mini-block">
+              <h6>Введите контактную информацию которая должна быть отражена в видеоролике</h6>
+              <textarea class="form-control" id="textarea1" placeholder="Контакты" rows="2"></textarea>
+              <div class="contact-block__radio form-check form-check-inline">
+                <input  checked  class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
+                  value="all">
+                <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input  checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2" value="option">
+                <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
+              </div>
+            </div>
+            <div class="disclaimer-block mini-block">
+              <h6>Введите дисклеймер</h6>
+              <textarea class="form-control" id="textarea2" placeholder="Дисклэймер" rows="2"></textarea>
+              <div class="form-check disclaimer-block__radio form-check-inline">
+                <input  class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio1"
+                  value="all">
+                <label class="form-check-label" for="inlineRadio1">Дисклеймер на каждом слайде</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio2" value="option">
+                <label class="form-check-label" for="inlineRadio2">Настроить отдельно для каждого слайда</label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="video-slide block">
@@ -78,18 +109,19 @@
                 </div>
               </div>
             </div>
-            
-            
+
+
           </div>
         </div>
 
         <div class="add_slide-wrapp">
           <div class="add_slide">
-            <p>+</p><p>Добавить кадр</p>
+            <p>+</p>
+            <p>Добавить кадр</p>
           </div>
         </div>
 
-        
+
 
 
       </div>

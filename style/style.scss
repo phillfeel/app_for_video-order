@@ -23,6 +23,11 @@ h5 {
     margin-bottom: 20px;
 }
 
+.block .mini-block {
+    margin-bottom: 20px;
+}
+
+
 .block>* {
     margin-bottom: 10px;
 }
@@ -49,6 +54,7 @@ p{
     margin-bottom: 0;
 }
 
+//MAIN BLOCK
 
 // COUNTER 
 .qty {
@@ -228,6 +234,20 @@ p{
     }
 
 }
+
+.mini-block textarea{
+    margin-bottom: 5px;
+}
+
+.form-check-inline{
+    margin-bottom:3px ;
+    .form-check-label{
+        padding-left:5px;
+        line-height: 1.2;
+    }
+}
+
+// SLIDE
 
 .video-slide {
     background-color: #efe7f1;
