@@ -247,11 +247,10 @@ document.addEventListener('DOMContentLoaded', function () {
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
 <input type="file" class="form-control-file" id="exampleFormControlFile1">
     <div class="text-zone">
-    
-    <div class="more-colors optional-field form-check">
-      <input class="form-check-input optional-checkbox" type="checkbox" checked value="" id="defaultCheck1">
+    <div class="solo-check form-check">
+      <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
       <label class="form-check-label" for="defaultCheck1">
-        <input class="slogan optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу" >
+      <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу">
       </label>
     </div>
   </div>
@@ -295,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
         createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1"));
         //добавляем работу доп. форм
-        optionalField = insideSlideWrapp.querySelectorAll(".optional-field");
+        optionalField = document.querySelectorAll(".optional-field");
         optionalField.forEach(function (item) {
           createOptionalFiled(item);
         })
@@ -403,6 +402,10 @@ document.addEventListener('DOMContentLoaded', function () {
     optionalField.forEach(function (item) {
       createOptionalFiled(item);
     });
+
+    insideSlideWrapp.querySelectorAll(".solo-check").forEach(function(item){
+      turnForm(item);
+    })
 
     $(document).ready(function () {
       $('.logo_slide').slick({
