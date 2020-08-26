@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (formatVideoZone) {
     createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
   }
-
   formatVideoSelect.addEventListener('change', () => {
     if (formatVideoSelect.value === "Ввести") {
       formatVideoZone.remove();
@@ -114,28 +113,78 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //What radio contact and disclaimer
   let howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-  console.log(howDisplayContact)
+  let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
+
+  const optionalContact = `<div class="option-contact solo-check form-check">
+  <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
+  </label>
+  </div>`
+
+  const optionalDisclaimer = `<div class="option-disclaimer solo-check form-check">
+      <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+      <label class="form-check-label" for="defaultCheck1">
+        <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
+      </label>
+    </div>`
 
   document.querySelectorAll('input[name="contact-where"]').forEach(elem => {
     elem.addEventListener('change', () => {
       if (elem.checked) {
         howDisplayContact = elem.value;
-        console.log(howDisplayContact)
+        if(howDisplayContact === 'all'){
+         document.querySelectorAll('.option-contact').forEach((elem)=>{
+            elem.remove();
+          })
+        } else {
+          document.querySelectorAll(".optional-contact__wrapp").forEach((elem)=>{
+            console.log(elem)
+            elem.innerHTML = optionalContact;
+            elem.querySelector(".option-contact .optional-txt").value = contactValue;
+          })
+        }
       }
     })
   });
 
-  let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-  console.log(howDisplayContact)
   document.querySelectorAll('input[name="disclaimer-where"]').forEach(elem => {
     elem.addEventListener('change', () => {
       if (elem.checked) {
         howDisplayDisclaimer = elem.value;
+        if(howDisplayDisclaimer === 'all'){
+          document.querySelectorAll('.option-disclaimer').forEach((elem)=>{
+             elem.remove();
+           })
+         } else {
+           document.querySelectorAll(".optional-disclaimer__wrapp").forEach((elem)=>{
+             elem.innerHTML = optionalDisclaimer;
+             elem.querySelector(".option-disclaimer .optional-txt").value = disclaimerValue;
+           })
+         }
       }
     })
   });
 
+let contactValue="";
+let contactTextarea = document.querySelector('.contact-block textarea');
 
+contactTextarea.addEventListener('change',()=>{
+    contactValue = contactTextarea.value;
+    document.querySelectorAll('.option-contact .optional-txt').forEach((elem)=>{
+      elem.value = contactValue;
+    })
+  })
+
+let disclaimerValue="";
+let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
+
+disclaimerTextarea.addEventListener('change',()=>{
+  disclaimerValue = disclaimerTextarea.value;
+    document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem)=>{
+      elem.value = disclaimerValue;
+    })
+  })
 
   //MORE - INPUT (more color)
   function turnForm(elem) {
@@ -151,7 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
 
   function createOptionalFiled(item) {
     console.log('вызвали createOptionalFiled');
@@ -173,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       } else {
         moreColorsInpt.setAttribute('disabled', true);
-        console.log(item);
         if (item.previousElementSibling !== null) {
           item = item.previousElementSibling;
           if (item.nextElementSibling !== null || item.nextElementSibling.classList.contains("optional-field")) {
@@ -217,29 +264,9 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm "><option ${stimulPhrs}>Побуждающая фраза</option><option ${logo}>Логотип</option><option ${productPrice}>Товар-Цена</option><option ${serviceDescription}>Услуга-Описание</option><option ${stock}>Акция</option><option ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
     return forConstruct;
-
   }
 
-
-  function setStimulHtmlWithSlider(name,howDisplayContact,howDisplayDisclaimer) {
-    let optionalContact ='';
-    if(howDisplayContact==='option'){
-      optionalContact = `<div class="option-contact solo-check form-check">
-    <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-    <label class="form-check-label" for="defaultCheck1">
-      <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
-    </label>
-  </div>`
-    }
-    let optionalDisclaimer ='';
-    if(howDisplayDisclaimer==='option'){
-      optionalDisclaimer = `<div class="option-disclaimer solo-check form-check">
-      <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-      <label class="form-check-label" for="defaultCheck1">
-        <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
-      </label>
-    </div>`
-    }
+  function setStimulHtmlWithSlider(name,optionalContact,howDisplayContact, optionalDisclaimer,howDisplayDisclaimer) {
 
     let insideHtmlStimulPrase = `<div class="text-zone">
   <input class="text-field form-control" type="text" placeholder="Введите текст">
@@ -268,33 +295,13 @@ document.addEventListener('DOMContentLoaded', function () {
       <p class="sl_text">Текст с фигурами</p></div>
   </div>
 </div>
-${optionalContact}
-${optionalDisclaimer}
+<div class="optional-contact__wrapp">${optionalContact}</div>
+<div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
 <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
     return insideHtmlStimulPrase;
   };
 
-  function setLogoHtmlWithSlider(name,howDisplayContact,howDisplayDisclaimer) {
-    let optionalContact ='';
-    if(howDisplayContact==='option'){
-      optionalContact = `<div class="option-contact solo-check form-check">
-    <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-    <label class="form-check-label" for="defaultCheck1">
-      <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
-    </label>
-  </div>`
-    }
-    let optionalDisclaimer ='';
-    if(howDisplayDisclaimer==='option'){
-      optionalDisclaimer = `<div class="option-disclaimer solo-check form-check">
-      <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-      <label class="form-check-label" for="defaultCheck1">
-        <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
-      </label>
-    </div>`
-    }
-
-
+  function setLogoHtmlWithSlider(name,optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer) {
     let insideHtmlLogo = `
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
@@ -324,8 +331,8 @@ ${optionalDisclaimer}
         <p class="sl_text">Текст с фигурами</p></div>
     </div>
   </div>
-  ${optionalContact}
-  ${optionalDisclaimer}
+  <div class="optional-contact__wrapp">${optionalContact}</div>
+  <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
   <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
     return insideHtmlLogo;
   };
@@ -356,7 +363,7 @@ ${optionalDisclaimer}
       case 'Побуждающая фраза':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1",howDisplayContact,howDisplayDisclaimer));
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1",optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer));
         //добавляем работу доп. форм
         optionalField = document.querySelectorAll(".optional-field");
         optionalField.forEach(function (item) {
@@ -449,7 +456,13 @@ ${optionalDisclaimer}
     let insideSlideWrapp, secondPart;
     insideSlideWrapp = document.querySelector('.added .wrapper');
 
-    createSecondPart(insideSlideWrapp, secondPart, 'logo-part', setLogoHtmlWithSlider("logo_slide",howDisplayContact,howDisplayDisclaimer));
+    createSecondPart(insideSlideWrapp, secondPart, 'logo-part', setLogoHtmlWithSlider("logo_slide", optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer));
+
+    //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
+    const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
+    optionContactInput.value = document.querySelector('.contact-block textarea').value;
+    const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
+    optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
 
     //добавляем работу доп. форм
     let optionalField = document.querySelectorAll(".logo-part .optional-field");
@@ -457,6 +470,7 @@ ${optionalDisclaimer}
       createOptionalFiled(item);
     });
 
+    //добавляем работу дизэйбл энэйбл для Соло форм
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
     })
@@ -503,11 +517,7 @@ ${optionalDisclaimer}
     });
     deleteSlide();
     document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
-
   })
-
-
-
 
 
 
