@@ -431,7 +431,6 @@ p{
         padding-bottom: 10px;
         vertical-align: middle;
         padding-left: 3px;
-
     }
     p{
     display: inline-block;
@@ -441,38 +440,70 @@ p{
 }
 
 
-
 // SLIDER LOGO
-.logo-part{
-    .slogan{
-        //wait
+
+.attach-block{
+    position: relative;
+    .form-control-file{
+        display: none;
+    }
+    .my-file-input{
+        cursor: pointer;
+        display: flex;
+        ion-icon{
+            position: absolute;
+            left: -8px;
+        }
+        P{  
+            display: inline-block;
+            border-bottom: 2px dotted #a19d94;
+            line-height: 29px;
+            margin-left: 20px;
+        }
+    }
+}
+.attach-block.for-product{
+    .my-file-input{
+        cursor: pointer;
+        display: flex;
+
+        ion-icon{
+            width: 22px;
+            color: #636363;
+            position: absolute;
+            left: 0px;
+        }
+        P{  
+            display: inline-block;
+            border-bottom: 2px dotted #a19d94;
+            line-height: 29px;
+            margin-left: 26px;
+        }
     }
 }
 
-.form-control-file{
-    display: none;
-}
-.my-file-input{
-    cursor: pointer;
-    display: flex;
-    margin-bottom: 20px;
-    ion-icon{
-        position: absolute;
-        left: 18px;
-    }
-    P{  
-        display: inline-block;
-        border-bottom: 2px dotted #a19d94;
-        line-height: 29px;
-       margin-left: 20px;
-        //position: absolute;
-        //left: 50px;
-    }
 
-}
+
 
 .solo-check{
     margin-bottom: 10px;
 }
 
+//Product .mini-block
 
+.product-block {
+    padding: 17px 7px 7px 7px;
+
+    border-radius: 7px;
+    background-color: #ffffff;
+    margin-bottom: 20px !important ;
+
+.form-row:first-child{
+    margin-bottom: 6px;
+}
+}
+@media (max-width: 576px) { 
+    .product-block .col-12{
+        margin-bottom: 7px;
+    }
+}

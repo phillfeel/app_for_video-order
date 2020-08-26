@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
           })
         } else {
           document.querySelectorAll(".optional-contact__wrapp").forEach((elem)=>{
-            console.log(elem)
             elem.innerHTML = optionalContact;
             elem.querySelector(".option-contact .optional-txt").value = contactValue;
           })
@@ -337,6 +336,57 @@ disclaimerTextarea.addEventListener('change',()=>{
     return insideHtmlLogo;
   };
 
+  function setProductHtmlWithSlider(name,optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer) {
+    let insideHtmlLogo = `
+    <div class="product-block mini-block">
+    <div class="form-row">
+      <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+        <input type="text" class="form-control  form-control-sm" placeholder="Название товара">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control  form-control-sm" placeholder="Цена">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+        <input type="text" class="form-control  form-control-sm" placeholder="Описание товара">
+      </div>
+      <div class="col">
+        <div class="attach-block for-product">
+          <label class="my-file-input" for="exampleFormControlFile1">
+            <ion-icon size="large" name="image-outline"></ion-icon>
+            <p>Изображение</p>
+          </label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+      </div>
+    </div>
+  </div>
+  <h6 class="duration-title">Настроить анимацию</h6>
+  <div class="chooseAnimation-zone">
+    <div class="${name}">
+      <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
+      <p class="sl_text">Текст на подложке</p>
+      </div>
+      <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
+        <p class="sl_text">Текст с фигурами</p></div>
+      <div class="sl_slice"><img src="img/3.gif" alt="" class="sl_img">
+        <p class="sl_text"> На подложке с фигурами</p>
+      </div>
+      <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
+        <p class="sl_text">Текст на подложке</p>
+    </div>
+      <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
+        <p class="sl_text">Текст с фигурами</p></div>
+    </div>
+  </div>
+  <div class="optional-contact__wrapp">${optionalContact}</div>
+  <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
+  <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
+    return insideHtmlLogo;
+  };
+
+
   function createSecondPart(wrapp, part2, classPart, funcHtmlSlider) {
     part2 = document.createElement('div');
     part2.classList.add(classPart);
@@ -445,8 +495,8 @@ disclaimerTextarea.addEventListener('change',()=>{
 
   //----SLIDERS----//
 
-  //создать новый слайд по клику
-  document.querySelector(".add_slide").addEventListener("click", () => {
+  //создать новый слайд по клику LOGO
+  /* document.querySelector(".add_slide").addEventListener("click", () => {
     const constructSlide = document.createElement("div");
     constructSlide.classList = "video-slide block added"
     constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Логотип");
@@ -464,7 +514,7 @@ disclaimerTextarea.addEventListener('change',()=>{
     const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
     optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
 
-    //добавляем работу доп. форм
+    //добавляем работу доп. форм(Нужно для: побуждающей, лого)
     let optionalField = document.querySelectorAll(".logo-part .optional-field");
     optionalField.forEach(function (item) {
       createOptionalFiled(item);
@@ -517,7 +567,82 @@ disclaimerTextarea.addEventListener('change',()=>{
     });
     deleteSlide();
     document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
+  });
+ */
+  //товар цена по клику
+  document.querySelector(".add_slide").addEventListener("click", () => {
+    const constructSlide = document.createElement("div");
+    constructSlide.classList = "video-slide block added"
+    constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Товар-Цена");
+    let main = document.querySelector('.main .col-md-8');
+    main.append(constructSlide);
+
+    let insideSlideWrapp, secondPart;
+    insideSlideWrapp = document.querySelector('.added .wrapper');
+
+    createSecondPart(insideSlideWrapp, secondPart, 'product-part', setProductHtmlWithSlider("product_slide", optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer));
+
+    //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
+    const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
+    optionContactInput.value = document.querySelector('.contact-block textarea').value;
+    const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
+    optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
+
+    //добавляем работу доп. форм(Нужно для: побуждающей, лого)
+  /*   let optionalField = document.querySelectorAll(".logo-part .optional-field");
+    optionalField.forEach(function (item) {
+      createOptionalFiled(item);
+    });
+ */
+    //добавляем работу дизэйбл энэйбл для Соло форм
+    insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
+      turnForm(item);
+    })
+
+    $(document).ready(function () {
+      $('.product_slide').slick({
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 3,
+        responsive: [{
+          breakpoint: 990,
+          settings: {
+            //arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 2
+          }
+        }, {
+          breakpoint: 768,
+          settings: {
+            //arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        }, {
+          breakpoint: 580,
+          settings: {
+            //arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 2
+          }
+        }, {
+          breakpoint: 420,
+          settings: {
+            //arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+          }
+        }]
+      });
+    });
+    deleteSlide();
+    document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
   })
+
 
 
 

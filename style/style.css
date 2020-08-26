@@ -442,31 +442,72 @@ p {
   margin: 0;
 }
 
-.form-control-file {
+.attach-block {
+  position: relative;
+}
+
+.attach-block .form-control-file {
   display: none;
 }
 
-.my-file-input {
+.attach-block .my-file-input {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 20px;
 }
 
-.my-file-input ion-icon {
+.attach-block .my-file-input ion-icon {
   position: absolute;
-  left: 18px;
+  left: -8px;
 }
 
-.my-file-input P {
+.attach-block .my-file-input P {
   display: inline-block;
   border-bottom: 2px dotted #a19d94;
   line-height: 29px;
   margin-left: 20px;
 }
 
+.attach-block.for-product .my-file-input {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.attach-block.for-product .my-file-input ion-icon {
+  width: 22px;
+  color: #636363;
+  position: absolute;
+  left: 0px;
+}
+
+.attach-block.for-product .my-file-input P {
+  display: inline-block;
+  border-bottom: 2px dotted #a19d94;
+  line-height: 29px;
+  margin-left: 26px;
+}
+
 .solo-check {
   margin-bottom: 10px;
+}
+
+.product-block {
+  padding: 17px 7px 7px 7px;
+  border-radius: 7px;
+  background-color: #ffffff;
+  margin-bottom: 20px !important;
+}
+
+.product-block .form-row:first-child {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 576px) {
+  .product-block .col-12 {
+    margin-bottom: 7px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
