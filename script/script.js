@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-//----MAIN-BLOCK----//
+  //----MAIN-BLOCK----//
   // counter
   function changeValCount(item, max, min, step) {
     console.log('вызвали changeValCount');
@@ -133,12 +133,12 @@ document.addEventListener('DOMContentLoaded', function () {
     elem.addEventListener('change', () => {
       if (elem.checked) {
         howDisplayContact = elem.value;
-        if(howDisplayContact === 'all'){
-         document.querySelectorAll('.option-contact').forEach((elem)=>{
+        if (howDisplayContact === 'all') {
+          document.querySelectorAll('.option-contact').forEach((elem) => {
             elem.remove();
           })
         } else {
-          document.querySelectorAll(".optional-contact__wrapp").forEach((elem)=>{
+          document.querySelectorAll(".optional-contact__wrapp").forEach((elem) => {
             elem.innerHTML = optionalContact;
             elem.querySelector(".option-contact .optional-txt").value = contactValue;
           })
@@ -151,36 +151,36 @@ document.addEventListener('DOMContentLoaded', function () {
     elem.addEventListener('change', () => {
       if (elem.checked) {
         howDisplayDisclaimer = elem.value;
-        if(howDisplayDisclaimer === 'all'){
-          document.querySelectorAll('.option-disclaimer').forEach((elem)=>{
-             elem.remove();
-           })
-         } else {
-           document.querySelectorAll(".optional-disclaimer__wrapp").forEach((elem)=>{
-             elem.innerHTML = optionalDisclaimer;
-             elem.querySelector(".option-disclaimer .optional-txt").value = disclaimerValue;
-           })
-         }
+        if (howDisplayDisclaimer === 'all') {
+          document.querySelectorAll('.option-disclaimer').forEach((elem) => {
+            elem.remove();
+          })
+        } else {
+          document.querySelectorAll(".optional-disclaimer__wrapp").forEach((elem) => {
+            elem.innerHTML = optionalDisclaimer;
+            elem.querySelector(".option-disclaimer .optional-txt").value = disclaimerValue;
+          })
+        }
       }
     })
   });
 
-let contactValue="";
-let contactTextarea = document.querySelector('.contact-block textarea');
+  let contactValue = "";
+  let contactTextarea = document.querySelector('.contact-block textarea');
 
-contactTextarea.addEventListener('change',()=>{
+  contactTextarea.addEventListener('change', () => {
     contactValue = contactTextarea.value;
-    document.querySelectorAll('.option-contact .optional-txt').forEach((elem)=>{
+    document.querySelectorAll('.option-contact .optional-txt').forEach((elem) => {
       elem.value = contactValue;
     })
   })
 
-let disclaimerValue="";
-let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
+  let disclaimerValue = "";
+  let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
 
-disclaimerTextarea.addEventListener('change',()=>{
-  disclaimerValue = disclaimerTextarea.value;
-    document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem)=>{
+  disclaimerTextarea.addEventListener('change', () => {
+    disclaimerValue = disclaimerTextarea.value;
+    document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem) => {
       elem.value = disclaimerValue;
     })
   })
@@ -261,11 +261,11 @@ disclaimerTextarea.addEventListener('change',()=>{
         contacts = "selected";
         break;
     };
-    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm "><option ${stimulPhrs}>Побуждающая фраза</option><option ${logo}>Логотип</option><option ${productPrice}>Товар-Цена</option><option ${serviceDescription}>Услуга-Описание</option><option ${stock}>Акция</option><option ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
+    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option ${stimulPhrs}>Побуждающая фраза</option><option ${logo}>Логотип</option><option ${productPrice}>Товар-Цена</option><option ${serviceDescription}>Услуга-Описание</option><option ${stock}>Акция</option><option ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
     return forConstruct;
   }
 
-  function setStimulHtmlWithSlider(name,optionalContact,howDisplayContact, optionalDisclaimer,howDisplayDisclaimer) {
+  function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
 
     let insideHtmlStimulPrase = `<div class="text-zone">
   <input class="text-field form-control" type="text" placeholder="Введите текст">
@@ -300,10 +300,12 @@ disclaimerTextarea.addEventListener('change',()=>{
     return insideHtmlStimulPrase;
   };
 
-  function setLogoHtmlWithSlider(name,optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer) {
+  function setLogoHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
     let insideHtmlLogo = `
+    <div class="attach-block for-logo">
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
     <div class="text-zone">
     <div class="solo-check form-check">
       <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
@@ -314,7 +316,7 @@ disclaimerTextarea.addEventListener('change',()=>{
   </div>
   <h6 class="duration-title">Настроить анимацию</h6>
   <div class="chooseAnimation-zone">
-    <div class="${name}">
+    <div class="${name} hide">
       <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
       <p class="sl_text">Текст на подложке</p>
       </div>
@@ -336,7 +338,7 @@ disclaimerTextarea.addEventListener('change',()=>{
     return insideHtmlLogo;
   };
 
-  function setProductHtmlWithSlider(name,optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer) {
+  function setProductHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
     let insideHtmlLogo = `
     <div class="product-block mini-block">
     <div class="form-row">
@@ -361,6 +363,20 @@ disclaimerTextarea.addEventListener('change',()=>{
         </div>
       </div>
     </div>
+    <div class="form-row">
+      <div class="col">
+      <div class="delete-item">
+        <div class="close">
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="add-item-block inside">
+    <div class="add-item">
+      <p>+</p>
+      <p>Добавить товар</p>
+    </div>
   </div>
   <h6 class="duration-title">Настроить анимацию</h6>
   <div class="chooseAnimation-zone">
@@ -386,7 +402,6 @@ disclaimerTextarea.addEventListener('change',()=>{
     return insideHtmlLogo;
   };
 
-
   function createSecondPart(wrapp, part2, classPart, funcHtmlSlider) {
     part2 = document.createElement('div');
     part2.classList.add(classPart);
@@ -406,42 +421,8 @@ disclaimerTextarea.addEventListener('change',()=>{
     })
   };
 
-  //----MAIN---// динамическое добавление Побуждающей фразы или другого слайда исходя из существующих слайдов
-  document.querySelectorAll('.video-slide__change').forEach((item) => {
-    let insideSlideWrapp, secondPart, optionalField;
-    switch (item.value) {
-      case 'Побуждающая фраза':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
-        insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1",optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer));
-        //добавляем работу доп. форм
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        })
-        insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
-          turnForm(item);
-        })
-
-        break;
-      case 'Логотип':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
-        insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        secondPart = document.createElement('div');
-        secondPart.classList.add('logo-part');
-        secondPart.innerHTML = setLogoHtmlWithSlider("sl1");
-        insideSlideWrapp.append(secondPart);
-        //добавляем работу доп. форм
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        })
-        break;
-    }
-  });
-
-  $(document).ready(function () {
-    $('.sl1').slick({
+  function initCarousel(carouselClass) {
+    $(carouselClass).slick({
       centerMode: true,
       centerPadding: '60px',
       slidesToShow: 3,
@@ -479,9 +460,63 @@ disclaimerTextarea.addEventListener('change',()=>{
         }
       }]
     });
+  };
+
+  //----MAIN---// динамическое добавление Побуждающей фразы или другого слайда исходя из существующих слайдов
+  document.querySelectorAll('.video-slide__change').forEach((item) => {
+    let insideSlideWrapp, secondPart, optionalField;
+
+    switch (item.value) {
+      case 'Побуждающая фраза':
+        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
+        insideSlideWrapp = item.parentNode.parentNode.parentNode;
+
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
+        //добавляем работу доп. форм
+        optionalField = document.querySelectorAll(".optional-field");
+        optionalField.forEach(function (item) {
+          createOptionalFiled(item);
+        })
+        insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
+          turnForm(item);
+        })
+
+        break;
+      case 'Логотип':
+        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
+        insideSlideWrapp = item.parentNode.parentNode.parentNode;
+        secondPart = document.createElement('div');
+        secondPart.classList.add('logo-part');
+        secondPart.innerHTML = setLogoHtmlWithSlider("sl1");
+        insideSlideWrapp.append(secondPart);
+        //добавляем работу доп. форм
+        optionalField = document.querySelectorAll(".optional-field");
+        optionalField.forEach(function (item) {
+          createOptionalFiled(item);
+        })
+        break;
+    }
   });
 
-  deleteSlide(); //точно должна идти после формирования слайда
+  //иницианализируем карусель
+  initCarousel('.sl1');
+
+  //Товар на страницу
+ document.querySelector('.add-item').addEventListener('click', (elem)=>{
+    let target = elem.target;
+    let nextProduct = document.querySelector('.product-block').cloneNode(true);
+    let productNumb = +nextProduct.id.split("-")[1];
+    let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
+    nextProduct.id = nextProductId;
+    console.log(target.parentElement.parentElement);
+    target.parentElement.before(nextProduct);
+    nextProduct.querySelector(".close").addEventListener('click', ()=>{
+      nextProduct.remove();
+    })
+  })
+
+  //иницинализируем функцию удаления слайда - идет после того как сформировалась
+  deleteSlide();
 
   document.querySelectorAll(".counter").forEach(function (item) {
     if (item.classList.contains('main-counter')) {
@@ -525,52 +560,16 @@ disclaimerTextarea.addEventListener('change',()=>{
       turnForm(item);
     })
 
-    $(document).ready(function () {
-      $('.logo_slide').slick({
-        centerMode: true,
-        centerPadding: '60px',
-        slidesToShow: 3,
-        responsive: [{
-          breakpoint: 990,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 768,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 580,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 420,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 1
-          }
-        }]
-      });
-    });
+    //иницинализируем слайд
+    initCarousel(".logo_slide");
+    //иницинализируем добавление слайда
     deleteSlide();
-    document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
+
+    document.querySelector('.main .col-md-8').append(document.querySelector(".add-item-block"));
   });
  */
   //товар цена по клику
-  document.querySelector(".add_slide").addEventListener("click", () => {
+  document.querySelector(".add-slide .add-item").addEventListener("click", () => {
     const constructSlide = document.createElement("div");
     constructSlide.classList = "video-slide block added"
     constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Товар-Цена");
@@ -580,7 +579,7 @@ disclaimerTextarea.addEventListener('change',()=>{
     let insideSlideWrapp, secondPart;
     insideSlideWrapp = document.querySelector('.added .wrapper');
 
-    createSecondPart(insideSlideWrapp, secondPart, 'product-part', setProductHtmlWithSlider("product_slide", optionalContact,howDisplayContact,optionalDisclaimer,howDisplayDisclaimer));
+    createSecondPart(insideSlideWrapp, secondPart, 'product-part', setProductHtmlWithSlider("product_slide", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
 
     //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
     const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
@@ -588,8 +587,8 @@ disclaimerTextarea.addEventListener('change',()=>{
     const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
     optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
 
-    //добавляем работу доп. форм(Нужно для: побуждающей, лого)
-  /*   let optionalField = document.querySelectorAll(".logo-part .optional-field");
+    // ВАЖНО добавляем работу доп. форм(Нужно для: побуждающей, лого)
+    /*   let optionalField = document.querySelectorAll(".logo-part .optional-field");
     optionalField.forEach(function (item) {
       createOptionalFiled(item);
     });
@@ -598,51 +597,94 @@ disclaimerTextarea.addEventListener('change',()=>{
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
     })
+      //Товар на страницу
+      insideSlideWrapp.querySelector('.add-item').addEventListener('click', (elem)=>{
+  let target = elem.target;
+  let nextProduct = document.querySelector('.product-block').cloneNode(true);
+  let productNumb = +nextProduct.id.split("-")[1];
+  let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
+  nextProduct.id = nextProductId;
+  console.log(target.parentElement.parentElement);
+  target.parentElement.before(nextProduct);
+  nextProduct.querySelector(".close").addEventListener('click', ()=>{
+    nextProduct.remove();
+  })
+})
 
-    $(document).ready(function () {
-      $('.product_slide').slick({
-        centerMode: true,
-        centerPadding: '60px',
-        slidesToShow: 3,
-        responsive: [{
-          breakpoint: 990,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 768,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 580,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 420,
-          settings: {
-            //arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 1
-          }
-        }]
-      });
-    });
+    //иницинализируем слайд
+    initCarousel('.product_slide');
+
+    //удаление товара
+    insideSlideWrapp.querySelector(".close").addEventListener('click', ()=>{
+      console.log(insideSlideWrapp.querySelector('.product-block'));
+      insideSlideWrapp.querySelector(".close").parentElement.parentElement;
+      insideSlideWrapp.querySelector('.product-block').remove();
+    })
+
+    //иницинализируем удаление слайда
     deleteSlide();
-    document.querySelector('.main .col-md-8').append(document.querySelector(".add_slide-wrapp"));
+
+    document.querySelector('.main .col-md-8').append(document.querySelector(".add-slide"));
   })
 
+  function changeSlide() {
+    document.querySelectorAll('.video-slide__change').forEach((elem) => {
+      elem.addEventListener('change', () => {
+        const firstPart = elem.parentElement.parentElement;
+        firstPart.nextElementSibling.remove();
+        let secondPart;
+        let classForSecondP, createFunc;
+        switch (elem.value) {
+          case "Логотип":
+            classForSecondP = "logo-part";
+            createFunc = setLogoHtmlWithSlider()
+            break;
+          case "Побуждающая фраза":
+            classForSecondP = "stimul-part";
+            break;
+          case "Товар-Цена":
+            classForSecondP = "product-part";
+            break;
+          case "Услуга-Описание":
+            classForSecondP = "logo-part";
+            break;
+          case "Акция":
+            classForSecondP = "logo-part";
+            break;
+          case "Контакты":
+            classForSecondP = "logo-part";
+            break;
+        };
+        console.log(classForSecondP);
+
+        createSecondPart(firstPart.parentElement, secondPart, classForSecondP, setLogoHtmlWithSlider("logo_slide", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer))
+
+        let constructSlide = firstPart.parentElement.parentElement;
+        console.log(constructSlide)
+
+        //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
+        const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
+        optionContactInput.value = document.querySelector('.contact-block textarea').value;
+        const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
+        optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
+
+        //добавляем работу доп. форм(Нужно для: побуждающей, лого)
+        let optionalField = document.querySelectorAll(".logo-part .optional-field");
+        optionalField.forEach(function (item) {
+          createOptionalFiled(item);
+        });
+        //добавляем работу дизэйбл энэйбл для Соло форм
+        firstPart.parentNode.querySelectorAll(".solo-check").forEach(function (item) {
+          turnForm(item);
+        })
+        //иницинализируем слайд
+        initCarousel(".logo_slide");
+        //иницинализируем добавление слайда
+        deleteSlide();
+      })
+    })
+  }
+  changeSlide()
 
 
 

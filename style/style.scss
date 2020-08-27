@@ -4,6 +4,14 @@ h5 {
     display: inline-block;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: none;
+}
+
 // --- FIRST MAIN BLOCK --- //
 .main {
     padding-top: 30px;
@@ -50,7 +58,7 @@ h5 {
     }
 }
 
-p{
+p {
     margin-bottom: 0;
 }
 
@@ -82,7 +90,7 @@ p{
 }
 
 .qty .plus {
-  
+
     background-color: #646464 !important;
     cursor: pointer;
     display: inline-block;
@@ -170,8 +178,7 @@ p{
         .square,
         .rectangle16x9,
         .rectangle9x16,
-        .custom-size-preview    
-         {
+        .custom-size-preview {
             content: "";
             position: absolute;
             top: 1px;
@@ -194,27 +201,31 @@ p{
 
         .rectangle9x16 {
             width: calc(#{$preview-height} * (9 / 16));
-            height:$preview-height;
+            height: $preview-height;
         }
+
         .custom-size-preview {
-            max-width:100%;
+            max-width: 100%;
             height: 0px;
-            border:none;
+            border: none;
         }
     }
 
-    &__input-size{
+    &__input-size {
         display: inline-block;
         margin-right: 20px;
         padding-bottom: 10px;
-        *{
+
+        * {
             display: inline-block;
         }
+
         p {
             margin: 0;
             font-weight: 600;
         }
-        input{
+
+        input {
             width: 70px;
         }
 
@@ -235,14 +246,15 @@ p{
 
 }
 
-.mini-block textarea{
+.mini-block textarea {
     margin-bottom: 5px;
 }
 
-.form-check-inline{
-    margin-bottom:3px ;
-    .form-check-label{
-        padding-left:5px;
+.form-check-inline {
+    margin-bottom: 3px;
+
+    .form-check-label {
+        padding-left: 5px;
         line-height: 1.2;
     }
 }
@@ -337,6 +349,7 @@ p{
     width: 100%;
     position: relative;
 }
+
 .slick-initialized img {
     width: 100%;
     position: relative;
@@ -387,18 +400,21 @@ p{
 // button delete
 .btn-zone {
     text-align: right;
+
     .btn-remove-slide {
         position: relative;
-        ion-icon{
+
+        ion-icon {
             position: absolute;
-            top:8px;
-            left:5px;
+            top: 8px;
+            left: 5px;
             line-height: 20px;
-    }
-       p{
+        }
+
+        p {
             display: inline-block;
             padding-left: 15px;
-       }
+        }
     }
 
     .btn-outline-danger {
@@ -411,50 +427,87 @@ p{
     .btn-zone {
         //text-align: left;
     }
-  }
+}
 
-  // add slide
-.add_slide-wrapp{
+// add slide
+.add-item-block {
     text-align: center;
-  .add_slide{
-      cursor: pointer;
-      user-select: none;
-    
-    display: inline-block;
-    p:first-child{
-        font-size: 30px;
-        font-weight: bold;
-        line-height: 20px;
-    
+
+    .add-item {
+        cursor: pointer;
+        user-select: none;
+        display: inline-block;
+
+        p:first-child {
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 20px;
+
+        }
+
+        p:last-child {
+            padding-bottom: 10px;
+            vertical-align: middle;
+            padding-left: 3px;
+        }
+
+        p {
+            display: inline-block;
+            margin: 0;
+        }
     }
-    p:last-child{
-        padding-bottom: 10px;
-        vertical-align: middle;
-        padding-left: 3px;
+}
+
+.inside {
+    @extend .add-item-block;
+
+    .add-item {
+        p:first-child {
+            //Значок
+            font-size: 25px;
+            font-weight: bold;
+            line-height: 20px;
+            color: #000;
+            opacity: .5;
+
+        }
+
+        p:last-child {
+            //Текст
+            padding-bottom: 8px;
+            vertical-align: middle;
+            padding-left: 0;
+            color: #4b4b4b
+        }
+
+        p {
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 0;
+        }
     }
-    p{
-    display: inline-block;
-    margin: 0;
-}
-}
 }
 
 
 // SLIDER LOGO
 
-.attach-block{
+.attach-block {
     position: relative;
-    .form-control-file{
+
+    .form-control-file {
         display: none;
     }
-    .my-file-input{
+
+    .my-file-input {
         cursor: pointer;
         display: flex;
-        ion-icon{
+
+        ion-icon {
             position: absolute;
             left: -8px;
         }
-        P{  
+
+        P {
             display: inline-block;
             border-bottom: 2px dotted #a19d94;
             line-height: 29px;
@@ -462,18 +515,24 @@ p{
         }
     }
 }
-.attach-block.for-product{
-    .my-file-input{
+
+.attach-block.for-logo {
+    margin-bottom: 15px;
+}
+
+.attach-block.for-product {
+    .my-file-input {
         cursor: pointer;
         display: flex;
 
-        ion-icon{
+        ion-icon {
             width: 22px;
             color: #636363;
             position: absolute;
             left: 0px;
         }
-        P{  
+
+        P {
             display: inline-block;
             border-bottom: 2px dotted #a19d94;
             line-height: 29px;
@@ -482,28 +541,66 @@ p{
     }
 }
 
-
-
-
-.solo-check{
+.solo-check {
     margin-bottom: 10px;
 }
 
 //Product .mini-block
 
 .product-block {
-    padding: 17px 7px 7px 7px;
-
+    padding: 13px 7px 7px 7px;
     border-radius: 7px;
     background-color: #ffffff;
-    margin-bottom: 20px !important ;
+    margin-bottom: 5px !important;
+    margin-top: 10px;
 
-.form-row:first-child{
-    margin-bottom: 6px;
+    .form-row:first-child {
+        margin-bottom: 6px;
+    }
 }
+
+.delete-item {
+    height: 100%;
+    text-align: center;
+
+    .close {
+        //position:re;
+        float: none;
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        width: 36px;
+        height: 16px;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        opacity: 1;
+    }
+
+    .close:before,
+    .close:after {
+        position: absolute;
+        left: 7px;
+        left: 50%;
+        content: ' ';
+        height: 16px;
+        width: 2px;
+        background-color: #333;
+    }
+
+    .close:before {
+        transform: rotate(45deg);
+    }
+
+    .close:after {
+        transform: rotate(-45deg);
+    }
 }
-@media (max-width: 576px) { 
-    .product-block .col-12{
+
+@media (max-width: 576px) {
+    .product-block .col-12 {
         margin-bottom: 7px;
     }
 }
