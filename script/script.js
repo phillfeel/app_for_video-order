@@ -285,10 +285,28 @@ document.addEventListener('DOMContentLoaded', function () {
        </label>
      </div>
    </div>`;
-    let attachHtml = `<div class="attach-block for-logo">
-     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>Прикрепить логотип</p></label>
-     <input type="file" class="form-control-file" id="exampleFormControlFile1">
-     </div>`
+
+   let textForContact = `<div class="option-contact solo-check form-check">
+   <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+   <label class="form-check-label" for="defaultCheck1">
+     <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу" disabled="true">
+   </label>
+   </div>`
+ 
+   let textStockHtml = `<div class="text-zone">
+        <textarea class="form-control stock-text" id="textarea3" placeholder="Текст акции" rows="1"></textarea>
+   </div>`;
+
+   let nameAttach;
+   let attachHtml;
+
+   function getAttachHtml(name){
+    let attach = `<div class="attach-block for-logo">
+    <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>${name}</p></label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>`
+    return attach;
+   };
 
     let productZoneHtml = `<div class="product-block mini-block" id="product-1">
       <div class="form-row">
@@ -327,7 +345,46 @@ document.addEventListener('DOMContentLoaded', function () {
         <p>+</p>
         <p>Добавить товар</p>
       </div>
-    </div>`
+    </div>`;
+
+    let serviceZoneHtml = `<div class="product-block service mini-block" id="service-1">
+      <div class="form-row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <input type="text" class="form-control  form-control-sm" placeholder="Название услуги">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control  form-control-sm" placeholder="Цена">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <input type="text" class="form-control  form-control-sm" placeholder="Описание услуги">
+        </div>
+        <div class="col">
+          <div class="attach-block for-product">
+            <label class="my-file-input" for="exampleFormControlFile1">
+              <ion-icon size="large" name="image-outline"></ion-icon>
+              <p>Изображение</p>
+            </label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+        <div class="delete-item">
+          <div class="close">
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="add-item-block inside">
+      <div class="add-item">
+        <p>+</p>
+        <p>Добавить услугу</p>
+      </div>
+    </div>`;
     
     let carouselHtml = `<h6 class="duration-title">Настроить анимацию</h6>
      <div class="chooseAnimation-zone">
@@ -357,6 +414,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (nameForInitSlider) {
       case "logo-part_slider":
+        nameAttach = 'Прикрепить логотип';
+        attachHtml = getAttachHtml(nameAttach);
         insideHtml = `${attachHtml}${textZoneHtml_2}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case "stimul-part_slider":
@@ -366,13 +425,17 @@ document.addEventListener('DOMContentLoaded', function () {
         insideHtml = `${productZoneHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case "service-part_slider":
-
+        insideHtml = `${serviceZoneHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case "stock-part_slider":
-
+        nameAttach = 'Прикрепить изображение';
+        attachHtml = getAttachHtml(nameAttach);
+        insideHtml = `${attachHtml}${textStockHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case "contact-part_slider":
-
+        nameAttach = 'Прикрепить фото фасада';
+        attachHtml = getAttachHtml(nameAttach);
+        insideHtml = `${attachHtml}${textForContact}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
     }
     //console.log(insideHtml);
@@ -528,15 +591,18 @@ document.addEventListener('DOMContentLoaded', function () {
   function addProduct(insideSlideWrapp) {
     insideSlideWrapp.querySelector('.add-item').addEventListener('click', (elem) => {
       let target = elem.target;
-      let allProducts = document.querySelectorAll('.product-block');
+      let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
       console.log(target.parentElement.parentElement);
       target.parentElement.parentElement.before(nextProduct);
+
       nextProduct.querySelector(".close").addEventListener('click', () => {
-        nextProduct.remove();
+         if (insideSlideWrapp.querySelectorAll('.product-block').length > 1) {
+            nextProduct.remove();
+         }
       });
     });
   };
@@ -692,21 +758,21 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector(".add-slide .add-item").addEventListener("click", () => {
     const constructSlide = document.createElement("div");
     constructSlide.classList = "video-slide block added"
-    constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Товар-Цена");
+    constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Акция"); // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
     let main = document.querySelector('.main .col-md-8');
     main.append(constructSlide);
 
     let insideSlideWrapp, secondPart;
     insideSlideWrapp = document.querySelector('.added .wrapper');
 
-    const namePart = 'logo-part' // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
+    const namePart = 'stock-part' // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
     const nameCarousel = namePart+'_slider'
 
     createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
 
     console.log(insideSlideWrapp);
-    // ВАЖНО добавляем работу доп. форм(Нужно для: побуждающей, лого)
 
+    // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
     if(namePart === 'logo-part'){
       let optionalField = document.querySelectorAll(".logo-part .optional-field");
       optionalField.forEach(function (item) {
@@ -718,18 +784,25 @@ document.addEventListener('DOMContentLoaded', function () {
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
     })
-    //Товар на страницу
-    //addProduct(insideSlideWrapp);
 
+   // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    if(namePart === 'service-part' || namePart === 'product-part' ){
+      addProduct(insideSlideWrapp);    // <--------------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
+
+   //УДАЛЕНИЕ ТОВАРА
+    insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
+        if(insideSlideWrapp.querySelectorAll('.product-block').length < 2){
+          console.log(insideSlideWrapp.querySelectorAll('.product-block').length);
+        }else{
+          console.log('удаляем товар или услугу');
+          insideSlideWrapp.querySelector(".close").parentElement.parentElement;
+          insideSlideWrapp.querySelector('.product-block').remove();
+        }
+      }) 
+    }
+   
     //иницинализируем слайд
     initCarousel(`.${nameCarousel}`);
-
-    //удаление товара
-    insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
-      console.log(insideSlideWrapp.querySelector('.product-block'));
-      insideSlideWrapp.querySelector(".close").parentElement.parentElement;
-      insideSlideWrapp.querySelector('.product-block').remove();
-    })
 
     // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
     //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
@@ -756,7 +829,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.main .col-md-8').append(document.querySelector(".add-slide"));
   })
-
 
 
   function changeSlide() {

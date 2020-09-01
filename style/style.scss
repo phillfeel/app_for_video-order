@@ -370,6 +370,7 @@ p {
     width: inherit;
     height: 100%;
     background-color: rgba($color: #efe7f2, $alpha: .6);
+    background-color: rgba(253, 232, 179, .6);
 }
 
 .slick-current::after {
@@ -525,6 +526,7 @@ p {
     .my-file-input {
         cursor: pointer;
         display: flex;
+        user-select: none;
 
         ion-icon {
             width: 22px;
