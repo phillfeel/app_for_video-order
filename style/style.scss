@@ -63,7 +63,17 @@ p {
     margin-bottom: 0;
 }
 
-//MAIN BLOCK
+//LAST MAIN BLOCK
+.main-comment{
+    margin-top: 15px;
+}
+.main-btn{
+    text-align: center;
+    button{
+        width: 30%;
+    }
+
+}
 
 // COUNTER 
 .qty {
@@ -434,6 +444,7 @@ p {
 // add slide
 .add-item-block {
     text-align: center;
+    margin-bottom: 20px;
 
     .add-item {
         cursor: pointer;

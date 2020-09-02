@@ -243,30 +243,30 @@ document.addEventListener('DOMContentLoaded', function () {
       stock = "",
       contacts = "";
     switch (selector) {
-      case "Логотип":
+      case "logo":
         logo = "selected";
         break;
-      case "Побуждающая фраза":
+      case "stimul":
         stimulPhrs = "selected";
         break;
-      case "Товар-Цена":
+      case "product":
         productPrice = "selected";
         break;
-      case "Услуга-Описание":
+      case "service":
         serviceDescription = "selected";
         break;
-      case "Акция":
+      case "stock":
         stock = "selected";
         break;
-      case "Контакты":
+      case "contact":
         contacts = "selected";
         break;
     };
-    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option ${stimulPhrs}>Побуждающая фраза</option><option ${logo}>Логотип</option><option ${productPrice}>Товар-Цена</option><option ${serviceDescription}>Услуга-Описание</option><option ${stock}>Акция</option><option ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
+    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
     return forConstruct;
   }
 
-
+  //ФУНКИЦЯ СОЗДАНИЯ ТЕЛА ВТОРОЙ ЧАСТИ СЛАЙДА
   function createSecondPartHtml(nameForInitSlider, optionalContact, optionalDisclaimer) {
     let textZoneHtml_1 = `<div class="text-zone">
        <input class="text-field form-control" type="text" placeholder="Введите текст">
@@ -286,27 +286,27 @@ document.addEventListener('DOMContentLoaded', function () {
      </div>
    </div>`;
 
-   let textForContact = `<div class="option-contact solo-check form-check">
+    let textForContact = `<div class="option-contact solo-check form-check">
    <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
    <label class="form-check-label" for="defaultCheck1">
      <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу" disabled="true">
    </label>
    </div>`
- 
-   let textStockHtml = `<div class="text-zone">
+
+    let textStockHtml = `<div class="text-zone">
         <textarea class="form-control stock-text" id="textarea3" placeholder="Текст акции" rows="1"></textarea>
    </div>`;
 
-   let nameAttach;
-   let attachHtml;
+    let nameAttach;
+    let attachHtml;
 
-   function getAttachHtml(name){
-    let attach = `<div class="attach-block for-logo">
+    function getAttachHtml(name) {
+      let attach = `<div class="attach-block for-logo">
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>${name}</p></label>
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
     </div>`
-    return attach;
-   };
+      return attach;
+    };
 
     let productZoneHtml = `<div class="product-block mini-block" id="product-1">
       <div class="form-row">
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <p>Добавить услугу</p>
       </div>
     </div>`;
-    
+
     let carouselHtml = `<h6 class="duration-title">Настроить анимацию</h6>
      <div class="chooseAnimation-zone">
        <div class="${nameForInitSlider}">
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
            <p class="sl_text">Текст с фигурами</p></div>
        </div>
      </div>`;
-   
+
     let optionalFieldHtml = `<div class="optional-contact__wrapp">${optionalContact}</div>
      <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>`;
 
@@ -440,8 +440,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     //console.log(insideHtml);
     return insideHtml;
-   
+
   };
+
 
   function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
     let insideHtmlStimulPrase = `<div class="text-zone">
@@ -600,24 +601,31 @@ document.addEventListener('DOMContentLoaded', function () {
       target.parentElement.parentElement.before(nextProduct);
 
       nextProduct.querySelector(".close").addEventListener('click', () => {
-         if (insideSlideWrapp.querySelectorAll('.product-block').length > 1) {
-            nextProduct.remove();
-         }
+        if (insideSlideWrapp.querySelectorAll('.product-block').length > 1) {
+          nextProduct.remove();
+        }
       });
     });
   };
 
   function deleteSlide() {
     document.querySelectorAll(".btn-remove-slide").forEach((elem) => {
-      elem.addEventListener('click', () => {
+      elem.addEventListener('click', (e) => {
+        let target = e.target;
         console.log("Удаляем Слайд")
         if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
-          const targetVideoSlide = elem.parentNode.parentNode.parentNode.parentNode;
+          const targetVideoSlide = target.parentNode.parentNode.parentNode.parentNode;
           targetVideoSlide.remove();
+          if (document.querySelectorAll('.video-slide').length === 5) {
+            document.querySelector('.add-item-block.add-slide').style.display = 'block';
+          }
         }
       })
     })
   };
+
+
+
 
   function initCarousel(carouselClass) {
     $(carouselClass).slick({
@@ -665,7 +673,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let insideSlideWrapp, secondPart, optionalField;
 
     switch (item.value) {
-      case 'Побуждающая фраза':
+      case 'stimul':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
@@ -753,54 +761,68 @@ document.addEventListener('DOMContentLoaded', function () {
   });
  */
 
+  function getNextName(arr) {
+    document.querySelectorAll('.video-slide__change.form-control').forEach((el) => {
+      console.log(arr.filter(item => item != el.value));
+      arr = arr.filter(item => item != el.value);
+    });
+    return arr.shift();
+  };
 
-  //создать новый слайд по клику PRODUCT-PRICE  - МОЖЕМ МЕНЯТЬ НЕЙМ и НОВЫЙ БУДЕТ ЛИБО ЛОГО либо ТОВАР-цена
+  // ----- Cоздать новый слайд по клику PRODUCT-PRICE  - МОЖЕМ МЕНЯТЬ НЕЙМ и НОВЫЙ БУДЕТ ЛИБО ЛОГО либо ТОВАР-цена
   document.querySelector(".add-slide .add-item").addEventListener("click", () => {
-    const constructSlide = document.createElement("div");
-    constructSlide.classList = "video-slide block added"
-    constructSlide.innerHTML = setSlideHtmlWithSelector(2, "Акция"); // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
-    let main = document.querySelector('.main .col-md-8');
-    main.append(constructSlide);
+    let slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
+    let namePart = getNextName(slidesArr);
+
+    let allSlidesNumb = document.querySelectorAll('.video-slide__number');
+    console.log(allSlidesNumb);
+    let slideNumber = +allSlidesNumb[allSlidesNumb.length - 1].textContent + 1;
+    console.log(slideNumber);
+
+
+    let constructSlide = document.createElement("div");
+    constructSlide.classList = `video-slide block added-${slideNumber}`
+    constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart); // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
+    let main = document.querySelector('.add-slide');
+    main.before(constructSlide);
 
     let insideSlideWrapp, secondPart;
-    insideSlideWrapp = document.querySelector('.added .wrapper');
-
-    const namePart = 'stock-part' // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
-    const nameCarousel = namePart+'_slider'
+    insideSlideWrapp = document.querySelector(`.added-${slideNumber} .wrapper`);
+    const nameCarousel = namePart + '-part_slider';
 
     createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
 
     console.log(insideSlideWrapp);
 
     // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
-    if(namePart === 'logo-part'){
+    if (namePart === 'logo-part') {
       let optionalField = document.querySelectorAll(".logo-part .optional-field");
       optionalField.forEach(function (item) {
-      createOptionalFiled(item);
-    });
+        createOptionalFiled(item);
+      });
     }
-   
+
     //добавляем работу дизэйбл энэйбл для Соло форм
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
     })
 
-   // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
-    if(namePart === 'service-part' || namePart === 'product-part' ){
-      addProduct(insideSlideWrapp);    // <--------------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
+    // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    if (namePart === 'service-part' || namePart === 'product-part') {
+      addProduct(insideSlideWrapp); // <--------------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
 
-   //УДАЛЕНИЕ ТОВАРА
-    insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
-        if(insideSlideWrapp.querySelectorAll('.product-block').length < 2){
+      //УДАЛЕНИЕ ТОВАРА
+      insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
+        if (insideSlideWrapp.querySelectorAll('.product-block').length < 2) {
           console.log(insideSlideWrapp.querySelectorAll('.product-block').length);
-        }else{
+        } else {
           console.log('удаляем товар или услугу');
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
         }
-      }) 
+      })
     }
-   
+
     //иницинализируем слайд
     initCarousel(`.${nameCarousel}`);
 
@@ -824,11 +846,29 @@ document.addEventListener('DOMContentLoaded', function () {
       optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
     }
 
-    //иницинализируем удаление слайда
-    deleteSlide();
+    //Либо удаляем кнопку Добавить слайд , либо перемещаем последний блок
+    if (slideNumber === 6) {
+      document.querySelector('.add-item-block.add-slide').style.display = 'none';
+    };
 
-    document.querySelector('.main .col-md-8').append(document.querySelector(".add-slide"));
-  })
+    //иницинализируем удаление слайда
+    const btnDeleteSlide = insideSlideWrapp.querySelector(".btn-remove-slide");
+    btnDeleteSlide.addEventListener('click', () => {
+      console.log("Удаляем Слайд")
+      if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
+        const targetVideoSlide = btnDeleteSlide.parentNode.parentNode.parentNode.parentNode;
+        targetVideoSlide.remove();
+        if (document.querySelectorAll('.video-slide').length === 5) {
+          document.querySelector('.add-item-block.add-slide').style.display = 'block';
+        }
+      //ЗДЕСЬ НУЖНО ПЕРЕСЧИТАТЬ НОМЕРА СЛАЙДОВ
+      }
+    });
+
+    document.querySelector('.last-main-block').before(document.querySelector(".add-slide"));
+
+  });
+
 
 
   function changeSlide() {
@@ -840,27 +880,27 @@ document.addEventListener('DOMContentLoaded', function () {
         let classForSecondP, createFunc;
         let nameSlider;
         switch (elem.value) {
-          case "Логотип":
+          case "logo":
             classForSecondP = "logo-part";
             nameSlider = classForSecondP + "_slider";
             createFunc = setLogoHtmlWithSlider(nameSlider, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer);
             break;
-          case "Побуждающая фраза":
+          case "stimul":
             classForSecondP = "stimul-part";
             nameSlider = classForSecondP + "_slider";
             console.log(nameSlider);
             createFunc = setStimulHtmlWithSlider(nameSlider, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer);
             break;
-          case "Товар-Цена":
+          case "product":
             classForSecondP = "product-part";
             break;
-          case "Услуга-Описание":
+          case "service":
             classForSecondP = "logo-part";
             break;
-          case "Акция":
+          case "stock":
             classForSecondP = "logo-part";
             break;
-          case "Контакты":
+          case "contact":
             classForSecondP = "logo-part";
             break;
         };
