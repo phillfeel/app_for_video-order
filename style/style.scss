@@ -18,6 +18,12 @@ h5 {
     padding-top: 30px;
 }
 
+button.add-item {
+    border: none;
+    background: none;
+    outline: none;
+}
+
 .duration-main {
     display: flex;
     justify-content: space-between;
@@ -64,18 +70,33 @@ p {
 }
 
 //LAST MAIN BLOCK
-.main-comment{
+.main-comment {
     margin-top: 15px;
 }
-.main-btn{
+
+.main-btn {
     text-align: center;
-    button{
+
+    button {
         width: 30%;
     }
 
 }
 
 // COUNTER 
+.main-counter.notice {
+    position: relative;
+
+    &::after {
+        content: "нельзя";
+        top: 100%;
+        right: 20%;
+        position: absolute;
+        width: 140%;
+        background-color: lightsalmon;
+    }
+}
+
 .qty {
     width: 100px;
     margin: auto 0;
@@ -102,7 +123,7 @@ p {
 
 .qty .plus {
 
-    background-color: #646464 !important;
+    background-color: #646464;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
@@ -116,7 +137,7 @@ p {
 }
 
 .qty .minus {
-    background-color: #646464 !important;
+    background-color: #646464;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
@@ -128,14 +149,32 @@ p {
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
+    position: relative;
+}
+
+.qty .minus.disabled {
+    background-color: #a1a1a1;
+    &:hover {
+        background-color: none;
+    }
+
+    &:hover::after {
+        content: "уменьшите количество слайдов";
+        top: 100%;
+        right: 20%;
+        position: absolute;
+        width: fit-content;
+        background-color: lightsalmon;
+        padding: 5px;
+    }
 }
 
 .minus:hover {
-    background-color: #717fe0 !important;
+    background-color: #717fe0;
 }
 
 .plus:hover {
-    background-color: #717fe0 !important;
+    background-color: #717fe0;
 }
 
 /*Prevent text selection*/
@@ -450,6 +489,17 @@ p {
         cursor: pointer;
         user-select: none;
         display: inline-block;
+        position: relative;
+
+        &:disabled:hover::after {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            left: 120%;
+            content: "Добавьте общую длительность";
+            background-color: rgb(255, 0, 0);
+
+        }
 
         p:first-child {
             font-size: 30px;

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 h5 {
   display: inline-block;
 }
@@ -12,6 +13,12 @@ h5 {
 
 .main {
   padding-top: 30px;
+}
+
+button.add-item {
+  border: none;
+  background: none;
+  outline: none;
 }
 
 .duration-main {
@@ -76,6 +83,19 @@ p {
   width: 30%;
 }
 
+.main-counter.notice {
+  position: relative;
+}
+
+.main-counter.notice::after {
+  content: "нельзя";
+  top: 100%;
+  right: 20%;
+  position: absolute;
+  width: 140%;
+  background-color: lightsalmon;
+}
+
 .qty {
   width: 100px;
   margin: auto 0;
@@ -103,7 +123,7 @@ p {
 }
 
 .qty .plus {
-  background-color: #646464 !important;
+  background-color: #646464;
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
@@ -117,7 +137,7 @@ p {
 }
 
 .qty .minus {
-  background-color: #646464 !important;
+  background-color: #646464;
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
@@ -129,14 +149,35 @@ p {
   text-align: center;
   border-radius: 50%;
   background-clip: padding-box;
+  position: relative;
+}
+
+.qty .minus.disabled {
+  background-color: #a1a1a1;
+}
+
+.qty .minus.disabled:hover {
+  background-color: none;
+}
+
+.qty .minus.disabled:hover::after {
+  content: "уменьшите количество слайдов";
+  top: 100%;
+  right: 20%;
+  position: absolute;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: lightsalmon;
+  padding: 5px;
 }
 
 .minus:hover {
-  background-color: #717fe0 !important;
+  background-color: #717fe0;
 }
 
 .plus:hover {
-  background-color: #717fe0 !important;
+  background-color: #717fe0;
 }
 
 /*Prevent text selection*/
@@ -445,6 +486,16 @@ p {
       -ms-user-select: none;
           user-select: none;
   display: inline-block;
+  position: relative;
+}
+
+.add-item-block .add-item:disabled:hover::after, .inside .add-item:disabled:hover::after {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 120%;
+  content: "Добавьте общую длительность";
+  background-color: red;
 }
 
 .add-item-block .add-item p:first-child, .inside .add-item p:first-child {
