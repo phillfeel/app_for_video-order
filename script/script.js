@@ -533,8 +533,13 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function deleteSlide(btn) {
+    if (document.querySelectorAll('.video-slide').length == 1){
+      document.querySelector('.btn-remove-slide').disabled = true;
+    } else {
+      document.querySelector('.btn-remove-slide').disabled = false;
+    }
     btn.addEventListener('click', () => {
-      if (document.querySelectorAll('.video-slide.block').length != 1) {
+      //if (document.querySelectorAll('.video-slide.block').length != 1) {
         console.log("Удаляем Слайд")
         if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
           const targetVideoSlide = btn.parentNode.parentNode.parentNode.parentNode;
@@ -556,8 +561,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.add-item-block.add-slide button').disabled = false;
             document.querySelector('.main-counter .minus').classList.remove('disabled');
           }
+          if (document.querySelectorAll('.video-slide').length == 1){
+            document.querySelector('.btn-remove-slide').disabled = true;
+          } else {
+            document.querySelector('.btn-remove-slide').disabled = false;
+          }
         }
-      }
+      //}
     });
   };
 
