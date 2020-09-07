@@ -119,6 +119,7 @@ p {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    background: transparent;
 }
 
 .qty .plus {
@@ -309,6 +310,10 @@ p {
     }
 }
 
+.for-logo label.form-check-label{
+    padding-top: 3px;
+}
+
 // SLIDE
 
 .video-slide {
@@ -391,7 +396,7 @@ p {
 }
 
 .wrapper .chooseAnimation-zone {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 
@@ -580,7 +585,15 @@ p {
 }
 
 .attach-block.for-logo {
-    margin-bottom: 18px;
+    //margin-bottom: 18px;
+    h5 {
+        display: inline-block;
+        border-bottom: 2px dotted #a19d94;
+        line-height: 29px;
+        margin-left: 26px;
+    }
+
+
 }
 
 .attach-block.for-product {
@@ -603,6 +616,10 @@ p {
             margin-left: 26px;
         }
     }
+}
+
+.form-check.for-logo{
+    margin-bottom: 15px;
 }
 
 .solo-check {
