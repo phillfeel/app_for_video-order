@@ -536,35 +536,76 @@ p {
   margin: 0;
 }
 
-.attach-block {
+.last-main-block .attach-block.extra .form-control-file {
+  top: 2px;
+  left: 170px;
+}
+
+.last-main-block .attach-block.extra .my-file-input {
+  width: 300px;
+}
+
+.attach-block.for-logo,
+.attach-block.extra {
   position: relative;
 }
 
-.attach-block .form-control-file {
-  display: none;
+.attach-block.for-logo .form-control-file,
+.attach-block.extra .form-control-file {
+  color: #a19d94;
+  display: inline-block;
+  position: absolute;
+  top: 2px;
+  left: 55px;
+  z-index: -100;
+  outline: none;
+  width: auto;
 }
 
-.attach-block .my-file-input {
+.attach-block.for-logo .my-file-input,
+.attach-block.extra .my-file-input {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 185px;
+  height: 33px;
+  background-color: #fff;
 }
 
-.attach-block .my-file-input ion-icon {
+.attach-block.for-logo .my-file-input ion-icon,
+.attach-block.extra .my-file-input ion-icon {
   position: absolute;
   left: -8px;
+  top: 3px;
 }
 
-.attach-block .my-file-input P {
+.attach-block.for-logo .my-file-input P,
+.attach-block.extra .my-file-input P {
   display: inline-block;
   border-bottom: 2px dotted #a19d94;
-  line-height: 29px;
+  line-height: 31px;
   margin-left: 20px;
 }
 
 .attach-block.for-logo {
   margin-bottom: 18px;
+}
+
+.attach-block.for-product {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.attach-block.for-product::after {
+  z-index: 1;
+  position: absolute;
+  content: "";
+  width: 135px;
+  height: 40px;
+  background-color: #fff;
+  top: 28px;
+  left: -135px;
 }
 
 .attach-block.for-product .my-file-input {
@@ -576,6 +617,12 @@ p {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  background-color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 100;
+  position: relative;
 }
 
 .attach-block.for-product .my-file-input ion-icon {
@@ -592,6 +639,82 @@ p {
   margin-left: 26px;
 }
 
+.attach-block.for-product .form-control-file {
+  color: #a19d94;
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  left: -130px;
+  z-index: 0;
+  outline: none;
+  width: auto;
+}
+
+@media screen and (max-width: 578px) {
+  .attach-block.for-product::after {
+    display: none;
+  }
+  .attach-block.for-product .form-control-file {
+    width: auto;
+    color: #a19d94;
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    z-index: 0;
+    outline: none;
+    width: 100%;
+  }
+  .attach-block.for-product .my-file-input {
+    width: 135px;
+    height: 33px;
+  }
+  .attach-block.for-product .my-file-input ion-icon {
+    top: 2px;
+    left: 0px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .attach-block.for-logo::after {
+    z-index: -10;
+    position: absolute;
+    content: "";
+    width: 30px;
+    height: 34px;
+    background-color: #fff;
+    top: 35px;
+    left: -28px;
+  }
+  .attach-block.for-logo .form-control-file {
+    top: 37px;
+    left: -130px;
+  }
+  .attach-block.for-logo .my-file-input {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .last-main-block .attach-block.extra::after {
+    z-index: -10;
+    position: absolute;
+    content: "";
+    width: 30px;
+    height: 34px;
+    background-color: #fff;
+    top: 35px;
+    left: -28px;
+  }
+  .last-main-block .attach-block.extra .form-control-file {
+    top: 37px;
+    left: -130px;
+  }
+  .last-main-block .attach-block.extra .my-file-input {
+    margin-bottom: 40px;
+  }
+}
+
 .solo-check {
   margin-bottom: 10px;
 }
@@ -604,8 +727,18 @@ p {
   margin-top: 10px;
 }
 
-.product-block .form-row:first-child {
+.product-block .form-row:nth-child(1) {
   margin-bottom: 6px;
+}
+
+.product-block .form-row:nth-child(2) .col-12 {
+  position: relative;
+  z-index: 10;
+}
+
+.product-block .form-row:nth-child(3) .col {
+  position: relative;
+  z-index: 100;
 }
 
 .delete-item {

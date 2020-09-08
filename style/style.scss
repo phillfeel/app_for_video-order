@@ -154,6 +154,7 @@ p {
 
 .qty .minus.disabled {
     background-color: #a1a1a1;
+
     &:hover {
         background-color: none;
     }
@@ -532,7 +533,6 @@ p {
             line-height: 20px;
             color: #000;
             opacity: .5;
-
         }
 
         p:last-child {
@@ -553,41 +553,83 @@ p {
 
 
 // SLIDER LOGO
+.last-main-block {
+    .attach-block.extra {
+        .form-control-file {
+            top: 2px;
+            left: 170px;
+        }
 
-.attach-block {
+        .my-file-input {
+            width: 300px;
+        }
+    }
+}
+
+.attach-block.for-logo,
+.attach-block.extra {
     position: relative;
 
     .form-control-file {
-        display: none;
+        color: #a19d94;
+        display: inline-block;
+        position: absolute;
+        top: 2px;
+        left: 55px;
+        z-index: -100;
+        outline: none;
+        width: auto;
     }
 
     .my-file-input {
         cursor: pointer;
         display: flex;
+        width: 185px;
+        height: 33px;
+        background-color: #fff;
 
         ion-icon {
             position: absolute;
             left: -8px;
+            top: 3px
         }
 
         P {
             display: inline-block;
             border-bottom: 2px dotted #a19d94;
-            line-height: 29px;
+            line-height: 31px;
             margin-left: 20px;
         }
     }
 }
+
 
 .attach-block.for-logo {
     margin-bottom: 18px;
 }
 
 .attach-block.for-product {
+    position: relative;
+    margin-bottom: 20px;
+
+    &::after {
+        z-index: 1;
+        position: absolute;
+        content: "";
+        width: 135px;
+        height: 40px;
+        background-color: #fff;
+        top: 28px;
+        left: -135px;
+    }
     .my-file-input {
         cursor: pointer;
         display: flex;
         user-select: none;
+        background-color: #fff;
+        width: fit-content;
+        z-index: 100;
+        position: relative;
 
         ion-icon {
             width: 22px;
@@ -601,6 +643,95 @@ p {
             border-bottom: 2px dotted #a19d94;
             line-height: 29px;
             margin-left: 26px;
+        }
+    }
+
+    .form-control-file {
+        color: #a19d94;
+        display: inline-block;
+        position: absolute;
+        top: 30px;
+        left: -130px;
+        z-index: 0;
+        outline: none;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 578px) {
+    .attach-block.for-product {
+        &::after {
+            display: none;
+        }
+        .form-control-file {
+            width: auto;
+            color: #a19d94;
+            display: inline-block;
+            position: absolute;
+            top: 1px;
+            left: 4px;
+            z-index: 0;
+            outline: none;
+            width: 100%;
+        }
+        .my-file-input {
+            width: 135px;
+            height: 33px;
+            ion-icon {
+            top: 2px;
+                left: 0px;
+            }
+        }
+    }
+};
+
+@media screen and (max-width: 400px) {
+    .attach-block.for-logo {
+        &::after {
+            z-index: -10;
+            position: absolute;
+            content: "";
+            width: 30px;
+            height: 34px;
+            background-color: #fff;
+            top: 35px;
+            left: -28px;
+        }
+
+        .form-control-file {
+            top: 37px;
+            left: -130px;
+        }
+
+        .my-file-input {
+            margin-bottom: 40px;
+     
+        }
+    }
+}
+
+@media screen and (max-width: 478px) {
+    .last-main-block {
+        .attach-block.extra {
+            &::after {
+                z-index: -10;
+                position: absolute;
+                content: "";
+                width: 30px;
+                height: 34px;
+                background-color: #fff;
+                top: 35px;
+                left: -28px;
+            }
+
+            .form-control-file {
+                top: 37px;
+                left: -130px;
+            }
+
+            .my-file-input {
+                margin-bottom: 40px;
+            }
         }
     }
 }
@@ -618,10 +749,21 @@ p {
     margin-bottom: 5px !important;
     margin-top: 10px;
 
-    .form-row:first-child {
+    .form-row:nth-child(1) {
         margin-bottom: 6px;
     }
+
+    .form-row:nth-child(2) .col-12 {
+        position: relative;
+        z-index: 10;
+    }
+    .form-row:nth-child(3) .col {
+        position: relative;
+        z-index: 100;
+    }
 }
+
+;
 
 .delete-item {
     height: 100%;
