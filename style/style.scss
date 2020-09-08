@@ -608,7 +608,6 @@ p {
     }
 }
 
-
 .attach-block.for-logo {
     //margin-bottom: 18px;
     h5 {
@@ -616,9 +615,14 @@ p {
         border-bottom: 2px dotted #a19d94;
         line-height: 29px;
         margin-left: 26px;
+        height: 30px;
     }
-
-
+    .my-file-input {
+        width: 240px;
+    }
+    .form-control-file {
+        left: 110px;
+    }
 }
 
 .attach-block.for-product {
@@ -664,14 +668,27 @@ p {
         display: inline-block;
         position: absolute;
         top: 30px;
-        left: -130px;
+        left: -131px;
         z-index: 0;
         outline: none;
-        width: auto;
+        width: 200%;
     }
+    @media (min-width:570px) and (max-width:770px) {
+       
+        .form-control-file {
+            width: 180%;
+        }
+    }
+    @media (min-width:990px) and (max-width:1200px) {
+       
+        .form-control-file {
+            width: 170%;
+        }
+    }
+
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 577px) {
     .attach-block.for-product {
         &::after {
             display: none;

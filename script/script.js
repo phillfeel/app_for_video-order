@@ -554,7 +554,9 @@ document.addEventListener('DOMContentLoaded', function () {
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
-      console.log(target.parentElement.parentElement);
+      nextProduct.querySelector('input[type="file"]').id = "img-"+nextProductId;
+      nextProduct.querySelector('.my-file-input').setAttribute('for', "img-"+nextProductId);
+      console.log(nextProduct.querySelector('input[type="file"]'));
       target.parentElement.parentElement.before(nextProduct);
 
       nextProduct.querySelector(".close").addEventListener('click', () => {
@@ -728,8 +730,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (iArr == slidesArr.length) {
       iArr = 0;
     }
-
-    //let namePart = getNextName(slidesArr);
 
     let allSlidesNumb = document.querySelectorAll('.video-slide__number');
     console.log(allSlidesNumb);
