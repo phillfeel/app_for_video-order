@@ -3,8 +3,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   //----MAIN-BLOCK----//
-  // counter
-  function changeValCount(item, max, min, step) {
+  // counter MAIN
+  function changeValCountMain(item, max, min, step) {
     console.log('вызвали changeValCount');
     const plus = item.querySelector(".plus"),
       minus = item.querySelector(".minus"),
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         count.value = +count.value + step;
         let amountSlide = document.querySelectorAll('.video-slide').length;
         console.log(count.value / amountSlide);
-        if (count.value / amountSlide >= 5) {
+        if (count.value / amountSlide >= step) {
           document.querySelector('.add-item-block.add-slide button').disabled = false;
           document.querySelector('.main-counter').classList.remove('notice');
         }
@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     minus.addEventListener("click", function () {
       let value = +count.value;
-      if (value / +document.querySelectorAll('.video-slide').length == 5) {
+      if (value / +document.querySelectorAll('.video-slide').length == step) {
         min = value;
         //document.querySelector('.main-counter').classList.add('notice');
       } else {
-        min = min - 5;
+        min = min - step;
       }
       console.log(value);
       console.log('min =' + min);
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         value = count.value;
         let amountSlide = document.querySelectorAll('.video-slide').length;
         console.log(value / amountSlide);
-        if (value / amountSlide == 5) {
+        if (value / amountSlide == step) {
           document.querySelector('.add-item-block.add-slide button').disabled = true;
           //document.querySelector('.main-counter').classList.add('notice');
           console.log('получается нельзя меньше')
@@ -47,7 +47,28 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('не никак')
       }
     })
-  }
+  };
+
+  //запускаем counter общей длины слайда
+  changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5);
+
+  // COUNTER Slides
+  const changeValCountSlides = function (item, max, min, step) {
+    const plus = item.querySelector(".plus"),
+      minus = item.querySelector(".minus"),
+      count = item.querySelector(".count");
+    count.setAttribute('disabled', true);
+    plus.addEventListener("click", function () {
+      if (count.value < max) {
+        count.value = +count.value + step;
+      }
+    });
+    minus.addEventListener("click", function () {
+      if (count.value > min) {
+        count.value = +count.value - step;
+      }
+    })
+  };
 
   //format-video-preview
   const formatVideoSelect = document.querySelector(".format-video__change_input"),
@@ -289,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function () {
         contacts = "selected";
         break;
     };
-    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty stimul-phrase"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
+    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty slide-counter"><span class="minus bg-dark">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus bg-dark">+</span></div></div></div></div>`
     return forConstruct;
   }
 
@@ -432,6 +453,12 @@ document.addEventListener('DOMContentLoaded', function () {
        </div>
      </div>`;
 
+    let logoUseHtml = `<div class="form-check for-logo">
+    <input class="form-check-input" type="checkbox" id="gridCheck">
+    <label class="form-check-label" for="gridCheck">
+        Добавить логотип
+    </label>
+  </div>`
     let optionalFieldHtml = `<div class="optional-contact__wrapp">${optionalContact}</div>
      <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>`;
 
@@ -446,23 +473,23 @@ document.addEventListener('DOMContentLoaded', function () {
         insideHtml = `${attachHtml}${textZoneHtml_2}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /stimul-part_slider/i.test(nameForInitSlider):
-        insideHtml = `${textZoneHtml_1}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${textZoneHtml_1}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /product-part_slider/i.test(nameForInitSlider):
-        insideHtml = `${productZoneHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${productZoneHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /service-part_slider/i.test(nameForInitSlider):
-        insideHtml = `${serviceZoneHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${serviceZoneHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /stock-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить изображение';
         attachHtml = getAttachHtml(nameAttach);
-        insideHtml = `${attachHtml}${textStockHtml}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${attachHtml}${textStockHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /contact-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить фото фасада';
         attachHtml = getAttachHtml(nameAttach);
-        insideHtml = `${attachHtml}${textForContact}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${attachHtml}${textForContact}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
     }
     //console.log(insideHtml);
@@ -497,6 +524,12 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
       <p class="sl_text">Текст с фигурами</p></div>
   </div>
+</div>
+<div class="form-check for-logo">
+  <input class="form-check-input" type="checkbox" id="gridCheck">
+  <label class="form-check-label" for="gridCheck">
+      Добавить логотип
+  </label>
 </div>
 <div class="optional-contact__wrapp">${optionalContact}</div>
 <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
@@ -533,8 +566,13 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function deleteSlide(btn) {
+    if (document.querySelectorAll('.video-slide').length == 1){
+      document.querySelector('.btn-remove-slide').disabled = true;
+    } else {
+      document.querySelector('.btn-remove-slide').disabled = false;
+    }
     btn.addEventListener('click', () => {
-      if (document.querySelectorAll('.video-slide.block').length != 1) {
+      //if (document.querySelectorAll('.video-slide.block').length != 1) {
         console.log("Удаляем Слайд")
         if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
           const targetVideoSlide = btn.parentNode.parentNode.parentNode.parentNode;
@@ -556,8 +594,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.add-item-block.add-slide button').disabled = false;
             document.querySelector('.main-counter .minus').classList.remove('disabled');
           }
+          if (document.querySelectorAll('.video-slide').length == 1){
+            document.querySelector('.btn-remove-slide').disabled = true;
+          } else {
+            document.querySelector('.btn-remove-slide').disabled = false;
+          }
         }
-      }
+      //}
     });
   };
 
@@ -602,6 +645,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+
+
   //----MAIN---// динамическое добавление Побуждающей фразы на существующий
   document.querySelectorAll('.video-slide__change').forEach((item) => {
     let insideSlideWrapp, secondPart, optionalField;
@@ -617,12 +662,14 @@ document.addEventListener('DOMContentLoaded', function () {
         optionalField.forEach(function (item) {
           createOptionalFiled(item);
         })
-
         //соло формы
         insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
           turnForm(item);
         })
 
+
+        //запускаем counter длины 1го слайда
+        changeValCountSlides(document.querySelector('.slide-counter'), 8, 2, 1);
 
         break;
       case 'logo':
@@ -647,16 +694,13 @@ document.addEventListener('DOMContentLoaded', function () {
   //иницинализируем функцию удаления слайда - идет после того как сформировалась
   deleteSlide(document.querySelector('.btn-remove-slide'));
 
+ 
 
-  document.querySelectorAll(".counter").forEach(function (item) {
-    if (item.classList.contains('main-counter')) {
-      changeValCount(item, 40, 5, 5);
+ /*  document.querySelectorAll(".counter").forEach(function (item) {
+    if (item.classList.contains('slide-counter')) {
+      
     }
-    if (item.classList.contains('stimul-phrase')) {
-      changeValCount(item, 8, 2, 1);
-    }
-
-  })
+  }) */
 
   //----SLIDERS----//
 
@@ -672,10 +716,11 @@ document.addEventListener('DOMContentLoaded', function () {
      slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
    }; */
 
-  let iArr = 1;
 
-  // ----- Cоздать новый слайд по клику PRODUCT-PRICE  - МОЖЕМ МЕНЯТЬ НЕЙМ и НОВЫЙ БУДЕТ ЛИБО ЛОГО либо ТОВАР-цена
-  document.querySelector(".add-slide .add-item").addEventListener("click", () => {
+  let iArr = 1; //для обхода массива названий слайдов
+
+  // ----- Cоздать новый слайд по клику! 
+    document.querySelector(".add-slide .add-item").addEventListener("click", () => {
     let slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
 
     let namePart = slidesArr[iArr];
@@ -693,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let constructSlide = document.createElement("div");
     constructSlide.classList = `video-slide block added-${slideNumber}`
-    constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart); // <--------------- ЧТОБЫ ПОМЕНЯТЬ СЛАЙД
+    constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart); 
     let main = document.querySelector('.add-slide');
     main.before(constructSlide);
 
@@ -743,8 +788,13 @@ document.addEventListener('DOMContentLoaded', function () {
       })
     }
 
-    //иницинализируем слайд
+    //иницинализируем карусель
     initCarousel(`.${nameCarousel}`);
+    
+    //запускаем Counter длины слайда и присваиваем класс слайда
+    const slideCounter = insideSlideWrapp.querySelector('.slide-counter');
+    slideCounter.querySelector('input').classList.add(namePart);
+    changeValCountSlides(slideCounter, 8, 2, 1);
 
     // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
     //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
@@ -776,11 +826,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('.main-counter .minus').classList.remove('disabled');
     }
 
-    //Либо удаляем кнопку Добавить слайд , либо перемещаем последний блок
-    /* if (slideNumber === 6) {
-      document.querySelector('.add-item-block.add-slide').style.display = 'none';
-    }; */
-
     //иницинализируем удаление слайда
     deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
 
@@ -796,8 +841,6 @@ document.addEventListener('DOMContentLoaded', function () {
       switch (elem.value) {
         case "logo":
           classForSecondP = "logo-part";
-          console.log(optionalContact);
-          console.log(optionalDisclaimer);
           break;
         case "stimul":
           classForSecondP = "stimul-part";
@@ -853,6 +896,10 @@ document.addEventListener('DOMContentLoaded', function () {
         })
       }
 
+          
+    //переименовываем counter слайда
+    insideSlideWrapp.querySelector('.slide-counter input').classList = 'count '+classForSecondP;
+
       //иницинализируем слайд
       initCarousel(`.${nameSlider}`);
 
@@ -882,5 +929,6 @@ document.addEventListener('DOMContentLoaded', function () {
   changeSlide(document.querySelector('.video-slide__change'));
 
 
+   
 
 })
