@@ -162,15 +162,7 @@ p {
 }
 
 .qty .minus.disabled:hover::after {
-  content: "уменьшите количество слайдов";
-  top: 100%;
-  right: 20%;
-  position: absolute;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  background-color: lightsalmon;
-  padding: 5px;
+  content: "";
 }
 
 .qty.main-counter .minus.disabled:hover::after {
