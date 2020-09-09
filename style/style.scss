@@ -170,13 +170,34 @@ p {
         padding: 5px;
     }
 }
+.qty.main-counter .minus.disabled {
+    &:hover::after {
+        content: "Cначала уменьшите количество слайдов";
+        top: 100%;
+        right: 20%;
+        position: absolute;
+        width: fit-content;
+        background-color: lightsalmon;
+        padding: 5px;
+    }
+}
+
+
+.qty .plus.disabled {
+    background-color: #a1a1a1;
+
+    &:hover {
+        background-color: none;
+    }
+}
+
 
 .minus:hover {
-    background-color: #717fe0;
+    background-color: #f89b4f;
 }
 
 .plus:hover {
-    background-color: #717fe0;
+    background-color: #f89b4f;
 }
 
 /*Prevent text selection*/
@@ -571,6 +592,32 @@ p {
     }
 }
 
+.logo-part .attach-block.for-logo,
+.stock-part .attach-block.for-logo,
+.contact-part .attach-block.for-logo{
+    .my-file-input{
+        position: relative;
+        z-index: 10;
+        width: 190px;
+        background-color: #ffe6b0;
+    }
+    .form-control-file{
+        left: 60px;
+        z-index: 0;
+    }
+}
+.contact-part .attach-block.for-logo,
+.stock-part .attach-block.for-logo{
+    .my-file-input{
+        width: 230px;
+    }
+    .form-control-file{
+        left: 100px;
+    }
+
+}
+
+
 .attach-block.for-logo,
 .attach-block.extra {
     position: relative;
@@ -715,22 +762,23 @@ p {
     }
 };
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 453px) {
     .attach-block.for-logo {
         &::after {
-            z-index: -10;
+            z-index: 0;
             position: absolute;
             content: "";
             width: 30px;
             height: 34px;
             background-color: #fff;
             top: 35px;
-            left: -28px;
+            left: -30px;
         }
 
         .form-control-file {
             top: 37px;
-            left: -130px;
+            left: -130px !important;
+            width: 130%;
         }
 
         .my-file-input {
@@ -738,6 +786,31 @@ p {
      
         }
     }
+    .logo-part, .contact-part, .stock-part{
+        .attach-block.for-logo {
+            &::after {
+                z-index: 0;
+                position: absolute;
+                content: "";
+                width: 30px;
+                height: 34px;
+                background-color: #fff;
+                top: 35px;
+                left: -30px;
+            }
+            &::before {
+                z-index: 1;
+                position: absolute;
+                content: "";
+                width: 12px;
+                height: 34px;
+                background-color: #ffe6b0;
+                top: 35px;
+                left: -10px;
+            }
+        }
+    }
+    
 }
 
 @media screen and (max-width: 478px) {
