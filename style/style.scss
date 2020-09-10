@@ -156,12 +156,15 @@ p {
 .qty .minus.disabled {
     background-color: #a1a1a1;
 
-    &:hover {
-        background-color: none;
-    }
+    &.no-touch{
 
-    &:hover::after {
-        content: "";
+        &:hover {
+            background-color: none;
+        }
+    
+        &:hover::after {
+            content: "";
+        }
     }
 }
 
@@ -173,6 +176,7 @@ p {
 }
 
 .qty.main-counter .minus.disabled {
+    &.no-touch{
     &:hover::after {
         content: "Cначала уменьшите количество слайдов";
         top: 100%;
@@ -183,10 +187,13 @@ p {
         padding: 5px;
     }
 }
+}
 .qty.main-counter .minus.disabl {
+    &.no-touch{
     &:hover::after {
         content: "";
     }
+}
 }
 
 
@@ -194,18 +201,24 @@ p {
 .qty .plus.disabled {
     background-color: #a1a1a1;
 
+    &.no-touch{
     &:hover {
         background-color: none;
     }
 }
+}
 
 
 .minus:hover {
+    &.no-touch{
     background-color: #f89b4f;
+    }
 }
 
 .plus:hover {
+    &.no-touch{
     background-color: #f89b4f;
+    }
 }
 
 /*Prevent text selection*/
