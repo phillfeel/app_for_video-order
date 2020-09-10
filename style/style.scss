@@ -203,22 +203,24 @@ p {
 }
 
 .no-touchevents {
-   
-        &:hover {
-            background-color: none;
-        }
+
+    &:hover {
+        background-color: none;
+    }
 }
 
-
+.touchevents {
     .minus:hover {
         background-color: #f89b4f;
     }
+}
 
 
-
+.touchevents {
     .plus:hover {
         background-color: #f89b4f;
     }
+}
 
 .touchevents {
     .minus:active {

@@ -193,11 +193,11 @@ p {
   background-color: none;
 }
 
-.minus:hover {
+.touchevents .minus:hover {
   background-color: #f89b4f;
 }
 
-.plus:hover {
+.touchevents .plus:hover {
   background-color: #f89b4f;
 }
 
