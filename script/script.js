@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
       count = item.querySelector(".count");
     count.setAttribute('disabled', true);
     plus.addEventListener("click", function () {
+      if(count.value == step){ //только если MIN = 5 , а STEP = 10
+        console.log('+');
+        document.querySelector('.main-counter .minus').classList.remove('disabl');
+      }
       if (count.value < max) {
         document.querySelector('.main-counter .minus').classList.remove('disabled');
         count.value = +count.value + step;
@@ -25,11 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    minus.addEventListener('mouseover', ()=>{
-      
-    })
- 
     minus.addEventListener("click", function () {
+      
       let value = +count.value;
       if(value == max){
         plus.classList.remove('disabled');
@@ -53,10 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         console.log('не никак')
       };
-      /* if(count.value == step){ //только если MIN = 5 , а STEP = 10
+      if(count.value == step){ //только если MIN = 5 , а STEP = 10
         console.log('object');
-        document.querySelector('.main-counter .minus.disabled').classList.remove('disabled')
-      } */
+        document.querySelector('.main-counter .minus').classList.remove('disabled');
+        document.querySelector('.main-counter .minus').classList.add('disabl');
+      }
+      
     })
   };
 
@@ -125,9 +128,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const customSizePreview = document.querySelector(".custom-size-preview");
     let horizontPx, verticalPx, proportionPx, resizeVerticalPx, resizeHorizontPx;
+
+    customSizePreview.style.display = 'none';
+
     inputHorizont.addEventListener("input", () => {
       horizontPx = inputHorizont.value;
       if (!inputVertical.value == "") {
+        if( inputHorizont.value == "" || inputVertical.value == "" ){
+          customSizePreview.style.display = 'none';
+        } else {
+        customSizePreview.style.display = 'block';
+        }
         proportionPx = 30 / verticalPx,
           resizeVerticalPx = proportionPx * verticalPx,
           resizeHorizontPx = proportionPx * horizontPx;
@@ -135,12 +146,18 @@ document.addEventListener('DOMContentLoaded', function () {
         customSizePreview.style.height = `${resizeVerticalPx}px`;
         customSizePreview.style.border = '1px solid #ffa500'
       }
-
     });
+
     inputVertical.addEventListener("input", () => {
       verticalPx = inputVertical.value;
       if (!inputHorizont.value == "") {
-        proportionPx = 30 / verticalPx;
+        if( inputHorizont.value == "" || inputVertical.value == "" ){
+          customSizePreview.style.display = 'none';
+        } else {
+        customSizePreview.style.display = 'block';
+        }
+
+       proportionPx = 30 / verticalPx;
         resizeVerticalPx = proportionPx * verticalPx;
         resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = `${resizeHorizontPx}px`;
@@ -394,11 +411,11 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="col">
           <div class="attach-block for-product">
-            <label class="my-file-input" for="exampleFormControlFile1">
+            <label class="my-file-input" for="img-product-1">
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <input type="file" class="form-control-file" id="img-product-1">
           </div>
         </div>
       </div>
@@ -433,11 +450,11 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="col">
           <div class="attach-block for-product">
-            <label class="my-file-input" for="exampleFormControlFile1">
+            <label class="my-file-input" for="img-service-1">
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <input type="file" class="form-control-file" id="img-service-1">
           </div>
         </div>
       </div>
@@ -574,6 +591,9 @@ document.addEventListener('DOMContentLoaded', function () {
       let target = elem.target;
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
+      nextProduct.querySelectorAll('input').forEach((inpt)=>{
+        inpt.value = '';
+      });
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
@@ -625,7 +645,6 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('.btn-remove-slide').disabled = false;
         }
       }
-      //}
     });
   };
 
@@ -704,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function () {
         invalFeedback.classList.add('invalid-feedback');
         document.querySelector('.text-zone .text-field').after(invalFeedback);
 
-        document.querySelector('.text-zone .text-field').addEventListener('change', (e) => {
+        document.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
           let maxLengthStimulPhrase = getMaxLengthStimulPhrase(document.querySelector('.slide-counter input'));
           if (e.target.value.length > maxLengthStimulPhrase) {
             e.target.classList.add('is-invalid');
@@ -829,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log( insideSlideWrapp.querySelector('.text-zone .text-field'));
       insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
 
-      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('change', (e) => {
+      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
         let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
         if (e.target.value.length > maxLengthStimulPhrase) {
           e.target.classList.add('is-invalid');
@@ -979,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log( insideSlideWrapp.querySelector('.text-zone .text-field'));
         insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
   
-        insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('change', (e) => {
+        insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
           let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
           if (e.target.value.length > maxLengthStimulPhrase) {
             e.target.classList.add('is-invalid');

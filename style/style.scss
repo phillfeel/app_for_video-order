@@ -164,6 +164,14 @@ p {
         content: "";
     }
 }
+
+.qty.main-counter .minus.disabl {
+    background-color: #a1a1a1;
+    &:hover {
+        background-color: none;
+    }
+}
+
 .qty.main-counter .minus.disabled {
     &:hover::after {
         content: "Cначала уменьшите количество слайдов";
@@ -175,6 +183,12 @@ p {
         padding: 5px;
     }
 }
+.qty.main-counter .minus.disabl {
+    &:hover::after {
+        content: "";
+    }
+}
+
 
 
 .qty .plus.disabled {
@@ -245,15 +259,28 @@ p {
         .square,
         .rectangle16x9,
         .rectangle9x16,
-        .custom-size-preview {
-            content: "";
-            position: absolute;
-            top: 1px;
-            left: 0;
-            //transform: translate(20%, 10%);
+        .custom-size-preview{
+            position: relative;
             border: 1px solid orange;
+            &::after{
+                position: absolute;
+                content: "";
+                top: 50%;
+                left: 50%;
+                transform: translate(-20%, -50%);
+                border: 5px solid transparent; /* Прозрачные границы */
+                border-left: 8px solid orange; /* Добавляем треугольник */
+            }
         }
-
+       /*  custom-size-preview {
+            position: relative;
+            border: 1px solid orange;
+            &::after{
+                position: absolute;
+                content: "";
+            }
+        }
+ */
         $preview-height: 30px;
 
         .square {
