@@ -153,27 +153,22 @@ p {
   position: relative;
 }
 
-.qty .minus.disabled {
-  background-color: #a1a1a1;
-}
-
-.qty .minus.disabled:hover {
-  background-color: none;
-}
-
-.qty .minus.disabled:hover::after {
-  content: "";
-}
-
+.qty .minus.disabled,
 .qty.main-counter .minus.disabl {
   background-color: #a1a1a1;
 }
 
-.qty.main-counter .minus.disabl:hover {
+.no-touchevents .qty .minus.disabled:hover,
+.no-touchevents .qty.main-counter .minus.disabl:hover {
   background-color: none;
 }
 
-.qty.main-counter .minus.disabled:hover::after {
+.no-touchevents .qty .minus.disabled:hover::after,
+.no-touchevents .qty.main-counter .minus.disabl:hover::after {
+  content: "";
+}
+
+.no-touchevents .qty.main-counter .minus.disabled:hover::after {
   content: "Cначала уменьшите количество слайдов";
   top: 100%;
   right: 20%;
@@ -183,25 +178,34 @@ p {
   width: fit-content;
   background-color: lightsalmon;
   padding: 5px;
+  z-index: 100;
 }
 
-.qty.main-counter .minus.disabl:hover::after {
+.no-touchevents .qty.main-counter .minus.disabl:hover::after {
   content: "";
 }
 
-.qty .plus.disabled {
+.no-touchevents .qty .plus.disabled {
   background-color: #a1a1a1;
 }
 
-.qty .plus.disabled:hover {
+.no-touchevents .qty .plus.disabled:hover {
   background-color: none;
 }
 
-.minus:hover {
+.no-touchevents .minus:hover {
   background-color: #f89b4f;
 }
 
-.plus:hover {
+.no-touchevents .plus:hover {
+  background-color: #f89b4f;
+}
+
+.touchevents .minus:active {
+  background-color: #f89b4f;
+}
+
+.touchevents .plus:active {
   background-color: #f89b4f;
 }
 
@@ -795,7 +799,9 @@ p {
   .attach-block.for-logo .my-file-input {
     margin-bottom: 40px;
   }
-  .logo-part .attach-block.for-logo::after, .contact-part .attach-block.for-logo::after, .stock-part .attach-block.for-logo::after {
+  .logo-part .attach-block.for-logo::after,
+  .contact-part .attach-block.for-logo::after,
+  .stock-part .attach-block.for-logo::after {
     z-index: 0;
     position: absolute;
     content: "";
@@ -805,7 +811,9 @@ p {
     top: 35px;
     left: -30px;
   }
-  .logo-part .attach-block.for-logo::before, .contact-part .attach-block.for-logo::before, .stock-part .attach-block.for-logo::before {
+  .logo-part .attach-block.for-logo::before,
+  .contact-part .attach-block.for-logo::before,
+  .stock-part .attach-block.for-logo::before {
     z-index: 1;
     position: absolute;
     content: "";
