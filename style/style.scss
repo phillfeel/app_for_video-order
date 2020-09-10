@@ -153,17 +153,20 @@ p {
     position: relative;
 }
 
-.qty .minus.disabled,.qty.main-counter .minus.disabl {
+.qty .minus.disabled,
+.qty.main-counter .minus.disabl {
     background-color: #a1a1a1;
 }
 
-.no-touchevents{
-.qty .minus.disabled,.qty.main-counter .minus.disabl {
+.no-touchevents {
+
+    .qty .minus.disabled,
+    .qty.main-counter .minus.disabl {
 
         &:hover {
             background-color: none;
         }
-    
+
         &:hover::after {
             content: "";
         }
@@ -171,55 +174,70 @@ p {
 }
 
 
-.no-touchevents{
-.qty.main-counter .minus.disabled {
-    &:hover::after {
-        content: "Cначала уменьшите количество слайдов";
-        top: 100%;
-        right: 20%;
-        position: absolute;
-        width: fit-content;
-        background-color: lightsalmon;
-        padding: 5px;
+.no-touchevents {
+    .qty.main-counter .minus.disabled {
+        &:hover::after {
+            content: "Cначала уменьшите количество слайдов";
+            top: 100%;
+            right: 20%;
+            position: absolute;
+            width: fit-content;
+            background-color: lightsalmon;
+            padding: 5px;
+        }
     }
 }
-}
-.no-touchevents{
-.qty.main-counter .minus.disabl {
-    
-    &:hover::after {
-        content: "";
+
+.no-touchevents {
+    .qty.main-counter .minus.disabl {
+
+        &:hover::after {
+            content: "";
+        }
     }
-}
 }
 
 
-.no-touchevents{
-.qty .plus.disabled {
-    background-color: #a1a1a1;
-   
-    &:hover {
-        background-color: none;
+.no-touchevents {
+    .qty .plus.disabled {
+        background-color: #a1a1a1;
+
+        &:hover {
+            background-color: none;
+        }
     }
-}
 }
 
-.no-touchevents{
-.minus:hover {
-    background-color: #f89b4f;
+.no-touchevents {
+    .minus:hover {
+        background-color: #f89b4f;
     }
 }
-.no-touchevents{
-.plus:hover {
-    background-color: #f89b4f;
+
+.no-touchevents {
+    .plus:hover {
+        background-color: #f89b4f;
     }
 }
+
+.touchevents {
+    .minus:active {
+        background-color: #f89b4f;
+    }
+}
+
+.touchevents {
+    .plus:active {
+        background-color: #f89b4f;
+    }
+}
+
 
 /*Prevent text selection*/
 .counter span {
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none; 
+    -ms-user-select: none;
 }
 
 .counter input {
@@ -266,20 +284,24 @@ p {
         .square,
         .rectangle16x9,
         .rectangle9x16,
-        .custom-size-preview{
+        .custom-size-preview {
             position: relative;
             border: 1px solid orange;
-            &::after{
+
+            &::after {
                 position: absolute;
                 content: "";
                 top: 50%;
                 left: 50%;
                 transform: translate(-20%, -50%);
-                border: 5px solid transparent; /* Прозрачные границы */
-                border-left: 8px solid orange; /* Добавляем треугольник */
+                border: 5px solid transparent;
+                /* Прозрачные границы */
+                border-left: 8px solid orange;
+                /* Добавляем треугольник */
             }
         }
-       /*  custom-size-preview {
+
+        /*  custom-size-preview {
             position: relative;
             border: 1px solid orange;
             &::after{
@@ -360,7 +382,7 @@ p {
     }
 }
 
-.for-logo label.form-check-label{
+.for-logo label.form-check-label {
     padding-top: 3px;
 }
 
@@ -622,24 +644,27 @@ p {
 
 .logo-part .attach-block.for-logo,
 .stock-part .attach-block.for-logo,
-.contact-part .attach-block.for-logo{
-    .my-file-input{
+.contact-part .attach-block.for-logo {
+    .my-file-input {
         position: relative;
         z-index: 10;
         width: 190px;
         background-color: #ffe6b0;
     }
-    .form-control-file{
+
+    .form-control-file {
         left: 60px;
         z-index: 0;
     }
 }
+
 .contact-part .attach-block.for-logo,
-.stock-part .attach-block.for-logo{
-    .my-file-input{
+.stock-part .attach-block.for-logo {
+    .my-file-input {
         width: 230px;
     }
-    .form-control-file{
+
+    .form-control-file {
         left: 100px;
     }
 
@@ -684,6 +709,7 @@ p {
 }
 
 .attach-block.for-logo {
+
     //margin-bottom: 18px;
     h5 {
         display: inline-block;
@@ -692,9 +718,11 @@ p {
         margin-left: 26px;
         height: 30px;
     }
+
     .my-file-input {
         width: 240px;
     }
+
     .form-control-file {
         left: 110px;
     }
@@ -714,6 +742,7 @@ p {
         top: 28px;
         left: -135px;
     }
+
     .my-file-input {
         cursor: pointer;
         display: flex;
@@ -748,14 +777,16 @@ p {
         outline: none;
         width: 200%;
     }
+
     @media (min-width:570px) and (max-width:770px) {
-       
+
         .form-control-file {
             width: 180%;
         }
     }
+
     @media (min-width:990px) and (max-width:1200px) {
-       
+
         .form-control-file {
             width: 170%;
         }
@@ -768,6 +799,7 @@ p {
         &::after {
             display: none;
         }
+
         .form-control-file {
             width: auto;
             color: #a19d94;
@@ -779,16 +811,20 @@ p {
             outline: none;
             width: 100%;
         }
+
         .my-file-input {
             width: 135px;
             height: 33px;
+
             ion-icon {
-            top: 2px;
+                top: 2px;
                 left: 0px;
             }
         }
     }
-};
+}
+
+;
 
 @media screen and (max-width: 453px) {
     .attach-block.for-logo {
@@ -811,10 +847,13 @@ p {
 
         .my-file-input {
             margin-bottom: 40px;
-     
+
         }
     }
-    .logo-part, .contact-part, .stock-part{
+
+    .logo-part,
+    .contact-part,
+    .stock-part {
         .attach-block.for-logo {
             &::after {
                 z-index: 0;
@@ -826,6 +865,7 @@ p {
                 top: 35px;
                 left: -30px;
             }
+
             &::before {
                 z-index: 1;
                 position: absolute;
@@ -838,7 +878,7 @@ p {
             }
         }
     }
-    
+
 }
 
 @media screen and (max-width: 478px) {
@@ -867,7 +907,7 @@ p {
     }
 }
 
-.form-check.for-logo{
+.form-check.for-logo {
     margin-bottom: 15px;
 }
 
@@ -892,6 +932,7 @@ p {
         position: relative;
         z-index: 10;
     }
+
     .form-row:nth-child(3) .col {
         position: relative;
         z-index: 100;
