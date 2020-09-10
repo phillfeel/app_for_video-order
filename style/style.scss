@@ -153,10 +153,12 @@ p {
     position: relative;
 }
 
-.qty .minus.disabled {
+.qty .minus.disabled,.qty.main-counter .minus.disabl {
     background-color: #a1a1a1;
+}
 
-    &.no-touchevents{
+.no-touchevents{
+.qty .minus.disabled,.qty.main-counter .minus.disabl {
 
         &:hover {
             background-color: none;
@@ -168,15 +170,9 @@ p {
     }
 }
 
-.qty.main-counter .minus.disabl {
-    background-color: #a1a1a1;
-    &:hover {
-        background-color: none;
-    }
-}
 
+.no-touchevents{
 .qty.main-counter .minus.disabled {
-    &.no-touchevents{
     &:hover::after {
         content: "Cначала уменьшите количество слайдов";
         top: 100%;
@@ -188,8 +184,9 @@ p {
     }
 }
 }
+.no-touchevents{
 .qty.main-counter .minus.disabl {
-    &.no-touchevents{
+    
     &:hover::after {
         content: "";
     }
@@ -197,25 +194,23 @@ p {
 }
 
 
-
+.no-touchevents{
 .qty .plus.disabled {
     background-color: #a1a1a1;
-    &.no-touchevents{
+   
     &:hover {
         background-color: none;
     }
 }
 }
 
-
+.no-touchevents{
 .minus:hover {
-    &.no-touchevents{
     background-color: #f89b4f;
     }
 }
-
+.no-touchevents{
 .plus:hover {
-    &.no-touchevents{
     background-color: #f89b4f;
     }
 }
@@ -224,7 +219,7 @@ p {
 .counter span {
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
+    -ms-user-select: none; 
 }
 
 .counter input {
