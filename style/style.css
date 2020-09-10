@@ -185,19 +185,19 @@ p {
   content: "";
 }
 
-.no-touchevents .qty .plus.disabled {
+.qty .plus.disabled {
   background-color: #a1a1a1;
 }
 
-.no-touchevents .qty .plus.disabled:hover {
+.no-touchevents:hover {
   background-color: none;
 }
 
-.no-touchevents .minus:hover {
+.minus:hover {
   background-color: #f89b4f;
 }
 
-.no-touchevents .plus:hover {
+.plus:hover {
   background-color: #f89b4f;
 }
 
