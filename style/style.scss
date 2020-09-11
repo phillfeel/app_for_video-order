@@ -13,6 +13,15 @@ h5 {
     display: none;
 }
 
+//маштабирование IOS
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    select,
+    textarea,
+    input {
+      font-size: 16px;
+    }
+  }
+
 // --- FIRST MAIN BLOCK --- //
 .main {
     padding-top: 30px;
