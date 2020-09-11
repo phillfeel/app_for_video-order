@@ -20,7 +20,7 @@ h5 {
 }
 
 .main {
-  padding-top: 30px;
+  padding-top: 60px;
 }
 
 button.add-item {
@@ -193,6 +193,10 @@ p {
   content: "";
 }
 
+.qty .orange {
+  background-color: #f89b4f;
+}
+
 .qty .plus.disabled {
   background-color: #a1a1a1;
 }
@@ -209,14 +213,17 @@ p {
   background-color: #f89b4f;
 }
 
-.touchevents .minus:active {
-  background-color: #f89b4f;
+/* .touchevents {
+    .minus:active {
+        background-color: #f89b4f;
+    }
 }
 
-.touchevents .plus:active {
-  background-color: #f89b4f;
-}
-
+.touchevents {
+    .plus:active {
+        background-color: #f89b4f;
+    }
+} */
 /*Prevent text selection*/
 .counter span {
   -webkit-user-select: none;

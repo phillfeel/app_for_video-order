@@ -823,9 +823,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    
     // устанавливаем id для вложений
-    uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+    if (namePart != 'stimul-part'){
+      uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+    }
     if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
      
 
@@ -959,7 +960,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
       // устанавливаем id для вложений
-      uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+      if (classForSecondP != 'stimul-part'){
+        uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+      }
+
       if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
         insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
         insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
@@ -976,7 +980,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //УДАЛЕНИЕ ТОВАРА
         insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
           if (insideSlideWrapp.querySelectorAll('.product-block').length < 2) {
-            console.log(insideSlideWrapp.querySelectorAll('.product-block').length);
           } else {
             console.log('удаляем товар или услугу');
             insideSlideWrapp.querySelector(".close").parentElement.parentElement;
@@ -1006,7 +1009,6 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
       }
-
       //иницинализируем слайдер
       initCarousel(`.${nameSlider}`);
 
@@ -1014,24 +1016,37 @@ document.addEventListener('DOMContentLoaded', function () {
       //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
       let howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
       let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-
       if (howDisplayContact === 'all') {
         constructSlide.querySelector('.option-contact').remove();
       } else {
         const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
         optionContactInput.value = document.querySelector('.contact-block textarea').value;
       }
-
       if (howDisplayDisclaimer === 'all') {
         constructSlide.querySelector('.option-disclaimer').remove();
       } else {
         const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
         optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
       }
-
       deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
 
     })
   }
   changeSlide(document.querySelector('.video-slide__change'));
+  
+  // MINUS TOUCHSTART
+    document.querySelector('span.minus').addEventListener("touchstart", function() {
+      document.querySelector('span.minus').classList.add('orange');
+    });
+   document.querySelector('span.minus').addEventListener("touchend", function() {
+    document.querySelector('span.minus').classList.remove('orange');
+    });
+   // PLUS TOUCHSTART
+   document.querySelector('span.plus').addEventListener("touchstart", function() {
+    document.querySelector('span.plus').classList.add('orange');
+  });
+ document.querySelector('span.plus').addEventListener("touchend", function() {
+  document.querySelector('span.plus').classList.remove('orange');
+  });
+
 })

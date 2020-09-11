@@ -24,7 +24,7 @@ h5 {
 
 // --- FIRST MAIN BLOCK --- //
 .main {
-    padding-top: 30px;
+    padding-top: 60px;
 }
 
 button.add-item {
@@ -207,6 +207,10 @@ p {
     }
 }
 
+.qty .orange {
+    background-color: #f89b4f;
+}
+
 .qty .plus.disabled {
     background-color: #a1a1a1;
 }
@@ -231,7 +235,7 @@ p {
     }
 }
 
-.touchevents {
+/* .touchevents {
     .minus:active {
         background-color: #f89b4f;
     }
@@ -241,7 +245,7 @@ p {
     .plus:active {
         background-color: #f89b4f;
     }
-}
+} */
 
 
 /*Prevent text selection*/
