@@ -209,14 +209,14 @@ p {
     }
 }
 
-.touchevents {
+.no-touchevents {
     .minus:hover {
         background-color: #f89b4f;
     }
 }
 
 
-.touchevents {
+.no-touchevents {
     .plus:hover {
         background-color: #f89b4f;
     }
@@ -633,6 +633,7 @@ p {
 // SLIDER LOGO
 .last-main-block {
     .attach-block.extra {
+        overflow: visible;
         .form-control-file {
             top: 2px;
             left: 170px;
@@ -676,7 +677,7 @@ p {
 .attach-block.for-logo,
 .attach-block.extra {
     position: relative;
-
+    overflow: visible;
     .form-control-file {
         color: #a19d94;
         display: inline-block;

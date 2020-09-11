@@ -193,11 +193,11 @@ p {
   background-color: none;
 }
 
-.touchevents .minus:hover {
+.no-touchevents .minus:hover {
   background-color: #f89b4f;
 }
 
-.touchevents .plus:hover {
+.no-touchevents .plus:hover {
   background-color: #f89b4f;
 }
 
@@ -591,6 +591,10 @@ p {
   margin: 0;
 }
 
+.last-main-block .attach-block.extra {
+  overflow: visible;
+}
+
 .last-main-block .attach-block.extra .form-control-file {
   top: 2px;
   left: 170px;
@@ -629,6 +633,7 @@ p {
 .attach-block.for-logo,
 .attach-block.extra {
   position: relative;
+  overflow: visible;
 }
 
 .attach-block.for-logo .form-control-file,
