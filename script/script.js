@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getAttachHtml(name) {
       let attach = `<div class="attach-block for-logo">
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>${name}</p></label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <input type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
     </div>`
       return attach;
     };
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" class="form-control-file" id="img-product-1">
+            <input type="file" accept="image/*" class="form-control-file" id="img-product-1">
           </div>
         </div>
       </div>
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" class="form-control-file" id="img-service-1">
+            <input type="file" accept="image/*" class="form-control-file" id="img-service-1">
           </div>
         </div>
       </div>

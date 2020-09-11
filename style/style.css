@@ -591,24 +591,6 @@ p {
   margin: 0;
 }
 
-.last-main-block .attach-block.extra .my-file-input {
-  width: 300px;
-}
-
-.logo-part .attach-block.for-logo .my-file-input,
-.stock-part .attach-block.for-logo .my-file-input,
-.contact-part .attach-block.for-logo .my-file-input {
-  position: relative;
-  z-index: 10;
-  width: 190px;
-  background-color: #ffe6b0;
-}
-
-.contact-part .attach-block.for-logo .my-file-input,
-.stock-part .attach-block.for-logo .my-file-input {
-  width: 230px;
-}
-
 .attach-block .form-control-file {
   display: none;
 }
@@ -630,9 +612,7 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 185px;
   height: 33px;
-  background-color: #fff;
 }
 
 .attach-block.for-logo .my-file-input ion-icon,
@@ -648,6 +628,12 @@ p {
   border-bottom: 2px dotted #a19d94;
   line-height: 31px;
   margin-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .attach-block.for-logo h5 {
@@ -656,10 +642,16 @@ p {
   line-height: 29px;
   margin-left: 26px;
   height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .attach-block.for-logo .my-file-input {
-  width: 240px;
+  width: 100%;
 }
 
 .attach-block.for-product {
@@ -676,9 +668,7 @@ p {
       -ms-user-select: none;
           user-select: none;
   background-color: #fff;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
   z-index: 100;
   position: relative;
 }
@@ -698,18 +688,9 @@ p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 104px;
-}
-
-@media screen and (max-width: 577px) {
-  .attach-block.for-product .my-file-input {
-    width: 135px;
-    height: 33px;
-  }
-  .attach-block.for-product .my-file-input ion-icon {
-    top: 2px;
-    left: 0px;
-  }
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .form-check.for-logo {

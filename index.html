@@ -47,7 +47,7 @@
                 <ion-icon size="large" name="attach-outline"></ion-icon>
                 <h5>Прикрепить логотип</h5>
               </label>
-              <input type="file" accept="image/jpeg,image/png,image/gif" class="form-control-file" id="main-logo">
+              <input type="file" accept="image/*" class="form-control-file" id="main-logo">
             </div>
             <input class="main-colors form-control" type="text" placeholder="Напишите основные цвета">
             <div class="more-colors optional-field form-check block">
@@ -124,7 +124,7 @@
               <ion-icon size="large" name="attach-outline"></ion-icon>
               <p>Прикрепить дополнительные файлы</p>
             </label>
-            <input type="file" class="form-control-file" id="extra-files">
+            <input type="file" multiple accept="image/*" class="form-control-file" id="extra-files">
           </div>
           <div class="form-group main-comment block">
             <textarea class="form-control"  placeholder="Добавить комментарий" id="exampleFormControlTextarea1" rows="3"></textarea>

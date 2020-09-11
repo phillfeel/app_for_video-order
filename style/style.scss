@@ -631,31 +631,8 @@ p {
 
 
 // SLIDER LOGO
-.last-main-block {
-    .attach-block.extra {
-        .my-file-input {
-            width: 300px;
-        }
-    }
-}
 
-.logo-part .attach-block.for-logo,
-.stock-part .attach-block.for-logo,
-.contact-part .attach-block.for-logo {
-    .my-file-input {
-        position: relative;
-        z-index: 10;
-        width: 190px;
-        background-color: #ffe6b0;
-    }
-}
 
-.contact-part .attach-block.for-logo,
-.stock-part .attach-block.for-logo {
-    .my-file-input {
-        width: 230px;
-    }
-}
 .attach-block{
 .form-control-file {
     display: none;
@@ -673,9 +650,7 @@ p {
     .my-file-input {
         cursor: pointer;
         display: flex;
-        width: 185px;
         height: 33px;
-        background-color: #fff;
 
         ion-icon {
             position: absolute;
@@ -688,6 +663,10 @@ p {
             border-bottom: 2px dotted #a19d94;
             line-height: 31px;
             margin-left: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: fit-content;
         }
     }
 }
@@ -701,10 +680,14 @@ p {
         line-height: 29px;
         margin-left: 26px;
         height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: fit-content;
     }
 
     .my-file-input {
-        width: 240px;
+        width: 100%;
     }
 
 }
@@ -716,7 +699,7 @@ p {
         display: flex;
         user-select: none;
         background-color: #fff;
-        width: fit-content;
+        width: 100%;
         z-index: 100;
         position: relative;
 
@@ -735,25 +718,11 @@ p {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 104px;
+            width: fit-content;
         }
     }
 }
 
-@media screen and (max-width: 577px) {
-    .attach-block.for-product {
-
-        .my-file-input {
-            width: 135px;
-            height: 33px;
-
-            ion-icon {
-                top: 2px;
-                left: 0px;
-            }
-        }
-    }
-};
 
 .form-check.for-logo {
     margin-bottom: 15px;
