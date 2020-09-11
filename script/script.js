@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       count = item.querySelector(".count");
     count.setAttribute('disabled', true);
     plus.addEventListener("click", function () {
-      if(count.value == step){ //только если MIN = 5 , а STEP = 10
+      if (count.value == step) { //только если MIN = 5 , а STEP = 10
         console.log('+');
         document.querySelector('.main-counter .minus').classList.remove('disabl');
       }
@@ -24,15 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('.main-counter').classList.remove('notice');
         }
       }
-      if(count.value == max){
+      if (count.value == max) {
         plus.classList.add('disabled');
       }
     });
 
     minus.addEventListener("click", function () {
-      
+
       let value = +count.value;
-      if(value == max){
+      if (value == max) {
         plus.classList.remove('disabled');
       }
       if (value / +document.querySelectorAll('.video-slide').length == step) {
@@ -54,47 +54,57 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         console.log('не никак')
       };
-      if(count.value == step){ //только если MIN = 5 , а STEP = 10
+      if (count.value == step) { //только если MIN = 5 , а STEP = 10
         console.log('object');
         document.querySelector('.main-counter .minus').classList.remove('disabled');
         document.querySelector('.main-counter .minus').classList.add('disabl');
       }
-      
+
     })
   };
 
   //запускаем counter общей длины слайда
   changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5);
-  
+
   // counter Slides
-  function changeValCountSlides (item, max, min, step) {
+  function changeValCountSlides(item, max, min, step) {
     const plus = item.querySelector(".plus"),
       minus = item.querySelector(".minus"),
       count = item.querySelector(".count");
     count.setAttribute('disabled', true);
     plus.addEventListener("click", function () {
-      if(count.value == min){
+      if (count.value == min) {
         minus.classList.remove('disabled');
       }
       if (count.value < max) {
         count.value = +count.value + step;
       }
-      if(count.value == max){
+      if (count.value == max) {
         plus.classList.add('disabled');
       }
     });
     minus.addEventListener("click", function () {
-      if(count.value == max){
+      if (count.value == max) {
         plus.classList.remove('disabled');
       }
       if (count.value > min) {
         count.value = +count.value - step;
       }
-      if(count.value == min){
+      if (count.value == min) {
         minus.classList.add('disabled');
       }
     })
   };
+  
+ //загрузка файла 
+  function uploadFile(target) { //заносим id Input
+    target.addEventListener('change', () => {
+        target.previousElementSibling.lastElementChild.textContent = target.files[0].name;
+    })
+  };
+  uploadFile(document.getElementById('main-logo'));
+  uploadFile(document.getElementById('extra-files'));
+
 
   //format-video-preview
   const formatVideoSelect = document.querySelector(".format-video__change_input"),
@@ -134,10 +144,10 @@ document.addEventListener('DOMContentLoaded', function () {
     inputHorizont.addEventListener("input", () => {
       horizontPx = inputHorizont.value;
       if (!inputVertical.value == "") {
-        if( inputHorizont.value == "" || inputVertical.value == "" ){
+        if (inputHorizont.value == "" || inputVertical.value == "") {
           customSizePreview.style.display = 'none';
         } else {
-        customSizePreview.style.display = 'block';
+          customSizePreview.style.display = 'block';
         }
         proportionPx = 30 / verticalPx,
           resizeVerticalPx = proportionPx * verticalPx,
@@ -151,13 +161,13 @@ document.addEventListener('DOMContentLoaded', function () {
     inputVertical.addEventListener("input", () => {
       verticalPx = inputVertical.value;
       if (!inputHorizont.value == "") {
-        if( inputHorizont.value == "" || inputVertical.value == "" ){
+        if (inputHorizont.value == "" || inputVertical.value == "") {
           customSizePreview.style.display = 'none';
         } else {
-        customSizePreview.style.display = 'block';
+          customSizePreview.style.display = 'block';
         }
 
-       proportionPx = 30 / verticalPx;
+        proportionPx = 30 / verticalPx;
         resizeVerticalPx = proportionPx * verticalPx;
         resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = `${resizeHorizontPx}px`;
@@ -291,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function createOptionalFiled(item) {
     console.log('вызвали createOptionalFiled');
-    //console.log(item);
     const moreColorsCheckbox = item.querySelector(".optional-checkbox"),
       moreColorsInpt = item.querySelector(".optional-txt");
     moreColorsCheckbox.addEventListener('click', function () {
@@ -539,41 +548,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
     let insideHtmlStimulPrase = `<div class="text-zone">
-  <input class="text-field form-control" type="text" placeholder="Введите текст">
-  <div class="more-colors optional-field form-check">
-    <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-    <label class="form-check-label" for="defaultCheck1">
-      <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
-    </label>
-  </div>
-</div>
-<h6 class="duration-title">Настроить анимацию</h6>
-<div class="chooseAnimation-zone">
-  <div class="${name}">
-    <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
-    <p class="sl_text">Текст на подложке</p>
-    </div>
-    <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
-      <p class="sl_text">Текст с фигурами</p></div>
-    <div class="sl_slice"><img src="img/3.gif" alt="" class="sl_img">
-      <p class="sl_text"> На подложке с фигурами</p>
-    </div>
-    <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
-      <p class="sl_text">Текст на подложке</p>
-  </div>
-    <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
-      <p class="sl_text">Текст с фигурами</p></div>
-  </div>
-</div>
-<div class="form-check for-logo">
-  <input class="form-check-input" type="checkbox" id="gridCheck">
-  <label class="form-check-label" for="gridCheck">
-      Добавить логотип
-  </label>
-</div>
-<div class="optional-contact__wrapp">${optionalContact}</div>
-<div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
-<div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
+       <input class="text-field form-control" type="text" placeholder="Введите текст">
+       <div class="more-colors optional-field form-check">
+         <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+         <label class="form-check-label" for="defaultCheck1">
+           <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
+         </label>
+       </div>
+     </div>
+     <h6 class="duration-title">Настроить анимацию</h6>
+     <div class="chooseAnimation-zone">
+       <div class="${name}">
+         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
+         <p class="sl_text">Текст на подложке</p>
+         </div>
+         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
+           <p class="sl_text">Текст с фигурами</p></div>
+         <div class="sl_slice"><img src="img/3.gif" alt="" class="sl_img">
+           <p class="sl_text"> На подложке с фигурами</p>
+         </div>
+         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
+           <p class="sl_text">Текст на подложке</p>
+       </div>
+         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
+           <p class="sl_text">Текст с фигурами</p></div>
+       </div>
+     </div>
+     <div class="form-check for-logo">
+       <input class="form-check-input" type="checkbox" id="gridCheck">
+       <label class="form-check-label" for="gridCheck">
+           Добавить логотип
+       </label>
+     </div>
+     <div class="optional-contact__wrapp">${optionalContact}</div>
+     <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
+     <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
     return insideHtmlStimulPrase;
   };
 
@@ -591,16 +600,23 @@ document.addEventListener('DOMContentLoaded', function () {
       let target = elem.target;
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
-      nextProduct.querySelectorAll('input').forEach((inpt)=>{
-        inpt.value = '';
-      });
+     
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
+
+      uploadFile(nextProduct.querySelector('input[type="file"]'));
+
       nextProduct.querySelector('input[type="file"]').id = "img-" + nextProductId;
       nextProduct.querySelector('.my-file-input').setAttribute('for', "img-" + nextProductId);
       console.log(nextProduct.querySelector('input[type="file"]'));
       target.parentElement.parentElement.before(nextProduct);
+      nextProduct.querySelectorAll('input').forEach((inpt) => {
+        inpt.value = '';
+        if (inpt.type == "file"){
+          inpt.previousElementSibling.lastElementChild.textContent = 'Изображение';
+        }
+      });
 
       nextProduct.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length > 1) {
@@ -694,6 +710,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return +slideCounterInput.value * 4;
   };
 
+  
 
   //----MAIN---// динамическое добавление Побуждающей фразы на существующий
   document.querySelectorAll('.video-slide__change').forEach((item) => {
@@ -757,29 +774,6 @@ document.addEventListener('DOMContentLoaded', function () {
   //иницинализируем функцию удаления слайда - идет после того как сформировалась
   deleteSlide(document.querySelector('.btn-remove-slide'));
 
-
-
-  /*  document.querySelectorAll(".counter").forEach(function (item) {
-     if (item.classList.contains('slide-counter')) {
-       
-     }
-   }) */
-
-  //----SLIDERS----//
-
-  /*  function getNextName(arr) {
-     document.querySelectorAll('.video-slide__change.form-control').forEach((el) => {
-       console.log(arr.filter(item => item != el.value));
-       arr = arr.filter(item => item != el.value);
-     });
-     return arr.shift();
-   };
-
-   if (slidesArr.length == 0){
-     slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
-   }; */
-
-
   let iArr = 1; //для обхода массива названий слайдов
 
   // ----- Cоздать новый слайд по клику! 
@@ -829,8 +823,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    
     // устанавливаем id для вложений
+    uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
+     
+
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = namePart + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
     }
@@ -841,11 +839,11 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // валидация длины текста на Побуждающей
-    if (namePart === 'stimul-part' || namePart === 'stock-part'){
+    if (namePart === 'stimul-part' || namePart === 'stock-part') {
 
       let invalFeedback = document.createElement('div');
       invalFeedback.classList.add('invalid-feedback');
-      console.log( insideSlideWrapp.querySelector('.text-zone .text-field'));
+      console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
       insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
 
       insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
@@ -857,7 +855,7 @@ document.addEventListener('DOMContentLoaded', function () {
           e.target.classList.remove('is-invalid');
           invalFeedback.textContent = '';
         }
-    });
+      });
     }
 
     // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
@@ -961,11 +959,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
       // устанавливаем id для вложений
+      uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
       if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
         insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
         insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
       }
-
 
       //добавляем работу дизэйбл энэйбл для Соло форм
       insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
@@ -987,17 +985,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
       }
 
-
       //переименовываем counter слайда
       insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
 
-      if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part'){
+      if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
 
         let invalFeedback = document.createElement('div');
         invalFeedback.classList.add('invalid-feedback');
-        console.log( insideSlideWrapp.querySelector('.text-zone .text-field'));
+        console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
         insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-  
+
         insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
           let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
           if (e.target.value.length > maxLengthStimulPhrase) {
@@ -1007,7 +1004,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.classList.remove('is-invalid');
             invalFeedback.textContent = '';
           }
-      });
+        });
       }
 
       //иницинализируем слайдер
@@ -1037,8 +1034,4 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
   changeSlide(document.querySelector('.video-slide__change'));
-
-
-
-
 })

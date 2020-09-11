@@ -591,15 +591,6 @@ p {
   margin: 0;
 }
 
-.last-main-block .attach-block.extra {
-  overflow: visible;
-}
-
-.last-main-block .attach-block.extra .form-control-file {
-  top: 2px;
-  left: 170px;
-}
-
 .last-main-block .attach-block.extra .my-file-input {
   width: 300px;
 }
@@ -613,39 +604,24 @@ p {
   background-color: #ffe6b0;
 }
 
-.logo-part .attach-block.for-logo .form-control-file,
-.stock-part .attach-block.for-logo .form-control-file,
-.contact-part .attach-block.for-logo .form-control-file {
-  left: 60px;
-  z-index: 0;
-}
-
 .contact-part .attach-block.for-logo .my-file-input,
 .stock-part .attach-block.for-logo .my-file-input {
   width: 230px;
 }
 
-.contact-part .attach-block.for-logo .form-control-file,
-.stock-part .attach-block.for-logo .form-control-file {
-  left: 100px;
+.attach-block .form-control-file {
+  display: none;
 }
 
 .attach-block.for-logo,
 .attach-block.extra {
+  margin-bottom: 20px;
   position: relative;
-  overflow: visible;
 }
 
 .attach-block.for-logo .form-control-file,
 .attach-block.extra .form-control-file {
-  color: #a19d94;
-  display: inline-block;
-  position: absolute;
-  top: 2px;
-  left: 55px;
-  z-index: -100;
-  outline: none;
-  width: auto;
+  display: none;
 }
 
 .attach-block.for-logo .my-file-input,
@@ -686,24 +662,8 @@ p {
   width: 240px;
 }
 
-.attach-block.for-logo .form-control-file {
-  left: 110px;
-}
-
 .attach-block.for-product {
   position: relative;
-  margin-bottom: 20px;
-}
-
-.attach-block.for-product::after {
-  z-index: 1;
-  position: absolute;
-  content: "";
-  width: 135px;
-  height: 40px;
-  background-color: #fff;
-  top: 28px;
-  left: -135px;
 }
 
 .attach-block.for-product .my-file-input {
@@ -735,46 +695,13 @@ p {
   border-bottom: 2px dotted #a19d94;
   line-height: 29px;
   margin-left: 26px;
-}
-
-.attach-block.for-product .form-control-file {
-  color: #a19d94;
-  display: inline-block;
-  position: absolute;
-  top: 30px;
-  left: -131px;
-  z-index: 0;
-  outline: none;
-  width: 200%;
-}
-
-@media (min-width: 570px) and (max-width: 770px) {
-  .attach-block.for-product .form-control-file {
-    width: 180%;
-  }
-}
-
-@media (min-width: 990px) and (max-width: 1200px) {
-  .attach-block.for-product .form-control-file {
-    width: 170%;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 104px;
 }
 
 @media screen and (max-width: 577px) {
-  .attach-block.for-product::after {
-    display: none;
-  }
-  .attach-block.for-product .form-control-file {
-    width: auto;
-    color: #a19d94;
-    display: inline-block;
-    position: absolute;
-    top: 1px;
-    left: 4px;
-    z-index: 0;
-    outline: none;
-    width: 100%;
-  }
   .attach-block.for-product .my-file-input {
     width: 135px;
     height: 33px;
@@ -782,71 +709,6 @@ p {
   .attach-block.for-product .my-file-input ion-icon {
     top: 2px;
     left: 0px;
-  }
-}
-
-@media screen and (max-width: 453px) {
-  .attach-block.for-logo::after {
-    z-index: 0;
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 34px;
-    background-color: #fff;
-    top: 35px;
-    left: -30px;
-  }
-  .attach-block.for-logo .form-control-file {
-    top: 37px;
-    left: -130px !important;
-    width: 130%;
-  }
-  .attach-block.for-logo .my-file-input {
-    margin-bottom: 40px;
-  }
-  .logo-part .attach-block.for-logo::after,
-  .contact-part .attach-block.for-logo::after,
-  .stock-part .attach-block.for-logo::after {
-    z-index: 0;
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 34px;
-    background-color: #fff;
-    top: 35px;
-    left: -30px;
-  }
-  .logo-part .attach-block.for-logo::before,
-  .contact-part .attach-block.for-logo::before,
-  .stock-part .attach-block.for-logo::before {
-    z-index: 1;
-    position: absolute;
-    content: "";
-    width: 12px;
-    height: 34px;
-    background-color: #ffe6b0;
-    top: 35px;
-    left: -10px;
-  }
-}
-
-@media screen and (max-width: 478px) {
-  .last-main-block .attach-block.extra::after {
-    z-index: -10;
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 34px;
-    background-color: #fff;
-    top: 35px;
-    left: -28px;
-  }
-  .last-main-block .attach-block.extra .form-control-file {
-    top: 37px;
-    left: -130px;
-  }
-  .last-main-block .attach-block.extra .my-file-input {
-    margin-bottom: 40px;
   }
 }
 
