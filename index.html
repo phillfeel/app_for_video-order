@@ -18,125 +18,126 @@
   <div class="container">
     <div class="row main">
       <div class="col-md-8 left-main">
-        <div class="wrapper">
-          <div class="main-settings block">
-            <div class="duration-main">
-              <h5 class="duration-main__title">Длина видеоролика в секундах</h5>
-              <div class="counter qty main-counter">
-                <span class="minus ">-</span>
-                <input type="number" class="count" name="qty" value="10">
-                <span class="plus">+</span>
-              </div>
-            </div>
-            <div class="format-video">
-              <h5 class="format-video__title">Формат</h5>
-              <div class="format-video__change">
-                <select class="format-video__change_input form-control form-control-sm ">
-                  <option>16:9</option>
-                  <option>9:16</option>
-                  <option>1:1</option>
-                  <option>Ввести</option>
-                </select>
-              </div>
-              <div class="format-video__preview">
-              </div>
-
-            </div>
-            <div class="attach-block for-logo">
-              <label class="my-file-input" for="main-logo">
-                <ion-icon size="large" name="attach-outline"></ion-icon>
-                <h5>Прикрепить логотип</h5>
-              </label>
-              <input type="file" accept="image/*" class="form-control-file" id="main-logo">
-            </div>
-            <input class="main-colors form-control" type="text" placeholder="Напишите основные цвета">
-            <div class="more-colors optional-field form-check block">
-              <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                <input class="optional-txt form-control form-control-sm" type="text" placeholder="Дополнительные цвета">
-              </label>
-            </div>
-            <div class="contact-block mini-block">
-              <h6>Введите контактную информацию которая должна быть отражена в видеоролике</h6>
-              <textarea class="form-control" id="textarea1" placeholder="Контакты" rows="2"></textarea>
-              <div class="contact-block__radio form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
-                  value="all">
-                <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
-                  value="option">
-                <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
-              </div>
-            </div>
-            <div class="disclaimer-block mini-block">
-              <h6>Введите дисклеймер</h6>
-              <textarea class="form-control" id="textarea2" placeholder="Дисклэймер" rows="2"></textarea>
-              <div class="form-check disclaimer-block__radio form-check-inline">
-                <input class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio1" value="all">
-                <label class="form-check-label" for="inlineRadio1">Дисклеймер на каждом слайде</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio2"
-                  value="option">
-                <label class="form-check-label" for="inlineRadio2">Настроить отдельно для каждого слайда</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="video-slide block">
+        <form id="formElem">
           <div class="wrapper">
-            <div class="title-line">
-              <div class="left-title">
-                <h5 class="video-slide__number">1</h5>
-                <select class="video-slide__change form-control form-control-sm">
-                  <option selected value="stimul">Побуждающая фраза</option>
-                  <option value="logo">Логотип</option>
-                  <option value="product">Товар-Цена</option>
-                  <option value="service">Услуга-Описание</option>
-                  <option value="stock">Акция</option>
-                  <option value="contact">Контакты</option>
-                </select>
-              </div>
-              <div class="right-title">
-                <h6 class="duration-title">Длительность</h6>
-                <div class="counter qty slide-counter">
-                  <span class="minus">-</span>
-                  <input type="number" class="count stimul-phrase-count-1" name="qty" value="5">
+            <div class="main-settings block">
+              <div class="duration-main">
+                <h5 class="duration-main__title">Длина видеоролика в секундах</h5>
+                <div class="counter qty main-counter form-group">
+                  <span class="minus ">-</span>
+                  <input id="main-conter-val" type="number" class="count" name="main-duration" value="10" >
                   <span class="plus">+</span>
+                </div>
+              </div>
+              <div class="format-video">
+                <h5 class="format-video__title">Формат</h5>
+                <div class="format-video__change">
+                  <select name="main-format" class="format-video__change_input form-control form-control-sm ">
+                    <option>16:9</option>
+                    <option>9:16</option>
+                    <option>1:1</option>
+                    <option>Ввести</option>
+                  </select>
+                </div>
+                <div class="format-video__preview">
+                </div>
+
+              </div>
+              <div class="attach-block for-logo">
+                <label class="my-file-input" for="main-logo">
+                  <ion-icon size="large" name="attach-outline"></ion-icon>
+                  <h5>Прикрепить логотип</h5>
+                </label>
+                <input name="main-logo" type="file" accept="image/*" class="form-control-file" id="main-logo">
+              </div>
+              <input class="main-colors form-control" name="main-colors" type="text" placeholder="Напишите основные цвета">
+              <div class="more-colors optional-field form-check block">
+                <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  <input name="main-extra-color" class="optional-txt form-control form-control-sm" type="text"
+                    placeholder="Дополнительные цвета">
+                </label>
+              </div>
+              <div class="contact-block mini-block">
+                <h6>Введите контактную информацию которая должна быть отражена в видеоролике</h6>
+                <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Контакты" rows="2"></textarea>
+                <div class="contact-block__radio form-check form-check-inline">
+                  <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
+                    value="all">
+                  <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
+                    value="option">
+                  <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
+                </div>
+              </div>
+              <div class="disclaimer-block mini-block">
+                <h6>Введите дисклеймер</h6>
+                <textarea name="main-disclaimer" class="form-control" id="textarea2" placeholder="Дисклэймер" rows="2"></textarea>
+                <div class="form-check disclaimer-block__radio form-check-inline">
+                  <input class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio1" value="all">
+                  <label class="form-check-label" for="inlineRadio1">Дисклеймер на каждом слайде</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input checked class="form-check-input" type="radio" name="disclaimer-where" id="inlineRadio2"
+                    value="option">
+                  <label class="form-check-label" for="inlineRadio2">Настроить отдельно для каждого слайда</label>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="add-item-block add-slide">
-          <button type="button" class="add-item">
-            <p>+</p>
-            <p>Добавить кадр</p>
-          </button>
-        </div>
-
-        <div class="last-main-block">
-          <div class="attach-block extra">
-            <label class="my-file-input" for="extra-files">
-              <ion-icon size="large" name="attach-outline"></ion-icon>
-              <p>Прикрепить дополнительные файлы</p>
-            </label>
-            <input type="file" multiple accept="image/*" class="form-control-file" id="extra-files">
+          <div class="video-slide block">
+            <div class="wrapper">
+              <div class="title-line">
+                <div class="left-title">
+                  <h5 class="video-slide__number">1</h5>
+                  <select name="slide-1" class="video-slide__change form-control form-control-sm">
+                    <option selected value="stimul">Побуждающая фраза</option>
+                    <option value="logo">Логотип</option>
+                    <option value="product">Товар-Цена</option>
+                    <option value="service">Услуга-Описание</option>
+                    <option value="stock">Акция</option>
+                    <option value="contact">Контакты</option>
+                  </select>
+                </div>
+                <div class="right-title">
+                  <h6 class="duration-title">Длительность</h6>
+                  <div class="counter qty slide-counter">
+                    <span class="minus">-</span>
+                    <input type="number" class="count stimul-phrase-count-1" name="qty" value="5">
+                    <span class="plus">+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group main-comment block">
-            <textarea class="form-control"  placeholder="Добавить комментарий" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-          <div class="main-btn block"><button type="button" class="btn btn-primary">Отправить</button></div>
-        </div>
-        
 
+          <div class="add-item-block add-slide">
+            <button type="button" class="add-item">
+              <p>+</p>
+              <p>Добавить кадр</p>
+            </button>
+          </div>
+
+          <div class="last-main-block">
+            <div class="attach-block extra">
+              <label class="my-file-input" for="extra-files">
+                <ion-icon size="large" name="attach-outline"></ion-icon>
+                <p>Прикрепить дополнительные файлы</p>
+              </label>
+              <input type="file" name ="extra-files" multiple accept="image/*" class="form-control-file" id="extra-files">
+            </div>
+            <div class="form-group main-comment block">
+              <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий" id="exampleFormControlTextarea1"
+                rows="3"></textarea>
+            </div>
+            <div class="main-btn block"><button type="submit" class="btn btn-primary">Отправить</button></div>
+          </div>
+        </form>
       </div>
     </div>
     <div class="col-md-4">
-
     </div>
   </div>
   </div>
@@ -149,7 +150,6 @@
   <script type="text/javascript" src="slick/slick.min.js"></script>
   <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
   <script src="script/script.js"></script>
-
 </body>
 
 </html>

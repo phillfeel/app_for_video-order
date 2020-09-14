@@ -266,7 +266,7 @@ p {
     margin: 0;
 }
 
-.counter input:disabled {
+.counter input {
     background-color: transparent;
 }
 
@@ -278,7 +278,6 @@ p {
     flex-wrap: wrap;
 
     h5 {
-
         margin-right: 10px;
     }
 

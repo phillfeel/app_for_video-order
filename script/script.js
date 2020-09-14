@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
   };
+
  //Добавляем Touchstart and Touchend для counter
   function counterTouch (selector, element=""){
     if (element != ""){
@@ -117,16 +118,36 @@ document.addEventListener('DOMContentLoaded', function () {
       selector.querySelector('span.plus').classList.remove('orange');
     });
   };
-  
+  counterTouch("main-settings");
+
  //загрузка файла 
   function uploadFile(target) { //заносим id Input
     target.addEventListener('change', () => {
+      console.log(target.id);
+      let amount = target.files.length;
+      if (target.id == "extra-files" && amount != 0){
+        let comment="";
+        console.log(amount);
+        switch (true){
+          case ((amount >= 2 && amount <= 4) || (amount % 10 >= 2 && amount % 10 <= 4)):
+            comment = "изображения";
+            break;
+          case ((amount == 1) || (amount % 10 == 1)):
+            comment = "изображение";
+            break;
+          case (amount >= 5 && amount <= 20):
+            comment = "изображений";
+            break;
+          };
+        console.log(comment);
+        target.previousElementSibling.lastElementChild.textContent = target.files.length + " " + comment;
+      }else{
         target.previousElementSibling.lastElementChild.textContent = target.files[0].name;
-    })
+      } 
+    });
   };
   uploadFile(document.getElementById('main-logo'));
   uploadFile(document.getElementById('extra-files'));
-
 
   //format-video-preview
   const formatVideoSelect = document.querySelector(".format-video__change_input"),
@@ -213,9 +234,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const inputSize = document.createElement('div');
       inputSize.classList.add('format-video__input-size');
       inputSize.innerHTML = `
-        <input class="form-control form-control-sm" type="number" placeholder="пиксели">
+        <input name="custom-format-width" class="form-control form-control-sm" type="number" placeholder="пиксели">
         <p>X</p>
-        <input class="form-control form-control-sm" type="number" placeholder="пиксели">`
+        <input name="custom-format-height" class="form-control form-control-sm" type="number" placeholder="пиксели">`
       formatVideoSelect.parentNode.after(inputSize);
       createPreviewCustom();
     } else {
@@ -381,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
         contacts = "selected";
         break;
     };
-    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty slide-counter"><span class="minus">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus">+</span></div></div></div></div>`
+    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select name="slide-${number}" class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty slide-counter"><span class="minus">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus">+</span></div></div></div></div>`
     return forConstruct;
   }
 
@@ -664,6 +685,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let allSlides = document.querySelectorAll('.video-slide.block');
         document.querySelectorAll('.video-slide__number').forEach((item) => {
           allSlides[i - 1].classList = `video-slide block added-${i}`;
+          allSlides[i - 1].querySelector('.video-slide__change').setAttribute('name',`slide-${i}`)
           item.textContent = i++;
         })
         //slideNumber = +document.querySelectorAll('.video-slide__number').length - 1;
@@ -852,8 +874,6 @@ document.addEventListener('DOMContentLoaded', function () {
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     }
     if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
-     
-
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = namePart + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
     }
@@ -896,7 +916,7 @@ document.addEventListener('DOMContentLoaded', function () {
           insideSlideWrapp.querySelector('.product-block').remove();
         }
       })
-    }
+    };
 
     //иницинализируем карусель
     initCarousel(`.${nameCarousel}`);
@@ -1054,10 +1074,41 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
 
-    })
-  }
-
+    });
+  };
   changeSlide(document.querySelector('.video-slide__change'));
-  counterTouch("main-settings");
+
+  // СБОР ДАННЫХ ФОРМЫ
+  let formElem = document.querySelector('#formElem');
+
+  formElem.onsubmit = async (e) => {
+    e.preventDefault();
+    console.log( document.querySelector(".qty.main-counter .count"));
+    document.querySelector(".qty.main-counter .count").removeAttribute("disabled");
+
+    let formData = new FormData(formElem);
+    console.log(formData);
+    for(let [name, value] of formData) {
+      console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+
+      /*ОТЛАДКА if (typeof value == 'object') {
+        for( let key in value){
+          console.log(key + ": " + value[key] );
+        }
+      } */
+
+    };
+  
+    document.querySelector(".qty.main-counter .count").setAttribute("disabled", "true");
+  
+    /* let response = await fetch('/article/formdata/post/user', {
+      method: 'POST',
+      body: new FormData(formElem)
+    }); */
+
+    //let result = await response.json();
+
+    //alert(result.message);
+  };
 
 })
