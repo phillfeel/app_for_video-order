@@ -44,7 +44,7 @@ button.add-item {
 }
 
 .block {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .block .mini-block {
@@ -576,21 +576,22 @@ p {
 .add-item-block {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
 
     .add-item {
         cursor: pointer;
         user-select: none;
         display: inline-block;
-        position: relative;
 
         &:disabled:hover::after {
             position: absolute;
             top: 0;
             width: 100%;
-            left: 120%;
-            content: "Добавьте общую длительность";
-            background-color: rgb(255, 0, 0);
-
+            left: 0;
+            top: -65%;
+            content: "Сначала добавьте общую длительность";
+            font-size: 80%;
+            color: #dc3545;
         }
 
         p:first-child {
@@ -644,8 +645,6 @@ p {
 
 
 // SLIDER LOGO
-
-
 .attach-block{
 .form-control-file {
     display: none;

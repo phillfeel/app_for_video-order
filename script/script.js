@@ -95,6 +95,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
   };
+ //Добавляем Touchstart and Touchend для counter
+  function counterTouch (selector, element=""){
+    if (element != ""){
+      selector=element;
+    }else{
+      selector = document.querySelector(`.${selector}`) 
+    }
+      // MINUS TOUCHSTART
+      selector.querySelector('span.minus').addEventListener("touchstart", function() {
+        selector.querySelector('span.minus').classList.add('orange');
+      });
+     selector.querySelector('span.minus').addEventListener("touchend", function() {
+      selector.querySelector('span.minus').classList.remove('orange');
+      });
+     // PLUS TOUCHSTART
+     selector.querySelector('span.plus').addEventListener("touchstart", function() {
+      selector.querySelector('span.plus').classList.add('orange');
+    });
+     selector.querySelector('span.plus').addEventListener("touchend", function() {
+      selector.querySelector('span.plus').classList.remove('orange');
+    });
+  };
   
  //загрузка файла 
   function uploadFile(target) { //заносим id Input
@@ -722,6 +744,9 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
         createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
+       //добавлям Touchstart на Counter этого слайда
+       counterTouch("video-slide");
+
         //добавляем работу доп. форм
         optionalField = document.querySelectorAll(".optional-field");
         optionalField.forEach(function (item) {
@@ -810,11 +835,11 @@ document.addEventListener('DOMContentLoaded', function () {
       nameCarousel = namePart + '_slider';
       console.log(nameCarousel);
     };
-
     createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
-
     console.log(insideSlideWrapp);
-
+    
+    //CHANGE COLOR TOUCHSTART COUNTER
+    counterTouch("", constructSlide);
     // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
     if (namePart === 'logo-part') {
       let optionalField = document.querySelectorAll(".logo-part .optional-field");
@@ -822,7 +847,6 @@ document.addEventListener('DOMContentLoaded', function () {
         createOptionalFiled(item);
       });
     }
-
     // устанавливаем id для вложений
     if (namePart != 'stimul-part'){
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
@@ -1032,21 +1056,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
   }
+
   changeSlide(document.querySelector('.video-slide__change'));
-  
-  // MINUS TOUCHSTART
-    document.querySelector('span.minus').addEventListener("touchstart", function() {
-      document.querySelector('span.minus').classList.add('orange');
-    });
-   document.querySelector('span.minus').addEventListener("touchend", function() {
-    document.querySelector('span.minus').classList.remove('orange');
-    });
-   // PLUS TOUCHSTART
-   document.querySelector('span.plus').addEventListener("touchstart", function() {
-    document.querySelector('span.plus').classList.add('orange');
-  });
- document.querySelector('span.plus').addEventListener("touchend", function() {
-  document.querySelector('span.plus').classList.remove('orange');
-  });
+  counterTouch("main-settings");
 
 })

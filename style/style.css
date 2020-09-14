@@ -46,7 +46,7 @@ button.add-item {
 }
 
 .block {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .block .mini-block {
@@ -547,6 +547,7 @@ p {
 .add-item-block, .inside {
   text-align: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .add-item-block .add-item, .inside .add-item {
@@ -556,16 +557,17 @@ p {
       -ms-user-select: none;
           user-select: none;
   display: inline-block;
-  position: relative;
 }
 
 .add-item-block .add-item:disabled:hover::after, .inside .add-item:disabled:hover::after {
   position: absolute;
   top: 0;
   width: 100%;
-  left: 120%;
-  content: "Добавьте общую длительность";
-  background-color: red;
+  left: 0;
+  top: -65%;
+  content: "Сначала добавьте общую длительность";
+  font-size: 80%;
+  color: #dc3545;
 }
 
 .add-item-block .add-item p:first-child, .inside .add-item p:first-child {
