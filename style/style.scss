@@ -87,7 +87,8 @@ p {
     text-align: center;
 
     button {
-        width: 30%;
+        //width: 30%;
+        width: 130px;
     }
 
 }
@@ -95,7 +96,6 @@ p {
 // COUNTER 
 .main-counter.notice {
     position: relative;
-
     &::after {
         content: "нельзя";
         top: 100%;
