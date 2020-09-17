@@ -252,19 +252,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  //What radio contact and disclaimer
+  //What radio contact and disclaimer FOR 1 SLIDE
 
   const optionalContact = `<div class="option-contact solo-check form-check">
   <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
-    <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
+    <input disabled name="optional-conatact" class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
   </label>
   </div>`
 
   const optionalDisclaimer = `<div class="option-disclaimer solo-check form-check">
       <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
       <label class="form-check-label" for="defaultCheck1">
-        <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
+        <input disabled name="optional-disclaimer" class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
       </label>
     </div>`
 
@@ -409,11 +409,11 @@ document.addEventListener('DOMContentLoaded', function () {
   //ФУНКИЦЯ СОЗДАНИЯ ТЕЛА ВТОРОЙ ЧАСТИ СЛАЙДА
   function createSecondPartHtml(nameForInitSlider, optionalContact, optionalDisclaimer) {
     let textZoneHtml_1 = `<div class="text-zone">
-       <input class="text-field form-control" type="text" placeholder="Введите текст">
+       <input class="text-field form-control" type="text" name="stimul-text" placeholder="Введите текст">
        <div class="more-colors optional-field form-check">
-         <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+         <input class="form-check-input optional-checkbox" type="checkbox"  id="defaultCheck1">
          <label class="form-check-label" for="defaultCheck1">
-           <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
+           <input name="optional-text" class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
          </label>
        </div>
      </div>`;
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
      <div class="solo-check form-check">
        <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
        <label class="form-check-label" for="defaultCheck1">
-       <input disabled class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу">
+       <input disabled name="optional-text" class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу">
        </label>
      </div>
    </div>`;
@@ -429,12 +429,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let textForContact = `<div class="option-contact solo-check form-check">
    <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
    <label class="form-check-label" for="defaultCheck1">
-     <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу" disabled="true">
+     <input name="optional-text" class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить слоган или фразу" disabled="true">
    </label>
    </div>`
 
     let textStockHtml = `<div class="text-zone">
-        <textarea class="form-control text-field stock-text" id="textarea3" placeholder="Текст акции" rows="1"></textarea>
+        <textarea name="stock-text" class="form-control text-field stock-text" id="textarea3" placeholder="Текст акции" rows="1"></textarea>
    </div>`;
 
     let nameAttach;
@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getAttachHtml(name) {
       let attach = `<div class="attach-block for-logo">
     <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>${name}</p></label>
-    <input type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
+    <input type="file" name="example" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
     </div>`
       return attach;
     };
@@ -451,23 +451,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let productZoneHtml = `<div class="product-block mini-block" id="product-1">
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input type="text" class="form-control  form-control-sm" placeholder="Название товара">
+          <input name="product-1_name" type="text" class="form-control  form-control-sm" placeholder="Название товара">
         </div>
         <div class="col">
-          <input type="text" class="form-control  form-control-sm" placeholder="Цена">
+          <input  name="product-1_price" type="text" class="form-control  form-control-sm" placeholder="Цена">
         </div>
       </div>
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input type="text" class="form-control  form-control-sm" placeholder="Описание товара">
+          <input name="product-1_descript" type="text" class="form-control  form-control-sm" placeholder="Описание товара">
         </div>
         <div class="col">
           <div class="attach-block for-product">
-            <label class="my-file-input" for="img-product-1">
+            <label class="my-file-input" for="product-slider-1_img-1">
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" accept="image/*" class="form-control-file" id="img-product-1">
+            <input type="file" name="product-slider-1_img-1" accept="image/*" class="form-control-file" id="product-slider-1_img-1">
           </div>
         </div>
       </div>
@@ -490,23 +490,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let serviceZoneHtml = `<div class="product-block service mini-block" id="service-1">
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input type="text" class="form-control  form-control-sm" placeholder="Название услуги">
+          <input name="service-1_name" type="text" class="form-control  form-control-sm" placeholder="Название услуги">
         </div>
         <div class="col">
-          <input type="text" class="form-control  form-control-sm" placeholder="Цена">
+          <input name="service-1_price" type="text" class="form-control  form-control-sm" placeholder="Цена">
         </div>
       </div>
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input type="text" class="form-control  form-control-sm" placeholder="Описание услуги">
+          <input name="service-1_descript" type="text" class="form-control  form-control-sm" placeholder="Описание услуги">
         </div>
         <div class="col">
           <div class="attach-block for-product">
-            <label class="my-file-input" for="img-service-1">
+            <label class="my-file-input" for="service-slider-1_img-1">
               <ion-icon size="large" name="image-outline"></ion-icon>
               <p>Изображение</p>
             </label>
-            <input type="file" accept="image/*" class="form-control-file" id="img-service-1">
+            <input type="file" name="service-slider-1_img-1" accept="image/*" class="form-control-file" id="service-slider-1_img-1">
           </div>
         </div>
       </div>
@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function () {
      </div>`;
 
     let logoUseHtml = `<div class="form-check for-logo">
-    <input class="form-check-input" type="checkbox" id="gridCheck">
+    <input class="form-check-input" type="checkbox" id="gridCheck" name="logo-use">
     <label class="form-check-label" for="gridCheck">
         Добавить логотип
     </label>
@@ -586,16 +586,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     //console.log(insideHtml);
     return insideHtml;
-
   };
 
   function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
     let insideHtmlStimulPrase = `<div class="text-zone">
-       <input class="text-field form-control" type="text" placeholder="Введите текст">
+       <input class="text-field form-control" type="text" name="stimul-text" placeholder="Введите текст">
        <div class="more-colors optional-field form-check">
-         <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+         <input  class="form-check-input optional-checkbox" type="checkbox" id="defaultCheck1">
          <label class="form-check-label" for="defaultCheck1">
-           <input class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
+           <input name="optional-text" class="optional-txt form-control form-control-sm" type="text" placeholder="Добавить еще текст">
          </label>
        </div>
      </div>
@@ -618,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function () {
        </div>
      </div>
      <div class="form-check for-logo">
-       <input class="form-check-input" type="checkbox" id="gridCheck">
+       <input class="form-check-input" type="checkbox" id="gridCheck" name="logo-use">
        <label class="form-check-label" for="gridCheck">
            Добавить логотип
        </label>
@@ -638,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapp.append(part2);
   };
 
-  function addProduct(insideSlideWrapp) {
+  function addProduct(insideSlideWrapp, nameSlider) {
     insideSlideWrapp.querySelector('.add-item').addEventListener('click', (elem) => {
       let target = elem.target;
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
@@ -649,9 +648,17 @@ document.addEventListener('DOMContentLoaded', function () {
       nextProduct.id = nextProductId;
 
       uploadFile(nextProduct.querySelector('input[type="file"]'));
-
-      nextProduct.querySelector('input[type="file"]').id = "img-" + nextProductId;
-      nextProduct.querySelector('.my-file-input').setAttribute('for', "img-" + nextProductId);
+      nameSlider = nameSlider.replace(/part_/g,"");
+      let nextProductId2 =  nextProductId.replace(/\w*-/gi, "");
+      
+      nextProduct.querySelectorAll('input[type="text"]')[0].setAttribute('name',nextProductId + "_name" );
+      nextProduct.querySelectorAll('input[type="text"]')[1].setAttribute('name',nextProductId + "_price" );
+      nextProduct.querySelectorAll('input[type="text"]')[2].setAttribute('name',nextProductId + "_descript" );
+      
+      let idAttach = nameSlider + "_img-" + nextProductId2;
+      nextProduct.querySelector('input[type="file"]').id = idAttach;
+      nextProduct.querySelector('input[type="file"]').setAttribute('name', idAttach)
+      nextProduct.querySelector('.my-file-input').setAttribute('for', idAttach);
       console.log(nextProduct.querySelector('input[type="file"]'));
       target.parentElement.parentElement.before(nextProduct);
       nextProduct.querySelectorAll('input').forEach((inpt) => {
@@ -765,7 +772,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("sl1", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
        //добавлям Touchstart на Counter этого слайда
        counterTouch("video-slide");
 
@@ -804,7 +811,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
         secondPart = document.createElement('div');
         secondPart.classList.add('logo-part');
-        secondPart.innerHTML = setLogoHtmlWithSlider("sl1");
+        secondPart.innerHTML = setLogoHtmlWithSlider("stimul-part_slider");
         insideSlideWrapp.append(secondPart);
         //добавляем работу доп. форм
         optionalField = document.querySelectorAll(".optional-field");
@@ -816,7 +823,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //иницианализируем карусель
-  initCarousel('.sl1');
+  initCarousel('.stimul-part_slider');
 
   //иницинализируем функцию удаления слайда - идет после того как сформировалась
   deleteSlide(document.querySelector('.btn-remove-slide'));
@@ -876,6 +883,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = namePart + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
+      insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', namePart + "_attach-" + number);
     }
 
     //добавляем работу дизэйбл энэйбл для Соло форм
@@ -905,25 +913,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
     if (namePart === 'service-part' || namePart === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
-      addProduct(insideSlideWrapp);
+      addProduct(insideSlideWrapp,nameCarousel);
+      if(document.querySelectorAll(`.${namePart}`).length > 1){
+        let nameSliderSlim = nameCarousel.replace(/part_/g,"");
+        insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
+        insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
+        insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1' );
+      }
+      
       //УДАЛЕНИЕ ТОВАРА
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
-        if (insideSlideWrapp.querySelectorAll('.product-block').length < 2) {
-          console.log(insideSlideWrapp.querySelectorAll('.product-block').length);
-        } else {
+        if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
           console.log('удаляем товар или услугу');
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
-        }
+        };
       })
     };
 
     //иницинализируем карусель
     initCarousel(`.${nameCarousel}`);
 
-    //запускаем Counter длины слайда и присваиваем класс слайда
+    //запускаем Counter длины слайда и присваиваем класс слайда  и меняем Name
     const slideCounter = insideSlideWrapp.querySelector('.slide-counter');
     slideCounter.querySelector('input').classList.add(namePart + '-count-' + number);
+    slideCounter.querySelector('input').setAttribute('name', namePart + '-count-' + number);
     changeValCountSlides(slideCounter, 8, 2, 1);
 
     // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
@@ -1007,10 +1021,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (classForSecondP != 'stimul-part'){
         uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
       }
-
       if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
         insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
         insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
+        insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name',classForSecondP + "_attach-" + number);
       }
 
       //добавляем работу дизэйбл энэйбл для Соло форм
@@ -1020,23 +1034,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
       if (classForSecondP === 'service-part' || classForSecondP === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
-        addProduct(insideSlideWrapp);
+        addProduct(insideSlideWrapp, nameSlider);
+
+        if(document.querySelectorAll(`.${classForSecondP}`).length > 1){
+          let nameSliderSlim = nameSlider.replace(/part_/g,"");
+          insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
+          insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
+          insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1' );
+        }
+        
         //УДАЛЕНИЕ ТОВАРА
         insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
-          if (insideSlideWrapp.querySelectorAll('.product-block').length < 2) {
-          } else {
+          if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
             console.log('удаляем товар или услугу');
             insideSlideWrapp.querySelector(".close").parentElement.parentElement;
             insideSlideWrapp.querySelector('.product-block').remove();
-          }
-        })
-      }
+          };
+        });
+      };
 
-      //переименовываем counter слайда
+      //переименовываем counter слайда и меняем Name
       insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
+      insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number);
 
+      //валидация длины формы
       if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
-
         let invalFeedback = document.createElement('div');
         invalFeedback.classList.add('invalid-feedback');
         console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
@@ -1053,6 +1075,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
       }
+
       //иницинализируем слайдер
       initCarousel(`.${nameSlider}`);
 
@@ -1073,7 +1096,6 @@ document.addEventListener('DOMContentLoaded', function () {
         optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
       }
       deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
-
     });
   };
   changeSlide(document.querySelector('.video-slide__change'));
@@ -1084,9 +1106,21 @@ document.addEventListener('DOMContentLoaded', function () {
   formElem.onsubmit = async (e) => {
     e.preventDefault();
     console.log( document.querySelector(".qty.main-counter .count"));
-    document.querySelector(".qty.main-counter .count").removeAttribute("disabled");
-
+    document.querySelectorAll(".qty .count").forEach((el)=>{
+      el.removeAttribute("disabled");
+    });  
     let formData = new FormData(formElem);
+
+    document.querySelectorAll('.slick-slider').forEach((el)=>{
+      let parentNameAnimation = el.classList[0];
+      let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
+      let nameAnimation = srcSlider.replace(/img\//gi, ""); 
+      formData.append(parentNameAnimation, nameAnimation);
+    });
+
+    //console.log(document.querySelector('.slick-slider .slick-current img').getAttribute('src')); 
+    let srcSlider = document.querySelector('.slick-slider .slick-current img').getAttribute('src');
+
     console.log(formData);
     for(let [name, value] of formData) {
       console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
@@ -1096,10 +1130,12 @@ document.addEventListener('DOMContentLoaded', function () {
           console.log(key + ": " + value[key] );
         }
       } */
-
     };
   
-    document.querySelector(".qty.main-counter .count").setAttribute("disabled", "true");
+    //document.querySelector(".qty.main-counter .count").setAttribute("disabled", "true");
+    document.querySelectorAll(".qty .count").forEach((el)=>{
+      el.setAttribute("disabled", "true");
+    });  
   
     /* let response = await fetch('/article/formdata/post/user', {
       method: 'POST',
