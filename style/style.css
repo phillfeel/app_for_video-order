@@ -3,13 +3,13 @@ h5 {
   display: inline-block;
 }
 
-.hide {
+/* .hide {
   display: none;
 }
 
 .show {
   display: none;
-}
+} */
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   select,
@@ -21,6 +21,7 @@ h5 {
 
 .main {
   padding-top: 60px;
+  justify-content: center;
 }
 
 button.add-item {

@@ -5,14 +5,14 @@ h5 {
     display: inline-block;
 }
 
-.hide {
+/* .hide {
     display: none;
 }
 
 .show {
     display: none;
 }
-
+ */
 //маштабирование IOS
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
     select,
@@ -25,6 +25,7 @@ h5 {
 // --- FIRST MAIN BLOCK --- //
 .main {
     padding-top: 60px;
+    justify-content: center;
 }
 
 button.add-item {
