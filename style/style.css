@@ -4,13 +4,12 @@ h5 {
 }
 
 /* .hide {
-  display: none;
+    display: none;
 }
-
 .show {
-  display: none;
-} */
-
+    display: none;
+}
+ */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   select,
   textarea,
@@ -21,7 +20,9 @@ h5 {
 
 .main {
   padding-top: 60px;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 button.add-item {
@@ -47,27 +48,31 @@ button.add-item {
 }
 
 .block {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .block .mini-block {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .block > * {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .block .wrapper > * {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.text-zone {
+  margin-bottom: 25px;
 }
 
 .text-zone > * {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .wrapper {
-  padding: 10px 10px;
+  padding: 20px 20px;
 }
 
 @media screen and (max-width: 450px) {
@@ -81,7 +86,7 @@ p {
 }
 
 .main-comment {
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .main-btn {
@@ -107,7 +112,6 @@ p {
 
 .qty {
   width: 100px;
-  margin: auto 0;
   text-align: right;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -214,17 +218,6 @@ p {
   background-color: #f89b4f;
 }
 
-/* .touchevents {
-    .minus:active {
-        background-color: #f89b4f;
-    }
-}
-
-.touchevents {
-    .plus:active {
-        background-color: #f89b4f;
-    }
-} */
 /*Prevent text selection*/
 .counter span {
   -webkit-user-select: none;
@@ -248,7 +241,7 @@ p {
 }
 
 .format-video {
-  margin-bottom: 0px;
+  margin-bottom: 18px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -344,7 +337,11 @@ p {
 }
 
 .format-video__input-size input {
-  width: 70px;
+  width: 90px;
+}
+
+.colors-block > * {
+  margin-bottom: 15px;
 }
 
 .form-check input[type=checkbox] {
@@ -363,7 +360,7 @@ p {
 }
 
 .form-check-inline {
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
 .form-check-inline .form-check-label {
@@ -415,7 +412,7 @@ p {
   display: inline-block;
 }
 
-@media screen and (max-width: 565px) {
+@media screen and (max-width: 482px) {
   .title-line {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -427,7 +424,7 @@ p {
             justify-content: space-between;
   }
   .title-line .right-title {
-    margin: 7px 0 0 0;
+    margin: 17px 0 0 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -465,7 +462,7 @@ p {
 }
 
 .wrapper .chooseAnimation-zone {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .slick-initialized img {
@@ -522,6 +519,7 @@ p {
 
 .btn-zone {
   text-align: right;
+  margin-top: 30px;
 }
 
 .btn-zone .btn-remove-slide {
@@ -545,9 +543,14 @@ p {
   text-align: right;
 }
 
+/* @media screen and (max-width: 465px) {
+    .btn-zone {
+        //text-align: left;
+    }
+} */
 .add-item-block, .inside {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   position: relative;
 }
 
@@ -615,7 +618,7 @@ p {
 
 .attach-block.for-logo,
 .attach-block.extra {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   position: relative;
 }
 
@@ -652,6 +655,10 @@ p {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.attach-block.for-logo {
+  margin-bottom: 40px;
 }
 
 .attach-block.for-logo h5 {
@@ -712,23 +719,23 @@ p {
 }
 
 .form-check.for-logo {
-  margin-bottom: 15px;
+  margin-bottom: 19px;
 }
 
 .solo-check {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .product-block {
   padding: 13px 7px 7px 7px;
   border-radius: 7px;
   background-color: #ffffff;
-  margin-bottom: 5px !important;
-  margin-top: 10px;
+  margin-bottom: 15px !important;
+  margin-top: 20px;
 }
 
 .product-block .form-row:nth-child(1) {
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .product-block .form-row:nth-child(2) .col-12 {
@@ -786,5 +793,19 @@ p {
   .product-block .col-12 {
     margin-bottom: 7px;
   }
+}
+
+.duration-message {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  left: 0;
+  top: -50%;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.main-btn {
+  position: relative;
 }
 /*# sourceMappingURL=style.css.map */

@@ -96,39 +96,39 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   };
 
- //Добавляем Touchstart and Touchend для counter
-  function counterTouch (selector, element=""){
-    if (element != ""){
-      selector=element;
-    }else{
-      selector = document.querySelector(`.${selector}`) 
+  //Добавляем Touchstart and Touchend для counter
+  function counterTouch(selector, element = "") {
+    if (element != "") {
+      selector = element;
+    } else {
+      selector = document.querySelector(`.${selector}`)
     }
-      // MINUS TOUCHSTART
-      selector.querySelector('span.minus').addEventListener("touchstart", function() {
-        selector.querySelector('span.minus').classList.add('orange');
-      });
-     selector.querySelector('span.minus').addEventListener("touchend", function() {
+    // MINUS TOUCHSTART
+    selector.querySelector('span.minus').addEventListener("touchstart", function () {
+      selector.querySelector('span.minus').classList.add('orange');
+    });
+    selector.querySelector('span.minus').addEventListener("touchend", function () {
       selector.querySelector('span.minus').classList.remove('orange');
-      });
-     // PLUS TOUCHSTART
-     selector.querySelector('span.plus').addEventListener("touchstart", function() {
+    });
+    // PLUS TOUCHSTART
+    selector.querySelector('span.plus').addEventListener("touchstart", function () {
       selector.querySelector('span.plus').classList.add('orange');
     });
-     selector.querySelector('span.plus').addEventListener("touchend", function() {
+    selector.querySelector('span.plus').addEventListener("touchend", function () {
       selector.querySelector('span.plus').classList.remove('orange');
     });
   };
   counterTouch("main-settings");
 
- //загрузка файла 
+  //загрузка файла 
   function uploadFile(target) { //заносим id Input
     target.addEventListener('change', () => {
       console.log(target.id);
       let amount = target.files.length;
-      if (target.id == "extra-files" && amount != 0){
-        let comment="";
+      if (target.id == "extra-files" && amount != 0) {
+        let comment = "";
         console.log(amount);
-        switch (true){
+        switch (true) {
           case ((amount >= 2 && amount <= 4) || (amount % 10 >= 2 && amount % 10 <= 4)):
             comment = "изображения";
             break;
@@ -138,12 +138,12 @@ document.addEventListener('DOMContentLoaded', function () {
           case (amount >= 5 && amount <= 20):
             comment = "изображений";
             break;
-          };
+        };
         console.log(comment);
         target.previousElementSibling.lastElementChild.textContent = target.files.length + " " + comment;
-      }else{
+      } else {
         target.previousElementSibling.lastElementChild.textContent = target.files[0].name;
-      } 
+      }
     });
   };
   uploadFile(document.getElementById('main-logo'));
@@ -642,19 +642,19 @@ document.addEventListener('DOMContentLoaded', function () {
       let target = elem.target;
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
-     
+
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
 
       uploadFile(nextProduct.querySelector('input[type="file"]'));
-      nameSlider = nameSlider.replace(/part_/g,"");
-      let nextProductId2 =  nextProductId.replace(/\w*-/gi, "");
-      
-      nextProduct.querySelectorAll('input[type="text"]')[0].setAttribute('name',nextProductId + "_name" );
-      nextProduct.querySelectorAll('input[type="text"]')[1].setAttribute('name',nextProductId + "_price" );
-      nextProduct.querySelectorAll('input[type="text"]')[2].setAttribute('name',nextProductId + "_descript" );
-      
+      nameSlider = nameSlider.replace(/part_/g, "");
+      let nextProductId2 = nextProductId.replace(/\w*-/gi, "");
+
+      nextProduct.querySelectorAll('input[type="text"]')[0].setAttribute('name', nextProductId + "_name");
+      nextProduct.querySelectorAll('input[type="text"]')[1].setAttribute('name', nextProductId + "_price");
+      nextProduct.querySelectorAll('input[type="text"]')[2].setAttribute('name', nextProductId + "_descript");
+
       let idAttach = nameSlider + "_img-" + nextProductId2;
       nextProduct.querySelector('input[type="file"]').id = idAttach;
       nextProduct.querySelector('input[type="file"]').setAttribute('name', idAttach)
@@ -663,7 +663,7 @@ document.addEventListener('DOMContentLoaded', function () {
       target.parentElement.parentElement.before(nextProduct);
       nextProduct.querySelectorAll('input').forEach((inpt) => {
         inpt.value = '';
-        if (inpt.type == "file"){
+        if (inpt.type == "file") {
           inpt.previousElementSibling.lastElementChild.textContent = 'Изображение';
         }
       });
@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let allSlides = document.querySelectorAll('.video-slide.block');
         document.querySelectorAll('.video-slide__number').forEach((item) => {
           allSlides[i - 1].classList = `video-slide block added-${i}`;
-          allSlides[i - 1].querySelector('.video-slide__change').setAttribute('name',`slide-${i}`)
+          allSlides[i - 1].querySelector('.video-slide__change').setAttribute('name', `slide-${i}`)
           item.textContent = i++;
         })
         //slideNumber = +document.querySelectorAll('.video-slide__number').length - 1;
@@ -712,14 +712,14 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('.btn-remove-slide').disabled = false;
         }
 
-       
+
 
         let logoCheck = document.querySelectorAll('.form-check.for-logo');
         console.log(logoCheck);
         logoCheck.forEach(el => {
           console.log(el);
           let numb = el.parentElement.parentElement.querySelector('.video-slide__number').textContent;
-          el.querySelector('[name="logo-use"]').id =  "gridCheck-" + numb;       
+          el.querySelector('[name="logo-use"]').id = "gridCheck-" + numb;
           el.querySelector('.for-logo label').setAttribute("for", "gridCheck-" + numb)
         });
 
@@ -784,8 +784,8 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
         createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer));
-       //добавлям Touchstart на Counter этого слайда
-       counterTouch("video-slide");
+        //добавлям Touchstart на Counter этого слайда
+        counterTouch("video-slide");
 
         //добавляем работу доп. форм
         optionalField = document.querySelectorAll(".optional-field");
@@ -877,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
     console.log(insideSlideWrapp);
-    
+
     //CHANGE COLOR TOUCHSTART COUNTER
     counterTouch("", constructSlide);
     // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
@@ -888,7 +888,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
     // устанавливаем id для вложений
-    if (namePart != 'stimul-part'){
+    if (namePart != 'stimul-part') {
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     }
     if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
@@ -896,11 +896,11 @@ document.addEventListener('DOMContentLoaded', function () {
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
       insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', namePart + "_attach-" + number);
     }
-    
+
     //для установки ID опционному лого - ДОДЕЛАТЬ
     if (namePart != 'logo-part' && namePart != 'contact-part') {
-    insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent;
-    insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent);
+      insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent;
+      insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent);
     }
 
     //добавляем работу дизэйбл энэйбл для Соло форм
@@ -930,14 +930,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
     if (namePart === 'service-part' || namePart === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
-      addProduct(insideSlideWrapp,nameCarousel);
-      if(document.querySelectorAll(`.${namePart}`).length > 1){
-        let nameSliderSlim = nameCarousel.replace(/part_/g,"");
+      addProduct(insideSlideWrapp, nameCarousel);
+      if (document.querySelectorAll(`.${namePart}`).length > 1) {
+        let nameSliderSlim = nameCarousel.replace(/part_/g, "");
         insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
         insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
-        insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1' );
+        insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
       }
-      
+
       //УДАЛЕНИЕ ТОВАРА
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
@@ -991,7 +991,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //перемещаем кнопку добавить слайд
     document.querySelector('.last-main-block').before(document.querySelector(".add-slide"));
+
+    // Перемотка к началу созданого элемента
+    insideSlideWrapp.scrollIntoView();
   });
+
 
   function changeSlide(elem) {
     elem.addEventListener('change', () => {
@@ -1019,7 +1023,6 @@ document.addEventListener('DOMContentLoaded', function () {
           break;
       };
 
-      
       let number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
         nameSlider = classForSecondP + "_slider-" + number;
       createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
@@ -1037,17 +1040,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
       // устанавливаем id для вложений
-      if (classForSecondP != 'stimul-part'){
+      if (classForSecondP != 'stimul-part') {
         uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
       }
       if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
         insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
         insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
-        insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name',classForSecondP + "_attach-" + number);
+        insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
       }
 
       //для установки ID опционному лого - ДОДЕЛАТЬ
-      if (classForSecondP != 'logo-part' && classForSecondP != 'contact-part'){
+      if (classForSecondP != 'logo-part' && classForSecondP != 'contact-part') {
         insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + slideNumber;
         insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + slideNumber);
       }
@@ -1061,13 +1064,13 @@ document.addEventListener('DOMContentLoaded', function () {
       if (classForSecondP === 'service-part' || classForSecondP === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
         addProduct(insideSlideWrapp, nameSlider);
 
-        if(document.querySelectorAll(`.${classForSecondP}`).length > 1){
-          let nameSliderSlim = nameSlider.replace(/part_/g,"");
+        if (document.querySelectorAll(`.${classForSecondP}`).length > 1) {
+          let nameSliderSlim = nameSlider.replace(/part_/g, "");
           insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
           insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
-          insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1' );
+          insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
         }
-        
+
         //УДАЛЕНИЕ ТОВАРА
         insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
           if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
@@ -1126,128 +1129,121 @@ document.addEventListener('DOMContentLoaded', function () {
   changeSlide(document.querySelector('.video-slide__change'));
 
   // СБОР ДАННЫХ ФОРМЫ
- /*  formElem.onsubmit = async (e) => {
-    e.preventDefault();
-    console.log( document.querySelector(".qty.main-counter .count"));
-    document.querySelectorAll(".qty .count").forEach((el)=>{
-      el.removeAttribute("disabled");
-    });  
+  /*  formElem.onsubmit = async (e) => {
+     e.preventDefault();
+     console.log( document.querySelector(".qty.main-counter .count"));
+     document.querySelectorAll(".qty .count").forEach((el)=>{
+       el.removeAttribute("disabled");
+     });  
 
-    let formData = new FormData(formElem);
-    document.querySelectorAll('.slick-slider').forEach((el)=>{
-      let parentNameAnimation = el.classList[0];
-      let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
-      let nameAnimation = srcSlider.replace(/img\//gi, ""); 
-      formData.append(parentNameAnimation, nameAnimation);
-    });
-    for(let [name, value] of formData) {
-      console.log(`${name} = ${value}`); 
-    };
-    document.querySelectorAll(".qty .count").forEach((el)=>{
-      el.setAttribute("disabled", "true");
-    });  
-   */
-    /* let response = await fetch('/article/formdata/post/user', {
-      method: 'POST',
-      body: new FormData(formElem)
-    }); */
+     let formData = new FormData(formElem);
+     document.querySelectorAll('.slick-slider').forEach((el)=>{
+       let parentNameAnimation = el.classList[0];
+       let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
+       let nameAnimation = srcSlider.replace(/img\//gi, ""); 
+       formData.append(parentNameAnimation, nameAnimation);
+     });
+     for(let [name, value] of formData) {
+       console.log(`${name} = ${value}`); 
+     };
+     document.querySelectorAll(".qty .count").forEach((el)=>{
+       el.setAttribute("disabled", "true");
+     });  
+    */
+  /* let response = await fetch('/article/formdata/post/user', {
+    method: 'POST',
+    body: new FormData(formElem)
+  }); */
 
-    //let result = await response.json();
-    //alert(result.message);
+  //let result = await response.json();
+  //alert(result.message);
 
   let formElem = document.querySelector('#formElem');
-  formElem.addEventListener('submit', submitHandler);
-  function submitHandler(e){
+  formElem.addEventListener('submit',(e)=>{
     e.preventDefault();
+    let allDuration = document.querySelector('#main-conter-val').value;
+    let slidesDurationArr=[],
+        slidesDuration = 0;
+    document.querySelectorAll('.slide-counter input').forEach((el)=>{
+      slidesDurationArr.push(el.value);
+    });
+
+    console.log(allDuration);
+
+    slidesDurationArr.forEach(element => {
+      slidesDuration += (+element);
+    });
+
+    console.log(slidesDuration);
+
+    if (allDuration >= slidesDuration){
+      if (document.querySelector('.duration-message')){
+        document.querySelector('.duration-message').remove();
+      }
+      submitHandler();
+    } else {
+      if (document.querySelector('.duration-message')){
+        document.querySelector('.duration-message').remove();
+        let durationMessage = document.createElement('div');
+        durationMessage.classList.add('duration-message');
+        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
+        document.querySelector('button[type="submit"]').before(durationMessage);
+      } else {
+        let durationMessage = document.createElement('div');
+        durationMessage.classList.add('duration-message');
+        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
+        document.querySelector('button[type="submit"]').before(durationMessage);
+      };
+    } 
+  });
+
+  function submitHandler() {
     //убираем disabled у Counter
-    document.querySelectorAll(".qty .count").forEach((el)=>{
+    document.querySelectorAll(".qty .count").forEach((el) => {
       el.removeAttribute("disabled");
-    });  
+    });
     //формируем formData
     let formData = new FormData(formElem);
-    for(let [name, value] of formData) {
+    for (let [name, value] of formData) {
       console.log(`${name} = ${value}`);
     }
     //добавляем в formData name Animation
-    document.querySelectorAll('.slick-slider').forEach((el)=>{
+    document.querySelectorAll('.slick-slider').forEach((el) => {
       let parentNameAnimation = el.classList[0];
       let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
-      let nameAnimation = srcSlider.replace(/img\//gi, ""); 
+      let nameAnimation = srcSlider.replace(/img\//gi, "");
       formData.append(parentNameAnimation, nameAnimation);
     });
 
-
-    //clg formdata
-  /* console.log(...formData);
-  console.log(formData.get('main-format'));
-
-
-  if (formData.get('main-format')){
-    formData.append('Основной формат', formData.get('main-format'));
-    formData.delete('main-format');
-  };
-  if (formData.get('main-contact') || formData.get('main-contact') ==="" ){
-    formData.append('Основные контакты', formData.get('main-contact'));
-    formData.delete('main-contact');
-  };
-
-
-
-  for(let pair of formData.entries()) {
-    console.log(`перебираем и берем из ${pair} - ${pair[0]}`);
-    switch (true) {
-        case /main-duration/i.test(pair[0]): 
-          console.log(pair[0]+" !inside");
-         
-          formData.append("Общая длина", pair[1]);
-          formData.delete(pair[0]);
-          break;
-        case /main-colors/i.test(pair[0]):
-          console.log(pair[0]);
-      
-          formData.append("Основные цвета", pair[1]);
-          formData.delete(pair[0]);
-          break; 
-        case "main-extra-color": 
-          console.log(pair[0]);
-          formData.append("Дополнительные цвета", value);
-          formData.delete(pair[0]);
-          break;
-
-        case "contact-where":
-          formData.append("Контакты опционально", value);
-          formData.delete(pair[0]);
-          break;
-        };
-  };  */
-
-for(let [name1, value1] of formData) {
+    for (let [name1, value1] of formData) {
       console.log(`${name1}=${value1}`);
-  };
+    };
     //возвращаем инпут обратно
-    document.querySelectorAll(".qty .count").forEach((el)=>{
-      el.setAttribute("disabled", "true"); 
-    }); 
+    document.querySelectorAll(".qty .count").forEach((el) => {
+      el.setAttribute("disabled", "true");
+    });
     console.log('идет отправка');
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
     $(".modal").modal('show');
     fetch("send.php", {
-      method: "POST",
-      body: formData
-    })
-    .then(response => { 
-      return response.json()})
-    .then(function(json) {  
-      console.log('отправлено');
-      document.querySelector('.modal .modal-body').textContent = "Отправлено!"
-      //$("#myModalBox").modal('show');
-      /*process your JSON further */  })
-    .catch(function(error) { 
-      console.log(error); 
-      console.log("ошибка отправки");
-      document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз."
-    });
-    }; 
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(function (json) {
+        console.log('отправлено');
+        document.querySelector('.modal .modal-body').textContent = "Отправлено!"
+        //$("#myModalBox").modal('show');
+        /*process your JSON further */
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log("ошибка отправки");
+        document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз."
+      });
+  };
 
 
 })
