@@ -93,59 +93,9 @@ header{
     display:block;
     a{background:0 0;}
     a:active,a:hover{outline:0;}
-    input{color:inherit;font:inherit;margin:0;}
-    input::-moz-focus-inner{border:0;padding:0;}
-    input{line-height:normal;}
-    input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}
     *,:after,:before{box-sizing:border-box;}
     ul{padding:0;list-style-position:inside;}
     a{outline:0;}
-    .checkboxInputContainer.checkboxChecked div,.tooltip .beak,.tooltip__close i{display:inline-block;background:url(https://adbus.pro/images/sprites20.png) no-repeat;}
-    .tooltip__close i{width:12px;height:11px;background-position:-360px 0;}
-    .counter{background:#ed4a30;display:inline-block;border-radius:20px;min-width:17px;height:17px;line-height:1;text-align:center;font-size:11px;color:#000;padding:2px 5px 0;}
-    .is-hidden{position:absolute!important;left:0!important;top:-99999em!important;right:auto!important;bottom:auto!important;}
-    .b-checkbox{display:inline-block;}
-    .b-checkbox input[type=checkbox]{position:absolute;left:-10000px;margin:0;padding:0;}
-    .b-checkbox label{vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding:0 0 2px;cursor:pointer;}
-    .checkboxInputContainer{background:#fff;border:1px solid rgba(107,79,58,.3);border-radius:4px;box-shadow:inset 0 1px 0 rgba(107,79,58,.1);position:relative;overflow:hidden;display:inline-block;width:18px;height:18px;vertical-align:middle;cursor:pointer;margin:0 2px 0 0;}
-    .checkboxInputContainer:hover{border-color:rgba(107,79,58,.7);}
-    .checkboxInputContainer div{position:absolute;top:1px;left:2px;width:12px;height:13px;}
-    .checkboxInputContainer.checkboxChecked{background:rgba(143,113,82,.5);background:linear-gradient(to bottom,rgba(143,113,82,.5) 0,rgba(105,75,47,.5) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(143, 113, 82, 0.5)', endColorstr='rgba(105, 75, 47, 0.5)', GradientType=0);border-color:rgba(107,79,58,.7);}
-    .checkboxInputContainer.checkboxChecked:hover{border-color:rgba(107,79,58,.9);}
-    .checkboxInputContainer.checkboxChecked div{background-position:-240px -20px;}
-    .b-radio{padding:0 0 0 1px;}
-    .b-radio:after,.b-radio:before{content:" ";display:table;}
-    .b-radio:after{clear:both;}
-    .b-radio input[type=radio]{position:absolute;left:-10000px;margin:0;padding:0;}
-    .radioInputContainer{background:linear-gradient(0deg,rgba(172,123,77,.1) 0,rgba(181,144,104,.1) 100%);border:1px solid rgba(107,79,58,.25);border-left-color:rgba(107,79,58,.125);border-right-color:rgba(107,79,58,.125);box-shadow:none;position:relative;overflow:hidden;float:left;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding:1px 11px 4px;margin:0 0 0 -1px;}
-    .radioInputContainer div{position:absolute;left:0;right:0;top:0;bottom:0;cursor:pointer;}
-    .radioInputContainer label{position:relative;z-index:1;text-shadow:0 1px 0 rgba(255,255,255,.5);color:#000;cursor:pointer;}
-    .radioInputContainer:hover{background:linear-gradient(0deg,rgba(172,123,77,.2) 0,rgba(181,144,104,.2) 100%);border-color:rgba(107,79,58,.4);border-color:rgba(107,79,58,.4) rgba(107,79,58,.275);}
-    .radioInputContainer:active{background:linear-gradient(0deg,rgba(181,144,104,.4) 0,rgba(172,123,77,.4) 100%);border-color:rgba(107,79,58,.6);border-color:rgba(107,79,58,.6) rgba(107,79,58,.475);box-shadow:inset 0 1px 0 rgba(107,79,58,.2);}
-    .radioInputContainer:first-child{border-left-color:rgba(107,79,58,.25);border-radius:4px 0 0 4px;}
-    .radioInputContainer:first-child div{border-radius:4px 0 0 4px;}
-    .radioInputContainer:first-child:hover{border-left-color:rgba(107,79,58,.4);}
-    .radioInputContainer:last-child{border-right-color:rgba(107,79,58,.25);border-radius:0 4px 4px 0;}
-    .radioInputContainer:last-child div{border-radius:0 4px 4px 0;}
-    .radioInputContainer:last-child:hover{border-right-color:rgba(107,79,58,.4);}
-    .radioInputContainer.radioChecked,.radioInputContainer.radioChecked:active,.radioInputContainer.radioChecked:hover{background:linear-gradient(0deg,rgba(181,144,104,.4) 0,rgba(172,123,77,.4) 100%);border-color:rgba(107,79,58,.6);border-color:rgba(107,79,58,.6) rgba(107,79,58,.475);box-shadow:inset 0 1px 0 rgba(107,79,58,.2);}
-    .radioInputContainer.radioChecked div,.radioInputContainer.radioChecked label{cursor:default;}
-    .simple-radio input{position:absolute;left:-999em;}
-    .simple-radio label{cursor:pointer;}
-    .simple-radio label span:first-child{display:inline-block;position:relative;padding-left:22px;vertical-align:top;}
-    .simple-radio label span:first-child:before{position:absolute;left:0;top:4px;width:15px;height:15px;border:1px solid #A69681;border-radius:50%;box-shadow:inset 0 1px 0 0 rgba(0,0,0,.1);content:'';}
-    .simple-radio input:checked+label span:first-child:after{position:absolute;left:3px;top:7px;width:9px;height:9px;background:#B7A491;border:1px solid #816754;border-radius:50%;content:'';}
-    .simple-radio input:disabled+label{cursor:default;color:rgba(0,0,0,.5);}
-    .simple-radio input:disabled+label span:first-child:after,.simple-radio input:disabled+label span:first-child:before{opacity:.5;}
-    ::-webkit-input-placeholder{color:#999;}
-    :-moz-placeholder{color:#999;opacity:1;}
-    ::-moz-placeholder{color:#999;opacity:1;}
-    :-ms-input-placeholder{color:#999;}
-    .button{background:linear-gradient(0deg,rgba(172,123,77,.1) 0,rgba(181,144,104,.1) 100%);border:1px solid rgba(107,79,58,.25);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2);text-shadow:0 1px 0 rgba(255,255,255,.5);display:inline-block;height:28px;line-height:1.6;white-space:nowrap;text-align:center;text-decoration:none;cursor:pointer;color:#000;padding:0 16px 2px;}
-    .button:hover{background:linear-gradient(0deg,rgba(172,123,77,.2) 0,rgba(181,144,104,.2) 100%);border-color:rgba(107,79,58,.4);}
-    .button:active{background:linear-gradient(0deg,rgba(181,144,104,.4) 0,rgba(172,123,77,.4) 100%);border-color:rgba(107,79,58,.6);box-shadow:inset 0 1px 0 rgba(107,79,58,.2);}
-    .button.is-disabled,.button:disabled{opacity:.5;color:rgba(0,0,0,.6);cursor:default;}
-    .button.is-disabled,.button.is-disabled:active,.button.is-disabled:hover,.button:disabled,.button:disabled:active,.button:disabled:hover{background:linear-gradient(0deg,rgba(172,123,77,.1) 0,rgba(181,144,104,.1) 100%);border-color:rgba(107,79,58,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.2);}
     .logo{float:left;}
     .logo .v-helper{height:50px;display:inline-block;vertical-align:middle;}
     .logo span{display:inline-block;width:115px;height:28px;vertical-align:middle;}
@@ -158,7 +108,6 @@ header{
         background-color: #333;
         align-items: flex-end;
     }
-
     .nav li{float:left;margin:0 0 0 6px;}
     .nav__link,.nav__text{display:inline-block;position:relative;height:50px;padding:10px 8px 0;}
     .nav__link,.nav__link:visited,.nav__text,.nav__text:visited{text-decoration:none;color:#fff;}
@@ -173,43 +122,7 @@ header{
     .nav ul .nav__link{display:block;height:36px;padding:4px 14px 0;}
     .nav li:hover ul{display:block;}
     .header__inner{height:49px;padding:0 42px;margin:0 auto;}
-    .header__account{float:right;margin:4px -9px 0 0;}
-    .header__account a{display:inline-block;font-size:16px;padding:7px 9px 0;}
-    .header__account a,.header__account a:hover,.header__account a:visited{text-decoration:none;color:#fff;}
-    .header__account a:hover{color:#fbc400;}
-    .header-balance{float:right;position:relative;margin-right:12px;padding-right:15px;}
-    .header-balance:after{position:absolute;top:50%;right:0;width:1px;height:25px;margin-top:-14px;background:rgba(255,255,255,.2);content:'';}
-    @media print{
-    .header{display:none;}
     }
-    .tooltip{font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;position:absolute;z-index:1;min-height:50px;margin:40px 0 0;border-radius:5px;background:#fff;box-shadow:0 0 15px rgba(0,0,0,.35);}
-    .tooltip__close{position:absolute;top:10px;right:10px;width:20px;height:20px;cursor:pointer;}
-    .tooltip__close i{margin:4px 0 0 4px;}
-    .tooltip__content{padding:18px 20px 25px;}
-    .tooltip .beak{background-position:-200px -140px;width:70px;height:46px;position:absolute;top:-46px;}
-    .archive-container{position:relative;float:right;margin-top:13px;margin-right:30px;}
-    .archive-bar{overflow:hidden;border:1px solid #bfb2a4;border-radius:3px;background:#fff;}
-    .archive-bar i{float:left;background:#ddd1c2;}
-    .archive-info{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;}
-    .archive-info__text{display:inline-block;color:#c1c1c1;}
-    .archive-info .archive-bar{display:inline-block;width:46px;height:9px;}
-    .archive-info .archive-bar i{height:7px;}
-    .archive-tooltip{right:-85px;top:30px;width:368px;}
-    .archive-tooltip .beak{right:97px;}
-    .archive-tooltip__heading{margin:0 0 10px;font-weight:800;font-size:18px;}
-    .archive-tooltip .archive-bar{height:14px;margin-bottom:6px;}
-    .archive-tooltip .archive-bar i{height:12px;}
-    .archive-tooltip__size{padding-bottom:28px;}
-    .archive-tooltip__tab{clear:both;}
-    .archive-tooltip__subheading{margin:0 0 5px;padding-top:15px;font-weight:800;font-size:16px;}
-    .archive-tooltip .simple-radio{margin-bottom:8px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
-    .archive-tooltip .simple-radio span:first-child{min-width:170px;}
-    .archive-tooltip__percents{display:inline-block;width:145px;vertical-align:top;}
-    .archive-tooltip__percents i{display:block;height:2px;overflow:hidden;background:#CDC7BB;}
-    .archive-tooltip .button{margin-top:18px;}
-    .archive-tooltip .b-checkbox{margin:14px 0 10px;font-weight:800;font-size:16px;}
-    /*! CSS Used from: Embedded */
-    #adsContent{display:none!important;}
 }
 header {
     background: #333;
