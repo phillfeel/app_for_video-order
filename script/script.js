@@ -437,8 +437,34 @@ document.addEventListener('DOMContentLoaded', function () {
         <textarea name="stock-text" class="form-control text-field stock-text" id="textarea3" placeholder="Текст акции" rows="1"></textarea>
    </div>`;
 
-    let nameAttach;
-    let attachHtml;
+    let nameAttach,
+        attachHtml,
+        carouselHtml,
+        gifName,
+        nameAnim_1,
+        nameAnim_2,
+        nameAnim_3,
+        nameAnim_4;
+
+    function getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4) {
+        let carousel = `<h6 class="duration-title">Настроить анимацию</h6>
+        <div class="chooseAnimation-zone">
+          <div class="${nameForInitSlider}">
+            <div class="sl_slice"><img src="img/${gifName}-1.gif" alt="" class="sl_img">
+            <p class="sl_text">${nameAnim_1}</p>
+            </div>
+            <div class="sl_slice"><img src="img/${gifName}-2.gif" alt="" class="sl_img">
+              <p class="sl_text">${nameAnim_2}</p></div>
+            <div class="sl_slice"><img src="img/${gifName}-3.gif" alt="" class="sl_img">
+              <p class="sl_text">${nameAnim_3}</p>
+            </div>
+            <div class="sl_slice"><img src="img/${gifName}-4.gif" alt="" class="sl_img">
+              <p class="sl_text">${nameAnim_4}</p>
+            </div> 
+          </div>
+        </div>`;
+      return carousel;
+    };
 
     function getAttachHtml(name) {
       let attach = `<div class="attach-block for-logo">
@@ -526,25 +552,6 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     </div>`;
 
-    let carouselHtml = `<h6 class="duration-title">Настроить анимацию</h6>
-     <div class="chooseAnimation-zone">
-       <div class="${nameForInitSlider}">
-         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
-         <p class="sl_text">Текст на подложке</p>
-         </div>
-         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
-           <p class="sl_text">Текст с фигурами</p></div>
-         <div class="sl_slice"><img src="img/3.gif" alt="" class="sl_img">
-           <p class="sl_text"> На подложке с фигурами</p>
-         </div>
-         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
-           <p class="sl_text">Текст на подложке</p>
-       </div>
-         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
-           <p class="sl_text">Текст с фигурами</p></div>
-       </div>
-     </div>`;
-
     let logoUseHtml = `<div class="form-check for-logo">
     <input class="form-check-input" type="checkbox" id="gridCheck" name="logo-use">
     <label class="form-check-label" for="gridCheck">
@@ -560,14 +567,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (true) {
       case /logo-part_slider/i.test(nameForInitSlider):
+        nameAnim_1 = "Динамичный";
+        nameAnim_2 = "Нежный";
+        nameAnim_3 = "Технологичный";
+        nameAnim_4 =  "Брутальный";
         nameAttach = 'Прикрепить логотип';
         attachHtml = getAttachHtml(nameAttach);
+        gifName='logo';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${attachHtml}${textZoneHtml_2}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /stimul-part_slider/i.test(nameForInitSlider):
+        nameAnim_1 = "Динамичный";
+        nameAnim_2 = "Нежный";
+        nameAnim_3 = "Технологичный";
+        nameAnim_4 =  "Брутальный";
+        nameAttach = 'Прикрепить логотип';
+        gifName='stimul';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${textZoneHtml_1}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /product-part_slider/i.test(nameForInitSlider):
+        gifName='product';
         insideHtml = `${productZoneHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /service-part_slider/i.test(nameForInitSlider):
@@ -601,21 +622,19 @@ document.addEventListener('DOMContentLoaded', function () {
      <h6 class="duration-title">Настроить анимацию</h6>
      <div class="chooseAnimation-zone">
        <div class="${name}">
-         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
+         <div class="sl_slice"><img src="img/stimul-1.gif" alt="" class="sl_img">
          <p class="sl_text">Текст на подложке</p>
          </div>
-         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
+         <div class="sl_slice"><img src="img/stimul-2.gif" alt="" class="sl_img">
            <p class="sl_text">Текст с фигурами</p></div>
-         <div class="sl_slice"><img src="img/3.gif" alt="" class="sl_img">
-           <p class="sl_text"> На подложке с фигурами</p>
+         <div class="sl_slice"><img src="img/stimul-3.gif" alt="" class="sl_img">
+           <p class="sl_text">На подложке с фигурами</p>
          </div>
-         <div class="sl_slice"><img src="img/1.gif" alt="" class="sl_img">
-           <p class="sl_text">Текст на подложке</p>
-       </div>
-         <div class="sl_slice"><img src="img/2.gif" alt="" class="sl_img">
-           <p class="sl_text">Текст с фигурами</p></div>
-       </div>
-     </div>
+         <div class="sl_slice"><img src="img/stimul-4.gif" alt="" class="sl_img">
+           <p class="sl_text">Энергичный</p>
+         </div> 
+        </div>
+        </div>
      <div class="form-check for-logo">
        <input class="form-check-input" type="checkbox" id="gridCheck" name="logo-use">
        <label class="form-check-label" for="gridCheck">
@@ -712,8 +731,6 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('.btn-remove-slide').disabled = false;
         }
 
-
-
         let logoCheck = document.querySelectorAll('.form-check.for-logo');
         console.log(logoCheck);
         logoCheck.forEach(el => {
@@ -722,10 +739,8 @@ document.addEventListener('DOMContentLoaded', function () {
           el.querySelector('[name="logo-use"]').id = "gridCheck-" + numb;
           el.querySelector('.for-logo label').setAttribute("for", "gridCheck-" + numb)
         });
-
       }
     });
-
   };
 
   function initCarousel(carouselClass) {
@@ -733,6 +748,8 @@ document.addEventListener('DOMContentLoaded', function () {
       centerMode: true,
       centerPadding: '60px',
       slidesToShow: 3,
+      slidesToScroll: 2,
+      infinity: true,
       responsive: [{
         breakpoint: 990,
         settings: {
@@ -740,14 +757,6 @@ document.addEventListener('DOMContentLoaded', function () {
           centerMode: true,
           centerPadding: '40px',
           slidesToShow: 2
-        }
-      }, {
-        breakpoint: 768,
-        settings: {
-          //arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
         }
       }, {
         breakpoint: 580,
@@ -768,7 +777,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }]
     });
   };
-
 
   function getMaxLengthStimulPhrase(slideCounterInput) {
     return +slideCounterInput.value * 4;
@@ -997,136 +1005,142 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-  function changeSlide(elem) {
-    elem.addEventListener('change', () => {
-      const firstPart = elem.parentElement.parentElement;
-      firstPart.nextElementSibling.remove();
-      let secondPart, classForSecondP;
-      switch (elem.value) {
-        case "logo":
-          classForSecondP = "logo-part";
-          break;
-        case "stimul":
-          classForSecondP = "stimul-part";
-          break;
-        case "product":
-          classForSecondP = "product-part";
-          break;
-        case "service":
-          classForSecondP = "service-part";
-          break;
-        case "stock":
-          classForSecondP = "stock-part";
-          break;
-        case "contact":
-          classForSecondP = "contact-part";
-          break;
-      };
+  function eventChangeSlide(elem) {
+    const firstPart = elem.parentElement.parentElement;
+    firstPart.nextElementSibling.remove();
+    let secondPart, classForSecondP;
+    switch (elem.value) {
+      case "logo":
+        classForSecondP = "logo-part";
+        break;
+      case "stimul":
+        classForSecondP = "stimul-part";
+        break;
+      case "product":
+        classForSecondP = "product-part";
+        break;
+      case "service":
+        classForSecondP = "service-part";
+        break;
+      case "stock":
+        classForSecondP = "stock-part";
+        break;
+      case "contact":
+        classForSecondP = "contact-part";
+        break;
+    };
 
-      let number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
-        nameSlider = classForSecondP + "_slider-" + number;
-      createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
+    let number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
+      nameSlider = classForSecondP + "_slider-" + number;
+    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
 
-      let constructSlide = firstPart.parentElement.parentElement;
+    let constructSlide = firstPart.parentElement.parentElement;
 
-      let insideSlideWrapp = firstPart.parentNode;
+    let insideSlideWrapp = firstPart.parentNode;
 
-      let slideNumber = +constructSlide.querySelector('.video-slide__number').textContent;
-      //добавляем работу доп. форм(Нужно для: побуждающей)
-      if (classForSecondP === 'stimul-part') {
-        let optionalField = constructSlide.querySelectorAll(".stimul-part .optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        });
+    let slideNumber = +constructSlide.querySelector('.video-slide__number').textContent;
+    //добавляем работу доп. форм(Нужно для: побуждающей)
+    if (classForSecondP === 'stimul-part') {
+      let optionalField = constructSlide.querySelectorAll(".stimul-part .optional-field");
+      optionalField.forEach(function (item) {
+        createOptionalFiled(item);
+      });
+    }
+    // устанавливаем id для вложений
+    if (classForSecondP != 'stimul-part') {
+      uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+    }
+    if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
+      insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
+      insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
+      insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
+    }
+
+    //для установки ID опционному лого - ДОДЕЛАТЬ
+    if (classForSecondP != 'logo-part' && classForSecondP != 'contact-part') {
+      insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + slideNumber;
+      insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + slideNumber);
+    }
+
+    //добавляем работу дизэйбл энэйбл для Соло форм
+    insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
+      turnForm(item);
+    })
+
+    // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    if (classForSecondP === 'service-part' || classForSecondP === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
+      addProduct(insideSlideWrapp, nameSlider);
+
+      if (document.querySelectorAll(`.${classForSecondP}`).length > 1) {
+        let nameSliderSlim = nameSlider.replace(/part_/g, "");
+        insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
+        insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
+        insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
       }
-      // устанавливаем id для вложений
-      if (classForSecondP != 'stimul-part') {
-        uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
-      }
-      if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
-        insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
-        insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
-        insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
-      }
 
-      //для установки ID опционному лого - ДОДЕЛАТЬ
-      if (classForSecondP != 'logo-part' && classForSecondP != 'contact-part') {
-        insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + slideNumber;
-        insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + slideNumber);
-      }
+      //УДАЛЕНИЕ ТОВАРА
+      insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
+        if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
+          console.log('удаляем товар или услугу');
+          insideSlideWrapp.querySelector(".close").parentElement.parentElement;
+          insideSlideWrapp.querySelector('.product-block').remove();
+        };
+      });
+    };
 
-      //добавляем работу дизэйбл энэйбл для Соло форм
-      insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
-        turnForm(item);
-      })
+    //переименовываем counter слайда и меняем Name
+    insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
+    insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number);
 
-      // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
-      if (classForSecondP === 'service-part' || classForSecondP === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
-        addProduct(insideSlideWrapp, nameSlider);
+    //валидация длины формы
+    if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
+      let invalFeedback = document.createElement('div');
+      invalFeedback.classList.add('invalid-feedback');
+      console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
+      insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
 
-        if (document.querySelectorAll(`.${classForSecondP}`).length > 1) {
-          let nameSliderSlim = nameSlider.replace(/part_/g, "");
-          insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
-          insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
-          insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
+      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
+        let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
+        if (e.target.value.length > maxLengthStimulPhrase) {
+          e.target.classList.add('is-invalid');
+          invalFeedback.textContent = `Длина текста ${e.target.value.length} при максимально допустимой в ${maxLengthStimulPhrase}`;
+        } else {
+          e.target.classList.remove('is-invalid');
+          invalFeedback.textContent = '';
         }
+      });
+    }
+    //иницинализируем слайдер
+    initCarousel(`.${nameSlider}`);
 
-        //УДАЛЕНИЕ ТОВАРА
-        insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
-          if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-            console.log('удаляем товар или услугу');
-            insideSlideWrapp.querySelector(".close").parentElement.parentElement;
-            insideSlideWrapp.querySelector('.product-block').remove();
-          };
-        });
-      };
+    // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
+    //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
+    let howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
+    let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
+    if (howDisplayContact === 'all') {
+      constructSlide.querySelector('.option-contact').remove();
+    } else {
+      const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
+      optionContactInput.value = document.querySelector('.contact-block textarea').value;
+    }
+    if (howDisplayDisclaimer === 'all') {
+      constructSlide.querySelector('.option-disclaimer').remove();
+    } else {
+      const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
+      optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
+    }
+    deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
+  }
 
-      //переименовываем counter слайда и меняем Name
-      insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
-      insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number);
-
-      //валидация длины формы
-      if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
-        let invalFeedback = document.createElement('div');
-        invalFeedback.classList.add('invalid-feedback');
-        console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
-        insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-
-        insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
-          let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
-          if (e.target.value.length > maxLengthStimulPhrase) {
-            e.target.classList.add('is-invalid');
-            invalFeedback.textContent = `Длина текста ${e.target.value.length} при максимально допустимой в ${maxLengthStimulPhrase}`;
-          } else {
-            e.target.classList.remove('is-invalid');
-            invalFeedback.textContent = '';
-          }
-        });
-      }
-
-      //иницинализируем слайдер
-      initCarousel(`.${nameSlider}`);
-
-      // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
-      //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
-      let howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-      let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-      if (howDisplayContact === 'all') {
-        constructSlide.querySelector('.option-contact').remove();
-      } else {
-        const optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
-        optionContactInput.value = document.querySelector('.contact-block textarea').value;
-      }
-      if (howDisplayDisclaimer === 'all') {
-        constructSlide.querySelector('.option-disclaimer').remove();
-      } else {
-        const optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
-        optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
-      }
-      deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
+  function changeSlide(elem) {
+    elem.addEventListener('change', ()=>{
+      eventChangeSlide(elem);
     });
   };
+
   changeSlide(document.querySelector('.video-slide__change'));
+//НУЖНО ДОБАВИТЬ ВЫБОР VALUE Чтобы сразу собрать ДРУГОЙ СЛАЙД
+  eventChangeSlide(document.querySelector('.video-slide__change'));
 
   // СБОР ДАННЫХ ФОРМЫ
   /*  formElem.onsubmit = async (e) => {
