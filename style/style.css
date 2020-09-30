@@ -491,9 +491,13 @@ header .logo span.adbus {
 
 header .nav {
   list-style-type: none;
-  float: left;
+  float: right;
   font-size: 16px;
-  margin: 4px 0 0 30px;
+  padding: 0px 15px 0px 20px;
+  background-color: #333;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 header .nav li {
@@ -504,7 +508,7 @@ header .nav li {
 header .nav__link, header .nav__text {
   display: inline-block;
   position: relative;
-  height: 46px;
+  height: 50px;
   padding: 10px 8px 0;
 }
 
@@ -580,7 +584,7 @@ header .nav li:hover ul {
 }
 
 header .header__inner {
-  height: 50px;
+  height: 49px;
   padding: 0 42px;
   margin: 0 auto;
 }
@@ -787,15 +791,37 @@ header #adsContent {
   display: none !important;
 }
 
-.header {
+header {
   background: #333;
   width: 100%;
-  height: 50px;
   position: relative;
   z-index: 3;
 }
 
-.header .inside {
+header nav.navbar {
+  padding: 0px 30px;
+  height: 50px;
+  background-color: #333;
+}
+
+header nav.navbar .navbar-brand {
+  padding-bottom: 12px;
+}
+
+header nav.navbar .navbar-collapse {
+  background-color: transparent;
+}
+
+header nav.navbar .navbar-nav {
+  margin-left: auto;
+}
+
+header nav.navbar span {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+header .inside {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;

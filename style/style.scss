@@ -150,9 +150,17 @@ header{
     .logo .v-helper{height:50px;display:inline-block;vertical-align:middle;}
     .logo span{display:inline-block;width:115px;height:28px;vertical-align:middle;}
     .logo span.adbus{background:  center / contain no-repeat url("/img/s2b_logo-ok.png");}
-    .nav{list-style-type:none;float:left;font-size:16px;margin:4px 0 0 30px;}
+    .nav{    
+        list-style-type: none;
+        float: right;
+        font-size: 16px;
+        padding: 0px 15px 0px 20px;
+        background-color: #333;
+        align-items: flex-end;
+    }
+
     .nav li{float:left;margin:0 0 0 6px;}
-    .nav__link,.nav__text{display:inline-block;position:relative;height:46px;padding:10px 8px 0;}
+    .nav__link,.nav__text{display:inline-block;position:relative;height:50px;padding:10px 8px 0;}
     .nav__link,.nav__link:visited,.nav__text,.nav__text:visited{text-decoration:none;color:#fff;}
     .nav__link.is-current,.nav__link:hover{text-decoration:none;color:#fbc400;}
     .nav__link.is-current{border-bottom:4px solid #fbc400;}
@@ -164,7 +172,7 @@ header{
     .nav ul li{display:block;float:none;margin:0;padding:0;}
     .nav ul .nav__link{display:block;height:36px;padding:4px 14px 0;}
     .nav li:hover ul{display:block;}
-    .header__inner{height:50px;padding:0 42px;margin:0 auto;}
+    .header__inner{height:49px;padding:0 42px;margin:0 auto;}
     .header__account{float:right;margin:4px -9px 0 0;}
     .header__account a{display:inline-block;font-size:16px;padding:7px 9px 0;}
     .header__account a,.header__account a:hover,.header__account a:visited{text-decoration:none;color:#fff;}
@@ -203,12 +211,30 @@ header{
     /*! CSS Used from: Embedded */
     #adsContent{display:none!important;}
 }
-.header {
+header {
     background: #333;
     width: 100%;
-    height: 50px;
+    //height: 50px;
     position: relative;
     z-index: 3;
+    nav.navbar{
+       padding: 0px 30px;
+        height: 50px;
+        background-color: #333;
+        .navbar-brand{
+            padding-bottom: 12px;
+        }
+        .navbar-collapse{
+            background-color: transparent;
+        }
+        .navbar-nav{
+            margin-left: auto;
+        }
+        span{
+            color: #ffffff;
+            font-size: 15px;
+        }
+    }
     .inside {
         justify-content: space-between;
         display: flex;
