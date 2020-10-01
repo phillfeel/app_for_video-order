@@ -440,11 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let nameAttach,
         attachHtml,
         carouselHtml,
-        gifName,
-        nameAnim_1,
-        nameAnim_2,
-        nameAnim_3,
-        nameAnim_4;
+        gifName;
 
     function getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4) {
         let carousel = `<h6 class="duration-title">Настроить анимацию</h6>
@@ -485,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input name="product-1_descript" type="text" class="form-control  form-control-sm" placeholder="Описание товара">
+          <input name="product-1_descript" type="text" class="form-control  description form-control-sm" placeholder="Описание товара">
         </div>
         <div class="col">
           <div class="attach-block for-product">
@@ -524,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="form-row">
         <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-          <input name="service-1_descript" type="text" class="form-control  form-control-sm" placeholder="Описание услуги">
+          <input name="service-1_descript" type="text" class="form-control description form-control-sm" placeholder="Описание услуги">
         </div>
         <div class="col">
           <div class="attach-block for-product">
@@ -563,25 +559,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let removeSlideHtml = `<div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`;
 
-    let insideHtml;
-
+    let insideHtml,
+        nameAnim_1 = "Динамичный",
+        nameAnim_2 = "Нежный",
+        nameAnim_3 = "Технологичный",
+        nameAnim_4 = "Брутальный";
+      
     switch (true) {
       case /logo-part_slider/i.test(nameForInitSlider):
-        nameAnim_1 = "Динамичный";
-        nameAnim_2 = "Нежный";
-        nameAnim_3 = "Технологичный";
-        nameAnim_4 =  "Брутальный";
         nameAttach = 'Прикрепить логотип';
-        attachHtml = getAttachHtml(nameAttach);
+        //attachHtml = getAttachHtml(nameAttach);
         gifName='logo';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
-        insideHtml = `${attachHtml}${textZoneHtml_2}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
+        insideHtml = `${textZoneHtml_2}${carouselHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /stimul-part_slider/i.test(nameForInitSlider):
-        nameAnim_1 = "Динамичный";
-        nameAnim_2 = "Нежный";
-        nameAnim_3 = "Технологичный";
-        nameAnim_4 =  "Брутальный";
         nameAttach = 'Прикрепить логотип';
         gifName='stimul';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
@@ -589,18 +581,25 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
       case /product-part_slider/i.test(nameForInitSlider):
         gifName='product';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${productZoneHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /service-part_slider/i.test(nameForInitSlider):
+        gifName='service';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${serviceZoneHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /stock-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить изображение';
+        gifName='stock';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         attachHtml = getAttachHtml(nameAttach);
         insideHtml = `${attachHtml}${textStockHtml}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
       case /contact-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить фото фасада';
+        gifName='contact';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         attachHtml = getAttachHtml(nameAttach);
         insideHtml = `${attachHtml}${textForContact}${carouselHtml}${logoUseHtml}${optionalFieldHtml}${removeSlideHtml}`;
         break;
@@ -779,9 +778,44 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function getMaxLengthStimulPhrase(slideCounterInput) {
-    return +slideCounterInput.value * 4;
+    return +slideCounterInput.value * 13;
   };
 
+  function validationText (element = insideSlideWrapp.querySelector('.text-zone .text-field'),
+                      elementCounter = insideSlideWrapp.querySelector('.slide-counter input')
+    ){
+      let invalFeedback = document.createElement('div');
+      invalFeedback.classList.add('invalid-feedback');
+      console.log(element);
+      element.after(invalFeedback);
+      element.addEventListener('input', (e) => {
+        let maxLengthStimulPhrase = getMaxLengthStimulPhrase(elementCounter);
+        if (e.target.value.length > maxLengthStimulPhrase) {
+          e.target.classList.add('is-invalid');
+          invalFeedback.textContent = `Длина текста ${e.target.value.length} при максимально допустимой в ${maxLengthStimulPhrase}`;
+        } else {
+          e.target.classList.remove('is-invalid');
+          invalFeedback.textContent = '';
+        }
+      });
+  };
+
+  function smoothAppearance (constructSlide){
+    let startOpacity = 0.3;
+    let finishOpacity = 0.99
+    let stepOp = 0.02;
+    //let element = document.getElementById('SomeElementYouWantToAnimate');
+    //constructSlide.style.opacity = 0;
+    function step() {
+      startOpacity = startOpacity + stepOp;
+      constructSlide.style.opacity = `${startOpacity}`;
+      console.log(startOpacity);
+      if (startOpacity < finishOpacity) {
+        window.requestAnimationFrame(step);
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
   //----MAIN---// динамическое добавление Побуждающей фразы на существующий
   document.querySelectorAll('.video-slide__change').forEach((item) => {
     let insideSlideWrapp, secondPart, optionalField;
@@ -896,10 +930,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
     // устанавливаем id для вложений
-    if (namePart != 'stimul-part') {
+    if (namePart != 'stimul-part' && namePart != 'logo-part') {
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     }
-    if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
+    if (namePart === 'contact-part' || namePart === 'stock-part') {
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = namePart + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
       insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', namePart + "_attach-" + number);
@@ -916,24 +950,18 @@ document.addEventListener('DOMContentLoaded', function () {
       turnForm(item);
     })
 
-    // валидация длины текста на Побуждающей
+    // валидация длины текста в полях слайда
     if (namePart === 'stimul-part' || namePart === 'stock-part') {
-
-      let invalFeedback = document.createElement('div');
-      invalFeedback.classList.add('invalid-feedback');
-      console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
-      insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-
-      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
-        let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
-        if (e.target.value.length > maxLengthStimulPhrase) {
-          e.target.classList.add('is-invalid');
-          invalFeedback.textContent = `Длина текста ${e.target.value.length} при максимально допустимой в ${maxLengthStimulPhrase}`;
-        } else {
-          e.target.classList.remove('is-invalid');
-          invalFeedback.textContent = '';
-        }
-      });
+      validationText(insideSlideWrapp.querySelector('.text-zone .text-field'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
+    }
+    if (namePart === 'logo-part' || namePart === 'contact-part') {
+      validationText(insideSlideWrapp.querySelector('.text-zone .optional-txt'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
+    }
+    if (namePart === 'product-part' || namePart === 'service-part') {
+      validationText(insideSlideWrapp.querySelector('.product-block .description'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
     }
 
     // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
@@ -1002,6 +1030,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Перемотка к началу созданого элемента
     insideSlideWrapp.scrollIntoView();
+
+    smoothAppearance(constructSlide);
+
   });
 
 
@@ -1030,6 +1061,8 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
     };
 
+    let namePart = classForSecondP;
+
     let number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
       nameSlider = classForSecondP + "_slider-" + number;
     createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
@@ -1047,10 +1080,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
     // устанавливаем id для вложений
-    if (classForSecondP != 'stimul-part') {
+    if (classForSecondP != 'stimul-part' && classForSecondP != 'logo-part' ) {
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     }
-    if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
+    if (classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
       insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
@@ -1093,23 +1126,19 @@ document.addEventListener('DOMContentLoaded', function () {
     insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number);
 
     //валидация длины формы
-    if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
-      let invalFeedback = document.createElement('div');
-      invalFeedback.classList.add('invalid-feedback');
-      console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
-      insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-
-      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', (e) => {
-        let maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
-        if (e.target.value.length > maxLengthStimulPhrase) {
-          e.target.classList.add('is-invalid');
-          invalFeedback.textContent = `Длина текста ${e.target.value.length} при максимально допустимой в ${maxLengthStimulPhrase}`;
-        } else {
-          e.target.classList.remove('is-invalid');
-          invalFeedback.textContent = '';
-        }
-      });
+    if (namePart === 'stimul-part' || namePart === 'stock-part') {
+      validationText(insideSlideWrapp.querySelector('.text-zone .text-field'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
     }
+    if (namePart === 'logo-part' || namePart === 'contact-part') {
+      validationText(insideSlideWrapp.querySelector('.solo-check .optional-txt'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
+    }
+    if (namePart === 'product-part' || namePart === 'service-part') {
+      validationText(insideSlideWrapp.querySelector('.product-block .description'),
+                    insideSlideWrapp.querySelector('.slide-counter input'))
+    }
+
     //иницинализируем слайдер
     initCarousel(`.${nameSlider}`);
 
@@ -1130,6 +1159,8 @@ document.addEventListener('DOMContentLoaded', function () {
       optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
     }
     deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
+
+    smoothAppearance(constructSlide);
   }
 
   function changeSlide(elem) {
@@ -1140,7 +1171,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   changeSlide(document.querySelector('.video-slide__change'));
 //НУЖНО ДОБАВИТЬ ВЫБОР VALUE Чтобы сразу собрать ДРУГОЙ СЛАЙД
-  eventChangeSlide(document.querySelector('.video-slide__change'));
+  //eventChangeSlide(document.querySelector('.video-slide__change'));
 
   // СБОР ДАННЫХ ФОРМЫ
   /*  formElem.onsubmit = async (e) => {
