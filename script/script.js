@@ -641,9 +641,10 @@ document.addEventListener('DOMContentLoaded', function () {
        </label>
      </div>
      <div class="optional-contact__wrapp">${optionalContact}</div>
-     <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div>
-     <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><ion-icon name="trash-bin-outline"></ion-icon><p>Удалить слайд</p></button></div>`
-    return insideHtmlStimulPrase;
+     <div class="optional-disclaimer__wrapp">${optionalDisclaimer}</div> 
+     <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i><p>Удалить слайд</p></button></div>`
+   /*  <ion-icon name="trash-bin-outline"></ion-icon> */
+     return insideHtmlStimulPrase;
   };
 
   let nameSlider;
@@ -1203,9 +1204,38 @@ document.addEventListener('DOMContentLoaded', function () {
   //let result = await response.json();
   //alert(result.message);
 
+  const button = document.querySelector('.button-anim');
+  const submit = document.querySelector('.submit');
+  
+  function toggleClassActive(e) {
+    console.log(e);
+      e.classList.toggle('active-anim');
+  }
+  
+  function addClassOk(e) {
+    console.log(e);
+      e.classList.add('finished-anim');
+      setTimeout(() => {e.classList.remove('finished-anim');
+      e.classList.remove('active-anim');
+  }, 4000);
+  }
+  function addClassFail(e) {
+    console.log(e);
+    e.classList.remove('active-anim');
+    e.classList.add('fail-anim');
+    setTimeout( () => e.classList.remove('fail-anim'), 2000);
+  }
+  
+  //button.addEventListener('click', toggleClassActive);
+  //button.addEventListener('transitionend', toggleClass);
+ // button.addEventListener('transitionend', addClassFail);
+  
+
   let formElem = document.querySelector('#formElem');
   formElem.addEventListener('submit',(e)=>{
     e.preventDefault();
+    e = e.target;
+    e = e.querySelector('button[type="submit"]');
     let allDuration = document.querySelector('#main-conter-val').value;
     let slidesDurationArr=[],
         slidesDuration = 0;
@@ -1225,7 +1255,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (document.querySelector('.duration-message')){
         document.querySelector('.duration-message').remove();
       }
-      submitHandler();
+      console.log(e);
+      submitHandler(e);
     } else {
       if (document.querySelector('.duration-message')){
         document.querySelector('.duration-message').remove();
@@ -1242,11 +1273,13 @@ document.addEventListener('DOMContentLoaded', function () {
     } 
   });
 
-  function submitHandler() {
+  function submitHandler(e) {
+    console.log(e);
     //убираем disabled у Counter
     document.querySelectorAll(".qty .count").forEach((el) => {
       el.removeAttribute("disabled");
     });
+
     //формируем formData
     let formData = new FormData(formElem);
     for (let [name, value] of formData) {
@@ -1269,7 +1302,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     console.log('идет отправка');
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
-    $(".modal").modal('show');
+   
+
+    toggleClassActive(e);
+    
     fetch("send.php", {
         method: "POST",
         body: formData
@@ -1279,16 +1315,24 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(function (json) {
         console.log('отправлено');
+        
+        addClassOk(e)
+
         document.querySelector('.modal .modal-body').textContent = "Отправлено!"
+        $(".modal").modal('show');
         //$("#myModalBox").modal('show');
         /*process your JSON further */
       })
       .catch(function (error) {
+        addClassFail(e)
         console.log(error);
         console.log("ошибка отправки");
-        document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз."
+        document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз.";
+        $(".modal").modal('show');
       });
   };
+
+  //NEW ANIM BUTTON
 
 
 })

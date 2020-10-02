@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="slick/slick.css" />
   <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
   <script src="js\modernizr-custom.js"></script>
+  <script src="script/fontawesome.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="header" style="display: none;">
@@ -206,7 +207,15 @@
               <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий"
                 id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            <div class="main-btn block"><button type="submit" class="btn btn-primary">Отправить</button></div>
+            <div class="main-btn block">  <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
+              <button type="submit" class="button-anim ">
+                <span class="submit">Отправить</span>
+                <span class="loading"><i class="fa fa-refresh"></i></span>
+                <span class="check"><i class="fa fa-check"></i></span>
+                <span class="fail"><i class="fas fa-times"></i></span>
+              </button>
+            </div>
+            
           </div>
         </form>
       </div>
