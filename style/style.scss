@@ -4,13 +4,18 @@ $pink-color: #efe7f1;
 h5 {
 	display: inline-block;
 }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	margin-bottom: .9rem;
+}
 
 .row {
 	justify-content: center;
 }
+
 header .row .nav {
 	font-size: 14px;
 }
+
 /* .hide {
 	display: none;
 }
@@ -20,13 +25,14 @@ header .row .nav {
  */
 
 //Маштабирование IOS
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
 	select,
 	textarea,
 	input {
-	  font-size: 16px;
+		font-size: 16px;
 	}
-  }
+}
 
 // --- FIRST MAIN BLOCK --- //
 .main {
@@ -63,15 +69,14 @@ button.add-item {
 }
 
 .block .wrapper>* {
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 }
 
-.text-zone{
-	margin-bottom: 25px;
-  &>* {
-	  margin-bottom: 15px;
-   }
+.text-zone {
+	margin-bottom: 40px;
+	.title{margin-bottom: 8px;}
 }
+
 .wrapper {
 	padding: 20px 20px
 }
@@ -86,21 +91,62 @@ p {
 	margin-bottom: 0;
 }
 
+.mini-block{
+	margin-bottom: 70px;
+}
+
 
 //HEADER CLONE
-header{
+header {
 	/*! CSS Used from: https://adbus.pro/build/css/styles.min.css?v1.0.0.188 */
-	display:block;
-	a{background:0 0;}
-	a:active,a:hover{outline:0;}
-	*,:after,:before{box-sizing:border-box;}
-	ul{padding:0;list-style-position:inside;}
-	a{outline:0;}
-	.logo{float:left;}
-	.logo .v-helper{height:50px;display:inline-block;vertical-align:middle;}
-	.logo span{display:inline-block;width:115px;height:28px;vertical-align:middle;}
-	.logo span.adbus{background:  center / contain no-repeat url("/img/s2b_logo-ok.png");}
-	.nav{    
+	display: block;
+
+	a {
+		background: 0 0;
+	}
+
+	a:active,
+	a:hover {
+		outline: 0;
+	}
+
+	*,
+	:after,
+	:before {
+		box-sizing: border-box;
+	}
+
+	ul {
+		padding: 0;
+		list-style-position: inside;
+	}
+
+	a {
+		outline: 0;
+	}
+
+	.logo {
+		float: left;
+	}
+
+	.logo .v-helper {
+		height: 50px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.logo span {
+		display: inline-block;
+		width: 115px;
+		height: 28px;
+		vertical-align: middle;
+	}
+
+	.logo span.adbus {
+		background: center / contain no-repeat url("/img/s2b_logo-ok.png");
+	}
+
+	.nav {
 		list-style-type: none;
 		float: right;
 		font-size: 16px;
@@ -108,21 +154,101 @@ header{
 		background-color: #333;
 		align-items: flex-end;
 	}
-	.nav li{float:left;margin:0 0 0 6px;}
-	.nav__link,.nav__text{display:inline-block;position:relative;height:50px;padding:10px 8px 0;}
-	.nav__link,.nav__link:visited,.nav__text,.nav__text:visited{text-decoration:none;color:#fff;}
-	.nav__link.is-current,.nav__link:hover{text-decoration:none;color:#fbc400;}
-	.nav__link.is-current{border-bottom:4px solid #fbc400;}
-	.nav__text{cursor:default;}
-	.nav__text:after{width:0;height:0;border:solid transparent;border-width:4px 4px 0;border-top-color:#fff;display:inline-block;vertical-align:middle;margin-left:5px;content:'';}
-	.nav .counter{position:absolute;top:5px;right:-6px;}
-	.nav ul{position:absolute;display:none;margin:0 0 0 -6px;padding:1px 0 6px;background:#333;}
-	.nav ul:before{position:absolute;left:0;top:0;width:100%;height:1px;content:'';background:#444;}
-	.nav ul li{display:block;float:none;margin:0;padding:0;}
-	.nav ul .nav__link{display:block;height:36px;padding:4px 14px 0;}
-	.nav li:hover ul{display:block;}
-	.header__inner{height:49px;padding:0 42px;margin:0 auto;}
+
+	.nav li {
+		float: left;
+		margin: 0 0 0 6px;
 	}
+
+	.nav__link,
+	.nav__text {
+		display: inline-block;
+		position: relative;
+		height: 50px;
+		padding: 10px 8px 0;
+	}
+
+	.nav__link,
+	.nav__link:visited,
+	.nav__text,
+	.nav__text:visited {
+		text-decoration: none;
+		color: #fff;
+	}
+
+	.nav__link.is-current,
+	.nav__link:hover {
+		text-decoration: none;
+		color: #fbc400;
+	}
+
+	.nav__link.is-current {
+		border-bottom: 4px solid #fbc400;
+	}
+
+	.nav__text {
+		cursor: default;
+	}
+
+	.nav__text:after {
+		width: 0;
+		height: 0;
+		border: solid transparent;
+		border-width: 4px 4px 0;
+		border-top-color: #fff;
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 5px;
+		content: '';
+	}
+
+	.nav .counter {
+		position: absolute;
+		top: 5px;
+		right: -6px;
+	}
+
+	.nav ul {
+		position: absolute;
+		display: none;
+		margin: 0 0 0 -6px;
+		padding: 1px 0 6px;
+		background: #333;
+	}
+
+	.nav ul:before {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 1px;
+		content: '';
+		background: #444;
+	}
+
+	.nav ul li {
+		display: block;
+		float: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav ul .nav__link {
+		display: block;
+		height: 36px;
+		padding: 4px 14px 0;
+	}
+
+	.nav li:hover ul {
+		display: block;
+	}
+
+	.header__inner {
+		height: 49px;
+		padding: 0 42px;
+		margin: 0 auto;
+	}
+}
 
 header {
 	background: #333;
@@ -130,24 +256,30 @@ header {
 	//height: 50px;
 	position: relative;
 	z-index: 3;
-	nav.navbar{
-	   padding: 0px 30px;
+
+	nav.navbar {
+		padding: 0px 30px;
 		height: 50px;
 		background-color: #333;
-		.navbar-brand{
+
+		.navbar-brand {
 			padding-bottom: 12px;
 		}
-		.navbar-collapse{
+
+		.navbar-collapse {
 			background-color: transparent;
 		}
-		.navbar-nav{
+
+		.navbar-nav {
 			margin-left: auto;
 		}
-		span{
+
+		span {
 			color: #ffffff;
 			font-size: 15px;
 		}
 	}
+
 	.inside {
 		justify-content: space-between;
 		display: flex;
@@ -171,6 +303,7 @@ header {
 // COUNTER 
 .main-counter.notice {
 	position: relative;
+
 	&::after {
 		content: "нельзя";
 		top: 100%;
@@ -433,10 +566,11 @@ header {
 
 
 //Main-others
-.colors-block > *{
+.colors-block>* {
 	margin-bottom: 15px;
 
 }
+
 .form-check {
 	input[type=checkbox] {
 		height: 20px;
@@ -617,7 +751,7 @@ header {
 			left: 5px;
 			line-height: 20px;
 		}
-       
+
 
 		p {
 			display: inline-block;
@@ -710,23 +844,52 @@ header {
 
 
 // SLIDER LOGO
-.attach-block{
-.form-control-file {
-	display: none;
+.attach-block {
+	.form-control-file {
+		display: none;
+	}
+	label {
+		width: fit-content;
+		display: inline-block;
+		margin-right: 15px;
+		margin-bottom: 0px;
+		i {
+			font-size: 15px;
+			color: rgb(94, 94, 94);
+		}
+	}
+	.description{
+		font-size: 15px;
+		display: inline-block;
+		padding-top: 5px;
+	}
 }
+
+.video-slide .attach-block p{
+	padding-left: 20px;
 }
+
+@media screen and (max-width: 356px) {
+	.attach-block {
+		flex-wrap: wrap;
+	}
+}
+
 
 .attach-block.for-logo,
 .attach-block.extra {
-	margin-bottom: 30px;
+	margin-left: 5px;
+	display: flex;
+	//flex-wrap: wrap;
+  align-items: flex-start;
 	position: relative;
+
 	.form-control-file {
 		display: none;
 	}
 
 	.my-file-input {
 		cursor: pointer;
-		display: flex;
 		height: 33px;
 
 		ion-icon {
@@ -739,7 +902,7 @@ header {
 			display: inline-block;
 			border-bottom: 2px dotted #a19d94;
 			line-height: 31px;
-			margin-left: 20px;
+			//margin-left: 20px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -750,6 +913,7 @@ header {
 
 .attach-block.for-logo {
 	margin-bottom: 40px;
+
 	h5 {
 		display: inline-block;
 		border-bottom: 2px dotted #a19d94;
@@ -762,20 +926,14 @@ header {
 		width: fit-content;
 	}
 
-	.my-file-input {
-		width: 100%;
-	}
-
 }
 
 .attach-block.for-product {
 	position: relative;
 	.my-file-input {
 		cursor: pointer;
-		display: flex;
 		user-select: none;
 		background-color: #fff;
-		width: 100%;
 		z-index: 100;
 		position: relative;
 
@@ -790,7 +948,7 @@ header {
 			display: inline-block;
 			border-bottom: 2px dotted #a19d94;
 			line-height: 29px;
-			margin-left: 26px;
+			//margin-left: 26px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -809,7 +967,6 @@ header {
 }
 
 //Product .mini-block
-
 .product-block {
 	padding: 13px 7px 7px 7px;
 	border-radius: 7px;
@@ -881,7 +1038,7 @@ header {
 }
 
 //Validation-message
-.duration-message{
+.duration-message {
 	position: absolute;
 	width: 100%;
 	height: 20px;
@@ -890,7 +1047,8 @@ header {
 	font-size: 80%;
 	color: #dc3545;
 }
-.main-btn{
+
+.main-btn {
 	position: relative;
 }
 
@@ -908,7 +1066,8 @@ $med: new-breakpoint(min-width 768px);
 $lg: new-breakpoint(min-width 1024px);
 
 
-.hide { display: none;
+.hide {
+	display: none;
 }
 
 .button-anim {
@@ -924,10 +1083,10 @@ $lg: new-breakpoint(min-width 1024px);
 	padding: 1.5rem 3.125rem;
 	background-color: $color-2;
 	border: none;
-	border-radius: 0.3125rem; 
-	box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+	border-radius: 0.3125rem;
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	outline: none !important;
-	
+
 	font-weight: 500;
 	background-color: #febf00;
 	//box-shadow:
@@ -938,8 +1097,8 @@ $lg: new-breakpoint(min-width 1024px);
 	//font-weight: 300;
 	text-transform: uppercase;
 	//transition: $base-duration ease;
-	overflow: hidden; 
-	
+	overflow: hidden;
+
 	&:before {
 		outline: none;
 		position: absolute;
@@ -948,13 +1107,13 @@ $lg: new-breakpoint(min-width 1024px);
 		left: 0;
 		width: 0%;
 		height: 100%;
-		background-color: lighten($color-3,10%);
+		background-color: lighten($color-3, 10%);
 	}
-	
+
 	span {
 		position: absolute;
 		line-height: 0;
-		
+
 		i {
 			transform-origin: center center;
 		}
@@ -963,13 +1122,13 @@ $lg: new-breakpoint(min-width 1024px);
 			top: 50%;
 			transform: translateY(-50%);
 		}
-		
+
 		&:nth-of-type(2) {
 			top: 100%;
 			transform: translateY(0%);
 			font-size: 24px;
 		}
-		
+
 		&:nth-of-type(3) {
 			display: none;
 		}
@@ -982,20 +1141,20 @@ $lg: new-breakpoint(min-width 1024px);
 
 .active-anim {
 	background-color: $color-3;
-	
+
 	&:before {
 		width: 100%;
 		transition: width 3s linear;
 	}
 
-	.fail{
-		display: none; 
+	.fail {
+		display: none;
 	}
 
 	span {
 		&:nth-of-type(1) {
 			top: -100%;
-			transform: translateY(-50%); 
+			transform: translateY(-50%);
 		}
 
 		&:nth-of-type(2) {
@@ -1006,7 +1165,7 @@ $lg: new-breakpoint(min-width 1024px);
 				animation: loading $base-duration linear infinite;
 			}
 		}
-		
+
 		&:nth-of-type(3) {
 			display: none;
 		}
@@ -1015,69 +1174,85 @@ $lg: new-breakpoint(min-width 1024px);
 }
 
 .finished-anim {
-  background-color: lighten($color-3,10%);
-  
-  .submit {
-	  display: none; 
-  }
-  
-  .loading {
-	  display: none;
-  }
-	
-	.fail{
-		display: none; 
+	background-color: lighten($color-3, 10%);
+
+	.submit {
+		display: none;
 	}
 
-  .check {
-	  display: block !important;
-	  font-size: 24px;
-	  animation: scale 0.5s linear;
-	  
-	  i {
-		  transform-origin: center center;
-	  }
-  }
-	
+	.loading {
+		display: none;
+	}
+
+	.fail {
+		display: none;
+	}
+
+	.check {
+		display: block !important;
+		font-size: 24px;
+		animation: scale 0.5s linear;
+
+		i {
+			transform-origin: center center;
+		}
+	}
+
 }
 
 .fail-anim {
-	background-color:red;
-  
-  .submit {
-	  display: none; 
-  }
-  
-  .loading {
-	  display: none;
-  }
-  
-  .check{
-	display: none; 
-  }
+	background-color: red;
 
-  .fail {
-	  display: block !important;
-	  font-size: 24px;
-	  animation: scale 0.5s linear;
-	  
-	  i {
-		  transform-origin: center center;
-	  }
-  }
+	.submit {
+		display: none;
+	}
+
+	.loading {
+		display: none;
+	}
+
+	.check {
+		display: none;
+	}
+
+	.fail {
+		display: block !important;
+		font-size: 24px;
+		animation: scale 0.5s linear;
+
+		i {
+			transform-origin: center center;
+		}
+	}
 
 }
 
 @keyframes loading {
-	100% { transform: rotate(360deg); }
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes scale {
-	0%   { transform: scale(10); }
-	50%  { transform: scale(0.2); }
-	70%  { transform: scale(1.2); }
-	90%  { transform: scale(0.7); }
-	100% { transform: scale(1); }
+	0% {
+		transform: scale(10);
+	}
+
+	50% {
+		transform: scale(0.2);
+	}
+
+	70% {
+		transform: scale(1.2);
+	}
+
+	90% {
+		transform: scale(0.7);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }
 
 
@@ -1086,24 +1261,24 @@ $lg: new-breakpoint(min-width 1024px);
 //1-input
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 
 }
 
 //Firefox:
 input[type="number"] {
-  -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
+
 input[type="number"]:hover,
 input[type="number"]:focus {
-  -moz-appearance: number-input;
+	-moz-appearance: number-input;
 }
 
 //others
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
-

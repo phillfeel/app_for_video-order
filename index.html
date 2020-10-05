@@ -88,7 +88,6 @@
       <div class="col-md-10 left-main">
         <form id="formElem" method="post" enctype="multipart/form-data">
           <div class="wrapper">
-            
             <div class="main-settings block">
               <div class="duration-main">
                 <h5 class="duration-main__title">Длина видеоролика в секундах</h5>
@@ -112,40 +111,8 @@
                 </div>
 
               </div>
-              <div class="attach-block for-logo">
-                <label class="my-file-input" for="main-logo">
-                  <ion-icon size="large" name="attach-outline"></ion-icon>
-                  <h5>Прикрепить логотип</h5>
-                </label>
-                <input name="main-logo" type="file" accept="image/*" class="form-control-file" id="main-logo">
-              </div>
-              <div class="colors-block mini-block">
-                <h6>Напишите цвета для видеоролика</h6>
-                <input class="main-colors form-control" name="main-colors" type="text" placeholder="Основные цвета">
-                <div class="more-colors optional-field form-check">
-                  <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    <input name="main-extra-color" class="optional-txt form-control form-control-sm" type="text"
-                      placeholder="Дополнительные цвета">
-                  </label>
-                </div>
-              </div>
-              <div class="contact-block mini-block">
-                <h6>Введите контактную информацию которая должна быть отражена в видеоролике</h6>
-                <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Контакты"
-                  rows="2"></textarea>
-                <div class="contact-block__radio form-check form-check-inline">
-                  <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
-                    value="all">
-                  <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
-                    value="option">
-                  <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
-                </div>
-              </div>
-              <div class="disclaimer-block mini-block">
+              
+              <!-- <div class="disclaimer-block mini-block">
                 <h6>Введите дисклеймер</h6>
                 <textarea name="main-disclaimer" class="form-control" id="textarea2" placeholder="Дисклэймер"
                   rows="2"></textarea>
@@ -158,7 +125,7 @@
                     value="option">
                   <label class="form-check-label" for="inlineRadio2">Настроить отдельно для каждого слайда</label>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="video-slide block">
@@ -184,6 +151,7 @@
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
 
@@ -195,15 +163,71 @@
           </div>
 
           <div class="last-main-block">
-            <div class="attach-block extra">
-              <label class="my-file-input" for="extra-files">
+            <!-- <div class="attach-block for-logo">
+              <label class="my-file-input" for="main-logo">
                 <ion-icon size="large" name="attach-outline"></ion-icon>
-                <p>Прикрепить дополнительные файлы</p>
+                <h5>Прикрепить логотип</h5>
+              </label>
+              <input name="main-logo" type="file" accept="image/*" class="form-control-file" id="main-logo">
+            </div> -->
+          <!--   <div class="colors-block mini-block">
+              <h6>Напишите цвета для видеоролика</h6>
+              <input class="main-colors form-control" name="main-colors" type="text" placeholder="Основные цвета">
+              <div class="more-colors optional-field form-check">
+                <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  <input name="main-extra-color" class="optional-txt form-control form-control-sm" type="text"
+                    placeholder="Дополнительные цвета">
+                </label>
+              </div>
+            </div> -->
+            <div class="attach-block extra mini-block">
+              <label class="my-file-input" for="extra-files">
+                <!-- <ion-icon size="large" name="attach-outline"></ion-icon> -->
+                <p><i class="fas fa-paperclip"></i> Прикрепите медиафайлы</p>
               </label>
               <input type="file" name="extra-files[]" multiple accept="image/*" class="form-control-file"
                 id="extra-files">
+              <p class="description">фото, логотип, брендбук и т.д.</p>
+            </div>
+            <div class="contact-block mini-block">
+              <h6>Введите контакты для видеоролика</h6>
+              <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Контакты"
+                rows="2"></textarea>
+              <!-- <div class="contact-block__radio form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
+                  value="all">
+                <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
+                  value="option">
+                <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
+              </div> -->
+              <div class="form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
+                  value="all">
+                <label class="form-check-label" for="contactRadio1">в конце</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
+                  value="option">
+                <label class="form-check-label" for="contactRadio2">в начале</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio3"
+                  value="option">
+                <label class="form-check-label" for="contactRadio3">на протяжении всего ролика</label>
+              </div>
+            </div>
+            <div class="links-block mini-block">
+              <h6>Ссылки на ваш сайт и социальные сети</h6>
+              <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Вставьте ваши ссылки через запятую"
+                rows="2"></textarea>
+              
             </div>
             <div class="form-group main-comment block">
+              <h6>Дополнительный комментарий (необязательное поле)</h6>
               <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий"
                 id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>

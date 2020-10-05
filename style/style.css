@@ -3,6 +3,10 @@ h5 {
   display: inline-block;
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .9rem;
+}
+
 .row {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -70,15 +74,15 @@ button.add-item {
 }
 
 .block .wrapper > * {
-  margin-bottom: 20px;
-}
-
-.text-zone {
   margin-bottom: 25px;
 }
 
-.text-zone > * {
-  margin-bottom: 15px;
+.text-zone {
+  margin-bottom: 40px;
+}
+
+.text-zone .title {
+  margin-bottom: 8px;
 }
 
 .wrapper {
@@ -95,6 +99,10 @@ p {
   margin-bottom: 0;
 }
 
+.mini-block {
+  margin-bottom: 70px;
+}
+
 header {
   /*! CSS Used from: https://adbus.pro/build/css/styles.min.css?v1.0.0.188 */
   display: block;
@@ -104,11 +112,14 @@ header a {
   background: 0 0;
 }
 
-header a:active, header a:hover {
+header a:active,
+header a:hover {
   outline: 0;
 }
 
-header *, header :after, header :before {
+header *,
+header :after,
+header :before {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -159,19 +170,24 @@ header .nav li {
   margin: 0 0 0 6px;
 }
 
-header .nav__link, header .nav__text {
+header .nav__link,
+header .nav__text {
   display: inline-block;
   position: relative;
   height: 50px;
   padding: 10px 8px 0;
 }
 
-header .nav__link, header .nav__link:visited, header .nav__text, header .nav__text:visited {
+header .nav__link,
+header .nav__link:visited,
+header .nav__text,
+header .nav__text:visited {
   text-decoration: none;
   color: #fff;
 }
 
-header .nav__link.is-current, header .nav__link:hover {
+header .nav__link.is-current,
+header .nav__link:hover {
   text-decoration: none;
   color: #fbc400;
 }
@@ -815,9 +831,46 @@ header .inside {
   display: none;
 }
 
+.attach-block label {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 0px;
+}
+
+.attach-block label i {
+  font-size: 15px;
+  color: #5e5e5e;
+}
+
+.attach-block .description {
+  font-size: 15px;
+  display: inline-block;
+  padding-top: 5px;
+}
+
+.video-slide .attach-block p {
+  padding-left: 20px;
+}
+
+@media screen and (max-width: 356px) {
+  .attach-block {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
 .attach-block.for-logo,
 .attach-block.extra {
-  margin-bottom: 30px;
+  margin-left: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   position: relative;
 }
 
@@ -829,9 +882,6 @@ header .inside {
 .attach-block.for-logo .my-file-input,
 .attach-block.extra .my-file-input {
   cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   height: 33px;
 }
 
@@ -847,7 +897,6 @@ header .inside {
   display: inline-block;
   border-bottom: 2px dotted #a19d94;
   line-height: 31px;
-  margin-left: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -874,25 +923,17 @@ header .inside {
   width: fit-content;
 }
 
-.attach-block.for-logo .my-file-input {
-  width: 100%;
-}
-
 .attach-block.for-product {
   position: relative;
 }
 
 .attach-block.for-product .my-file-input {
   cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   background-color: #fff;
-  width: 100%;
   z-index: 100;
   position: relative;
 }
@@ -908,7 +949,6 @@ header .inside {
   display: inline-block;
   border-bottom: 2px dotted #a19d94;
   line-height: 29px;
-  margin-left: 26px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
