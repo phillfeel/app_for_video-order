@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
           resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = `${resizeHorizontPx}px`;
         customSizePreview.style.height = `${resizeVerticalPx}px`;
-        customSizePreview.style.border = '1px solid #ffa500'
+        customSizePreview.style.border = '1px solid #febf00'
       }
     });
 
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = `${resizeHorizontPx}px`;
         customSizePreview.style.height = `${resizeVerticalPx}px`;
-        customSizePreview.style.border = '1px solid #ffa500'
+        customSizePreview.style.border = '1px solid #febf00'
       }
     });
   }
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getAttachHtml(name) {
       let attach = `<div class="attach-block for-logo">
-    <label class="my-file-input" for="exampleFormControlFile1"><ion-icon size="large" name="attach-outline"></ion-icon><p>${name}</p></label>
+    <label class="my-file-input" for="exampleFormControlFile1"><p><i name="image-outline" class="far fa-image"></i>${name}</p></label>
     <input type="file" name="example" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
     </div>`
       return attach;
@@ -481,8 +481,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="col">
           <div class="attach-block for-product">
             <label class="my-file-input" for="product-slider-1_img-1">
-              <ion-icon size="large" name="image-outline"></ion-icon>
-              <p>Изображение</p>
+            <p>
+            <i name="image-outline" class="far fa-image"></i>
+            Изображение</p>
             </label>
             <input type="file" name="product-slider-1_img-1" accept="image/*" class="form-control-file" id="product-slider-1_img-1">
           </div>
@@ -520,8 +521,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="col">
           <div class="attach-block for-product">
             <label class="my-file-input" for="service-slider-1_img-1">
-              <ion-icon size="large" name="image-outline"></ion-icon>
-              <p>Изображение</p>
+              <p>
+              <i name="image-outline" class="far fa-image"></i>
+              Изображение</p>
             </label>
             <input type="file" name="service-slider-1_img-1" accept="image/*" class="form-control-file" id="service-slider-1_img-1">
           </div>

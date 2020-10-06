@@ -181,7 +181,7 @@
                 </label>
               </div>
             </div> -->
-            <div class="attach-block extra mini-block">
+            <div class="attach-block extra">
               <label class="my-file-input" for="extra-files">
                 <!-- <ion-icon size="large" name="attach-outline"></ion-icon> -->
                 <p><i class="fas fa-paperclip"></i> Прикрепите медиафайлы</p>
@@ -190,7 +190,12 @@
                 id="extra-files">
               <p class="description">фото, логотип, брендбук и т.д.</p>
             </div>
-            <div class="contact-block mini-block">
+            <div class="form-group links-block mini-block">
+              <p>Если вы хотите прикрепить файлы большого размера (больше 40мб) загрузите их на файлообменник и прикрепите ссылку. Рекомендуем сервис без регистрации - <a target="_blank" href="https://dropmefiles.com/">dropmefiles</a>.</p>
+              <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Вставьте ваши ссылки через запятую"
+                rows="2"></textarea>
+            </div>
+            <div class="form-group contact-block mini-block">
               <h6>Введите контакты для видеоролика</h6>
               <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Контакты"
                 rows="2"></textarea>
@@ -220,13 +225,12 @@
                 <label class="form-check-label" for="contactRadio3">на протяжении всего ролика</label>
               </div>
             </div>
-            <div class="links-block mini-block">
+            <div class="form-group links-block mini-block">
               <h6>Ссылки на ваш сайт и социальные сети</h6>
               <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Вставьте ваши ссылки через запятую"
                 rows="2"></textarea>
-              
             </div>
-            <div class="form-group main-comment block">
+            <div class="form-group main-comment mini-block">
               <h6>Дополнительный комментарий (необязательное поле)</h6>
               <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий"
                 id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -239,11 +243,9 @@
                 <span class="fail"><i class="fas fa-times"></i></span>
               </button>
             </div>
-            
           </div>
         </form>
       </div>
-
     </div>
     <!--  <div class="col-md-4">
     </div> -->
@@ -262,7 +264,6 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-
           </div>
         </div>
       </div>

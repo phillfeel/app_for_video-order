@@ -16,13 +16,6 @@ header .row .nav {
 	font-size: 14px;
 }
 
-/* .hide {
-	display: none;
-}
-.show {
-	display: none;
-}
- */
 
 //Маштабирование IOS
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -57,7 +50,7 @@ button.add-item {
 }
 
 .block {
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 }
 
 .block .mini-block {
@@ -69,7 +62,7 @@ button.add-item {
 }
 
 .block .wrapper>* {
-	margin-bottom: 25px;
+	margin-bottom: 13px;
 }
 
 .text-zone {
@@ -88,11 +81,11 @@ button.add-item {
 }
 
 p {
-	margin-bottom: 0;
+	//margin-bottom: 0;
 }
 
 .mini-block{
-	margin-bottom: 70px;
+	margin-bottom: 50px;
 }
 
 
@@ -178,12 +171,14 @@ header {
 
 	.nav__link.is-current,
 	.nav__link:hover {
-		text-decoration: none;
-		color: #fbc400;
-	}
+		span{
+			text-decoration: none;
+			color: #febf00;
+		}
+		}
 
 	.nav__link.is-current {
-		border-bottom: 4px solid #fbc400;
+		border-bottom: 4px solid #febf00;
 	}
 
 	.nav__text {
@@ -287,7 +282,6 @@ header {
 }
 
 
-
 //LAST MAIN BLOCK
 .main-comment {
 	margin-top: 25px;
@@ -310,7 +304,7 @@ header {
 		right: 20%;
 		position: absolute;
 		width: 140%;
-		background-color: lightsalmon;
+		background-color:  #febf00;
 	}
 }
 
@@ -398,7 +392,7 @@ header {
 			right: 20%;
 			position: absolute;
 			width: fit-content;
-			background-color: lightsalmon;
+			background-color: #febf00;
 			padding: 5px;
 			z-index: 100;
 		}
@@ -415,7 +409,7 @@ header {
 }
 
 .qty .orange {
-	background-color: #f89b4f;
+	background-color: #febf00;
 }
 
 .qty .plus.disabled {
@@ -431,14 +425,14 @@ header {
 
 .no-touchevents {
 	.minus:hover {
-		background-color: #f89b4f;
+		background-color: #febf00;
 	}
 }
 
 
 .no-touchevents {
 	.plus:hover {
-		background-color: #f89b4f;
+		background-color: #febf00;
 	}
 }
 
@@ -468,7 +462,7 @@ header {
 
 // Format video
 .format-video {
-	margin-bottom: 18px;
+	//margin-bottom: 18px;
 	display: flex;
 	flex-wrap: wrap;
 
@@ -495,7 +489,8 @@ header {
 		.rectangle9x16,
 		.custom-size-preview {
 			position: relative;
-			border: 1px solid orange;
+			border: 1px solid #febf00;
+			background-color: #febf00;
 
 			&::after {
 				position: absolute;
@@ -505,7 +500,7 @@ header {
 				transform: translate(-20%, -50%);
 				border: 5px solid transparent;
 				/* Прозрачные границы */
-				border-left: 8px solid orange;
+				border-left: 8px solid rgb(255, 255, 255);
 				/* Добавляем треугольник */
 			}
 		}
@@ -774,7 +769,7 @@ header {
 // add slide
 .add-item-block {
 	text-align: center;
-	margin-bottom: 40px;
+	margin-bottom: 70px;
 	position: relative;
 
 	.add-item {
@@ -854,6 +849,7 @@ header {
 		margin-right: 15px;
 		margin-bottom: 0px;
 		i {
+			padding-right: 3px;
 			font-size: 15px;
 			color: rgb(94, 94, 94);
 		}
@@ -865,8 +861,8 @@ header {
 	}
 }
 
-.video-slide .attach-block p{
-	padding-left: 20px;
+.video-slide .attach-block p i{
+	font-size: 17px;
 }
 
 @media screen and (max-width: 356px) {
@@ -883,6 +879,7 @@ header {
 	//flex-wrap: wrap;
   align-items: flex-start;
 	position: relative;
+	margin-bottom: 10px;
 
 	.form-control-file {
 		display: none;
@@ -912,7 +909,7 @@ header {
 }
 
 .attach-block.for-logo {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 
 	h5 {
 		display: inline-block;
@@ -987,9 +984,7 @@ header {
 		position: relative;
 		z-index: 100;
 	}
-}
-
-;
+};
 
 .delete-item {
 	height: 100%;
