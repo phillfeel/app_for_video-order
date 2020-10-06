@@ -15,39 +15,6 @@
   <script src="script/fontawesome.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="header" style="display: none;">
-    <div class="container header__inner">
-      <div class="row">
-        <div class="inside col-md-10 col-sm-10">
-          <div class="logo">
-            <i class="v-helper"></i><span class="adbus"></span>
-          </div>
-          <ul class="nav">
-            <li>
-              <a class="nav__link is-current" href="#" title="">
-                <span>Заказать видеоролик</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav__link " href="#" title="">
-                <span>Примеры работ</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav__link " href="#" title="">
-                <span>Оплата/Сроки</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav__link " href="#" title="">
-                <span>Помощь</span>
-              </a>
-            </li>
-            </ul>
-        </div>
-      </div>
-    </div>
-  </header>
   <header>
   <nav class="navbar navbar-expand-lg navbar-dark ">
     <div class="container header__inner">
@@ -63,7 +30,7 @@
               <span>Заказать видеоролик</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link nav__link " href="#" title="">
               <span>Примеры работ</span>
             </a>
@@ -77,7 +44,7 @@
             <a class="nav-link nav__link " href="#" title="">
               <span>Помощь</span>
             </a>
-          </li>
+          </li> -->
           </ul>
       </div>
     </div>
@@ -92,7 +59,7 @@
               <div class="duration-main">
                 <h5 class="duration-main__title">Длина видеоролика в секундах</h5>
                 <div class="counter qty main-counter form-group">
-                  <span class="minus ">-</span>
+                  <span class="minus ">–</span>
                   <input id="main-conter-val" type="number" class="count" name="main-duration" value="10">
                   <span class="plus">+</span>
                 </div>
@@ -135,7 +102,7 @@
                   <h5 class="video-slide__number">1</h5>
                   <select name="slide-1" class="video-slide__change form-control form-control-sm">
                     <option selected value="stimul">Побуждающая фраза</option>
-                    <option value="logo">Логотип</option>
+                    <option value="logo">Интро (вступление)</option>
                     <option value="product">Товар-Цена</option>
                     <option value="service">Услуга-Описание</option>
                     <option value="stock">Акция</option>
@@ -145,7 +112,7 @@
                 <div class="right-title">
                   <h6 class="duration-title">Длительность</h6>
                   <div class="counter qty slide-counter">
-                    <span class="minus">-</span>
+                    <span class="minus">–</span>
                     <input type="number" class="count stimul-phrase-count-1" name="stimul-phrase-count-1" value="5">
                     <span class="plus">+</span>
                   </div>
@@ -191,49 +158,41 @@
               <p class="description">фото, логотип, брендбук и т.д.</p>
             </div>
             <div class="form-group links-block mini-block">
-              <p>Если вы хотите прикрепить файлы большого размера (больше 40мб) загрузите их на файлообменник и прикрепите ссылку. Рекомендуем сервис без регистрации - <a target="_blank" href="https://dropmefiles.com/">dropmefiles</a>.</p>
+              <p>Если вы хотите прикрепить файлы большого размера (больше 20 MB) загрузите их на файлообменник и прикрепите ссылку. Рекомендуем сервис без регистрации - <a target="_blank" href="https://dropmefiles.com/">dropmefiles</a>.</p>
               <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Вставьте ваши ссылки через запятую"
                 rows="2"></textarea>
             </div>
             <div class="form-group contact-block mini-block">
               <h6>Введите контакты для видеоролика</h6>
-              <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Контакты"
+              <textarea name="main-contact" class="form-control" id="textarea2" placeholder="Контакты"
                 rows="2"></textarea>
-              <!-- <div class="contact-block__radio form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
-                  value="all">
-                <label class="form-check-label" for="contactRadio1">Контакты на каждом слайде</label>
-              </div>
               <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
-                  value="option">
-                <label class="form-check-label" for="contactRadio2">Настроить отдельно для каждого слайда</label>
-              </div> -->
-              <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
-                  value="all">
-                <label class="form-check-label" for="contactRadio1">в конце</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
-                  value="option">
+                <input  class="form-check-input" type="radio" name="contact-where" id="contactRadio2"
+                  value="start">
                 <label class="form-check-label" for="contactRadio2">в начале</label>
               </div>
+
               <div class="form-check form-check-inline">
-                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio3"
-                  value="option">
+                <input checked class="form-check-input" type="radio" name="contact-where" id="contactRadio1"
+                  value="finish">
+                <label class="form-check-label" for="contactRadio1">в конце</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input  class="form-check-input" type="radio" name="contact-where" id="contactRadio3"
+                  value="all-video">
                 <label class="form-check-label" for="contactRadio3">на протяжении всего ролика</label>
               </div>
             </div>
             <div class="form-group links-block mini-block">
               <h6>Ссылки на ваш сайт и социальные сети</h6>
-              <textarea name="main-contact" class="form-control" id="textarea1" placeholder="Вставьте ваши ссылки через запятую"
+              <textarea name="main-contact" class="form-control" id="textarea3" placeholder="Вставьте ваши ссылки через запятую"
                 rows="2"></textarea>
             </div>
             <div class="form-group main-comment mini-block">
               <h6>Дополнительный комментарий (необязательное поле)</h6>
               <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий"
-                id="exampleFormControlTextarea1" rows="3"></textarea>
+                id="textarea4" rows="3"></textarea>
             </div>
             <div class="main-btn block">  <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
               <button type="submit" class="button-anim ">

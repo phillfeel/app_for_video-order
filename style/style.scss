@@ -62,7 +62,7 @@ button.add-item {
 }
 
 .block .wrapper>* {
-	margin-bottom: 13px;
+	margin-bottom: 18px;
 }
 
 .text-zone {
@@ -78,10 +78,6 @@ button.add-item {
 	.duration-main__title {
 		width: 60%;
 	}
-}
-
-p {
-	//margin-bottom: 0;
 }
 
 .mini-block{
@@ -349,6 +345,7 @@ header {
 }
 
 .qty .minus {
+	font-size: 14px;
 	background-color: #646464;
 	cursor: pointer;
 	display: inline-block;
@@ -395,6 +392,9 @@ header {
 			background-color: #febf00;
 			padding: 5px;
 			z-index: 100;
+			font-size: 15px;
+			font-weight: 300;
+			padding: 10px;
 		}
 	}
 }
@@ -724,12 +724,24 @@ header {
 	top: 35%;
 	right: 0px;
 	z-index: 1000;
+	width: 30px;
+	height: 30px;
+	&::before{
+		font-size: 30px;
+		color: #646464;
+		opacity: 1;
+	}
 }
 
 .slick-prev.slick-arrow {
 	top: 35%;
 	left: 0px;
 	z-index: 1000;
+	&::before{
+		font-size: 30px;
+		color: #646464;
+		opacity: 1;
+	}
 }
 
 // button delete
@@ -757,6 +769,9 @@ header {
 	.btn-outline-danger {
 		display: inline-block;
 		text-align: right;
+		&:disabled{
+			opacity: .4;
+		}
 	}
 }
 
@@ -848,6 +863,7 @@ header {
 		display: inline-block;
 		margin-right: 15px;
 		margin-bottom: 0px;
+		margin-left: 4px;
 		i {
 			padding-right: 3px;
 			font-size: 15px;

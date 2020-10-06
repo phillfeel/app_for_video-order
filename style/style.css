@@ -67,7 +67,7 @@ button.add-item {
 }
 
 .block .wrapper > * {
-  margin-bottom: 13px;
+  margin-bottom: 18px;
 }
 
 .text-zone {
@@ -355,6 +355,7 @@ header .inside {
 }
 
 .qty .minus {
+  font-size: 14px;
   background-color: #646464;
   cursor: pointer;
   display: inline-block;
@@ -396,6 +397,9 @@ header .inside {
   background-color: #febf00;
   padding: 5px;
   z-index: 100;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 10px;
 }
 
 .no-touchevents .qty.main-counter .minus.disabl:hover::after {
@@ -713,12 +717,26 @@ header .inside {
   top: 35%;
   right: 0px;
   z-index: 1000;
+  width: 30px;
+  height: 30px;
+}
+
+.slick-arrow.slick-next::before {
+  font-size: 30px;
+  color: #646464;
+  opacity: 1;
 }
 
 .slick-prev.slick-arrow {
   top: 35%;
   left: 0px;
   z-index: 1000;
+}
+
+.slick-prev.slick-arrow::before {
+  font-size: 30px;
+  color: #646464;
+  opacity: 1;
 }
 
 .btn-zone {
@@ -746,6 +764,10 @@ header .inside {
 .btn-zone .btn-outline-danger {
   display: inline-block;
   text-align: right;
+}
+
+.btn-zone .btn-outline-danger:disabled {
+  opacity: .4;
 }
 
 /* @media screen and (max-width: 465px) {
@@ -828,6 +850,7 @@ header .inside {
   display: inline-block;
   margin-right: 15px;
   margin-bottom: 0px;
+  margin-left: 4px;
 }
 
 .attach-block label i {
