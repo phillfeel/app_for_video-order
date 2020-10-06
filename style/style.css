@@ -740,6 +740,7 @@ header .inside {
 .btn-zone .btn-remove-slide p {
   display: inline-block;
   padding-left: 10px;
+  margin-bottom: 0px;
 }
 
 .btn-zone .btn-outline-danger {
