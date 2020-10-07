@@ -92,6 +92,18 @@ button.add-item {
   margin-bottom: 50px;
 }
 
+.fa-plus-circle:before {
+  content: "\f055";
+  font-size: 25px;
+  color: #646464;
+}
+
+.fa-minus-circle:before {
+  content: "\f055";
+  font-size: 25px;
+  color: #646464;
+}
+
 header {
   /*! CSS Used from: https://adbus.pro/build/css/styles.min.css?v1.0.0.188 */
   display: block;
@@ -317,6 +329,9 @@ header .inside {
 .qty {
   width: 100px;
   text-align: right;
+}
+
+.qty input {
   -moz-user-select: none;
   -webkit-user-select: none;
       -ms-user-select: none;
@@ -340,48 +355,52 @@ header .inside {
   background: transparent;
 }
 
-.qty .plus {
-  background-color: #646464;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: top;
-  color: white;
-  width: 25px;
-  height: 25px;
-  line-height: 22px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 50%;
+/* .qty .plus {
+
+	background-color: #646464;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	color: white;
+	width: 25px;
+	height: 25px;
+	line-height: 19px;
+	font-weight: 700;
+	text-align: center;
+	border-radius: 50%;
+	font-size: 23px;
+	font-weight: 450;
 }
 
 .qty .minus {
-  font-size: 14px;
-  background-color: #646464;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: top;
-  color: white;
-  width: 25px;
-  height: 25px;
-  line-height: 22px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 50%;
-  background-clip: padding-box;
-  position: relative;
+	font-size: 14px;
+	background-color: #646464;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	color: white;
+	width: 25px;
+	height: 25px;
+	line-height: 22px;
+	font-weight: 700;
+	text-align: center;
+	border-radius: 50%;
+	background-clip: padding-box;
+	position: relative;
+} */
+.qty .minus.disabled i::before,
+.qty.main-counter .minus.disabl i::before {
+  color: #b9b9b9;
 }
 
-.qty .minus.disabled,
-.qty.main-counter .minus.disabl {
-  background-color: #a1a1a1;
-}
-
-.no-touchevents .qty .minus.disabled:hover,
-.no-touchevents .qty.main-counter .minus.disabl:hover {
-  background-color: none;
+.no-touchevents .qty .minus.disabled:hover i::before,
+.no-touchevents .qty .plus.disabled:hover i::before,
+.no-touchevents .qty.main-counter .minus.disabl:hover i::before {
+  color: #b9b9b9;
 }
 
 .no-touchevents .qty .minus.disabled:hover::after,
+.no-touchevents .qty .plus.disabled:hover::after,
 .no-touchevents .qty.main-counter .minus.disabl:hover::after {
   content: "";
 }
@@ -406,24 +425,24 @@ header .inside {
   content: "";
 }
 
-.qty .orange {
-  background-color: #febf00;
+.qty .orange i::before {
+  color: #febf00;
 }
 
-.qty .plus.disabled {
-  background-color: #a1a1a1;
+.qty .plus.disabled i::before {
+  color: #b9b9b9;
 }
 
 .no-touchevents:hover {
   background-color: none;
 }
 
-.no-touchevents .minus:hover {
-  background-color: #febf00;
+.no-touchevents .minus:hover i::before {
+  color: #febf00;
 }
 
-.no-touchevents .plus:hover {
-  background-color: #febf00;
+.no-touchevents .plus:hover i::before {
+  color: #febf00;
 }
 
 /*Prevent text selection*/
@@ -790,6 +809,10 @@ header .inside {
   display: inline-block;
 }
 
+.add-item-block .add-item:disabled .fa-plus-circle::before, .inside .add-item:disabled .fa-plus-circle::before {
+  opacity: .4;
+}
+
 .add-item-block .add-item:disabled:hover::after, .inside .add-item:disabled:hover::after {
   position: absolute;
   top: 0;
@@ -819,17 +842,22 @@ header .inside {
 }
 
 .inside .add-item p:first-child {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
-  line-height: 20px;
   color: #000;
   opacity: .5;
+  width: 25px;
+  height: 25px;
+  background-color: #646464;
+  border-radius: 50%;
+  color: #ffffff;
+  line-height: 18px;
 }
 
 .inside .add-item p:last-child {
-  padding-bottom: 8px;
+  padding-bottom: 13px;
   vertical-align: middle;
-  padding-left: 0;
+  padding-left: 5px;
   color: #4b4b4b;
 }
 
@@ -961,6 +989,7 @@ header .inside {
 }
 
 .attach-block.for-product .my-file-input P {
+  margin-bottom: 0px;
   display: inline-block;
   border-bottom: 2px dotted #a19d94;
   line-height: 29px;
@@ -1061,6 +1090,8 @@ header .inside {
 
 .main-btn {
   position: relative;
+  margin-bottom: 80px;
+  margin-top: 80px;
 }
 
 .hide {

@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
         contacts = "selected";
         break;
     };
-    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select name="slide-${number}" class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty slide-counter"><span class="minus">-</span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus">+</span></div></div></div></div>`
+    let forConstruct = `<div class="wrapper"><div class="title-line"><div class="left-title"><h5 class="video-slide__number">${number}</h5><select name="slide-${number}" class="video-slide__change form-control form-control-sm"><option value="stimul" ${stimulPhrs}>Побуждающая фраза</option><option value="logo" ${logo}>Логотип</option><option value="product" ${productPrice}>Товар-Цена</option><option value="service" ${serviceDescription}>Услуга-Описание</option><option value="stock" ${stock}>Акция</option><option value="contact" ${contacts}>Контакты</option></select></div><div class="right-title"><h6 class="duration-title">Длительность</h6><div class="counter qty slide-counter"><span class="minus"><i class="fas fa-minus-circle"></i></span><input type="number" class="count" name="qty" value="5" disabled="true"><span class="plus"><i class="fas fa-plus-circle"></i></span></div></div></div></div>`                    
     return forConstruct;
   }
 
@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
     <div class="add-item-block inside">
       <div class="add-item">
-        <p>+</p>
+        <i class="fas fa-plus-circle"></i>
         <p>Добавить товар</p>
       </div>
     </div>`;
@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
     <div class="add-item-block inside">
       <div class="add-item">
-        <p>+</p>
+      <i class="fas fa-plus-circle"></i>
         <p>Добавить услугу</p>
       </div>
     </div>`;
@@ -638,6 +638,9 @@ document.addEventListener('DOMContentLoaded', function () {
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
 
+      console.log(target.parentElement.parentElement);
+      console.log(nextProduct);
+
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
@@ -654,12 +657,16 @@ document.addEventListener('DOMContentLoaded', function () {
       nextProduct.querySelector('input[type="file"]').id = idAttach;
       nextProduct.querySelector('input[type="file"]').setAttribute('name', idAttach)
       nextProduct.querySelector('.my-file-input').setAttribute('for', idAttach);
+
       console.log(nextProduct.querySelector('input[type="file"]'));
+
       target.parentElement.parentElement.before(nextProduct);
       nextProduct.querySelectorAll('input').forEach((inpt) => {
         inpt.value = '';
         if (inpt.type == "file") {
-          inpt.previousElementSibling.lastElementChild.textContent = 'Изображение';
+
+          inpt.previousElementSibling.lastElementChild.innerHTML = '<i name="image-outline" class="far fa-image"></i>Изображение';
+          
         }
       });
 

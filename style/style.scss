@@ -84,6 +84,17 @@ button.add-item {
 	margin-bottom: 50px;
 }
 
+//FAVICONS
+.fa-plus-circle:before {
+	content: "\f055";
+	font-size: 25px;
+	color: #646464;
+}
+.fa-minus-circle:before {
+	content: "\f055";
+	font-size: 25px;
+	color: #646464;
+}
 
 //HEADER CLONE
 header {
@@ -308,9 +319,11 @@ header {
 	width: 100px;
 	//margin: auto 0;
 	text-align: right;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
+	input{
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		user-select: none;
+	}
 }
 
 .qty .count {
@@ -329,7 +342,7 @@ header {
 	background: transparent;
 }
 
-.qty .plus {
+/* .qty .plus {
 
 	background-color: #646464;
 	cursor: pointer;
@@ -338,10 +351,12 @@ header {
 	color: white;
 	width: 25px;
 	height: 25px;
-	line-height: 22px;
+	line-height: 19px;
 	font-weight: 700;
 	text-align: center;
 	border-radius: 50%;
+	font-size: 23px;
+	font-weight: 450;
 }
 
 .qty .minus {
@@ -359,20 +374,26 @@ header {
 	border-radius: 50%;
 	background-clip: padding-box;
 	position: relative;
-}
+} */
 
 .qty .minus.disabled,
 .qty.main-counter .minus.disabl {
-	background-color: #a1a1a1;
+	i::before{
+		color:#b9b9b9;
+	}
 }
 
 .no-touchevents {
 
 	.qty .minus.disabled,
+	.qty .plus.disabled,
 	.qty.main-counter .minus.disabl {
 
 		&:hover {
-			background-color: none;
+			i::before{
+				color: #b9b9b9;
+			}
+		
 		}
 
 		&:hover::after {
@@ -409,11 +430,17 @@ header {
 }
 
 .qty .orange {
-	background-color: #febf00;
+	i::before{
+		color: #febf00;
+	}
+	
 }
 
 .qty .plus.disabled {
-	background-color: #a1a1a1;
+	i::before{
+	 	color: #b9b9b9;
+	}
+
 }
 
 .no-touchevents {
@@ -425,14 +452,18 @@ header {
 
 .no-touchevents {
 	.minus:hover {
-		background-color: #febf00;
+		i::before{
+			color: #febf00;
+		}
 	}
 }
 
 
 .no-touchevents {
 	.plus:hover {
-		background-color: #febf00;
+		i::before{
+			color: #febf00;
+		}
 	}
 }
 
@@ -791,6 +822,15 @@ header {
 		cursor: pointer;
 		user-select: none;
 		display: inline-block;
+		p:first-child{
+			
+		}
+
+		&:disabled{
+			.fa-plus-circle::before{
+				opacity: .4;
+			}
+		}
 
 		&:disabled:hover::after {
 			position: absolute;
@@ -829,18 +869,23 @@ header {
 	.add-item {
 		p:first-child {
 			//Значок
-			font-size: 25px;
+			font-size: 22px;
 			font-weight: bold;
-			line-height: 20px;
 			color: #000;
 			opacity: .5;
+			width: 25px;
+			height: 25px;
+			background-color: #646464;
+			border-radius: 50%;
+			color:#ffffff;
+			line-height: 18px;
 		}
 
 		p:last-child {
 			//Текст
-			padding-bottom: 8px;
+			padding-bottom: 13px;
 			vertical-align: middle;
-			padding-left: 0;
+			padding-left: 5px;
 			color: #4b4b4b
 		}
 
@@ -958,6 +1003,7 @@ header {
 		}
 
 		P {
+			margin-bottom: 0px;
 			display: inline-block;
 			border-bottom: 2px dotted #a19d94;
 			line-height: 29px;
@@ -1061,6 +1107,8 @@ header {
 
 .main-btn {
 	position: relative;
+	margin-bottom: 80px;
+	margin-top: 80px;
 }
 
 //NEW ANIMATION BUTTON
