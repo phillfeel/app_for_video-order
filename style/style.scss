@@ -815,6 +815,7 @@ header {
 // add slide
 .add-item-block {
 	text-align: center;
+	margin-top: 50px;
 	margin-bottom: 70px;
 	position: relative;
 
@@ -837,7 +838,7 @@ header {
 			top: 0;
 			width: 100%;
 			left: 0;
-			top: -65%;
+			top: -110%;
 			content: "Сначала добавьте общую длительность";
 			font-size: 80%;
 			color: #dc3545;
@@ -1089,6 +1090,12 @@ header {
 }
 
 @media (max-width: 576px) {
+	.delete-item {
+		margin-top: 17px;
+	}
+}
+
+@media (max-width: 576px) {
 	.product-block .col-12 {
 		margin-bottom: 7px;
 	}
@@ -1108,7 +1115,6 @@ header {
 .main-btn {
 	position: relative;
 	margin-bottom: 80px;
-	margin-top: 80px;
 }
 
 //NEW ANIMATION BUTTON
