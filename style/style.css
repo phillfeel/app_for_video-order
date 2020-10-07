@@ -17,6 +17,10 @@ header .row .nav {
   font-size: 14px;
 }
 
+a {
+  color: #febf00;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   select,
   textarea,
@@ -90,6 +94,12 @@ button.add-item {
 
 .mini-block {
   margin-bottom: 50px;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .fa-plus-circle:before {
@@ -580,10 +590,11 @@ header .inside {
 .form-check .form-check-label {
   padding-left: 10px;
   width: 100%;
+  padding-bottom: 3px;
 }
 
 .mini-block textarea {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .form-check-inline {
@@ -1098,6 +1109,53 @@ header .inside {
 .main-btn {
   position: relative;
   margin-bottom: 80px;
+}
+
+input[type='radio'],
+label {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  position: relative;
+  height: 22px;
+  width: 22px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+input[type='radio']::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid #febf00;
+}
+
+input[type='radio']:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  left: 10px;
+  border-radius: 50%;
+  background-color: #febf00;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  visibility: visible;
+}
+
+#contactRadio3 {
+  margin-right: 2px;
 }
 
 .hide {
