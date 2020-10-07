@@ -184,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
-  uploadFile(document.getElementById('main-logo'));
+  ; //uploadFile(document.getElementById('main-logo'));
+
   uploadFile(document.getElementById('extra-files')); //format-video-preview
 
   var formatVideoSelect = document.querySelector(".format-video__change_input"),
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
         proportionPx = 30 / verticalPx, resizeVerticalPx = proportionPx * verticalPx, resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = "".concat(resizeHorizontPx, "px");
         customSizePreview.style.height = "".concat(resizeVerticalPx, "px");
-        customSizePreview.style.border = '1px solid #ffa500';
+        customSizePreview.style.border = '1px solid #febf00';
       }
     });
     inputVertical.addEventListener("input", function () {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeHorizontPx = proportionPx * horizontPx;
         customSizePreview.style.width = "".concat(resizeHorizontPx, "px");
         customSizePreview.style.height = "".concat(resizeVerticalPx, "px");
-        customSizePreview.style.border = '1px solid #ffa500';
+        customSizePreview.style.border = '1px solid #febf00';
       }
     });
   }
@@ -286,8 +286,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var optionalContact = "<div class=\"option-contact solo-check form-check\">\n  <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n  <label class=\"form-check-label\" for=\"defaultCheck1\">\n    <input disabled name=\"optional-conatact\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F\">\n  </label>\n  </div>";
   var optionalDisclaimer = "<div class=\"option-disclaimer solo-check form-check\">\n      <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n      <label class=\"form-check-label\" for=\"defaultCheck1\">\n        <input disabled name=\"optional-disclaimer\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u0438\u0441\u043A\u043B\u0435\u0439\u043C\u0435\u0440\">\n      </label>\n    </div>";
-  var howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-  var howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
+  var howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value; //let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
+
   document.querySelectorAll('input[name="contact-where"]').forEach(function (elem) {
     elem.addEventListener('change', function () {
       if (elem.checked) {
@@ -332,14 +332,16 @@ document.addEventListener('DOMContentLoaded', function () {
       elem.value = contactValue;
     });
   });
-  var disclaimerValue = "";
-  var disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
-  disclaimerTextarea.addEventListener('change', function () {
-    disclaimerValue = disclaimerTextarea.value;
-    document.querySelectorAll('.option-disclaimer .optional-txt').forEach(function (elem) {
-      elem.value = disclaimerValue;
-    });
-  }); //MORE - INPUT (more color)
+  /*   let disclaimerValue = "";
+    let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
+  
+    disclaimerTextarea.addEventListener('change', () => {
+      disclaimerValue = disclaimerTextarea.value;
+      document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem) => {
+        elem.value = disclaimerValue;
+      })
+    }) */
+  //MORE - INPUT (more color)
 
   function turnForm(elem) {
     console.log("вызвали turnForm");
@@ -427,63 +429,82 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     ;
-    var forConstruct = "<div class=\"wrapper\"><div class=\"title-line\"><div class=\"left-title\"><h5 class=\"video-slide__number\">".concat(number, "</h5><select name=\"slide-").concat(number, "\" class=\"video-slide__change form-control form-control-sm\"><option value=\"stimul\" ").concat(stimulPhrs, ">\u041F\u043E\u0431\u0443\u0436\u0434\u0430\u044E\u0449\u0430\u044F \u0444\u0440\u0430\u0437\u0430</option><option value=\"logo\" ").concat(logo, ">\u041B\u043E\u0433\u043E\u0442\u0438\u043F</option><option value=\"product\" ").concat(productPrice, ">\u0422\u043E\u0432\u0430\u0440-\u0426\u0435\u043D\u0430</option><option value=\"service\" ").concat(serviceDescription, ">\u0423\u0441\u043B\u0443\u0433\u0430-\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</option><option value=\"stock\" ").concat(stock, ">\u0410\u043A\u0446\u0438\u044F</option><option value=\"contact\" ").concat(contacts, ">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B</option></select></div><div class=\"right-title\"><h6 class=\"duration-title\">\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C</h6><div class=\"counter qty slide-counter\"><span class=\"minus\">-</span><input type=\"number\" class=\"count\" name=\"qty\" value=\"5\" disabled=\"true\"><span class=\"plus\">+</span></div></div></div></div>");
+    var forConstruct = "<div class=\"wrapper\"><div class=\"title-line\"><div class=\"left-title\"><h5 class=\"video-slide__number\">".concat(number, "</h5><select name=\"slide-").concat(number, "\" class=\"video-slide__change form-control form-control-sm\"><option value=\"stimul\" ").concat(stimulPhrs, ">\u041F\u043E\u0431\u0443\u0436\u0434\u0430\u044E\u0449\u0430\u044F \u0444\u0440\u0430\u0437\u0430</option><option value=\"logo\" ").concat(logo, ">\u041B\u043E\u0433\u043E\u0442\u0438\u043F</option><option value=\"product\" ").concat(productPrice, ">\u0422\u043E\u0432\u0430\u0440-\u0426\u0435\u043D\u0430</option><option value=\"service\" ").concat(serviceDescription, ">\u0423\u0441\u043B\u0443\u0433\u0430-\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</option><option value=\"stock\" ").concat(stock, ">\u0410\u043A\u0446\u0438\u044F</option><option value=\"contact\" ").concat(contacts, ">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B</option></select></div><div class=\"right-title\"><h6 class=\"duration-title\">\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C</h6><div class=\"counter qty slide-counter\"><span class=\"minus\"><i class=\"fas fa-minus-circle\"></i></span><input type=\"number\" class=\"count\" name=\"qty\" value=\"5\" disabled=\"true\"><span class=\"plus\"><i class=\"fas fa-plus-circle\"></i></span></div></div></div></div>");
     return forConstruct;
   } //ФУНКИЦЯ СОЗДАНИЯ ТЕЛА ВТОРОЙ ЧАСТИ СЛАЙДА
 
 
   function createSecondPartHtml(nameForInitSlider, optionalContact, optionalDisclaimer) {
-    var textZoneHtml_1 = "<div class=\"text-zone\">\n       <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n       <div class=\"more-colors optional-field form-check\">\n         <input class=\"form-check-input optional-checkbox\" type=\"checkbox\"  id=\"defaultCheck1\">\n         <label class=\"form-check-label\" for=\"defaultCheck1\">\n           <input name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0435\u0449\u0435 \u0442\u0435\u043A\u0441\u0442\">\n         </label>\n       </div>\n     </div>";
+    var textZoneHtml_1 = "<div class=\"text-zone\">\n    <p class=\"title\">\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u0447\u0430\u0442\u044C \u0432\u0438\u0434\u0435\u043E\u0440\u043E\u043B\u0438\u043A \u0441 \u0432\u043E\u043F\u0440\u043E\u0441\u0430 \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u044B \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u043A \u043F\u043E\u043A\u0443\u043F\u043A\u0435</p>   \n    <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n     </div>";
     var textZoneHtml_2 = "<div class=\"text-zone\">\n     <div class=\"solo-check form-check\">\n       <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n       <label class=\"form-check-label\" for=\"defaultCheck1\">\n       <input disabled name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0433\u0430\u043D \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u0443\">\n       </label>\n     </div>\n   </div>";
     var textForContact = "<div class=\"option-contact solo-check form-check\">\n   <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n   <label class=\"form-check-label\" for=\"defaultCheck1\">\n     <input name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0433\u0430\u043D \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u0443\" disabled=\"true\">\n   </label>\n   </div>";
     var textStockHtml = "<div class=\"text-zone\">\n        <textarea name=\"stock-text\" class=\"form-control text-field stock-text\" id=\"textarea3\" placeholder=\"\u0422\u0435\u043A\u0441\u0442 \u0430\u043A\u0446\u0438\u0438\" rows=\"1\"></textarea>\n   </div>";
-    var nameAttach;
-    var attachHtml;
+    var nameAttach, attachHtml, carouselHtml, gifName;
+
+    function getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4) {
+      var carousel = "<h6 class=\"duration-title\">\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E</h6>\n        <div class=\"chooseAnimation-zone\">\n          <div class=\"".concat(nameForInitSlider, "\">\n            <div class=\"sl_slice\"><img src=\"img/").concat(gifName, "-1.gif\" alt=\"\" class=\"sl_img\">\n            <p class=\"sl_text\">").concat(nameAnim_1, "</p>\n            </div>\n            <div class=\"sl_slice\"><img src=\"img/").concat(gifName, "-2.gif\" alt=\"\" class=\"sl_img\">\n              <p class=\"sl_text\">").concat(nameAnim_2, "</p></div>\n            <div class=\"sl_slice\"><img src=\"img/").concat(gifName, "-3.gif\" alt=\"\" class=\"sl_img\">\n              <p class=\"sl_text\">").concat(nameAnim_3, "</p>\n            </div>\n            <div class=\"sl_slice\"><img src=\"img/").concat(gifName, "-4.gif\" alt=\"\" class=\"sl_img\">\n              <p class=\"sl_text\">").concat(nameAnim_4, "</p>\n            </div> \n          </div>\n        </div>");
+      return carousel;
+    }
+
+    ;
 
     function getAttachHtml(name) {
-      var attach = "<div class=\"attach-block for-logo\">\n    <label class=\"my-file-input\" for=\"exampleFormControlFile1\"><ion-icon size=\"large\" name=\"attach-outline\"></ion-icon><p>".concat(name, "</p></label>\n    <input type=\"file\" name=\"example\" accept=\"image/*\" class=\"form-control-file\" id=\"exampleFormControlFile1\">\n    </div>");
+      var attach = "<div class=\"attach-block for-logo\">\n    <label class=\"my-file-input\" for=\"exampleFormControlFile1\"><p><i name=\"image-outline\" class=\"far fa-image\"></i>".concat(name, "</p></label>\n    <input type=\"file\" name=\"example\" accept=\"image/*\" class=\"form-control-file\" id=\"exampleFormControlFile1\">\n    </div>");
       return attach;
     }
 
     ;
-    var productZoneHtml = "<div class=\"product-block mini-block\" id=\"product-1\">\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"product-1_name\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u043E\u0432\u0430\u0440\u0430\">\n        </div>\n        <div class=\"col\">\n          <input  name=\"product-1_price\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u0426\u0435\u043D\u0430\">\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"product-1_descript\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0442\u043E\u0432\u0430\u0440\u0430\">\n        </div>\n        <div class=\"col\">\n          <div class=\"attach-block for-product\">\n            <label class=\"my-file-input\" for=\"product-slider-1_img-1\">\n              <ion-icon size=\"large\" name=\"image-outline\"></ion-icon>\n              <p>\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435</p>\n            </label>\n            <input type=\"file\" name=\"product-slider-1_img-1\" accept=\"image/*\" class=\"form-control-file\" id=\"product-slider-1_img-1\">\n          </div>\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col\">\n        <div class=\"delete-item\">\n          <div class=\"close\">\n          </div>\n        </div>\n      </div>\n      </div>\n    </div>\n    <div class=\"add-item-block inside\">\n      <div class=\"add-item\">\n        <p>+</p>\n        <p>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440</p>\n      </div>\n    </div>";
-    var serviceZoneHtml = "<div class=\"product-block service mini-block\" id=\"service-1\">\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"service-1_name\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u0438\">\n        </div>\n        <div class=\"col\">\n          <input name=\"service-1_price\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u0426\u0435\u043D\u0430\">\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"service-1_descript\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u0438\">\n        </div>\n        <div class=\"col\">\n          <div class=\"attach-block for-product\">\n            <label class=\"my-file-input\" for=\"service-slider-1_img-1\">\n              <ion-icon size=\"large\" name=\"image-outline\"></ion-icon>\n              <p>\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435</p>\n            </label>\n            <input type=\"file\" name=\"service-slider-1_img-1\" accept=\"image/*\" class=\"form-control-file\" id=\"service-slider-1_img-1\">\n          </div>\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col\">\n        <div class=\"delete-item\">\n          <div class=\"close\">\n          </div>\n        </div>\n      </div>\n      </div>\n    </div>\n    <div class=\"add-item-block inside\">\n      <div class=\"add-item\">\n        <p>+</p>\n        <p>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0443\u0441\u043B\u0443\u0433\u0443</p>\n      </div>\n    </div>";
-    var carouselHtml = "<h6 class=\"duration-title\">\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E</h6>\n     <div class=\"chooseAnimation-zone\">\n       <div class=\"".concat(nameForInitSlider, "\">\n         <div class=\"sl_slice\"><img src=\"img/1.gif\" alt=\"\" class=\"sl_img\">\n         <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u043D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/2.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p></div>\n         <div class=\"sl_slice\"><img src=\"img/3.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\"> \u041D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/test1.jpg\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\"> \u041D\u0430 \u0442\u0435\u0441\u0442</p>\n         </div> \n       </div>\n     </div>");
-    var logoUseHtml = "<div class=\"form-check for-logo\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"gridCheck\" name=\"logo-use\">\n    <label class=\"form-check-label\" for=\"gridCheck\">\n        \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043B\u043E\u0433\u043E\u0442\u0438\u043F\n    </label>\n  </div>";
-    var optionalFieldHtml = "<div class=\"optional-contact__wrapp\">".concat(optionalContact, "</div>\n     <div class=\"optional-disclaimer__wrapp\">").concat(optionalDisclaimer, "</div>");
-    var removeSlideHtml = "<div class=\"btn-zone\"><button type=\"button\" class=\"btn-remove-slide btn btn-outline-danger btn-sm\"><ion-icon name=\"trash-bin-outline\"></ion-icon><p>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u043B\u0430\u0439\u0434</p></button></div>";
-    var insideHtml;
+    var productZoneHtml = "<div class=\"product-block mini-block\" id=\"product-1\">\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"product-1_name\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u043E\u0432\u0430\u0440\u0430\">\n        </div>\n        <div class=\"col\">\n          <input  name=\"product-1_price\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u0426\u0435\u043D\u0430\">\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"product-1_descript\" type=\"text\" class=\"form-control  description form-control-sm\" placeholder=\"\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0442\u043E\u0432\u0430\u0440\u0430\">\n        </div>\n        <div class=\"col\">\n          <div class=\"attach-block for-product\">\n            <label class=\"my-file-input\" for=\"product-slider-1_img-1\">\n            <p>\n            <i name=\"image-outline\" class=\"far fa-image\"></i>\n            \u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435</p>\n            </label>\n            <input type=\"file\" name=\"product-slider-1_img-1\" accept=\"image/*\" class=\"form-control-file\" id=\"product-slider-1_img-1\">\n          </div>\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col\">\n        <div class=\"delete-item\">\n          <div class=\"close\">\n          </div>\n        </div>\n      </div>\n      </div>\n    </div>\n    <div class=\"add-item-block inside\">\n      <div class=\"add-item\">\n        <i class=\"fas fa-plus-circle\"></i>\n        <p>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440</p>\n      </div>\n    </div>";
+    var serviceZoneHtml = "<div class=\"product-block service mini-block\" id=\"service-1\">\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"service-1_name\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u0438\">\n        </div>\n        <div class=\"col\">\n          <input name=\"service-1_price\" type=\"text\" class=\"form-control  form-control-sm\" placeholder=\"\u0426\u0435\u043D\u0430\">\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col-12 col-sm-8 col-md-8 col-lg-8\">\n          <input name=\"service-1_descript\" type=\"text\" class=\"form-control description form-control-sm\" placeholder=\"\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u0438\">\n        </div>\n        <div class=\"col\">\n          <div class=\"attach-block for-product\">\n            <label class=\"my-file-input\" for=\"service-slider-1_img-1\">\n              <p>\n              <i name=\"image-outline\" class=\"far fa-image\"></i>\n              \u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435</p>\n            </label>\n            <input type=\"file\" name=\"service-slider-1_img-1\" accept=\"image/*\" class=\"form-control-file\" id=\"service-slider-1_img-1\">\n          </div>\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"col\">\n        <div class=\"delete-item\">\n          <div class=\"close\">\n          </div>\n        </div>\n      </div>\n      </div>\n    </div>\n    <div class=\"add-item-block inside\">\n      <div class=\"add-item\">\n      <i class=\"fas fa-plus-circle\"></i>\n        <p>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0443\u0441\u043B\u0443\u0433\u0443</p>\n      </div>\n    </div>";
+    var removeSlideHtml = "<div class=\"btn-zone\"><button type=\"button\" class=\"btn-remove-slide btn btn-outline-danger btn-sm\"><i class=\"far fa-trash-alt\"></i><p>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u043B\u0430\u0439\u0434</p></button></div>";
+    var insideHtml,
+        nameAnim_1 = "Динамичный",
+        nameAnim_2 = "Нежный",
+        nameAnim_3 = "Технологичный",
+        nameAnim_4 = "Брутальный";
 
     switch (true) {
       case /logo-part_slider/i.test(nameForInitSlider):
-        nameAttach = 'Прикрепить логотип';
-        attachHtml = getAttachHtml(nameAttach);
-        gifName_1 = 'for_logo-1';
-        insideHtml = "".concat(attachHtml).concat(textZoneHtml_2).concat(carouselHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        nameAttach = 'Прикрепить логотип'; //attachHtml = getAttachHtml(nameAttach);
+
+        gifName = 'logo';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
+        insideHtml = "".concat(textZoneHtml_2).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /stimul-part_slider/i.test(nameForInitSlider):
-        insideHtml = "".concat(textZoneHtml_1).concat(carouselHtml).concat(logoUseHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        //nameAttach = 'Прикрепить логотип';
+        gifName = 'stimul';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
+        insideHtml = "".concat(textZoneHtml_1).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /product-part_slider/i.test(nameForInitSlider):
-        insideHtml = "".concat(productZoneHtml).concat(carouselHtml).concat(logoUseHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        gifName = 'product';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
+        insideHtml = "".concat(productZoneHtml).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /service-part_slider/i.test(nameForInitSlider):
-        insideHtml = "".concat(serviceZoneHtml).concat(carouselHtml).concat(logoUseHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        gifName = 'service';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
+        insideHtml = "".concat(serviceZoneHtml).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /stock-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить изображение';
+        gifName = 'stock';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         attachHtml = getAttachHtml(nameAttach);
-        insideHtml = "".concat(attachHtml).concat(textStockHtml).concat(carouselHtml).concat(logoUseHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        insideHtml = "".concat(attachHtml).concat(textStockHtml).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /contact-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить фото фасада';
+        gifName = 'contact';
+        carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         attachHtml = getAttachHtml(nameAttach);
-        insideHtml = "".concat(attachHtml).concat(textForContact).concat(carouselHtml).concat(logoUseHtml).concat(optionalFieldHtml).concat(removeSlideHtml);
+        insideHtml = "".concat(attachHtml).concat(textForContact).concat(carouselHtml).concat(removeSlideHtml);
         break;
     } //console.log(insideHtml);
 
@@ -493,8 +514,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   ;
 
-  function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer) {
-    var insideHtmlStimulPrase = "<div class=\"text-zone\">\n       <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n       <div class=\"more-colors optional-field form-check\">\n         <input  class=\"form-check-input optional-checkbox\" type=\"checkbox\" id=\"defaultCheck1\">\n         <label class=\"form-check-label\" for=\"defaultCheck1\">\n           <input name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0435\u0449\u0435 \u0442\u0435\u043A\u0441\u0442\">\n         </label>\n       </div>\n     </div>\n     <h6 class=\"duration-title\">\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E</h6>\n     <div class=\"chooseAnimation-zone\">\n       <div class=\"".concat(name, "\">\n         <div class=\"sl_slice\"><img src=\"img/1.gif\" alt=\"\" class=\"sl_img\">\n         <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u043D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/2.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p></div>\n         <div class=\"sl_slice\"><img src=\"img/3.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\"> \u041D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/logo-1.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\"> \u041D\u0430 \u0442\u0435\u0441\u0442</p>\n         </div> \n        </div>\n        </div>\n     <div class=\"form-check for-logo\">\n       <input class=\"form-check-input\" type=\"checkbox\" id=\"gridCheck\" name=\"logo-use\">\n       <label class=\"form-check-label\" for=\"gridCheck\">\n           \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043B\u043E\u0433\u043E\u0442\u0438\u043F\n       </label>\n     </div>\n     <div class=\"optional-contact__wrapp\">").concat(optionalContact, "</div>\n     <div class=\"optional-disclaimer__wrapp\">").concat(optionalDisclaimer, "</div>\n     <div class=\"btn-zone\"><button type=\"button\" class=\"btn-remove-slide btn btn-outline-danger btn-sm\"><ion-icon name=\"trash-bin-outline\"></ion-icon><p>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u043B\u0430\u0439\u0434</p></button></div>");
+  function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact) {
+    var insideHtmlStimulPrase = "\n    <div class=\"text-zone\">\n    <p class=\"title\">\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u0447\u0430\u0442\u044C \u0432\u0438\u0434\u0435\u043E\u0440\u043E\u043B\u0438\u043A \u0441 \u0432\u043E\u043F\u0440\u043E\u0441\u0430 \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u044B \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u043A \u043F\u043E\u043A\u0443\u043F\u043A\u0435</p>   \n    <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n     </div>\n     <h6 class=\"duration-title\">\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E</h6>\n     <div class=\"chooseAnimation-zone\">\n       <div class=\"".concat(name, "\">\n         <div class=\"sl_slice\"><img src=\"img/stimul-1.gif\" alt=\"\" class=\"sl_img\">\n         <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u043D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-2.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p></div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-3.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u041D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-4.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u042D\u043D\u0435\u0440\u0433\u0438\u0447\u043D\u044B\u0439</p>\n         </div> \n        </div>\n        </div>\n     <div class=\"btn-zone\"><button type=\"button\" class=\"btn-remove-slide btn btn-outline-danger btn-sm\"><i class=\"far fa-trash-alt\"></i><p>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u043B\u0430\u0439\u0434</p></button></div>");
+    /*  <ion-icon name="trash-bin-outline"></ion-icon> */
+
     return insideHtmlStimulPrase;
   }
 
@@ -515,6 +538,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var target = elem.target;
       var allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       var nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
+      console.log(target.parentElement.parentElement);
+      console.log(nextProduct);
       var productNumb = +nextProduct.id.split("-")[1];
       var nextProductId = "".concat(nextProduct.id.split("-")[0], "-").concat(productNumb + 1);
       nextProduct.id = nextProductId;
@@ -534,7 +559,7 @@ document.addEventListener('DOMContentLoaded', function () {
         inpt.value = '';
 
         if (inpt.type == "file") {
-          inpt.previousElementSibling.lastElementChild.textContent = 'Изображение';
+          inpt.previousElementSibling.lastElementChild.innerHTML = '<i name="image-outline" class="far fa-image"></i>Изображение';
         }
       });
       nextProduct.querySelector(".close").addEventListener('click', function () {
@@ -638,10 +663,52 @@ document.addEventListener('DOMContentLoaded', function () {
   ;
 
   function getMaxLengthStimulPhrase(slideCounterInput) {
-    return +slideCounterInput.value * 4;
+    return +slideCounterInput.value * 13;
   }
 
-  ; //----MAIN---// динамическое добавление Побуждающей фразы на существующий
+  ;
+
+  function validationText() {
+    var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : insideSlideWrapp.querySelector('.text-zone .text-field');
+    var elementCounter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : insideSlideWrapp.querySelector('.slide-counter input');
+    var invalFeedback = document.createElement('div');
+    invalFeedback.classList.add('invalid-feedback');
+    console.log(element);
+    element.after(invalFeedback);
+    element.addEventListener('input', function (e) {
+      var maxLengthStimulPhrase = getMaxLengthStimulPhrase(elementCounter);
+
+      if (e.target.value.length > maxLengthStimulPhrase) {
+        e.target.classList.add('is-invalid');
+        invalFeedback.textContent = "\u0414\u043B\u0438\u043D\u0430 \u0442\u0435\u043A\u0441\u0442\u0430 ".concat(e.target.value.length, " \u043F\u0440\u0438 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E \u0434\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u043E\u0439 \u0432 ").concat(maxLengthStimulPhrase);
+      } else {
+        e.target.classList.remove('is-invalid');
+        invalFeedback.textContent = '';
+      }
+    });
+  }
+
+  ;
+
+  function smoothAppearance(constructSlide) {
+    var startOpacity = 0.3;
+    var finishOpacity = 0.99;
+    var stepOp = 0.02; //let element = document.getElementById('SomeElementYouWantToAnimate');
+    //constructSlide.style.opacity = 0;
+
+    function step() {
+      startOpacity = startOpacity + stepOp;
+      constructSlide.style.opacity = "".concat(startOpacity);
+      console.log(startOpacity);
+
+      if (startOpacity < finishOpacity) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  } //----MAIN---// динамическое добавление Побуждающей фразы на существующий
+
 
   document.querySelectorAll('.video-slide__change').forEach(function (item) {
     var insideSlideWrapp, secondPart, optionalField;
@@ -650,7 +717,7 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'stimul':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда');
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact, optionalDisclaimer, howDisplayDisclaimer)); //добавлям Touchstart на Counter этого слайда
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact)); //добавлям Touchstart на Counter этого слайда
 
         counterTouch("video-slide"); //добавляем работу доп. форм
 
@@ -751,43 +818,31 @@ document.addEventListener('DOMContentLoaded', function () {
     } // устанавливаем id для вложений
 
 
-    if (namePart != 'stimul-part') {
+    if (namePart != 'stimul-part' && namePart != 'logo-part') {
       uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
     }
 
-    if (namePart === 'logo-part' || namePart === 'contact-part' || namePart === 'stock-part') {
+    if (namePart === 'contact-part' || namePart === 'stock-part') {
       insideSlideWrapp.querySelector('.attach-block.for-logo input').id = namePart + "_attach-" + number;
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
       insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', namePart + "_attach-" + number);
-    } //для установки ID опционному лого - ДОДЕЛАТЬ
-
-
-    if (namePart != 'logo-part' && namePart != 'contact-part') {
-      insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent;
-      insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + constructSlide.querySelector('.video-slide__number').textContent);
     } //добавляем работу дизэйбл энэйбл для Соло форм
 
 
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
-    }); // валидация длины текста на Побуждающей
+    }); // валидация длины текста в полях слайда
 
     if (namePart === 'stimul-part' || namePart === 'stock-part') {
-      var invalFeedback = document.createElement('div');
-      invalFeedback.classList.add('invalid-feedback');
-      console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
-      insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-      insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', function (e) {
-        var maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
+      validationText(insideSlideWrapp.querySelector('.text-zone .text-field'), insideSlideWrapp.querySelector('.slide-counter input'));
+    }
 
-        if (e.target.value.length > maxLengthStimulPhrase) {
-          e.target.classList.add('is-invalid');
-          invalFeedback.textContent = "\u0414\u043B\u0438\u043D\u0430 \u0442\u0435\u043A\u0441\u0442\u0430 ".concat(e.target.value.length, " \u043F\u0440\u0438 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E \u0434\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u043E\u0439 \u0432 ").concat(maxLengthStimulPhrase);
-        } else {
-          e.target.classList.remove('is-invalid');
-          invalFeedback.textContent = '';
-        }
-      });
+    if (namePart === 'logo-part' || namePart === 'contact-part') {
+      validationText(insideSlideWrapp.querySelector('.solo-check .optional-txt'), insideSlideWrapp.querySelector('.slide-counter input'));
+    }
+
+    if (namePart === 'product-part' || namePart === 'service-part') {
+      validationText(insideSlideWrapp.querySelector('.product-block .description'), insideSlideWrapp.querySelector('.slide-counter input'));
     } // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
 
 
@@ -821,26 +876,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var slideCounter = insideSlideWrapp.querySelector('.slide-counter');
     slideCounter.querySelector('input').classList.add(namePart + '-count-' + number);
     slideCounter.querySelector('input').setAttribute('name', namePart + '-count-' + number);
-    changeValCountSlides(slideCounter, 8, 2, 1); // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
-    //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
-
-    var howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-    var howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-
-    if (howDisplayContact === 'all') {
-      constructSlide.querySelector('.option-contact').remove();
-    } else {
-      var optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
-      optionContactInput.value = document.querySelector('.contact-block textarea').value;
-    }
-
-    if (howDisplayDisclaimer === 'all') {
-      constructSlide.querySelector('.option-disclaimer').remove();
-    } else {
-      var optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
-      optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
-    }
-
+    changeValCountSlides(slideCounter, 8, 2, 1);
     changeSlide(insideSlideWrapp.querySelector('.video-slide__change'));
     var mainCounterVal = document.querySelector(".main-counter input").value;
 
@@ -858,150 +894,128 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.last-main-block').before(document.querySelector(".add-slide")); // Перемотка к началу созданого элемента
 
     insideSlideWrapp.scrollIntoView();
+    smoothAppearance(constructSlide);
   });
+
+  function eventChangeSlide(elem) {
+    var firstPart = elem.parentElement.parentElement;
+    firstPart.nextElementSibling.remove();
+    var secondPart, classForSecondP;
+
+    switch (elem.value) {
+      case "logo":
+        classForSecondP = "logo-part";
+        break;
+
+      case "stimul":
+        classForSecondP = "stimul-part";
+        break;
+
+      case "product":
+        classForSecondP = "product-part";
+        break;
+
+      case "service":
+        classForSecondP = "service-part";
+        break;
+
+      case "stock":
+        classForSecondP = "stock-part";
+        break;
+
+      case "contact":
+        classForSecondP = "contact-part";
+        break;
+    }
+
+    ;
+    var namePart = classForSecondP;
+    var number = +document.querySelectorAll(".".concat(classForSecondP)).length + 1,
+        nameSlider = classForSecondP + "_slider-" + number;
+    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
+    var constructSlide = firstPart.parentElement.parentElement;
+    var insideSlideWrapp = firstPart.parentNode;
+    var slideNumber = +constructSlide.querySelector('.video-slide__number').textContent; //добавляем работу доп. форм(Нужно для: побуждающей)
+
+    if (classForSecondP === 'stimul-part') {
+      var optionalField = constructSlide.querySelectorAll(".stimul-part .optional-field");
+      optionalField.forEach(function (item) {
+        createOptionalFiled(item);
+      });
+    } // устанавливаем id для вложений
+
+
+    if (classForSecondP != 'stimul-part' && classForSecondP != 'logo-part') {
+      uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
+    }
+
+    if (classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
+      insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
+      insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
+      insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
+    } //добавляем работу дизэйбл энэйбл для Соло форм
+
+
+    insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
+      turnForm(item);
+    }); // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+
+    if (classForSecondP === 'service-part' || classForSecondP === 'product-part') {
+      //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
+      addProduct(insideSlideWrapp, nameSlider);
+
+      if (document.querySelectorAll(".".concat(classForSecondP)).length > 1) {
+        var nameSliderSlim = nameSlider.replace(/part_/g, "");
+        insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
+        insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
+        insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
+      } //УДАЛЕНИЕ ТОВАРА
+
+
+      insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
+        if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
+          console.log('удаляем товар или услугу');
+          insideSlideWrapp.querySelector(".close").parentElement.parentElement;
+          insideSlideWrapp.querySelector('.product-block').remove();
+        }
+
+        ;
+      });
+    }
+
+    ; //переименовываем counter слайда и меняем Name
+
+    insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
+    insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number); //валидация длины формы
+
+    if (namePart === 'stimul-part' || namePart === 'stock-part') {
+      validationText(insideSlideWrapp.querySelector('.text-zone .text-field'), insideSlideWrapp.querySelector('.slide-counter input'));
+    }
+
+    if (namePart === 'logo-part' || namePart === 'contact-part') {
+      validationText(insideSlideWrapp.querySelector('.solo-check .optional-txt'), insideSlideWrapp.querySelector('.slide-counter input'));
+    }
+
+    if (namePart === 'product-part' || namePart === 'service-part') {
+      validationText(insideSlideWrapp.querySelector('.product-block .description'), insideSlideWrapp.querySelector('.slide-counter input'));
+    } //иницинализируем слайдер
+
+
+    initCarousel(".".concat(nameSlider));
+    deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
+    smoothAppearance(constructSlide);
+  }
 
   function changeSlide(elem) {
     elem.addEventListener('change', function () {
-      var firstPart = elem.parentElement.parentElement;
-      firstPart.nextElementSibling.remove();
-      var secondPart, classForSecondP;
-
-      switch (elem.value) {
-        case "logo":
-          classForSecondP = "logo-part";
-          break;
-
-        case "stimul":
-          classForSecondP = "stimul-part";
-          break;
-
-        case "product":
-          classForSecondP = "product-part";
-          break;
-
-        case "service":
-          classForSecondP = "service-part";
-          break;
-
-        case "stock":
-          classForSecondP = "stock-part";
-          break;
-
-        case "contact":
-          classForSecondP = "contact-part";
-          break;
-      }
-
-      ;
-      var number = +document.querySelectorAll(".".concat(classForSecondP)).length + 1,
-          nameSlider = classForSecondP + "_slider-" + number;
-      createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
-      var constructSlide = firstPart.parentElement.parentElement;
-      var insideSlideWrapp = firstPart.parentNode;
-      var slideNumber = +constructSlide.querySelector('.video-slide__number').textContent; //добавляем работу доп. форм(Нужно для: побуждающей)
-
-      if (classForSecondP === 'stimul-part') {
-        var optionalField = constructSlide.querySelectorAll(".stimul-part .optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        });
-      } // устанавливаем id для вложений
-
-
-      if (classForSecondP != 'stimul-part') {
-        uploadFile(insideSlideWrapp.querySelector('.attach-block input'));
-      }
-
-      if (classForSecondP === 'logo-part' || classForSecondP === 'contact-part' || classForSecondP === 'stock-part') {
-        insideSlideWrapp.querySelector('.attach-block.for-logo input').id = classForSecondP + "_attach-" + number;
-        insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', classForSecondP + "_attach-" + number);
-        insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', classForSecondP + "_attach-" + number);
-      } //для установки ID опционному лого - ДОДЕЛАТЬ
-
-
-      if (classForSecondP != 'logo-part' && classForSecondP != 'contact-part') {
-        insideSlideWrapp.querySelector('.form-check.for-logo [name="logo-use"]').id = "gridCheck-" + slideNumber;
-        insideSlideWrapp.querySelector('.form-check.for-logo label').setAttribute("for", "gridCheck-" + slideNumber);
-      } //добавляем работу дизэйбл энэйбл для Соло форм
-
-
-      insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
-        turnForm(item);
-      }); // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
-
-      if (classForSecondP === 'service-part' || classForSecondP === 'product-part') {
-        //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
-        addProduct(insideSlideWrapp, nameSlider);
-
-        if (document.querySelectorAll(".".concat(classForSecondP)).length > 1) {
-          var nameSliderSlim = nameSlider.replace(/part_/g, "");
-          insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
-          insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
-          insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
-        } //УДАЛЕНИЕ ТОВАРА
-
-
-        insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
-          if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-            console.log('удаляем товар или услугу');
-            insideSlideWrapp.querySelector(".close").parentElement.parentElement;
-            insideSlideWrapp.querySelector('.product-block').remove();
-          }
-
-          ;
-        });
-      }
-
-      ; //переименовываем counter слайда и меняем Name
-
-      insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
-      insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number); //валидация длины формы
-
-      if (classForSecondP === 'stimul-part' || classForSecondP === 'stock-part') {
-        var invalFeedback = document.createElement('div');
-        invalFeedback.classList.add('invalid-feedback');
-        console.log(insideSlideWrapp.querySelector('.text-zone .text-field'));
-        insideSlideWrapp.querySelector('.text-zone .text-field').after(invalFeedback);
-        insideSlideWrapp.querySelector('.text-zone .text-field').addEventListener('input', function (e) {
-          var maxLengthStimulPhrase = getMaxLengthStimulPhrase(insideSlideWrapp.querySelector('.slide-counter input'));
-
-          if (e.target.value.length > maxLengthStimulPhrase) {
-            e.target.classList.add('is-invalid');
-            invalFeedback.textContent = "\u0414\u043B\u0438\u043D\u0430 \u0442\u0435\u043A\u0441\u0442\u0430 ".concat(e.target.value.length, " \u043F\u0440\u0438 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E \u0434\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u043E\u0439 \u0432 ").concat(maxLengthStimulPhrase);
-          } else {
-            e.target.classList.remove('is-invalid');
-            invalFeedback.textContent = '';
-          }
-        });
-      } //иницинализируем слайдер
-
-
-      initCarousel(".".concat(nameSlider)); // отображение доп форм КОНТАКТЫ ДИСКЛЭЙМЕР
-      //собираем инфу из поля Контактов и дисклеймера и вносим в поля на слайде
-
-      var howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-      var howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-
-      if (howDisplayContact === 'all') {
-        constructSlide.querySelector('.option-contact').remove();
-      } else {
-        var optionContactInput = constructSlide.querySelector('.option-contact .optional-txt');
-        optionContactInput.value = document.querySelector('.contact-block textarea').value;
-      }
-
-      if (howDisplayDisclaimer === 'all') {
-        constructSlide.querySelector('.option-disclaimer').remove();
-      } else {
-        var optionDisclaimerInput = constructSlide.querySelector('.option-disclaimer .optional-txt');
-        optionDisclaimerInput.value = document.querySelector('.disclaimer-block textarea').value;
-      }
-
-      deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide"));
+      eventChangeSlide(elem);
     });
   }
 
   ;
-  changeSlide(document.querySelector('.video-slide__change')); // СБОР ДАННЫХ ФОРМЫ
+  changeSlide(document.querySelector('.video-slide__change')); //НУЖНО ДОБАВИТЬ ВЫБОР VALUE Чтобы сразу собрать ДРУГОЙ СЛАЙД
+  //eventChangeSlide(document.querySelector('.video-slide__change'));
+  // СБОР ДАННЫХ ФОРМЫ
 
   /*  formElem.onsubmit = async (e) => {
      e.preventDefault();
@@ -1031,9 +1045,40 @@ document.addEventListener('DOMContentLoaded', function () {
   //let result = await response.json();
   //alert(result.message);
 
+  var button = document.querySelector('.button-anim');
+  var submit = document.querySelector('.submit');
+
+  function toggleClassActive(e) {
+    console.log(e);
+    e.classList.toggle('active-anim');
+  }
+
+  function addClassOk(e) {
+    console.log(e);
+    e.classList.add('finished-anim');
+    setTimeout(function () {
+      e.classList.remove('finished-anim');
+      e.classList.remove('active-anim');
+    }, 4000);
+  }
+
+  function addClassFail(e) {
+    console.log(e);
+    e.classList.remove('active-anim');
+    e.classList.add('fail-anim');
+    setTimeout(function () {
+      return e.classList.remove('fail-anim');
+    }, 2000);
+  } //button.addEventListener('click', toggleClassActive);
+  //button.addEventListener('transitionend', toggleClass);
+  // button.addEventListener('transitionend', addClassFail);
+
+
   var formElem = document.querySelector('#formElem');
   formElem.addEventListener('submit', function (e) {
     e.preventDefault();
+    e = e.target;
+    e = e.querySelector('button[type="submit"]');
     var allDuration = document.querySelector('#main-conter-val').value;
     var slidesDurationArr = [],
         slidesDuration = 0;
@@ -1051,7 +1096,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.duration-message').remove();
       }
 
-      submitHandler();
+      console.log(e);
+      submitHandler(e);
     } else {
       if (document.querySelector('.duration-message')) {
         document.querySelector('.duration-message').remove();
@@ -1072,8 +1118,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  function submitHandler() {
-    //убираем disabled у Counter
+  function submitHandler(e) {
+    console.log(e); //убираем disabled у Counter
+
     document.querySelectorAll(".qty .count").forEach(function (el) {
       el.removeAttribute("disabled");
     }); //формируем formData
@@ -1129,7 +1176,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     console.log('идет отправка');
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
-    $(".modal").modal('show');
+    toggleClassActive(e);
     fetch("send.php", {
       method: "POST",
       body: formData
@@ -1137,15 +1184,19 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.json();
     }).then(function (json) {
       console.log('отправлено');
-      document.querySelector('.modal .modal-body').textContent = "Отправлено!"; //$("#myModalBox").modal('show');
+      addClassOk(e);
+      document.querySelector('.modal .modal-body').textContent = "Отправлено!";
+      $(".modal").modal('show'); //$("#myModalBox").modal('show');
 
       /*process your JSON further */
     })["catch"](function (error) {
+      addClassFail(e);
       console.log(error);
       console.log("ошибка отправки");
       document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз.";
+      $(".modal").modal('show');
     });
   }
 
-  ;
+  ; //NEW ANIM BUTTON
 });

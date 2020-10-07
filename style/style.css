@@ -3,7 +3,18 @@ h5 {
   display: inline-block;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: .9rem;
 }
 
@@ -344,8 +355,8 @@ header .inside {
 .qty input {
   -moz-user-select: none;
   -webkit-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .qty .count {
@@ -360,8 +371,8 @@ header .inside {
   text-align: center;
   -moz-user-select: none;
   -webkit-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: transparent;
 }
 
@@ -598,7 +609,7 @@ header .inside {
 }
 
 .form-check-inline {
-  margin-bottom: 6px;
+  margin-bottom: 15px;
 }
 
 .form-check-inline .form-check-label {
@@ -815,9 +826,9 @@ header .inside {
 .add-item-block .add-item, .inside .add-item {
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   display: inline-block;
 }
 
@@ -851,6 +862,10 @@ header .inside {
 .add-item-block .add-item p, .inside .add-item p {
   display: inline-block;
   margin: 0;
+}
+
+.inside {
+  margin-top: 20px;
 }
 
 .inside .add-item p:first-child {
@@ -985,9 +1000,9 @@ header .inside {
 .attach-block.for-product .my-file-input {
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background-color: #fff;
   z-index: 100;
   position: relative;
@@ -1164,9 +1179,9 @@ input[type='radio']:checked::after {
 
 .button-anim {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   display: inline-block;
   position: relative;
   display: -webkit-box;
@@ -1268,7 +1283,7 @@ input[type='radio']:checked::after {
 
 .active-anim span:nth-of-type(2) i {
   -webkit-animation: loading 500ms linear infinite;
-          animation: loading 500ms linear infinite;
+  animation: loading 500ms linear infinite;
 }
 
 .active-anim span:nth-of-type(3) {
@@ -1295,7 +1310,7 @@ input[type='radio']:checked::after {
   display: block !important;
   font-size: 24px;
   -webkit-animation: scale 0.5s linear;
-          animation: scale 0.5s linear;
+  animation: scale 0.5s linear;
 }
 
 .finished-anim .check i {
@@ -1323,7 +1338,7 @@ input[type='radio']:checked::after {
   display: block !important;
   font-size: 24px;
   -webkit-animation: scale 0.5s linear;
-          animation: scale 0.5s linear;
+  animation: scale 0.5s linear;
 }
 
 .fail-anim .fail i {
