@@ -1,5 +1,15 @@
 "use strict";
 
+require("core-js/modules/es6.regexp.replace");
+
+require("core-js/modules/es6.regexp.split");
+
+require("core-js/modules/es7.object.define-getter");
+
+require("core-js/modules/es6.regexp.to-string");
+
+require("core-js/modules/es6.object.to-string");
+
 window.FontAwesomeKitConfig = {
   "asyncLoading": {
     "enabled": false

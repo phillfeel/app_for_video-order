@@ -334,6 +334,10 @@ header .inside {
           justify-content: center;
 }
 
+.video-name {
+  margin-bottom: 50px;
+}
+
 .main-counter.notice {
   position: relative;
 }
@@ -673,6 +677,10 @@ header .inside {
             justify-content: space-between;
   }
   .title-line .right-title {
+    width: 100%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin: 17px 0 0 0;
     display: -webkit-box;
     display: -ms-flexbox;

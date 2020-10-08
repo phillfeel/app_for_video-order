@@ -329,6 +329,10 @@ header {
 }
 
 
+.video-name{
+	margin-bottom: 50px;
+}
+
 // COUNTER 
 .main-counter.notice {
 	position: relative;
@@ -702,6 +706,8 @@ header {
 		justify-content: space-between;
 
 		.right-title {
+			width: 100%;
+			justify-content: space-between;
 			margin: 17px 0 0 0;
 			display: flex;
 			align-items: center;

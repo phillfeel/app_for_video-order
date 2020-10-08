@@ -1,4 +1,5 @@
 'use strict';
+require("classlist-polyfill");
 
 document.addEventListener('DOMContentLoaded', function () {
 
