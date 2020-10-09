@@ -1,46 +1,309 @@
-'use strict';
+//Other Polyfill
+if (typeof window !== 'undefined' && window.NodeList && !NodeList.prototype.forEach) {
+  NodeList.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
 
-require("core-js/modules/web.dom.iterable");
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
 
-require("core-js/modules/es7.symbol.async-iterator");
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('after')) {
+      return;
+    }
 
-require("core-js/modules/es6.symbol");
+    Object.defineProperty(item, 'after', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function after() {
+        var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        this.parentNode.insertBefore(docFrag, this.nextSibling);
+      }
+    });
+  });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-require("core-js/modules/es6.string.iterator");
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('before')) {
+      return;
+    }
 
-require("core-js/modules/es6.array.from");
+    Object.defineProperty(item, 'before', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function before() {
+        var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        this.parentNode.insertBefore(docFrag, this);
+      }
+    });
+  });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-require("core-js/modules/es6.regexp.to-string");
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('append')) {
+      return;
+    }
 
-require("core-js/modules/es6.object.to-string");
+    Object.defineProperty(item, 'append', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function append() {
+        var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        this.appendChild(docFrag);
+      }
+    });
+  });
+})([Element.prototype, Document.prototype, DocumentFragment.prototype]); // --- classlist-Polyfill --- //
 
-require("core-js/modules/es6.regexp.replace");
 
-require("core-js/modules/es6.regexp.split");
+if ("document" in window.self) {
+  // Full polyfill for browsers with no classList support
+  // Including IE < Edge missing SVGElement.classList
+  if (!("classList" in document.createElement("_")) || document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg", "g"))) {
+    (function (view) {
+      "use strict";
 
-require("core-js/modules/es6.function.name");
+      if (!('Element' in view)) return;
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+      var classListProp = "classList",
+          protoProp = "prototype",
+          elemCtrProto = view.Element[protoProp],
+          objCtr = Object,
+          strTrim = String[protoProp].trim || function () {
+        return this.replace(/^\s+|\s+$/g, "");
+      },
+          arrIndexOf = Array[protoProp].indexOf || function (item) {
+        var i = 0,
+            len = this.length;
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+        for (; i < len; i++) {
+          if (i in this && this[i] === item) {
+            return i;
+          }
+        }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+        return -1;
+      } // Vendors: please allow content code to instantiate DOMExceptions
+      ,
+          DOMEx = function DOMEx(type, message) {
+        this.name = type;
+        this.code = DOMException[type];
+        this.message = message;
+      },
+          checkTokenAndGetIndex = function checkTokenAndGetIndex(classList, token) {
+        if (token === "") {
+          throw new DOMEx("SYNTAX_ERR", "An invalid or illegal string was specified");
+        }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+        if (/\s/.test(token)) {
+          throw new DOMEx("INVALID_CHARACTER_ERR", "String contains an invalid character");
+        }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+        return arrIndexOf.call(classList, token);
+      },
+          ClassList = function ClassList(elem) {
+        var trimmedClasses = strTrim.call(elem.getAttribute("class") || ""),
+            classes = trimmedClasses ? trimmedClasses.split(/\s+/) : [],
+            i = 0,
+            len = classes.length;
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+        for (; i < len; i++) {
+          this.push(classes[i]);
+        }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+        this._updateClassName = function () {
+          elem.setAttribute("class", this.toString());
+        };
+      },
+          classListProto = ClassList[protoProp] = [],
+          classListGetter = function classListGetter() {
+        return new ClassList(this);
+      }; // Most DOMException implementations don't allow calling DOMException's toString()
+      // on non-DOMExceptions. Error's toString() is sufficient here.
 
-require("classlist-polyfill");
+
+      DOMEx[protoProp] = Error[protoProp];
+
+      classListProto.item = function (i) {
+        return this[i] || null;
+      };
+
+      classListProto.contains = function (token) {
+        token += "";
+        return checkTokenAndGetIndex(this, token) !== -1;
+      };
+
+      classListProto.add = function () {
+        var tokens = arguments,
+            i = 0,
+            l = tokens.length,
+            token,
+            updated = false;
+
+        do {
+          token = tokens[i] + "";
+
+          if (checkTokenAndGetIndex(this, token) === -1) {
+            this.push(token);
+            updated = true;
+          }
+        } while (++i < l);
+
+        if (updated) {
+          this._updateClassName();
+        }
+      };
+
+      classListProto.remove = function () {
+        var tokens = arguments,
+            i = 0,
+            l = tokens.length,
+            token,
+            updated = false,
+            index;
+
+        do {
+          token = tokens[i] + "";
+          index = checkTokenAndGetIndex(this, token);
+
+          while (index !== -1) {
+            this.splice(index, 1);
+            updated = true;
+            index = checkTokenAndGetIndex(this, token);
+          }
+        } while (++i < l);
+
+        if (updated) {
+          this._updateClassName();
+        }
+      };
+
+      classListProto.toggle = function (token, force) {
+        token += "";
+        var result = this.contains(token),
+            method = result ? force !== true && "remove" : force !== false && "add";
+
+        if (method) {
+          this[method](token);
+        }
+
+        if (force === true || force === false) {
+          return force;
+        } else {
+          return !result;
+        }
+      };
+
+      classListProto.toString = function () {
+        return this.join(" ");
+      };
+
+      if (objCtr.defineProperty) {
+        var classListPropDesc = {
+          get: classListGetter,
+          enumerable: true,
+          configurable: true
+        };
+
+        try {
+          objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+        } catch (ex) {
+          // IE 8 doesn't support enumerable:true
+          // adding undefined to fight this issue https://github.com/eligrey/classList.js/issues/36
+          // modernie IE8-MSW7 machine has IE8 8.0.6001.18702 and is affected
+          if (ex.number === undefined || ex.number === -0x7FF5EC54) {
+            classListPropDesc.enumerable = false;
+            objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+          }
+        }
+      } else if (objCtr[protoProp].__defineGetter__) {
+        elemCtrProto.__defineGetter__(classListProp, classListGetter);
+      }
+    })(window.self);
+  } // There is full or partial native classList support, so just check if we need
+  // to normalize the add/remove and toggle APIs.
+
+
+  (function () {
+    "use strict";
+
+    var testElement = document.createElement("_");
+    testElement.classList.add("c1", "c2"); // Polyfill for IE 10/11 and Firefox <26, where classList.add and
+    // classList.remove exist but support only one argument at a time.
+
+    if (!testElement.classList.contains("c2")) {
+      var createMethod = function createMethod(method) {
+        var original = DOMTokenList.prototype[method];
+
+        DOMTokenList.prototype[method] = function (token) {
+          var i,
+              len = arguments.length;
+
+          for (i = 0; i < len; i++) {
+            token = arguments[i];
+            original.call(this, token);
+          }
+        };
+      };
+
+      createMethod('add');
+      createMethod('remove');
+    }
+
+    testElement.classList.toggle("c3", false); // Polyfill for IE 10 and Firefox <24, where classList.toggle does not
+    // support the second argument.
+
+    if (testElement.classList.contains("c3")) {
+      var _toggle = DOMTokenList.prototype.toggle;
+
+      DOMTokenList.prototype.toggle = function (token, force) {
+        if (1 in arguments && !this.contains(token) === !force) {
+          return force;
+        } else {
+          return _toggle.call(this, token);
+        }
+      };
+    }
+
+    testElement = null;
+  })();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-  //----MAIN-BLOCK----//
-  // counter MAIN
+  // --- Переменные для задания параметров страницы --- //
+  //Переменная для максимальной длины текста (5 * validationLevel )
+  var validatonLevel = 13; //Доступные форматы видео(значения в будущем классы)  
+
+  var formats = {
+    f16x9: "rectangle16x9",
+    f1x1: "square",
+    f9x16: "rectangle9x16"
+  }; //Функция изменения значения Основного Counter
+
   function changeValCountMain(item, max, min, step) {
-    console.log('вызвали changeValCount');
     var plus = item.querySelector(".plus"),
         minus = item.querySelector(".minus"),
         count = item.querySelector(".count");
@@ -75,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       if (value / +document.querySelectorAll('.video-slide').length == step) {
-        min = value; //document.querySelector('.main-counter').classList.add('notice');
+        min = value;
       } else {
         min = min - step;
       }
@@ -86,14 +349,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var amountSlide = document.querySelectorAll('.video-slide').length;
 
         if (value / amountSlide == step) {
-          document.querySelector('.add-item-block.add-slide button').disabled = true; //document.querySelector('.main-counter').classList.add('notice');
-
-          console.log('получается нельзя меньше');
+          document.querySelector('.add-item-block.add-slide button').disabled = true;
           minus.classList.add('disabled');
         }
-      } else {
-        console.log('не никак');
-      }
+      } else {}
 
       ;
 
@@ -106,9 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ; //запускаем counter общей длины слайда
-
-  changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5); // counter Slides
+  ; //Функция изменения значения counter Слайдов
 
   function changeValCountSlides(item, max, min, step) {
     var plus = item.querySelector(".plus"),
@@ -143,7 +400,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ; //Добавляем Touchstart and Touchend для counter
+  ; //запускаем counter общей длины слайда
+
+  changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5); //Функция Touchstart and Touchend для counter для сенсорных
 
   function counterTouch(selector) {
     var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
@@ -171,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   ;
-  counterTouch("main-settings"); //загрузка файла 
+  counterTouch("main-settings"); //Функция названия поля загрузки файла
 
   function uploadFile(target) {
     //заносим id Input
@@ -206,27 +465,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ; //uploadFile(document.getElementById('main-logo'));
+  ; //Иницианализируем изменение названия длины
 
-  uploadFile(document.getElementById('extra-files')); //format-video-preview
+  uploadFile(document.getElementById('extra-files')); //Переменные для создания Prewiew
 
   var formatVideoSelect = document.querySelector(".format-video__change_input"),
       formatPreview = document.createElement("div");
-  var formatVideoZone = document.querySelector(".format-video__preview");
-  var pickedVideoFormat = formatVideoSelect.value;
-  var formats = {
-    f16x9: "rectangle16x9",
-    f1x1: "square",
-    f9x16: "rectangle9x16"
-  };
+  var formatVideoZone = document.querySelector(".format-video__preview"),
+      pickedVideoFormat = formatVideoSelect.value; //Функция создания дефолтных prewiew
 
   function createPreview(zone, item, picked) {
     console.log('вызвали createPreview для format');
     var nameFormatArr = picked.split(":"),
         nameFormat = "f".concat(nameFormatArr[0], "x").concat(nameFormatArr[1]);
     item.classList = formats[nameFormat];
-    zone.append(item);
-  }
+    zone.appendChild(item);
+  } //Функция создания prewiewCustom для format
+
 
   function createPreviewCustom() {
     var inputCustomSize = document.querySelector(".format-video__input-size"),
@@ -273,12 +528,14 @@ document.addEventListener('DOMContentLoaded', function () {
         customSizePreview.style.border = '1px solid #febf00';
       }
     });
-  }
+  } //Функция удаления Prewiew
+
 
   function deletePreviewCustom() {
     var formatVideoZone2 = document.querySelector('.format-video__preview');
     formatVideoZone2.remove();
-  }
+  } // --- Создаем prewiew формата --- //
+
 
   if (formatVideoZone) {
     createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
@@ -304,66 +561,7 @@ document.addEventListener('DOMContentLoaded', function () {
       pickedVideoFormat = formatVideoSelect.value;
       createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
     }
-  }); //What radio contact and disclaimer FOR 1 SLIDE
-
-  var optionalContact = "<div class=\"option-contact solo-check form-check\">\n  <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n  <label class=\"form-check-label\" for=\"defaultCheck1\">\n    <input disabled name=\"optional-conatact\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F\">\n  </label>\n  </div>";
-  var optionalDisclaimer = "<div class=\"option-disclaimer solo-check form-check\">\n      <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n      <label class=\"form-check-label\" for=\"defaultCheck1\">\n        <input disabled name=\"optional-disclaimer\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u0438\u0441\u043A\u043B\u0435\u0439\u043C\u0435\u0440\">\n      </label>\n    </div>";
-  var howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value; //let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-
-  document.querySelectorAll('input[name="contact-where"]').forEach(function (elem) {
-    elem.addEventListener('change', function () {
-      if (elem.checked) {
-        howDisplayContact = elem.value;
-
-        if (howDisplayContact === 'all') {
-          document.querySelectorAll('.option-contact').forEach(function (elem) {
-            elem.remove();
-          });
-        } else {
-          document.querySelectorAll(".optional-contact__wrapp").forEach(function (elem) {
-            elem.innerHTML = optionalContact;
-            elem.querySelector(".option-contact .optional-txt").value = contactValue;
-          });
-        }
-      }
-    });
-  });
-  document.querySelectorAll('input[name="disclaimer-where"]').forEach(function (elem) {
-    elem.addEventListener('change', function () {
-      if (elem.checked) {
-        howDisplayDisclaimer = elem.value;
-
-        if (howDisplayDisclaimer === 'all') {
-          document.querySelectorAll('.option-disclaimer').forEach(function (elem) {
-            elem.remove();
-          });
-        } else {
-          document.querySelectorAll(".optional-disclaimer__wrapp").forEach(function (elem) {
-            elem.innerHTML = optionalDisclaimer;
-            elem.querySelector(".option-disclaimer .optional-txt").value = disclaimerValue;
-          });
-        }
-      }
-    });
-  });
-  var contactValue = "";
-  var contactTextarea = document.querySelector('.contact-block textarea');
-  contactTextarea.addEventListener('change', function () {
-    contactValue = contactTextarea.value;
-    document.querySelectorAll('.option-contact .optional-txt').forEach(function (elem) {
-      elem.value = contactValue;
-    });
-  });
-  /*   let disclaimerValue = "";
-    let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
-  
-    disclaimerTextarea.addEventListener('change', () => {
-      disclaimerValue = disclaimerTextarea.value;
-      document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem) => {
-        elem.value = disclaimerValue;
-      })
-    }) */
-  //MORE - INPUT (more color)
+  }); //Функция disable Enable для чекбоксов и полей
 
   function turnForm(elem) {
     console.log("вызвали turnForm");
@@ -376,44 +574,7 @@ document.addEventListener('DOMContentLoaded', function () {
         moreColorsInpt.setAttribute('disabled', true);
       }
     });
-  }
-
-  function createOptionalFiled(item) {
-    console.log('вызвали createOptionalFiled');
-    var moreColorsCheckbox = item.querySelector(".optional-checkbox"),
-        moreColorsInpt = item.querySelector(".optional-txt");
-    moreColorsCheckbox.addEventListener('click', function () {
-      if (moreColorsCheckbox.checked) {
-        moreColorsInpt.removeAttribute('disabled', false);
-        var itemClone = item.cloneNode(true),
-            //clone
-        cloneCheck = itemClone.querySelector(".optional-checkbox"),
-            cloneInpt = itemClone.querySelector(".optional-txt");
-        cloneCheck.checked = false;
-        cloneInpt.setAttribute('disabled', true);
-
-        if (item.nextSibling) {
-          item.after(itemClone);
-          item = item.nextSibling;
-          createOptionalFiled(item);
-        }
-      } else {
-        moreColorsInpt.setAttribute('disabled', true);
-
-        if (item.previousElementSibling !== null) {
-          item = item.previousElementSibling;
-
-          if (item.nextElementSibling !== null || item.nextElementSibling.classList.contains("optional-field")) {
-            item.nextSibling.remove();
-          }
-        }
-      }
-    });
-
-    if (!moreColorsCheckbox.checked) {
-      moreColorsInpt.setAttribute('disabled', true);
-    }
-  } // динамическое создание слайдов
+  } //Функция создания основы слайда
 
 
   function setSlideHtmlWithSelector(number, selector) {
@@ -453,10 +614,10 @@ document.addEventListener('DOMContentLoaded', function () {
     ;
     var forConstruct = "<div class=\"wrapper\"><div class=\"title-line\"><div class=\"left-title\"><h5 class=\"video-slide__number\">".concat(number, "</h5><select name=\"slide-").concat(number, "\" class=\"video-slide__change form-control form-control-sm\"><option value=\"stimul\" ").concat(stimulPhrs, ">\u041F\u043E\u0431\u0443\u0436\u0434\u0430\u044E\u0449\u0430\u044F \u0444\u0440\u0430\u0437\u0430</option><option value=\"logo\" ").concat(logo, ">\u041B\u043E\u0433\u043E\u0442\u0438\u043F</option><option value=\"product\" ").concat(productPrice, ">\u0422\u043E\u0432\u0430\u0440-\u0426\u0435\u043D\u0430</option><option value=\"service\" ").concat(serviceDescription, ">\u0423\u0441\u043B\u0443\u0433\u0430-\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</option><option value=\"stock\" ").concat(stock, ">\u0410\u043A\u0446\u0438\u044F</option><option value=\"contact\" ").concat(contacts, ">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B</option></select></div><div class=\"right-title\"><h6 class=\"duration-title\">\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C</h6><div class=\"counter qty slide-counter\"><span class=\"minus\"><i class=\"fas fa-minus-circle\"></i></span><input type=\"number\" class=\"count\" name=\"qty\" value=\"5\" disabled=\"true\"><span class=\"plus\"><i class=\"fas fa-plus-circle\"></i></span></div></div></div></div>");
     return forConstruct;
-  } //ФУНКИЦЯ СОЗДАНИЯ ТЕЛА ВТОРОЙ ЧАСТИ СЛАЙДА
+  } //Функция создания второй части слайда
 
 
-  function createSecondPartHtml(nameForInitSlider, optionalContact, optionalDisclaimer) {
+  function createSecondPartHtml(nameForInitSlider) {
     var textZoneHtml_1 = "<div class=\"text-zone\">\n    <p class=\"title\">\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u0447\u0430\u0442\u044C \u0432\u0438\u0434\u0435\u043E\u0440\u043E\u043B\u0438\u043A \u0441 \u0432\u043E\u043F\u0440\u043E\u0441\u0430 \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u044B \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u043A \u043F\u043E\u043A\u0443\u043F\u043A\u0435</p>   \n    <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n     </div>";
     var textZoneHtml_2 = "<div class=\"text-zone\">\n     <div class=\"solo-check form-check\">\n       <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n       <label class=\"form-check-label\" for=\"defaultCheck1\">\n       <input disabled name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0433\u0430\u043D \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u0443\">\n       </label>\n     </div>\n   </div>";
     var textForContact = "<div class=\"option-contact solo-check form-check\">\n   <input class=\"form-check-input optional-checkbox\" type=\"checkbox\" value=\"\" id=\"defaultCheck1\">\n   <label class=\"form-check-label\" for=\"defaultCheck1\">\n     <input name=\"optional-text\" class=\"optional-txt form-control form-control-sm\" type=\"text\" placeholder=\"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0433\u0430\u043D \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u0443\" disabled=\"true\">\n   </label>\n   </div>";
@@ -487,15 +648,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (true) {
       case /logo-part_slider/i.test(nameForInitSlider):
-        nameAttach = 'Прикрепить логотип'; //attachHtml = getAttachHtml(nameAttach);
-
+        nameAttach = 'Прикрепить логотип';
         gifName = 'logo';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = "".concat(textZoneHtml_2).concat(carouselHtml).concat(removeSlideHtml);
         break;
 
       case /stimul-part_slider/i.test(nameForInitSlider):
-        //nameAttach = 'Прикрепить логотип';
         gifName = 'stimul';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = "".concat(textZoneHtml_1).concat(carouselHtml).concat(removeSlideHtml);
@@ -528,32 +687,29 @@ document.addEventListener('DOMContentLoaded', function () {
         attachHtml = getAttachHtml(nameAttach);
         insideHtml = "".concat(attachHtml).concat(textForContact).concat(carouselHtml).concat(removeSlideHtml);
         break;
-    } //console.log(insideHtml);
-
+    }
 
     return insideHtml;
   }
 
-  ;
+  ; //Функция создания верстки первого слайда  
 
-  function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact) {
+  function setStimulHtmlWithSlider(name) {
     var insideHtmlStimulPrase = "\n    <div class=\"text-zone\">\n    <p class=\"title\">\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u0447\u0430\u0442\u044C \u0432\u0438\u0434\u0435\u043E\u0440\u043E\u043B\u0438\u043A \u0441 \u0432\u043E\u043F\u0440\u043E\u0441\u0430 \u0438\u043B\u0438 \u0444\u0440\u0430\u0437\u044B \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u043A \u043F\u043E\u043A\u0443\u043F\u043A\u0435</p>   \n    <input class=\"text-field form-control\" type=\"text\" name=\"stimul-text\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442\">\n     </div>\n     <h6 class=\"duration-title\">\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E</h6>\n     <div class=\"chooseAnimation-zone\">\n       <div class=\"".concat(name, "\">\n         <div class=\"sl_slice\"><img src=\"img/stimul-1.gif\" alt=\"\" class=\"sl_img\">\n         <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u043D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-2.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u0422\u0435\u043A\u0441\u0442 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p></div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-3.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u041D\u0430 \u043F\u043E\u0434\u043B\u043E\u0436\u043A\u0435 \u0441 \u0444\u0438\u0433\u0443\u0440\u0430\u043C\u0438</p>\n         </div>\n         <div class=\"sl_slice\"><img src=\"img/stimul-4.gif\" alt=\"\" class=\"sl_img\">\n           <p class=\"sl_text\">\u042D\u043D\u0435\u0440\u0433\u0438\u0447\u043D\u044B\u0439</p>\n         </div> \n        </div>\n        </div>\n     <div class=\"btn-zone\"><button type=\"button\" class=\"btn-remove-slide btn btn-outline-danger btn-sm\"><i class=\"far fa-trash-alt\"></i><p>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u043B\u0430\u0439\u0434</p></button></div>");
-    /*  <ion-icon name="trash-bin-outline"></ion-icon> */
-
     return insideHtmlStimulPrase;
   }
 
   ;
-  var nameSlider;
+  var nameSlider; //Функция добавления второй части слайда
 
   function createSecondPart(wrapp, part2, classPart, funcHtmlSlider) {
     part2 = document.createElement('div');
     part2.classList.add(classPart);
     part2.innerHTML = funcHtmlSlider;
-    wrapp.append(part2);
+    wrapp.appendChild(part2);
   }
 
-  ;
+  ; //Функция для добавления товара или услуги на страницу
 
   function addProduct(insideSlideWrapp, nameSlider) {
     insideSlideWrapp.querySelector('.add-item').addEventListener('click', function (elem) {
@@ -592,7 +748,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
+  ; //Функция для удаления слайда
 
   function deleteSlide(btn) {
     if (document.querySelectorAll('.video-slide').length == 1) {
@@ -611,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var i = 1;
         var allSlides = document.querySelectorAll('.video-slide.block');
         document.querySelectorAll('.video-slide__number').forEach(function (item) {
-          allSlides[i - 1].classList = "video-slide block added-".concat(i);
+          allSlides[i - 1].className = "video-slide block added-".concat(i);
           allSlides[i - 1].querySelector('.video-slide__change').setAttribute('name', "slide-".concat(i));
           item.textContent = i++;
         }); //slideNumber = +document.querySelectorAll('.video-slide__number').length - 1;
@@ -645,7 +801,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
+  ; //Функция иницинализации карусели
 
   function initCarousel(carouselClass) {
     $(carouselClass).slick({
@@ -682,13 +838,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
+  ; //Функция для определения максимальной длины текста
 
   function getMaxLengthStimulPhrase(slideCounterInput) {
-    return +slideCounterInput.value * 13;
+    return +slideCounterInput.value * validatonLevel;
   }
 
-  ;
+  ; //Функция валидации длины текста
 
   function validationText() {
     var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : insideSlideWrapp.querySelector('.text-zone .text-field');
@@ -710,43 +866,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
-
-  function smoothAppearance(constructSlide) {
-    var startOpacity = 0.3;
-    var finishOpacity = 0.99;
-    var stepOp = 0.02; //let element = document.getElementById('SomeElementYouWantToAnimate');
-    //constructSlide.style.opacity = 0;
-
-    function step() {
-      startOpacity = startOpacity + stepOp;
-      constructSlide.style.opacity = "".concat(startOpacity);
-      console.log(startOpacity);
-
-      if (startOpacity < finishOpacity) {
-        window.requestAnimationFrame(step);
-      }
-    }
-
-    window.requestAnimationFrame(step);
-  } //----MAIN---// динамическое добавление Побуждающей фразы на существующий
-
+  ; // --- Добавление самого первого слайда --- //
 
   document.querySelectorAll('.video-slide__change').forEach(function (item) {
-    var insideSlideWrapp, secondPart, optionalField;
+    var insideSlideWrapp, secondPart, optionalField; //первый салйд - побуждающая фраза
 
     switch (item.value) {
       case 'stimul':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда');
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact)); //добавлям Touchstart на Counter этого слайда
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider")); //добавлям Touchstart на Counter этого слайда
 
-        counterTouch("video-slide"); //добавляем работу доп. форм
-
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        }); //соло формы
+        counterTouch("video-slide"); //соло формы
 
         insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
           turnForm(item);
@@ -769,30 +900,34 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
         break;
-
-      case 'logo':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда');
-        insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        secondPart = document.createElement('div');
-        secondPart.classList.add('logo-part');
-        secondPart.innerHTML = setLogoHtmlWithSlider("stimul-part_slider");
-        insideSlideWrapp.append(secondPart); //добавляем работу доп. форм
-
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        });
-        break;
     }
 
-    ;
-  }); //иницианализируем карусель
+    ; //иницианализируем карусель
 
-  initCarousel('.stimul-part_slider'); //иницинализируем функцию удаления слайда - идет после того как сформировалась
+    initCarousel('.stimul-part_slider'); //иницинализируем функцию удаления слайда - идет после того как сформировалась
 
-  deleteSlide(document.querySelector('.btn-remove-slide'));
+    deleteSlide(document.querySelector('.btn-remove-slide'));
+  }); //Функция плавного появления слайда
+
+  function smoothAppearance(constructSlide) {
+    var startOpacity = 0.3,
+        finishOpacity = 0.99,
+        stepOp = 0.02;
+
+    function step() {
+      startOpacity = startOpacity + stepOp;
+      constructSlide.style.opacity = "".concat(startOpacity);
+
+      if (startOpacity < finishOpacity) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  } // --- Создание нового слайда по клику --- //
+
+
   var iArr = 1; //для обхода массива названий слайдов
-  // ----- Cоздать новый слайд по клику! 
 
   document.querySelector(".add-slide .add-item").addEventListener("click", function () {
     var slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
@@ -808,7 +943,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var slideNumber = +allSlidesNumb[allSlidesNumb.length - 1].textContent + 1;
     console.log(slideNumber);
     var constructSlide = document.createElement("div");
-    constructSlide.classList = "video-slide block added-".concat(slideNumber);
+    constructSlide.className = "video-slide block added-".concat(slideNumber);
     constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart);
     var main = document.querySelector('.add-slide');
     main.before(constructSlide);
@@ -827,10 +962,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     ;
-    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
-    console.log(insideSlideWrapp); //CHANGE COLOR TOUCHSTART COUNTER
+    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel));
+    console.log(insideSlideWrapp); //меняем цвет counter при клике на него на Сенсорных
 
-    counterTouch("", constructSlide); // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
+    counterTouch("", constructSlide); // если лого добавляем работу доп. форм(Нужно для: побуждающей, лого)
 
     if (namePart === 'logo-part') {
       var optionalField = document.querySelectorAll(".logo-part .optional-field");
@@ -865,7 +1000,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (namePart === 'product-part' || namePart === 'service-part') {
       validationText(insideSlideWrapp.querySelector('.product-block .description'), insideSlideWrapp.querySelector('.slide-counter input'));
-    } // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    } // если товар-цена , услуга - добавить товар на страницу
 
 
     if (namePart === 'service-part' || namePart === 'product-part') {
@@ -877,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
         insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
         insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
-      } //УДАЛЕНИЕ ТОВАРА
+      } //удаление товара
 
 
       insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
@@ -913,11 +1048,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     deleteSlide(insideSlideWrapp.querySelector(".btn-remove-slide")); //перемещаем кнопку добавить слайд
 
-    document.querySelector('.last-main-block').before(document.querySelector(".add-slide")); // Перемотка к началу созданого элемента
+    document.querySelector('.last-main-block').before(document.querySelector(".add-slide")); // Перемотка к началу созданого элемента и анимация
 
     insideSlideWrapp.scrollIntoView();
     smoothAppearance(constructSlide);
-  });
+  }); // --- Функция смены слайда через переключатель --- //
 
   function eventChangeSlide(elem) {
     var firstPart = elem.parentElement.parentElement;
@@ -951,12 +1086,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     ;
-    var namePart = classForSecondP;
-    var number = +document.querySelectorAll(".".concat(classForSecondP)).length + 1,
+    var namePart = classForSecondP,
+        constructSlide = firstPart.parentElement.parentElement,
+        insideSlideWrapp = firstPart.parentNode,
+        number = +document.querySelectorAll(".".concat(classForSecondP)).length + 1,
         nameSlider = classForSecondP + "_slider-" + number;
-    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
-    var constructSlide = firstPart.parentElement.parentElement;
-    var insideSlideWrapp = firstPart.parentNode;
+    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider));
     var slideNumber = +constructSlide.querySelector('.video-slide__number').textContent; //добавляем работу доп. форм(Нужно для: побуждающей)
 
     if (classForSecondP === 'stimul-part') {
@@ -980,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
       turnForm(item);
-    }); // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    }); // если товар-цена , услуга - добавить товар на страницу
 
     if (classForSecondP === 'service-part' || classForSecondP === 'product-part') {
       //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
@@ -991,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp.querySelector('input[type="file"]').id = nameSliderSlim + '_img-1';
         insideSlideWrapp.querySelector('input[type="file"]').setAttribute("name", nameSliderSlim + '_img-1');
         insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
-      } //УДАЛЕНИЕ ТОВАРА
+      } //удаление товара
 
 
       insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
@@ -1007,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ; //переименовываем counter слайда и меняем Name
 
-    insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
+    insideSlideWrapp.querySelector('.slide-counter input').className = 'count ' + classForSecondP + '-count-' + number;
     insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number); //валидация длины формы
 
     if (namePart === 'stimul-part' || namePart === 'stock-part') {
@@ -1034,49 +1169,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ;
-  changeSlide(document.querySelector('.video-slide__change')); //НУЖНО ДОБАВИТЬ ВЫБОР VALUE Чтобы сразу собрать ДРУГОЙ СЛАЙД
-  //eventChangeSlide(document.querySelector('.video-slide__change'));
-  // СБОР ДАННЫХ ФОРМЫ
+  ; //Иницианализируем функцию смены слайда с помощью переключателя
 
-  /*  formElem.onsubmit = async (e) => {
-     e.preventDefault();
-     console.log( document.querySelector(".qty.main-counter .count"));
-     document.querySelectorAll(".qty .count").forEach((el)=>{
-       el.removeAttribute("disabled");
-     });  
-       let formData = new FormData(formElem);
-     document.querySelectorAll('.slick-slider').forEach((el)=>{
-       let parentNameAnimation = el.classList[0];
-       let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
-       let nameAnimation = srcSlider.replace(/img\//gi, ""); 
-       formData.append(parentNameAnimation, nameAnimation);
-     });
-     for(let [name, value] of formData) {
-       console.log(`${name} = ${value}`); 
-     };
-     document.querySelectorAll(".qty .count").forEach((el)=>{
-       el.setAttribute("disabled", "true");
-     });  
-    */
-
-  /* let response = await fetch('/article/formdata/post/user', {
-    method: 'POST',
-    body: new FormData(formElem)
-  }); */
-  //let result = await response.json();
-  //alert(result.message);
-
-  var button = document.querySelector('.button-anim');
-  var submit = document.querySelector('.submit');
+  changeSlide(document.querySelector('.video-slide__change')); // --- Функции анимации --- //
 
   function toggleClassActive(e) {
-    console.log(e);
     e.classList.toggle('active-anim');
   }
 
   function addClassOk(e) {
-    console.log(e);
     e.classList.add('finished-anim');
     setTimeout(function () {
       e.classList.remove('finished-anim');
@@ -1085,60 +1186,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function addClassFail(e) {
-    console.log(e);
     e.classList.remove('active-anim');
     e.classList.add('fail-anim');
     setTimeout(function () {
       return e.classList.remove('fail-anim');
     }, 2000);
-  } //button.addEventListener('click', toggleClassActive);
-  //button.addEventListener('transitionend', toggleClass);
-  // button.addEventListener('transitionend', addClassFail);
+  } // --- Сборка и отправка формы --- //
 
 
-  var formElem = document.querySelector('#formElem');
-  formElem.addEventListener('submit', function (e) {
-    e.preventDefault();
-    e = e.target;
-    e = e.querySelector('button[type="submit"]');
-    var allDuration = document.querySelector('#main-conter-val').value;
-    var slidesDurationArr = [],
-        slidesDuration = 0;
-    document.querySelectorAll('.slide-counter input').forEach(function (el) {
-      slidesDurationArr.push(el.value);
-    });
-    console.log(allDuration);
-    slidesDurationArr.forEach(function (element) {
-      slidesDuration += +element;
-    });
-    console.log(slidesDuration);
-
-    if (allDuration >= slidesDuration) {
-      if (document.querySelector('.duration-message')) {
-        document.querySelector('.duration-message').remove();
-      }
-
-      console.log(e);
-      submitHandler(e);
-    } else {
-      if (document.querySelector('.duration-message')) {
-        document.querySelector('.duration-message').remove();
-        var durationMessage = document.createElement('div');
-        durationMessage.classList.add('duration-message');
-        durationMessage.textContent = "Сначала уменьшите длительность слайдов";
-        document.querySelector('button[type="submit"]').before(durationMessage);
-      } else {
-        var _durationMessage = document.createElement('div');
-
-        _durationMessage.classList.add('duration-message');
-
-        _durationMessage.textContent = "Сначала уменьшите длительность слайдов";
-        document.querySelector('button[type="submit"]').before(_durationMessage);
-      }
-
-      ;
-    }
-  });
+  var formElem = document.querySelector('#formElem'); //Функция сборки и отправки формы
 
   function submitHandler(e) {
     console.log(e); //убираем disabled у Counter
@@ -1148,24 +1204,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }); //формируем formData
 
     var formData = new FormData(formElem);
-
-    var _iterator = _createForOfIteratorHelper(formData),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var _step$value = _slicedToArray(_step.value, 2),
-            name = _step$value[0],
-            value = _step$value[1];
-
-        console.log("".concat(name, " = ").concat(value));
-      } //добавляем в formData name Animation
-
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
+    /*   for (let [name, value] of formData) {
+        console.log(`${name} = ${value}`);
+      } */
+    //добавляем в formData name Animation
 
     document.querySelectorAll('.slick-slider').forEach(function (el) {
       var parentNameAnimation = el.classList[0];
@@ -1173,25 +1215,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var nameAnimation = srcSlider.replace(/img\//gi, "");
       formData.append(parentNameAnimation, nameAnimation);
     });
-
-    var _iterator2 = _createForOfIteratorHelper(formData),
-        _step2;
-
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var _step2$value = _slicedToArray(_step2.value, 2),
-            name1 = _step2$value[0],
-            value1 = _step2$value[1];
-
-        console.log("".concat(name1, "=").concat(value1));
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-
-    ; //возвращаем инпут обратно
+    /*    for (let [name1, value1] of formData) {
+         console.log(`${name1}=${value1}`);
+       }; */
+    //возвращаем инпут обратно
 
     document.querySelectorAll(".qty .count").forEach(function (el) {
       el.setAttribute("disabled", "true");
@@ -1220,5 +1247,45 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  ; //NEW ANIM BUTTON
+  ; //Отправка формы
+
+  formElem.addEventListener('submit', function (e) {
+    e.preventDefault();
+    e = e.target;
+    e = e.querySelector('button[type="submit"]');
+    var allDuration = document.querySelector('#main-conter-val').value;
+    var slidesDurationArr = [],
+        slidesDuration = 0;
+    document.querySelectorAll('.slide-counter input').forEach(function (el) {
+      slidesDurationArr.push(el.value);
+    });
+    slidesDurationArr.forEach(function (element) {
+      slidesDuration += +element;
+    });
+
+    if (allDuration >= slidesDuration) {
+      if (document.querySelector('.duration-message')) {
+        document.querySelector('.duration-message').remove();
+      }
+
+      submitHandler(e);
+    } else {
+      if (document.querySelector('.duration-message')) {
+        document.querySelector('.duration-message').remove();
+        var durationMessage = document.createElement('div');
+        durationMessage.classList.add('duration-message');
+        durationMessage.textContent = "Сначала уменьшите длительность слайдов";
+        document.querySelector('button[type="submit"]').before(durationMessage);
+      } else {
+        var _durationMessage = document.createElement('div');
+
+        _durationMessage.classList.add('duration-message');
+
+        _durationMessage.textContent = "Сначала уменьшите длительность слайдов";
+        document.querySelector('button[type="submit"]').before(_durationMessage);
+      }
+
+      ;
+    }
+  });
 });

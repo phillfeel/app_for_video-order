@@ -1,12 +1,341 @@
-'use strict';
-require("classlist-polyfill");
+//Other Polyfill
+
+if (typeof window !== 'undefined' &&  window.NodeList && !NodeList.prototype.forEach) {
+
+  NodeList.prototype.forEach = function (callback, thisArg) {
+
+      thisArg = thisArg || window;
+
+      for (var i = 0; i < this.length; i++) {
+
+          callback.call(thisArg, this[i], i, this);
+
+      }
+
+  };
+
+}
+
+
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('after')) {
+      return;
+    }
+    Object.defineProperty(item, 'after', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function after() {
+        var argArr = Array.prototype.slice.call(arguments),
+          docFrag = document.createDocumentFragment();
+        
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        
+        this.parentNode.insertBefore(docFrag, this.nextSibling);
+      }
+    });
+  });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('before')) {
+      return;
+    }
+    Object.defineProperty(item, 'before', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function before() {
+        var argArr = Array.prototype.slice.call(arguments),
+          docFrag = document.createDocumentFragment();
+        
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        
+        this.parentNode.insertBefore(docFrag, this);
+      }
+    });
+  });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('append')) {
+      return;
+    }
+    Object.defineProperty(item, 'append', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function append() {
+        var argArr = Array.prototype.slice.call(arguments),
+          docFrag = document.createDocumentFragment();
+        
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof Node;
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+        
+        this.appendChild(docFrag);
+      }
+    });
+  });
+})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
+
+
+// --- classlist-Polyfill --- //
+if ("document" in window.self) {
+
+  // Full polyfill for browsers with no classList support
+  // Including IE < Edge missing SVGElement.classList
+  if (!("classList" in document.createElement("_")) 
+    || document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg","g"))) {
+  
+  (function (view) {
+  
+  "use strict";
+  
+  if (!('Element' in view)) return;
+  
+  var
+      classListProp = "classList"
+    , protoProp = "prototype"
+    , elemCtrProto = view.Element[protoProp]
+    , objCtr = Object
+    , strTrim = String[protoProp].trim || function () {
+      return this.replace(/^\s+|\s+$/g, "");
+    }
+    , arrIndexOf = Array[protoProp].indexOf || function (item) {
+      var
+          i = 0
+        , len = this.length
+      ;
+      for (; i < len; i++) {
+        if (i in this && this[i] === item) {
+          return i;
+        }
+      }
+      return -1;
+    }
+    // Vendors: please allow content code to instantiate DOMExceptions
+    , DOMEx = function (type, message) {
+      this.name = type;
+      this.code = DOMException[type];
+      this.message = message;
+    }
+    , checkTokenAndGetIndex = function (classList, token) {
+      if (token === "") {
+        throw new DOMEx(
+            "SYNTAX_ERR"
+          , "An invalid or illegal string was specified"
+        );
+      }
+      if (/\s/.test(token)) {
+        throw new DOMEx(
+            "INVALID_CHARACTER_ERR"
+          , "String contains an invalid character"
+        );
+      }
+      return arrIndexOf.call(classList, token);
+    }
+    , ClassList = function (elem) {
+      var
+          trimmedClasses = strTrim.call(elem.getAttribute("class") || "")
+        , classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
+        , i = 0
+        , len = classes.length
+      ;
+      for (; i < len; i++) {
+        this.push(classes[i]);
+      }
+      this._updateClassName = function () {
+        elem.setAttribute("class", this.toString());
+      };
+    }
+    , classListProto = ClassList[protoProp] = []
+    , classListGetter = function () {
+      return new ClassList(this);
+    }
+  ;
+  // Most DOMException implementations don't allow calling DOMException's toString()
+  // on non-DOMExceptions. Error's toString() is sufficient here.
+  DOMEx[protoProp] = Error[protoProp];
+  classListProto.item = function (i) {
+    return this[i] || null;
+  };
+  classListProto.contains = function (token) {
+    token += "";
+    return checkTokenAndGetIndex(this, token) !== -1;
+  };
+  classListProto.add = function () {
+    var
+        tokens = arguments
+      , i = 0
+      , l = tokens.length
+      , token
+      , updated = false
+    ;
+    do {
+      token = tokens[i] + "";
+      if (checkTokenAndGetIndex(this, token) === -1) {
+        this.push(token);
+        updated = true;
+      }
+    }
+    while (++i < l);
+  
+    if (updated) {
+      this._updateClassName();
+    }
+  };
+  classListProto.remove = function () {
+    var
+        tokens = arguments
+      , i = 0
+      , l = tokens.length
+      , token
+      , updated = false
+      , index
+    ;
+    do {
+      token = tokens[i] + "";
+      index = checkTokenAndGetIndex(this, token);
+      while (index !== -1) {
+        this.splice(index, 1);
+        updated = true;
+        index = checkTokenAndGetIndex(this, token);
+      }
+    }
+    while (++i < l);
+  
+    if (updated) {
+      this._updateClassName();
+    }
+  };
+  classListProto.toggle = function (token, force) {
+    token += "";
+  
+    var
+        result = this.contains(token)
+      , method = result ?
+        force !== true && "remove"
+      :
+        force !== false && "add"
+    ;
+  
+    if (method) {
+      this[method](token);
+    }
+  
+    if (force === true || force === false) {
+      return force;
+    } else {
+      return !result;
+    }
+  };
+  classListProto.toString = function () {
+    return this.join(" ");
+  };
+  
+  if (objCtr.defineProperty) {
+    var classListPropDesc = {
+        get: classListGetter
+      , enumerable: true
+      , configurable: true
+    };
+    try {
+      objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+    } catch (ex) { // IE 8 doesn't support enumerable:true
+      // adding undefined to fight this issue https://github.com/eligrey/classList.js/issues/36
+      // modernie IE8-MSW7 machine has IE8 8.0.6001.18702 and is affected
+      if (ex.number === undefined || ex.number === -0x7FF5EC54) {
+        classListPropDesc.enumerable = false;
+        objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+      }
+    }
+  } else if (objCtr[protoProp].__defineGetter__) {
+    elemCtrProto.__defineGetter__(classListProp, classListGetter);
+  }
+  
+  }(window.self));
+  
+  }
+  
+  // There is full or partial native classList support, so just check if we need
+  // to normalize the add/remove and toggle APIs.
+  
+  (function () {
+    "use strict";
+  
+    var testElement = document.createElement("_");
+  
+    testElement.classList.add("c1", "c2");
+  
+    // Polyfill for IE 10/11 and Firefox <26, where classList.add and
+    // classList.remove exist but support only one argument at a time.
+    if (!testElement.classList.contains("c2")) {
+      var createMethod = function(method) {
+        var original = DOMTokenList.prototype[method];
+  
+        DOMTokenList.prototype[method] = function(token) {
+          var i, len = arguments.length;
+  
+          for (i = 0; i < len; i++) {
+            token = arguments[i];
+            original.call(this, token);
+          }
+        };
+      };
+      createMethod('add');
+      createMethod('remove');
+    }
+  
+    testElement.classList.toggle("c3", false);
+  
+    // Polyfill for IE 10 and Firefox <24, where classList.toggle does not
+    // support the second argument.
+    if (testElement.classList.contains("c3")) {
+      var _toggle = DOMTokenList.prototype.toggle;
+  
+      DOMTokenList.prototype.toggle = function(token, force) {
+        if (1 in arguments && !this.contains(token) === !force) {
+          return force;
+        } else {
+          return _toggle.call(this, token);
+        }
+      };
+  
+    }
+  
+    testElement = null;
+  }());
+  
+  }
+  
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  //----MAIN-BLOCK----//
-  // counter MAIN
+  // --- Переменные для задания параметров страницы --- //
+
+  //Переменная для максимальной длины текста (5 * validationLevel )
+  const validatonLevel = 13;
+
+  //Доступные форматы видео(значения в будущем классы)  
+  let formats = {
+    f16x9: "rectangle16x9",
+    f1x1: "square",
+    f9x16: "rectangle9x16"
+  }
+
+  //Функция изменения значения Основного Counter
   function changeValCountMain(item, max, min, step) {
-    console.log('вызвали changeValCount');
     const plus = item.querySelector(".plus"),
       minus = item.querySelector(".minus"),
       count = item.querySelector(".count");
@@ -31,14 +360,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     minus.addEventListener("click", function () {
-
       let value = +count.value;
       if (value == max) {
         plus.classList.remove('disabled');
       }
       if (value / +document.querySelectorAll('.video-slide').length == step) {
         min = value;
-        //document.querySelector('.main-counter').classList.add('notice');
       } else {
         min = min - step;
       }
@@ -48,12 +375,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let amountSlide = document.querySelectorAll('.video-slide').length;
         if (value / amountSlide == step) {
           document.querySelector('.add-item-block.add-slide button').disabled = true;
-          //document.querySelector('.main-counter').classList.add('notice');
-          console.log('получается нельзя меньше')
           minus.classList.add('disabled');
         }
       } else {
-        console.log('не никак')
       };
       if (count.value == step) { //только если MIN = 5 , а STEP = 10
         console.log('object');
@@ -64,10 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   };
 
-  //запускаем counter общей длины слайда
-  changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5);
-
-  // counter Slides
+  //Функция изменения значения counter Слайдов
   function changeValCountSlides(item, max, min, step) {
     const plus = item.querySelector(".plus"),
       minus = item.querySelector(".minus"),
@@ -97,7 +418,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   };
 
-  //Добавляем Touchstart and Touchend для counter
+  //запускаем counter общей длины слайда
+  changeValCountMain(document.querySelector('.counter.main-counter'), 40, 5, 5);
+
+  //Функция Touchstart and Touchend для counter для сенсорных
   function counterTouch(selector, element = "") {
     if (element != "") {
       selector = element;
@@ -121,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
   counterTouch("main-settings");
 
-  //загрузка файла 
+  //Функция названия поля загрузки файла
   function uploadFile(target) { //заносим id Input
     target.addEventListener('change', () => {
       console.log(target.id);
@@ -147,29 +471,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   };
-  //uploadFile(document.getElementById('main-logo'));
+
+  //Иницианализируем изменение названия длины
   uploadFile(document.getElementById('extra-files'));
 
-  //format-video-preview
+  //Переменные для создания Prewiew
   const formatVideoSelect = document.querySelector(".format-video__change_input"),
-    formatPreview = document.createElement("div");
-  let formatVideoZone = document.querySelector(".format-video__preview");
-  let pickedVideoFormat = formatVideoSelect.value;
+      formatPreview = document.createElement("div");
+  let formatVideoZone = document.querySelector(".format-video__preview"),
+      pickedVideoFormat = formatVideoSelect.value;
 
-  let formats = {
-    f16x9: "rectangle16x9",
-    f1x1: "square",
-    f9x16: "rectangle9x16"
-  }
 
+  //Функция создания дефолтных prewiew
   function createPreview(zone, item, picked) {
     console.log('вызвали createPreview для format');
     let nameFormatArr = picked.split(":"),
       nameFormat = `f${nameFormatArr[0]}x${nameFormatArr[1]}`;
     item.classList = formats[nameFormat];
-    zone.append(item);
+    zone.appendChild(item);
   }
 
+  //Функция создания prewiewCustom для format
   function createPreviewCustom() {
     const inputCustomSize = document.querySelector(".format-video__input-size"),
       inputHorizont = inputCustomSize.firstElementChild,
@@ -201,7 +523,6 @@ document.addEventListener('DOMContentLoaded', function () {
         customSizePreview.style.border = '1px solid #febf00'
       }
     });
-
     inputVertical.addEventListener("input", () => {
       verticalPx = inputVertical.value;
       if (!inputHorizont.value == "") {
@@ -210,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           customSizePreview.style.display = 'block';
         }
-
         proportionPx = 30 / verticalPx;
         resizeVerticalPx = proportionPx * verticalPx;
         resizeHorizontPx = proportionPx * horizontPx;
@@ -221,11 +541,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  //Функция удаления Prewiew
   function deletePreviewCustom() {
     const formatVideoZone2 = document.querySelector('.format-video__preview');
     formatVideoZone2.remove();
   }
 
+  // --- Создаем prewiew формата --- //
   if (formatVideoZone) {
     createPreview(formatVideoZone, formatPreview, pickedVideoFormat);
   }
@@ -253,82 +575,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  //What radio contact and disclaimer FOR 1 SLIDE
-
-  const optionalContact = `<div class="option-contact solo-check form-check">
-  <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-  <label class="form-check-label" for="defaultCheck1">
-    <input disabled name="optional-conatact" class="optional-txt form-control form-control-sm" type="text" placeholder="Контактная информация">
-  </label>
-  </div>`
-
-  const optionalDisclaimer = `<div class="option-disclaimer solo-check form-check">
-      <input class="form-check-input optional-checkbox" type="checkbox" value="" id="defaultCheck1">
-      <label class="form-check-label" for="defaultCheck1">
-        <input disabled name="optional-disclaimer" class="optional-txt form-control form-control-sm" type="text" placeholder="Дисклеймер">
-      </label>
-    </div>`
-
-  let howDisplayContact = document.querySelector('input[name="contact-where"]:checked').value;
-  //let howDisplayDisclaimer = document.querySelector('input[name="disclaimer-where"]:checked').value;
-
-  document.querySelectorAll('input[name="contact-where"]').forEach(elem => {
-    elem.addEventListener('change', () => {
-      if (elem.checked) {
-        howDisplayContact = elem.value;
-        if (howDisplayContact === 'all') {
-          document.querySelectorAll('.option-contact').forEach((elem) => {
-            elem.remove();
-          })
-        } else {
-          document.querySelectorAll(".optional-contact__wrapp").forEach((elem) => {
-            elem.innerHTML = optionalContact;
-            elem.querySelector(".option-contact .optional-txt").value = contactValue;
-          })
-        }
-      }
-    })
-  });
-
-  document.querySelectorAll('input[name="disclaimer-where"]').forEach(elem => {
-    elem.addEventListener('change', () => {
-      if (elem.checked) {
-        howDisplayDisclaimer = elem.value;
-        if (howDisplayDisclaimer === 'all') {
-          document.querySelectorAll('.option-disclaimer').forEach((elem) => {
-            elem.remove();
-          })
-        } else {
-          document.querySelectorAll(".optional-disclaimer__wrapp").forEach((elem) => {
-            elem.innerHTML = optionalDisclaimer;
-            elem.querySelector(".option-disclaimer .optional-txt").value = disclaimerValue;
-          })
-        }
-      }
-    })
-  });
-
-  let contactValue = "";
-  let contactTextarea = document.querySelector('.contact-block textarea');
-
-  contactTextarea.addEventListener('change', () => {
-    contactValue = contactTextarea.value;
-    document.querySelectorAll('.option-contact .optional-txt').forEach((elem) => {
-      elem.value = contactValue;
-    })
-  })
-
-/*   let disclaimerValue = "";
-  let disclaimerTextarea = document.querySelector('.disclaimer-block textarea');
-
-  disclaimerTextarea.addEventListener('change', () => {
-    disclaimerValue = disclaimerTextarea.value;
-    document.querySelectorAll('.option-disclaimer .optional-txt').forEach((elem) => {
-      elem.value = disclaimerValue;
-    })
-  }) */
-
-  //MORE - INPUT (more color)
+  //Функция disable Enable для чекбоксов и полей
   function turnForm(elem) {
     console.log("вызвали turnForm")
     const moreColorsCheckbox = elem.querySelector(".optional-checkbox"),
@@ -343,39 +590,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function createOptionalFiled(item) {
-    console.log('вызвали createOptionalFiled');
-    const moreColorsCheckbox = item.querySelector(".optional-checkbox"),
-      moreColorsInpt = item.querySelector(".optional-txt");
-    moreColorsCheckbox.addEventListener('click', function () {
-      if (moreColorsCheckbox.checked) {
-        moreColorsInpt.removeAttribute('disabled', false);
-        let itemClone = item.cloneNode(true), //clone
-          cloneCheck = itemClone.querySelector(".optional-checkbox"),
-          cloneInpt = itemClone.querySelector(".optional-txt");
-        cloneCheck.checked = false;
-        cloneInpt.setAttribute('disabled', true);
-        if (item.nextSibling) {
-          item.after(itemClone);
-          item = item.nextSibling;
-          createOptionalFiled(item);
-        }
-      } else {
-        moreColorsInpt.setAttribute('disabled', true);
-        if (item.previousElementSibling !== null) {
-          item = item.previousElementSibling;
-          if (item.nextElementSibling !== null || item.nextElementSibling.classList.contains("optional-field")) {
-            item.nextSibling.remove();
-          }
-        }
-      }
-    })
-    if (!moreColorsCheckbox.checked) {
-      moreColorsInpt.setAttribute('disabled', true);
-    }
-  }
-
-  // динамическое создание слайдов
+  //Функция создания основы слайда
   function setSlideHtmlWithSelector(number, selector) {
     let logo = "",
       stimulPhrs = "",
@@ -407,8 +622,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return forConstruct;
   }
 
-  //ФУНКИЦЯ СОЗДАНИЯ ТЕЛА ВТОРОЙ ЧАСТИ СЛАЙДА
-  function createSecondPartHtml(nameForInitSlider, optionalContact, optionalDisclaimer) {
+  //Функция создания второй части слайда
+  function createSecondPartHtml(nameForInitSlider) {
     let textZoneHtml_1 = `<div class="text-zone">
     <p class="title">Вы можете начать видеоролик с вопроса или фразы призывающей к покупке</p>   
     <input class="text-field form-control" type="text" name="stimul-text" placeholder="Введите текст">
@@ -557,13 +772,11 @@ document.addEventListener('DOMContentLoaded', function () {
     switch (true) {
       case /logo-part_slider/i.test(nameForInitSlider):
         nameAttach = 'Прикрепить логотип';
-        //attachHtml = getAttachHtml(nameAttach);
         gifName='logo';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${textZoneHtml_2}${carouselHtml}${removeSlideHtml}`;
         break;
       case /stimul-part_slider/i.test(nameForInitSlider):
-        //nameAttach = 'Прикрепить логотип';
         gifName='stimul';
         carouselHtml = getCarouselHtml(gifName, nameAnim_1, nameAnim_2, nameAnim_3, nameAnim_4);
         insideHtml = `${textZoneHtml_1}${carouselHtml}${removeSlideHtml}`;
@@ -593,11 +806,11 @@ document.addEventListener('DOMContentLoaded', function () {
         insideHtml = `${attachHtml}${textForContact}${carouselHtml}${removeSlideHtml}`;
         break;
     }
-    //console.log(insideHtml);
     return insideHtml;
   };
 
-  function setStimulHtmlWithSlider(name, optionalContact, howDisplayContact) {
+  //Функция создания верстки первого слайда  
+  function setStimulHtmlWithSlider(name) {
     let insideHtmlStimulPrase = `
     <div class="text-zone">
     <p class="title">Вы можете начать видеоролик с вопроса или фразы призывающей к покупке</p>   
@@ -620,19 +833,20 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         </div>
      <div class="btn-zone"><button type="button" class="btn-remove-slide btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i><p>Удалить слайд</p></button></div>`
-   /*  <ion-icon name="trash-bin-outline"></ion-icon> */
      return insideHtmlStimulPrase;
   };
 
   let nameSlider;
 
+  //Функция добавления второй части слайда
   function createSecondPart(wrapp, part2, classPart, funcHtmlSlider) {
     part2 = document.createElement('div');
     part2.classList.add(classPart);
     part2.innerHTML = funcHtmlSlider;
-    wrapp.append(part2);
+    wrapp.appendChild(part2);
   };
 
+  //Функция для добавления товара или услуги на страницу
   function addProduct(insideSlideWrapp, nameSlider) {
     insideSlideWrapp.querySelector('.add-item').addEventListener('click', (elem) => {
       let target = elem.target;
@@ -665,12 +879,9 @@ document.addEventListener('DOMContentLoaded', function () {
       nextProduct.querySelectorAll('input').forEach((inpt) => {
         inpt.value = '';
         if (inpt.type == "file") {
-
           inpt.previousElementSibling.lastElementChild.innerHTML = '<i name="image-outline" class="far fa-image"></i>Изображение';
-          
         }
       });
-
       nextProduct.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length > 1) {
           nextProduct.remove();
@@ -679,6 +890,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+  //Функция для удаления слайда
   function deleteSlide(btn) {
     if (document.querySelectorAll('.video-slide').length == 1) {
       document.querySelector('.btn-remove-slide').disabled = true;
@@ -694,7 +906,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let i = 1;
         let allSlides = document.querySelectorAll('.video-slide.block');
         document.querySelectorAll('.video-slide__number').forEach((item) => {
-          allSlides[i - 1].classList = `video-slide block added-${i}`;
+          allSlides[i - 1].className = `video-slide block added-${i}`;
           allSlides[i - 1].querySelector('.video-slide__change').setAttribute('name', `slide-${i}`)
           item.textContent = i++;
         })
@@ -727,6 +939,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+  //Функция иницинализации карусели
   function initCarousel(carouselClass) {
     $(carouselClass).slick({
       centerMode: true,
@@ -762,10 +975,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+  //Функция для определения максимальной длины текста
   function getMaxLengthStimulPhrase(slideCounterInput) {
-    return +slideCounterInput.value * 13;
+    return +slideCounterInput.value * validatonLevel;
   };
 
+  //Функция валидации длины текста
   function validationText (element = insideSlideWrapp.querySelector('.text-zone .text-field'),
                       elementCounter = insideSlideWrapp.querySelector('.slide-counter input')
     ){
@@ -785,40 +1000,19 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
-  function smoothAppearance (constructSlide){
-    let startOpacity = 0.3;
-    let finishOpacity = 0.99
-    let stepOp = 0.02;
-    //let element = document.getElementById('SomeElementYouWantToAnimate');
-    //constructSlide.style.opacity = 0;
-    function step() {
-      startOpacity = startOpacity + stepOp;
-      constructSlide.style.opacity = `${startOpacity}`;
-      console.log(startOpacity);
-      if (startOpacity < finishOpacity) {
-        window.requestAnimationFrame(step);
-      }
-    }
-    window.requestAnimationFrame(step);
-  }
-  //----MAIN---// динамическое добавление Побуждающей фразы на существующий
+  // --- Добавление самого первого слайда --- //
   document.querySelectorAll('.video-slide__change').forEach((item) => {
     let insideSlideWrapp, secondPart, optionalField;
-
+    //первый салйд - побуждающая фраза
     switch (item.value) {
       case 'stimul':
         console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
-        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider", optionalContact, howDisplayContact));
+        createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider"));
         //добавлям Touchstart на Counter этого слайда
         counterTouch("video-slide");
 
-        //добавляем работу доп. форм
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        })
         //соло формы
         insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
           turnForm(item);
@@ -842,33 +1036,32 @@ document.addEventListener('DOMContentLoaded', function () {
             invalFeedback.textContent = '';
           }
         });
-
-        break;
-      case 'logo':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
-        insideSlideWrapp = item.parentNode.parentNode.parentNode;
-        secondPart = document.createElement('div');
-        secondPart.classList.add('logo-part');
-        secondPart.innerHTML = setLogoHtmlWithSlider("stimul-part_slider");
-        insideSlideWrapp.append(secondPart);
-        //добавляем работу доп. форм
-        optionalField = document.querySelectorAll(".optional-field");
-        optionalField.forEach(function (item) {
-          createOptionalFiled(item);
-        })
         break;
     };
+      //иницианализируем карусель
+    initCarousel('.stimul-part_slider');
+    //иницинализируем функцию удаления слайда - идет после того как сформировалась
+    deleteSlide(document.querySelector('.btn-remove-slide'));
   });
 
-  //иницианализируем карусель
-  initCarousel('.stimul-part_slider');
+  //Функция плавного появления слайда
+  function smoothAppearance (constructSlide){
+    let startOpacity = 0.3,
+      finishOpacity = 0.99,
+      stepOp = 0.02;
+    function step() {
+      startOpacity = startOpacity + stepOp;
+      constructSlide.style.opacity = `${startOpacity}`;
+      if (startOpacity < finishOpacity) {
+        window.requestAnimationFrame(step);
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
 
-  //иницинализируем функцию удаления слайда - идет после того как сформировалась
-  deleteSlide(document.querySelector('.btn-remove-slide'));
-
+  // --- Создание нового слайда по клику --- //
   let iArr = 1; //для обхода массива названий слайдов
 
-  // ----- Cоздать новый слайд по клику! 
   document.querySelector(".add-slide .add-item").addEventListener("click", () => {
     let slidesArr = ['stimul', 'logo', 'product', 'service', 'stock', 'contact'];
 
@@ -884,7 +1077,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(slideNumber);
 
     let constructSlide = document.createElement("div");
-    constructSlide.classList = `video-slide block added-${slideNumber}`
+    constructSlide.className = `video-slide block added-${slideNumber}`
     constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart);
     let main = document.querySelector('.add-slide');
     main.before(constructSlide);
@@ -902,12 +1095,13 @@ document.addEventListener('DOMContentLoaded', function () {
       nameCarousel = namePart + '_slider';
       console.log(nameCarousel);
     };
-    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel, optionalContact, optionalDisclaimer));
+    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel));
     console.log(insideSlideWrapp);
 
-    //CHANGE COLOR TOUCHSTART COUNTER
+    //меняем цвет counter при клике на него на Сенсорных
     counterTouch("", constructSlide);
-    // ЕСЛИ ЛОГО добавляем работу доп. форм(Нужно для: побуждающей, лого)
+
+    // если лого добавляем работу доп. форм(Нужно для: побуждающей, лого)
     if (namePart === 'logo-part') {
       let optionalField = document.querySelectorAll(".logo-part .optional-field");
       optionalField.forEach(function (item) {
@@ -923,7 +1117,6 @@ document.addEventListener('DOMContentLoaded', function () {
       insideSlideWrapp.querySelector('.attach-block.for-logo label').setAttribute('for', namePart + "_attach-" + number);
       insideSlideWrapp.querySelector('.attach-block.for-logo input').setAttribute('name', namePart + "_attach-" + number);
     }
-
 
     //добавляем работу дизэйбл энэйбл для Соло форм
     insideSlideWrapp.querySelectorAll(".solo-check").forEach(function (item) {
@@ -944,7 +1137,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     insideSlideWrapp.querySelector('.slide-counter input'))
     }
 
-    // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    // если товар-цена , услуга - добавить товар на страницу
     if (namePart === 'service-part' || namePart === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
       addProduct(insideSlideWrapp, nameCarousel);
       if (document.querySelectorAll(`.${namePart}`).length > 1) {
@@ -954,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
       }
 
-      //УДАЛЕНИЕ ТОВАРА
+      //удаление товара
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
           console.log('удаляем товар или услугу');
@@ -990,14 +1183,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //перемещаем кнопку добавить слайд
     document.querySelector('.last-main-block').before(document.querySelector(".add-slide"));
 
-    // Перемотка к началу созданого элемента
+    // Перемотка к началу созданого элемента и анимация
     insideSlideWrapp.scrollIntoView();
-
     smoothAppearance(constructSlide);
-
   });
 
-
+  // --- Функция смены слайда через переключатель --- //
   function eventChangeSlide(elem) {
     const firstPart = elem.parentElement.parentElement;
     firstPart.nextElementSibling.remove();
@@ -1023,15 +1214,13 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
     };
 
-    let namePart = classForSecondP;
-
-    let number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
+    let namePart = classForSecondP,
+      constructSlide = firstPart.parentElement.parentElement,
+      insideSlideWrapp = firstPart.parentNode,
+      number = (+document.querySelectorAll(`.${classForSecondP}`).length + 1),
       nameSlider = classForSecondP + "_slider-" + number;
-    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider, optionalContact, optionalDisclaimer));
 
-    let constructSlide = firstPart.parentElement.parentElement;
-
-    let insideSlideWrapp = firstPart.parentNode;
+    createSecondPart(firstPart.parentElement, secondPart, classForSecondP, createSecondPartHtml(nameSlider));
 
     let slideNumber = +constructSlide.querySelector('.video-slide__number').textContent;
     //добавляем работу доп. форм(Нужно для: побуждающей)
@@ -1056,7 +1245,7 @@ document.addEventListener('DOMContentLoaded', function () {
       turnForm(item);
     })
 
-    // ЕСЛИ ТОВАР-цена , услуга - добавить товар на страницу
+    // если товар-цена , услуга - добавить товар на страницу
     if (classForSecondP === 'service-part' || classForSecondP === 'product-part') { //<--------- ДЛЯ ТОВАР-ЦЕНА и УСЛУГА ЦЕНА
       addProduct(insideSlideWrapp, nameSlider);
 
@@ -1067,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', function () {
         insideSlideWrapp.querySelector('.my-file-input').setAttribute("for", nameSliderSlim + '_img-1');
       }
 
-      //УДАЛЕНИЕ ТОВАРА
+      //удаление товара
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
           console.log('удаляем товар или услугу');
@@ -1078,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     //переименовываем counter слайда и меняем Name
-    insideSlideWrapp.querySelector('.slide-counter input').classList = 'count ' + classForSecondP + '-count-' + number;
+    insideSlideWrapp.querySelector('.slide-counter input').className = 'count ' + classForSecondP + '-count-' + number;
     insideSlideWrapp.querySelector('.slide-counter input').setAttribute('name', classForSecondP + '-count-' + number);
 
     //валидация длины формы
@@ -1109,109 +1298,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
+  //Иницианализируем функцию смены слайда с помощью переключателя
   changeSlide(document.querySelector('.video-slide__change'));
-//НУЖНО ДОБАВИТЬ ВЫБОР VALUE Чтобы сразу собрать ДРУГОЙ СЛАЙД
-  //eventChangeSlide(document.querySelector('.video-slide__change'));
 
-  // СБОР ДАННЫХ ФОРМЫ
-  /*  formElem.onsubmit = async (e) => {
-     e.preventDefault();
-     console.log( document.querySelector(".qty.main-counter .count"));
-     document.querySelectorAll(".qty .count").forEach((el)=>{
-       el.removeAttribute("disabled");
-     });  
-
-     let formData = new FormData(formElem);
-     document.querySelectorAll('.slick-slider').forEach((el)=>{
-       let parentNameAnimation = el.classList[0];
-       let srcSlider = el.querySelector('.slick-current img').getAttribute('src');
-       let nameAnimation = srcSlider.replace(/img\//gi, ""); 
-       formData.append(parentNameAnimation, nameAnimation);
-     });
-     for(let [name, value] of formData) {
-       console.log(`${name} = ${value}`); 
-     };
-     document.querySelectorAll(".qty .count").forEach((el)=>{
-       el.setAttribute("disabled", "true");
-     });  
-    */
-  /* let response = await fetch('/article/formdata/post/user', {
-    method: 'POST',
-    body: new FormData(formElem)
-  }); */
-
-  //let result = await response.json();
-  //alert(result.message);
-
-  const button = document.querySelector('.button-anim');
-  const submit = document.querySelector('.submit');
   
+  // --- Функции анимации --- //
   function toggleClassActive(e) {
-    console.log(e);
-      e.classList.toggle('active-anim');
+    e.classList.toggle('active-anim');
   }
-  
   function addClassOk(e) {
-    console.log(e);
       e.classList.add('finished-anim');
       setTimeout(() => {e.classList.remove('finished-anim');
       e.classList.remove('active-anim');
   }, 4000);
   }
   function addClassFail(e) {
-    console.log(e);
     e.classList.remove('active-anim');
     e.classList.add('fail-anim');
     setTimeout( () => e.classList.remove('fail-anim'), 2000);
   }
-  
-  //button.addEventListener('click', toggleClassActive);
-  //button.addEventListener('transitionend', toggleClass);
- // button.addEventListener('transitionend', addClassFail);
-  
 
+  // --- Сборка и отправка формы --- //
   let formElem = document.querySelector('#formElem');
-  formElem.addEventListener('submit',(e)=>{
-    e.preventDefault();
-    e = e.target;
-    e = e.querySelector('button[type="submit"]');
-    let allDuration = document.querySelector('#main-conter-val').value;
-    let slidesDurationArr=[],
-        slidesDuration = 0;
-    document.querySelectorAll('.slide-counter input').forEach((el)=>{
-      slidesDurationArr.push(el.value);
-    });
 
-    console.log(allDuration);
-
-    slidesDurationArr.forEach(element => {
-      slidesDuration += (+element);
-    });
-
-    console.log(slidesDuration);
-
-    if (allDuration >= slidesDuration){
-      if (document.querySelector('.duration-message')){
-        document.querySelector('.duration-message').remove();
-      }
-      console.log(e);
-      submitHandler(e);
-    } else {
-      if (document.querySelector('.duration-message')){
-        document.querySelector('.duration-message').remove();
-        let durationMessage = document.createElement('div');
-        durationMessage.classList.add('duration-message');
-        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
-        document.querySelector('button[type="submit"]').before(durationMessage);
-      } else {
-        let durationMessage = document.createElement('div');
-        durationMessage.classList.add('duration-message');
-        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
-        document.querySelector('button[type="submit"]').before(durationMessage);
-      };
-    } 
-  });
-
+  //Функция сборки и отправки формы
   function submitHandler(e) {
     console.log(e);
     //убираем disabled у Counter
@@ -1221,9 +1331,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //формируем formData
     let formData = new FormData(formElem);
-    for (let [name, value] of formData) {
+  /*   for (let [name, value] of formData) {
       console.log(`${name} = ${value}`);
-    }
+    } */
     //добавляем в formData name Animation
     document.querySelectorAll('.slick-slider').forEach((el) => {
       let parentNameAnimation = el.classList[0];
@@ -1232,9 +1342,9 @@ document.addEventListener('DOMContentLoaded', function () {
       formData.append(parentNameAnimation, nameAnimation);
     });
 
-    for (let [name1, value1] of formData) {
+ /*    for (let [name1, value1] of formData) {
       console.log(`${name1}=${value1}`);
-    };
+    }; */
     //возвращаем инпут обратно
     document.querySelectorAll(".qty .count").forEach((el) => {
       el.setAttribute("disabled", "true");
@@ -1242,9 +1352,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('идет отправка');
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
    
-
     toggleClassActive(e);
-    
     fetch("send.php", {
         method: "POST",
         body: formData
@@ -1271,7 +1379,41 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
-  //NEW ANIM BUTTON
+  //Отправка формы
+  formElem.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    e = e.target;
+    e = e.querySelector('button[type="submit"]');
+    let allDuration = document.querySelector('#main-conter-val').value;
+    let slidesDurationArr=[],
+        slidesDuration = 0;
+    document.querySelectorAll('.slide-counter input').forEach((el)=>{
+      slidesDurationArr.push(el.value);
+    });
 
+    slidesDurationArr.forEach(element => {
+      slidesDuration += (+element);
+    });
+
+    if (allDuration >= slidesDuration){
+      if (document.querySelector('.duration-message')){
+        document.querySelector('.duration-message').remove();
+      }
+      submitHandler(e);
+    } else {
+      if (document.querySelector('.duration-message')){
+        document.querySelector('.duration-message').remove();
+        let durationMessage = document.createElement('div');
+        durationMessage.classList.add('duration-message');
+        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
+        document.querySelector('button[type="submit"]').before(durationMessage);
+      } else {
+        let durationMessage = document.createElement('div');
+        durationMessage.classList.add('duration-message');
+        durationMessage.textContent = "Сначала уменьшите длительность слайдов"
+        document.querySelector('button[type="submit"]').before(durationMessage);
+      };
+    } 
+  });
 
 })
