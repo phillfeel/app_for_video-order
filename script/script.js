@@ -1,324 +1,3 @@
-//Other Polyfill
-
-if (typeof window !== 'undefined' &&  window.NodeList && !NodeList.prototype.forEach) {
-
-  NodeList.prototype.forEach = function (callback, thisArg) {
-
-      thisArg = thisArg || window;
-
-      for (var i = 0; i < this.length; i++) {
-
-          callback.call(thisArg, this[i], i, this);
-
-      }
-
-  };
-
-}
-
-
-(function (arr) {
-  arr.forEach(function (item) {
-    if (item.hasOwnProperty('after')) {
-      return;
-    }
-    Object.defineProperty(item, 'after', {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value: function after() {
-        var argArr = Array.prototype.slice.call(arguments),
-          docFrag = document.createDocumentFragment();
-        
-        argArr.forEach(function (argItem) {
-          var isNode = argItem instanceof Node;
-          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-        });
-        
-        this.parentNode.insertBefore(docFrag, this.nextSibling);
-      }
-    });
-  });
-})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-
-(function (arr) {
-  arr.forEach(function (item) {
-    if (item.hasOwnProperty('before')) {
-      return;
-    }
-    Object.defineProperty(item, 'before', {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value: function before() {
-        var argArr = Array.prototype.slice.call(arguments),
-          docFrag = document.createDocumentFragment();
-        
-        argArr.forEach(function (argItem) {
-          var isNode = argItem instanceof Node;
-          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-        });
-        
-        this.parentNode.insertBefore(docFrag, this);
-      }
-    });
-  });
-})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-
-(function (arr) {
-  arr.forEach(function (item) {
-    if (item.hasOwnProperty('append')) {
-      return;
-    }
-    Object.defineProperty(item, 'append', {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value: function append() {
-        var argArr = Array.prototype.slice.call(arguments),
-          docFrag = document.createDocumentFragment();
-        
-        argArr.forEach(function (argItem) {
-          var isNode = argItem instanceof Node;
-          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-        });
-        
-        this.appendChild(docFrag);
-      }
-    });
-  });
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-
-
-// --- classlist-Polyfill --- //
-if ("document" in window.self) {
-
-  // Full polyfill for browsers with no classList support
-  // Including IE < Edge missing SVGElement.classList
-  if (!("classList" in document.createElement("_")) 
-    || document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg","g"))) {
-  
-  (function (view) {
-  
-  "use strict";
-  
-  if (!('Element' in view)) return;
-  
-  var
-      classListProp = "classList"
-    , protoProp = "prototype"
-    , elemCtrProto = view.Element[protoProp]
-    , objCtr = Object
-    , strTrim = String[protoProp].trim || function () {
-      return this.replace(/^\s+|\s+$/g, "");
-    }
-    , arrIndexOf = Array[protoProp].indexOf || function (item) {
-      var
-          i = 0
-        , len = this.length
-      ;
-      for (; i < len; i++) {
-        if (i in this && this[i] === item) {
-          return i;
-        }
-      }
-      return -1;
-    }
-    // Vendors: please allow content code to instantiate DOMExceptions
-    , DOMEx = function (type, message) {
-      this.name = type;
-      this.code = DOMException[type];
-      this.message = message;
-    }
-    , checkTokenAndGetIndex = function (classList, token) {
-      if (token === "") {
-        throw new DOMEx(
-            "SYNTAX_ERR"
-          , "An invalid or illegal string was specified"
-        );
-      }
-      if (/\s/.test(token)) {
-        throw new DOMEx(
-            "INVALID_CHARACTER_ERR"
-          , "String contains an invalid character"
-        );
-      }
-      return arrIndexOf.call(classList, token);
-    }
-    , ClassList = function (elem) {
-      var
-          trimmedClasses = strTrim.call(elem.getAttribute("class") || "")
-        , classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
-        , i = 0
-        , len = classes.length
-      ;
-      for (; i < len; i++) {
-        this.push(classes[i]);
-      }
-      this._updateClassName = function () {
-        elem.setAttribute("class", this.toString());
-      };
-    }
-    , classListProto = ClassList[protoProp] = []
-    , classListGetter = function () {
-      return new ClassList(this);
-    }
-  ;
-  // Most DOMException implementations don't allow calling DOMException's toString()
-  // on non-DOMExceptions. Error's toString() is sufficient here.
-  DOMEx[protoProp] = Error[protoProp];
-  classListProto.item = function (i) {
-    return this[i] || null;
-  };
-  classListProto.contains = function (token) {
-    token += "";
-    return checkTokenAndGetIndex(this, token) !== -1;
-  };
-  classListProto.add = function () {
-    var
-        tokens = arguments
-      , i = 0
-      , l = tokens.length
-      , token
-      , updated = false
-    ;
-    do {
-      token = tokens[i] + "";
-      if (checkTokenAndGetIndex(this, token) === -1) {
-        this.push(token);
-        updated = true;
-      }
-    }
-    while (++i < l);
-  
-    if (updated) {
-      this._updateClassName();
-    }
-  };
-  classListProto.remove = function () {
-    var
-        tokens = arguments
-      , i = 0
-      , l = tokens.length
-      , token
-      , updated = false
-      , index
-    ;
-    do {
-      token = tokens[i] + "";
-      index = checkTokenAndGetIndex(this, token);
-      while (index !== -1) {
-        this.splice(index, 1);
-        updated = true;
-        index = checkTokenAndGetIndex(this, token);
-      }
-    }
-    while (++i < l);
-  
-    if (updated) {
-      this._updateClassName();
-    }
-  };
-  classListProto.toggle = function (token, force) {
-    token += "";
-  
-    var
-        result = this.contains(token)
-      , method = result ?
-        force !== true && "remove"
-      :
-        force !== false && "add"
-    ;
-  
-    if (method) {
-      this[method](token);
-    }
-  
-    if (force === true || force === false) {
-      return force;
-    } else {
-      return !result;
-    }
-  };
-  classListProto.toString = function () {
-    return this.join(" ");
-  };
-  
-  if (objCtr.defineProperty) {
-    var classListPropDesc = {
-        get: classListGetter
-      , enumerable: true
-      , configurable: true
-    };
-    try {
-      objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
-    } catch (ex) { // IE 8 doesn't support enumerable:true
-      // adding undefined to fight this issue https://github.com/eligrey/classList.js/issues/36
-      // modernie IE8-MSW7 machine has IE8 8.0.6001.18702 and is affected
-      if (ex.number === undefined || ex.number === -0x7FF5EC54) {
-        classListPropDesc.enumerable = false;
-        objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
-      }
-    }
-  } else if (objCtr[protoProp].__defineGetter__) {
-    elemCtrProto.__defineGetter__(classListProp, classListGetter);
-  }
-  
-  }(window.self));
-  
-  }
-  
-  // There is full or partial native classList support, so just check if we need
-  // to normalize the add/remove and toggle APIs.
-  
-  (function () {
-    "use strict";
-  
-    var testElement = document.createElement("_");
-  
-    testElement.classList.add("c1", "c2");
-  
-    // Polyfill for IE 10/11 and Firefox <26, where classList.add and
-    // classList.remove exist but support only one argument at a time.
-    if (!testElement.classList.contains("c2")) {
-      var createMethod = function(method) {
-        var original = DOMTokenList.prototype[method];
-  
-        DOMTokenList.prototype[method] = function(token) {
-          var i, len = arguments.length;
-  
-          for (i = 0; i < len; i++) {
-            token = arguments[i];
-            original.call(this, token);
-          }
-        };
-      };
-      createMethod('add');
-      createMethod('remove');
-    }
-  
-    testElement.classList.toggle("c3", false);
-  
-    // Polyfill for IE 10 and Firefox <24, where classList.toggle does not
-    // support the second argument.
-    if (testElement.classList.contains("c3")) {
-      var _toggle = DOMTokenList.prototype.toggle;
-  
-      DOMTokenList.prototype.toggle = function(token, force) {
-        if (1 in arguments && !this.contains(token) === !force) {
-          return force;
-        } else {
-          return _toggle.call(this, token);
-        }
-      };
-  
-    }
-  
-    testElement = null;
-  }());
-  
-  }
-  
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -342,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     count.setAttribute('disabled', true);
     plus.addEventListener("click", function () {
       if (count.value == step) { //только если MIN = 5 , а STEP = 10
-        console.log('+');
+        
         document.querySelector('.main-counter .minus').classList.remove('disabl');
       }
       if (count.value < max) {
@@ -380,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
       };
       if (count.value == step) { //только если MIN = 5 , а STEP = 10
-        console.log('object');
+        
         document.querySelector('.main-counter .minus').classList.remove('disabled');
         document.querySelector('.main-counter .minus').classList.add('disabl');
       }
@@ -448,11 +127,11 @@ document.addEventListener('DOMContentLoaded', function () {
   //Функция названия поля загрузки файла
   function uploadFile(target) { //заносим id Input
     target.addEventListener('change', () => {
-      console.log(target.id);
+      
       let amount = target.files.length;
       if (target.id == "extra-files" && amount != 0) {
         let comment = "";
-        console.log(amount);
+        
         switch (true) {
           case ((amount >= 2 && amount <= 4) || (amount % 10 >= 2 && amount % 10 <= 4)):
             comment = "изображения";
@@ -464,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
             comment = "изображений";
             break;
         };
-        console.log(comment);
+        
         target.previousElementSibling.lastElementChild.textContent = target.files.length + " " + comment;
       } else {
         target.previousElementSibling.lastElementChild.textContent = target.files[0].name;
@@ -484,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Функция создания дефолтных prewiew
   function createPreview(zone, item, picked) {
-    console.log('вызвали createPreview для format');
+    
     let nameFormatArr = picked.split(":"),
       nameFormat = `f${nameFormatArr[0]}x${nameFormatArr[1]}`;
     item.classList = formats[nameFormat];
@@ -577,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Функция disable Enable для чекбоксов и полей
   function turnForm(elem) {
-    console.log("вызвали turnForm")
+    
     const moreColorsCheckbox = elem.querySelector(".optional-checkbox"),
       moreColorsInpt = elem.querySelector(".optional-txt");
 
@@ -853,9 +532,6 @@ document.addEventListener('DOMContentLoaded', function () {
       let allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       let nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
 
-      console.log(target.parentElement.parentElement);
-      console.log(nextProduct);
-
       let productNumb = +nextProduct.id.split("-")[1];
       let nextProductId = `${nextProduct.id.split("-")[0]}-${productNumb + 1}`;
       nextProduct.id = nextProductId;
@@ -872,8 +548,6 @@ document.addEventListener('DOMContentLoaded', function () {
       nextProduct.querySelector('input[type="file"]').id = idAttach;
       nextProduct.querySelector('input[type="file"]').setAttribute('name', idAttach)
       nextProduct.querySelector('.my-file-input').setAttribute('for', idAttach);
-
-      console.log(nextProduct.querySelector('input[type="file"]'));
 
       target.parentElement.parentElement.before(nextProduct);
       nextProduct.querySelectorAll('input').forEach((inpt) => {
@@ -899,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     btn.addEventListener('click', () => {
       //if (document.querySelectorAll('.video-slide.block').length != 1) {
-      console.log("Удаляем Слайд")
+      
       if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
         const targetVideoSlide = btn.parentNode.parentNode.parentNode.parentNode;
         targetVideoSlide.remove();
@@ -912,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         //slideNumber = +document.querySelectorAll('.video-slide__number').length - 1;
         let mainCounterVal = document.querySelector(".main-counter input").value;
-        console.log(i);
+        
 
         if (mainCounterVal / (i - 1) <= 5) {
           document.querySelector('.add-item-block.add-slide button').disabled = true;
@@ -928,9 +602,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         let logoCheck = document.querySelectorAll('.form-check.for-logo');
-        console.log(logoCheck);
+        
         logoCheck.forEach(el => {
-          console.log(el);
+          
           let numb = el.parentElement.parentElement.querySelector('.video-slide__number').textContent;
           el.querySelector('[name="logo-use"]').id = "gridCheck-" + numb;
           el.querySelector('.for-logo label').setAttribute("for", "gridCheck-" + numb)
@@ -986,7 +660,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ){
       let invalFeedback = document.createElement('div');
       invalFeedback.classList.add('invalid-feedback');
-      console.log(element);
+      
       element.after(invalFeedback);
       element.addEventListener('input', (e) => {
         let maxLengthStimulPhrase = getMaxLengthStimulPhrase(elementCounter);
@@ -1006,7 +680,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //первый салйд - побуждающая фраза
     switch (item.value) {
       case 'stimul':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда')
+        
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
 
         createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider"));
@@ -1072,9 +746,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     let allSlidesNumb = document.querySelectorAll('.video-slide__number');
-    console.log(allSlidesNumb);
+    
     let slideNumber = +allSlidesNumb[allSlidesNumb.length - 1].textContent + 1;
-    console.log(slideNumber);
+    
 
     let constructSlide = document.createElement("div");
     constructSlide.className = `video-slide block added-${slideNumber}`
@@ -1087,16 +761,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     namePart = namePart + '-part';
     let number = (+document.querySelectorAll(`.${namePart}`).length + 1);
-    console.log(number);
+    
     let nameCarousel;
     if (number > 1) {
       nameCarousel = namePart + '_slider-' + number;
     } else {
       nameCarousel = namePart + '_slider';
-      console.log(nameCarousel);
+      
     };
     createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel));
-    console.log(insideSlideWrapp);
+    
 
     //меняем цвет counter при клике на него на Сенсорных
     counterTouch("", constructSlide);
@@ -1150,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function () {
       //удаление товара
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-          console.log('удаляем товар или услугу');
+          
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
         };
@@ -1259,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function () {
       //удаление товара
       insideSlideWrapp.querySelector(".close").addEventListener('click', () => {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-          console.log('удаляем товар или услугу');
+          
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
         };
@@ -1323,7 +997,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Функция сборки и отправки формы
   function submitHandler(e) {
-    console.log(e);
+    
     //убираем disabled у Counter
     document.querySelectorAll(".qty .count").forEach((el) => {
       el.removeAttribute("disabled");
@@ -1332,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //формируем formData
     let formData = new FormData(formElem);
   /*   for (let [name, value] of formData) {
-      console.log(`${name} = ${value}`);
+      
     } */
     //добавляем в formData name Animation
     document.querySelectorAll('.slick-slider').forEach((el) => {
@@ -1343,13 +1017,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
  /*    for (let [name1, value1] of formData) {
-      console.log(`${name1}=${value1}`);
+      
     }; */
     //возвращаем инпут обратно
     document.querySelectorAll(".qty .count").forEach((el) => {
       el.setAttribute("disabled", "true");
     });
-    console.log('идет отправка');
+    
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
    
     toggleClassActive(e);
@@ -1361,7 +1035,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.json()
       })
       .then(function (json) {
-        console.log('отправлено');
         
         addClassOk(e)
 
@@ -1372,8 +1045,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(function (error) {
         addClassFail(e)
-        console.log(error);
-        console.log("ошибка отправки");
+        
         document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз.";
         $(".modal").modal('show');
       });

@@ -1487,3 +1487,33 @@ input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
+
+//Hacks
+//IE >= 9
+@media screen and (min-width:0\0) {
+	.button-anim {
+		.submit {
+		left: 55px;
+		}
+
+	}
+	.button-anim span:nth-of-type(2){
+		top: 55px;
+		left: 90px;
+	}
+	.button-anim.active-anim span:nth-of-type(2){
+		top: 25px;
+	}
+	.button-anim.finished-anim span:nth-of-type(3){
+		top:15px;
+		left:95px;
+	}
+
+	.button-anim.fail-anim span:nth-of-type(4){
+		top:15px;
+		left:95px;
+
+	}
+
+
+}
