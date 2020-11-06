@@ -1,3 +1,4 @@
+"use strict";
 
 document.addEventListener('DOMContentLoaded', function () {
   // --- Переменные для задания параметров страницы --- //
@@ -18,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     plus.addEventListener("click", function () {
       if (count.value == step) {
         //только если MIN = 5 , а STEP = 10
-        console.log('+');
         document.querySelector('.main-counter .minus').classList.remove('disabl');
       }
 
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (count.value == step) {
         //только если MIN = 5 , а STEP = 10
-        console.log('object');
         document.querySelector('.main-counter .minus').classList.remove('disabled');
         document.querySelector('.main-counter .minus').classList.add('disabl');
       }
@@ -142,12 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function uploadFile(target) {
     //заносим id Input
     target.addEventListener('change', function () {
-      console.log(target.id);
       var amount = target.files.length;
 
       if (target.id == "extra-files" && amount != 0) {
         var comment = "";
-        console.log(amount);
 
         switch (true) {
           case amount >= 2 && amount <= 4 || amount % 10 >= 2 && amount % 10 <= 4:
@@ -164,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         ;
-        console.log(comment);
         target.previousElementSibling.lastElementChild.textContent = target.files.length + " " + comment;
       } else {
         target.previousElementSibling.lastElementChild.textContent = target.files[0].name;
@@ -182,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function () {
       pickedVideoFormat = formatVideoSelect.value; //Функция создания дефолтных prewiew
 
   function createPreview(zone, item, picked) {
-    console.log('вызвали createPreview для format');
     var nameFormatArr = picked.split(":"),
         nameFormat = "f".concat(nameFormatArr[0], "x").concat(nameFormatArr[1]);
     item.classList = formats[nameFormat];
@@ -271,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }); //Функция disable Enable для чекбоксов и полей
 
   function turnForm(elem) {
-    console.log("вызвали turnForm");
     var moreColorsCheckbox = elem.querySelector(".optional-checkbox"),
         moreColorsInpt = elem.querySelector(".optional-txt");
     moreColorsCheckbox.addEventListener('click', function () {
@@ -423,8 +417,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var target = elem.target;
       var allProducts = insideSlideWrapp.querySelectorAll('.product-block');
       var nextProduct = allProducts[allProducts.length - 1].cloneNode(true);
-      console.log(target.parentElement.parentElement);
-      console.log(nextProduct);
       var productNumb = +nextProduct.id.split("-")[1];
       var nextProductId = "".concat(nextProduct.id.split("-")[0], "-").concat(productNumb + 1);
       nextProduct.id = nextProductId;
@@ -438,7 +430,6 @@ document.addEventListener('DOMContentLoaded', function () {
       nextProduct.querySelector('input[type="file"]').id = idAttach;
       nextProduct.querySelector('input[type="file"]').setAttribute('name', idAttach);
       nextProduct.querySelector('.my-file-input').setAttribute('for', idAttach);
-      console.log(nextProduct.querySelector('input[type="file"]'));
       target.parentElement.parentElement.before(nextProduct);
       nextProduct.querySelectorAll('input').forEach(function (inpt) {
         inpt.value = '';
@@ -466,8 +457,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
       //if (document.querySelectorAll('.video-slide.block').length != 1) {
-      console.log("Удаляем Слайд");
-
       if (confirm("После удаления слайда данные не сохранятся. Удалить?")) {
         var targetVideoSlide = btn.parentNode.parentNode.parentNode.parentNode;
         targetVideoSlide.remove();
@@ -480,7 +469,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }); //slideNumber = +document.querySelectorAll('.video-slide__number').length - 1;
 
         var mainCounterVal = document.querySelector(".main-counter input").value;
-        console.log(i);
 
         if (mainCounterVal / (i - 1) <= 5) {
           document.querySelector('.add-item-block.add-slide button').disabled = true;
@@ -497,9 +485,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         var logoCheck = document.querySelectorAll('.form-check.for-logo');
-        console.log(logoCheck);
         logoCheck.forEach(function (el) {
-          console.log(el);
           var numb = el.parentElement.parentElement.querySelector('.video-slide__number').textContent;
           el.querySelector('[name="logo-use"]').id = "gridCheck-" + numb;
           el.querySelector('.for-logo label').setAttribute("for", "gridCheck-" + numb);
@@ -558,7 +544,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var elementCounter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : insideSlideWrapp.querySelector('.slide-counter input');
     var invalFeedback = document.createElement('div');
     invalFeedback.classList.add('invalid-feedback');
-    console.log(element);
     element.after(invalFeedback);
     element.addEventListener('input', function (e) {
       var maxLengthStimulPhrase = getMaxLengthStimulPhrase(elementCounter);
@@ -580,7 +565,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (item.value) {
       case 'stimul':
-        console.log('перебор нашел Побуждающую фразу и создает оставшуюся часть слайда');
         insideSlideWrapp = item.parentNode.parentNode.parentNode;
         createSecondPart(insideSlideWrapp, secondPart, 'stimul-part', setStimulHtmlWithSlider("stimul-part_slider")); //добавлям Touchstart на Counter этого слайда
 
@@ -646,9 +630,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var allSlidesNumb = document.querySelectorAll('.video-slide__number');
-    console.log(allSlidesNumb);
     var slideNumber = +allSlidesNumb[allSlidesNumb.length - 1].textContent + 1;
-    console.log(slideNumber);
     var constructSlide = document.createElement("div");
     constructSlide.className = "video-slide block added-".concat(slideNumber);
     constructSlide.innerHTML = setSlideHtmlWithSelector(slideNumber, namePart);
@@ -658,19 +640,16 @@ document.addEventListener('DOMContentLoaded', function () {
     insideSlideWrapp = document.querySelector(".added-".concat(slideNumber, " .wrapper"));
     namePart = namePart + '-part';
     var number = +document.querySelectorAll(".".concat(namePart)).length + 1;
-    console.log(number);
     var nameCarousel;
 
     if (number > 1) {
       nameCarousel = namePart + '_slider-' + number;
     } else {
       nameCarousel = namePart + '_slider';
-      console.log(nameCarousel);
     }
 
     ;
-    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel));
-    console.log(insideSlideWrapp); //меняем цвет counter при клике на него на Сенсорных
+    createSecondPart(insideSlideWrapp, secondPart, namePart, createSecondPartHtml(nameCarousel)); //меняем цвет counter при клике на него на Сенсорных
 
     counterTouch("", constructSlide); // если лого добавляем работу доп. форм(Нужно для: побуждающей, лого)
 
@@ -724,7 +703,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-          console.log('удаляем товар или услугу');
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
         }
@@ -838,7 +816,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       insideSlideWrapp.querySelector(".close").addEventListener('click', function () {
         if (insideSlideWrapp.querySelectorAll('.product-block').length >= 2) {
-          console.log('удаляем товар или услугу');
           insideSlideWrapp.querySelector(".close").parentElement.parentElement;
           insideSlideWrapp.querySelector('.product-block').remove();
         }
@@ -904,15 +881,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var formElem = document.querySelector('#formElem'); //Функция сборки и отправки формы
 
   function submitHandler(e) {
-    console.log(e); //убираем disabled у Counter
-
+    //убираем disabled у Counter
     document.querySelectorAll(".qty .count").forEach(function (el) {
       el.removeAttribute("disabled");
     }); //формируем formData
 
     var formData = new FormData(formElem);
     /*   for (let [name, value] of formData) {
-        console.log(`${name} = ${value}`);
+        
       } */
     //добавляем в formData name Animation
 
@@ -923,23 +899,21 @@ document.addEventListener('DOMContentLoaded', function () {
       formData.append(parentNameAnimation, nameAnimation);
     });
     /*    for (let [name1, value1] of formData) {
-         console.log(`${name1}=${value1}`);
+         
        }; */
     //возвращаем инпут обратно
 
     document.querySelectorAll(".qty .count").forEach(function (el) {
       el.setAttribute("disabled", "true");
     });
-    console.log('идет отправка');
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
     toggleClassActive(e);
-    fetch("send.php", {
+    fetch("php/send.php", {
       method: "POST",
       body: formData
     }).then(function (response) {
       return response.json();
     }).then(function (json) {
-      console.log('отправлено');
       addClassOk(e);
       document.querySelector('.modal .modal-body').textContent = "Отправлено!";
       $(".modal").modal('show'); //$("#myModalBox").modal('show');
@@ -947,8 +921,6 @@ document.addEventListener('DOMContentLoaded', function () {
       /*process your JSON further */
     }).catch(function (error) {
       addClassFail(e);
-      console.log(error);
-      console.log("ошибка отправки");
       document.querySelector('.modal .modal-body').textContent = "Отправка не удалась , попробуйте еще раз.";
       $(".modal").modal('show');
     });
@@ -994,5 +966,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       ;
     }
+  }); // --- Header menu--- //
+
+  document.querySelectorAll(".nav-item .nav-link.first span").forEach(function (item) {
+    item.addEventListener("mouseover", function () {
+      item.parentElement.classList.add("is-current", "active");
+    });
+    item.addEventListener("mouseout", function () {
+      item.parentElement.classList.remove("is-current", "active");
+    });
   });
 });

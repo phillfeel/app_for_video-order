@@ -1027,7 +1027,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.modal .modal-body').textContent = "Отправляем данные... Не закрывайте окно до окончания отправки.";
    
     toggleClassActive(e);
-    fetch("send.php", {
+    fetch("php/send.php", {
         method: "POST",
         body: formData
       })
@@ -1087,5 +1087,15 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     } 
   });
+
+   // --- Header menu--- //
+ document.querySelectorAll(".nav-item .nav-link.first span").forEach((item)=>{
+  item.addEventListener("mouseover", ()=>{
+    item.parentElement.classList.add("is-current", "active");
+  });
+  item.addEventListener("mouseout", ()=>{
+    item.parentElement.classList.remove("is-current", "active");
+  });
+})
 
 })

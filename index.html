@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, user-scalable=0">
   <title>Форма заказа видео</title>
+  <link rel="shortcut icon" href="img/favicon-new.png" type="image/png">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="style/style.css">
@@ -25,6 +26,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" ">
       <ul class=" nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link first nav__link" href="#" title="">
+              <span>Главная</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link first nav__link" href="#" title="">
+              <span>Примеры видео</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link nav__link is-current active" href="#" title="">
               <span>Заказать видеоролик</span>
@@ -198,6 +209,12 @@
               <textarea name="main-comment" class="form-control" placeholder="Добавить комментарий"
                 id="textarea4" rows="3"></textarea>
             </div>
+            <div class="form-group contact-order mini-block">
+              <h6>Контактная информация для заказа</h6>
+              <input class="text-field form-control" required type="text" name="contact-name" placeholder="Имя">
+              <input class="text-field form-control" required type="email" name="contact-email" placeholder="Email">
+              <input class="text-field form-control" required type="phone" name="contact-phone" placeholder="Телефон">
+            </div>
             <div class="main-btn block">  <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
               <button type="submit" class="button-anim ">
                 <span class="submit">Отправить</span>
@@ -232,7 +249,7 @@
       </div>
     </div>
   </div>
-  <script src="script/my-polyfills.js" ></script>
+  <script src="dist/my-polyfills.js" ></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
   <script src="js/jquery-3.5.1.min.js"></script>
